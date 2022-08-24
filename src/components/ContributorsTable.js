@@ -16,7 +16,6 @@ import {
 
 
 // components
-import Scrollbar from './Scrollbar';
 import SearchNotFound from './SearchNotFound';
 import TableEmpty from './TableEmpty';
 import ContributorHead from './ContributorHead';
@@ -50,12 +49,12 @@ export default function WatchlistTable({
     const showData = isSearchEmpty ? data : searchData;
 
     return (
-        <Scrollbar>
+        <>
             <TableContainer
                 sx={{
                     minWidth: 800,
                 }}
-                component={Paper}
+                // component={Paper}
                 className={classes.table}
             >
                 <Table stickyHeader>
@@ -219,6 +218,6 @@ export default function WatchlistTable({
                     )}
                 </Table>
             </TableContainer>
-        </Scrollbar>
+        </>
     );
 }

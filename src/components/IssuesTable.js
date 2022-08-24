@@ -12,12 +12,12 @@ import {
     TableCell,
     Typography,
     TableContainer,
-    Paper
+    Paper,
+    Tooltip
 } from '@mui/material';
 
 
 // components
-import Scrollbar from './Scrollbar';
 import SearchNotFound from './SearchNotFound';
 import TableEmpty from './TableEmpty';
 import IssuesHead from './IssuesHead';
@@ -61,12 +61,12 @@ export default function WatchlistTable({
     const showData = isSearchEmpty ? data : searchData;
 
     return (
-        <Scrollbar>
+        <>
             <TableContainer
                 sx={{
                     minWidth: 800,
                 }}
-                component={Paper}
+                // component={Paper}
                 className={classes.table}
             >
                 <Table stickyHeader>
@@ -100,16 +100,12 @@ export default function WatchlistTable({
                                         component="th"
                                         scope="row"
                                         padding="none"
-                                        style={{ height: '5em' }}
+                                        style={{
+                                            height: '5em',
+                                            paddingLeft: 0,
+                                        }}
                                     >
-                                        <Typography
-                                            variant="subtitle2"
-                                            noWrap
-                                            style={{
-                                                marginLeft: '1.1em',
-                                                opacity: 0.72
-                                            }}
-                                        >
+                                        <Typography variant="subtitle2" noWrap>
                                             {showId}
                                         </Typography>
                                     </TableCell>
@@ -172,7 +168,15 @@ export default function WatchlistTable({
                                         scope="row"
                                         padding="none"
                                     >
-                                        {assignee.haveAssignee ? <img src={assignee.icon} alt='icon' /> : ""}
+                                        {assignee.haveAssignee ?
+                                            <Tooltip
+                                                title={assignee.name}
+                                                placement="bottom-end"
+                                                arrow
+                                            >
+                                                <img src={assignee.icon} alt='icon' />
+                                            </Tooltip> :
+                                            ""}
                                     </TableCell>
 
                                     <TableCell
@@ -237,6 +241,6 @@ export default function WatchlistTable({
                     )}
                 </Table>
             </TableContainer>
-        </Scrollbar>
+        </>
     );
 }

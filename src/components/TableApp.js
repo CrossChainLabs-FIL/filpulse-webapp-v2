@@ -71,35 +71,52 @@ const useStyles = makeStyles(() => ({
     table: {
         maxHeight: "40em",
     },
+    stea: {
+        // height: '1.2em',
+        paddingBottom: '0.3em'
+    },
     watchlistTab: {
         height: '3em',
         minHeight: '3em',
         minWidth: '8em',
         width: '8em',
         marginRight: '3em',
+        marginTop: '1em',
         paddingBottom: 0
     },
     prTab: {
+        height: '3em',
+        minHeight: '3em',
         minWidth: '3em',
         width: '3em',
         marginRight: '3em',
+        marginTop: '1em',
         paddingBottom: 0
     },
     issuesTab: {
+        height: '3em',
+        minHeight: '3em',
         minWidth: '4em',
         width: '4em',
         marginRight: '3em',
+        marginTop: '1em',
         paddingBottom: 0
     },
     commitsTab: {
+        height: '3em',
+        minHeight: '3em',
         minWidth: '4.5em',
         width: '4.5em',
         marginRight: '3em',
+        marginTop: '1em',
         paddingBottom: 0
     },
     contributorsTab: {
+        height: '3em',
+        minHeight: '3em',
         minWidth: '7em',
         width: '7em',
+        marginTop: '1em',
         paddingBottom: 0
     }
 }));
@@ -263,7 +280,7 @@ export default function TableApp() {
                     }}
                 >
                     <StyledTab
-                        icon={<img src={steaPlin} alt="steaPlin" />}
+                        icon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
                         iconPosition='start'
                         label='Watchlist'
                         classes={{ root: classes.watchlistTab }}
@@ -336,8 +353,6 @@ export default function TableApp() {
                 />
             }
 
-
-            <Box className={classes.endBox} />
         </Paper>
     );
 }

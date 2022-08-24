@@ -42,7 +42,7 @@ export default function PRHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ marginLeft: '1.3em', }}>
+                        <Typography variant="h6" noWrap >
                             #
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />

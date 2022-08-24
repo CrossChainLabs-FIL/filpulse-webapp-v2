@@ -51,14 +51,17 @@ const issuesData = [...Array(24)].map(() => {
       {
         haveAssignee: 0,
         icon: avatar4,
+        name: "ZenGround0",
       },
       {
         haveAssignee: 1,
         icon: avatar1,
+        name: "Aloxaf",
       },
       {
         haveAssignee: 1,
         icon: avatar4,
+        name: "ZenGround0",
       },
     ]),
     merged: sample([

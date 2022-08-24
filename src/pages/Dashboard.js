@@ -5,10 +5,10 @@ import Page from '../components/Page';
 import { Footer } from '../components/Footer';
 import { Client } from '../utils/client';
 
-import { 
-  RecentCommits, 
-  Commits, 
-  CardWidget, 
+import {
+  RecentCommits,
+  Commits,
+  CardWidget,
   TopContributors,
   Issues,
   ActiveContributors,
@@ -18,7 +18,7 @@ const client = new Client();
 
 export default function Dashboard() {
   const theme = useTheme();
-  const  themeStretch  = false;
+  const themeStretch = false;
 
   const [state, setState] = useState({ loading: true, commits: '', repositories: '', contributors: '', prs: '' });
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function Dashboard() {
         contributors: overview.contributors,
         prs: overview.prs,
       })
-      
+
     });
   }, [setState]);
 
@@ -88,7 +88,6 @@ export default function Dashboard() {
           </Grid>
 
         </Grid>
-        
       </Container>
       <Footer />
     </Page>
