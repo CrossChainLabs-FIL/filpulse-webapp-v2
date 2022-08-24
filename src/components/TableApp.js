@@ -34,7 +34,6 @@ import CONTRIBUTORSDATA from '../_mock/contributorsData';
 
 // assets
 import steaPlin from '../assets/steaPlin.svg';
-import { padding } from '@mui/system';
 
 
 function descendingComparator(a, b, orderBy) {
