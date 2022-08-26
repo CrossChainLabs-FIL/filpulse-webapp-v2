@@ -37,7 +37,8 @@ export default function ContributorsTable({
     filterName,
     isSearchEmpty,
     data,
-    searchData
+    searchData,
+    handleSortChange
 }) {
 
     const classes = useStyles();
@@ -59,7 +60,7 @@ export default function ContributorsTable({
             >
                 <Table stickyHeader>
 
-                    <ContributorHead />
+                    <ContributorHead data={data} handleSortChange={handleSortChange} />
 
                     <TableBody>
                         {showData.map((row) => {

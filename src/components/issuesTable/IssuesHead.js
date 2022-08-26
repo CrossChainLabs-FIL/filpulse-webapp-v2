@@ -158,7 +158,7 @@ export default function IssuesHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleSortChange("timeNumber")}
+                            onClick={(e) => handleSortChange("timeNumber", 'asc')}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

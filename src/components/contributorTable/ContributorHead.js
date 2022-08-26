@@ -1,7 +1,17 @@
 // material
-import { Typography, TableRow, TableCell, TableHead, Stack } from '@mui/material';
+import {
+    Typography,
+    TableRow,
+    TableCell,
+    TableHead,
+    Stack,
+    IconButton
+} from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
+
+// components
+import TriunghiMenuContributorContributor from './headMenus/TriunghiMenuContributorContributor';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -22,7 +32,10 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function ContributorHead() {
+export default function ContributorHead({
+    data,
+    handleSortChange
+}) {
 
     const classes = useStyles();
 
@@ -54,7 +67,8 @@ export default function ContributorHead() {
                         >
                             Contributor
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuContributorContributor data={data} />
                     </Stack>
                 </TableCell>
 
@@ -88,7 +102,14 @@ export default function ContributorHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Commits
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={(e) => handleSortChange("commits", 'asc')}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 

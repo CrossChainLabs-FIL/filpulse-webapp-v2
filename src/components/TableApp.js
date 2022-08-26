@@ -231,49 +231,59 @@ export default function TableApp() {
         switch (newValue) {
             case 0:
                 setOrderBy('showId');
+                setOrder('asc');
                 applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
                 break;
             case 1:
                 setOrderBy('showId');
+                setOrder('asc');
                 applySortFilter(PRDATA, getComparator(order, "showId"), '');
                 break;
             case 2:
                 setOrderBy('showId');
+                setOrder('asc');
                 applySortFilter(ISSUESDATA, getComparator(order, "showId"), '');
                 break;
             case 3:
                 setOrderBy('showId');
+                setOrder('asc');
                 applySortFilter(COMMITSDATA, getComparator(order, "showId"), '');
                 break;
             case 4:
                 setOrderBy('personName');
+                setOrder('asc');
                 applySortFilter(CONTRIBUTORSDATA, getComparator(order, 'personName'), '');
                 break;
             default: console.log(newValue); break;
         }
     };
 
-    const handleSortChange = (orderByNew) => {
+    const handleSortChange = (orderByNew, orderNew) => {
         if (isSorted) {
             switch (value) {
                 case 0:
                     setOrderBy('showId');
+                    setOrder('asc');
                     applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
                     break;
                 case 1:
                     setOrderBy('showId');
+                    setOrder('asc');
                     applySortFilter(PRDATA, getComparator(order, "showId"), '');
                     break;
                 case 2:
                     setOrderBy('showId');
+                    setOrder('asc');
                     applySortFilter(ISSUESDATA, getComparator(order, "showId"), '');
                     break;
                 case 3:
                     setOrderBy('showId');
+                    setOrder('asc');
                     applySortFilter(COMMITSDATA, getComparator(order, "showId"), '');
                     break;
                 case 4:
                     setOrderBy('personName');
+                    setOrder('asc');
                     applySortFilter(CONTRIBUTORSDATA, getComparator(order, 'personName'), '');
                     break;
                 default: console.log(value); break;
@@ -284,23 +294,28 @@ export default function TableApp() {
             switch (value) {
                 case 0:
                     setOrderBy(orderByNew);
-                    applySortFilter(WATCHLISTDATA, getComparator(order, orderByNew), '');
+                    setOrder(orderNew);
+                    applySortFilter(WATCHLISTDATA, getComparator(orderNew, orderByNew), '');
                     break;
                 case 1:
                     setOrderBy(orderByNew);
-                    applySortFilter(PRDATA, getComparator(order, orderByNew), '');
+                    setOrder(orderNew);
+                    applySortFilter(PRDATA, getComparator(orderNew, orderByNew), '');
                     break;
                 case 2:
                     setOrderBy(orderByNew);
-                    applySortFilter(ISSUESDATA, getComparator(order, orderByNew), '');
+                    setOrder(orderNew);
+                    applySortFilter(ISSUESDATA, getComparator(orderNew, orderByNew), '');
                     break;
                 case 3:
                     setOrderBy(orderByNew);
-                    applySortFilter(COMMITSDATA, getComparator(order, orderByNew), '');
+                    setOrder(orderNew);
+                    applySortFilter(COMMITSDATA, getComparator(orderNew, orderByNew), '');
                     break;
                 case 4:
                     setOrderBy(orderByNew);
-                    applySortFilter(CONTRIBUTORSDATA, getComparator(order, orderByNew), '');
+                    setOrder(orderNew);
+                    applySortFilter(CONTRIBUTORSDATA, getComparator(orderNew, orderByNew), '');
                     break;
                 default: console.log(value); break;
             }
@@ -408,6 +423,7 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     data={data}
                     searchData={searchData}
+                    handleSortChange={handleSortChange}
                 />
             }
 
