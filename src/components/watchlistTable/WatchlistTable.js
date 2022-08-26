@@ -2,7 +2,8 @@
 import { makeStyles } from '@mui/styles';
 
 import {
-    Stack,
+    Box,
+    Checkbox,
     CardHeader,
     Table,
     TableRow,
@@ -10,19 +11,43 @@ import {
     TableCell,
     Typography,
     TableContainer,
-    Paper
+    Paper,
+    Badge,
+    Stack
 } from '@mui/material';
 
+
 // components
-import SearchNotFound from './SearchNotFound';
-import TableEmpty from './TableEmpty';
-import CommitsHead from './CommitsHead';
+import SearchNotFound from '../SearchNotFound';
+import TableEmpty from '../TableEmpty';
+import WatchlistHead from './WatchlistHead';
+
+// assets
+import steaPlin from '../../assets/steaPlin.svg';
+import steaGol from '../../assets/steaGol.svg';
+import comment from '../../assets/comment.svg';
 
 
 const useStyles = makeStyles(() => ({
     table: {
         maxHeight: "40em",
     },
+    mergedBox: {
+        width: '6em',
+        height: '1.5em',
+        borderRadius: 5,
+        backgroundColor: '#CFD2F5'
+    },
+    openBox: {
+        width: '4em',
+        height: '1.5em',
+        borderRadius: 5,
+        backgroundColor: '#E0F3E0'
+    },
+    customBadge: {
+        backgroundColor: "#F05B47",
+        color: "white"
+    }
 }));
 
 export default function WatchlistTable({
@@ -51,35 +76,43 @@ export default function WatchlistTable({
             >
                 <Table stickyHeader>
 
-                    <CommitsHead />
+                    <WatchlistHead />
 
                     <TableBody>
                         {showData.map((row) => {
                             const { id,
                                 showId,
-                                project,
-                                person,
-                                time } = row;
+                                projectTitle,
+                                projectSubtitle,
+                                participantIcons,
+                                merged,
+                                commentsTotal,
+                                commentsUnseen,
+                                timeText,
+                                timeNumber } = row;
                             return (
                                 <TableRow
                                     hover
                                     key={id}
                                     tabIndex={-1}
                                 >
+                                    <TableCell padding="checkbox">
+                                        <Checkbox
+                                            icon={<img src={steaGol} alt='steaGol' />}
+                                            checkedIcon={<img src={steaPlin} alt='steaPlin' />}
+                                        />
+                                    </TableCell>
+
                                     <TableCell
                                         align="left"
                                         component="th"
                                         scope="row"
                                         padding="none"
-                                        style={{ height: '5em' }}
+                                        style={{ height: '6em' }}
                                     >
                                         <Typography
                                             variant="subtitle2"
                                             noWrap
-                                            style={{
-                                                marginLeft: '2.5em',
-                                                opacity: 0.72
-                                            }}
                                         >
                                             {showId}
                                         </Typography>
@@ -106,12 +139,50 @@ export default function WatchlistTable({
                                                         marginTop: '0.45em'
                                                     }}
                                                 >
-                                                    {project.title}
+                                                    {projectTitle}
                                                 </Typography>
                                             }
-                                            subheader={project.subtitle}
+                                            subheader={projectSubtitle}
                                         />
 
+                                    </TableCell>
+
+                                    <TableCell
+                                        align="left"
+                                        component="th"
+                                        scope="row"
+                                        padding="none"
+                                    >
+                                        {participantIcons.map((avatar) => {
+                                            return (
+                                                <img key={avatar} src={avatar} alt="avatar" />
+                                            )
+                                        })}
+                                    </TableCell>
+
+                                    <TableCell
+                                        align="center"
+                                        component="th"
+                                        scope="row"
+                                        padding="none"
+                                    >
+
+                                        {merged ?
+                                            (
+                                                <Box className={classes.mergedBox}>
+                                                    <Typography variant="subtitle2" noWrap color='#434991'>
+                                                        Merged
+                                                    </Typography>
+                                                </Box>
+                                            ) :
+                                            (
+                                                <Box className={classes.openBox}>
+                                                    <Typography variant="subtitle2" noWrap color='#2B840E'>
+                                                        Open
+                                                    </Typography>
+                                                </Box>
+                                            )
+                                        }
                                     </TableCell>
 
                                     <TableCell
@@ -124,15 +195,23 @@ export default function WatchlistTable({
                                             direction="row"
                                             alignItems="center"
                                         >
-                                            <img
-                                                src={person.icon}
-                                                alt='avatar'
-                                                style={{
-                                                    marginRight: '1em'
+                                            <Badge
+                                                badgeContent={commentsUnseen}
+                                                // color='primary'
+                                                anchorOrigin={{
+                                                    vertical: 'top',
+                                                    horizontal: 'left',
                                                 }}
-                                            />
-                                            <Typography variant="subtitle2" noWrap>
-                                                {person.name}
+                                                classes={{ badge: classes.customBadge }}
+                                                style={{
+                                                    marginLeft: '0.25em',
+                                                    marginRight: '0.25em',
+                                                }}
+                                            >
+                                                <img src={comment} alt='comment' />
+                                            </Badge>
+                                            <Typography variant="subtitle2" noWrap >
+                                                {commentsTotal}
                                             </Typography>
                                         </Stack>
                                     </TableCell>
@@ -144,7 +223,7 @@ export default function WatchlistTable({
                                         padding="none"
                                     >
                                         <Typography variant="subtitle2" noWrap>
-                                            {time}
+                                            {timeText}
                                         </Typography>
                                     </TableCell>
 

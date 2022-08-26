@@ -3,7 +3,6 @@ import { makeStyles } from '@mui/styles';
 
 import {
     Box,
-    Stack,
     Checkbox,
     CardHeader,
     Table,
@@ -13,18 +12,17 @@ import {
     Typography,
     TableContainer,
     Paper,
-    Tooltip
+    Stack
 } from '@mui/material';
 
-
 // components
-import SearchNotFound from './SearchNotFound';
-import TableEmpty from './TableEmpty';
-import IssuesHead from './IssuesHead';
+import SearchNotFound from '../SearchNotFound';
+import TableEmpty from '../TableEmpty';
+import PRHead from './PRHead';
 
 // assets
-import steaPlin from '../assets/steaPlin.svg';
-import steaGol from '../assets/steaGol.svg';
+import steaPlin from '../../assets/steaPlin.svg';
+import steaGol from '../../assets/steaGol.svg';
 
 
 const useStyles = makeStyles(() => ({
@@ -45,7 +43,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export default function WatchlistTable({
+export default function PRTable({
     filterName,
     isSearchEmpty,
     data,
@@ -71,17 +69,19 @@ export default function WatchlistTable({
             >
                 <Table stickyHeader>
 
-                    <IssuesHead data={data} />
+                    <PRHead />
 
                     <TableBody>
                         {showData.map((row) => {
                             const { id,
                                 showId,
-                                project,
-                                person,
-                                assignee,
+                                projectTitle,
+                                projectSubtitle,
+                                personName,
+                                personIcon,
                                 merged,
-                                time } = row;
+                                timeText,
+                                timeNumber } = row;
                             return (
                                 <TableRow
                                     hover
@@ -131,10 +131,10 @@ export default function WatchlistTable({
                                                         marginTop: '0.45em'
                                                     }}
                                                 >
-                                                    {project.title}
+                                                    {projectTitle}
                                                 </Typography>
                                             }
-                                            subheader={project.subtitle}
+                                            subheader={projectSubtitle}
                                         />
 
                                     </TableCell>
@@ -150,33 +150,16 @@ export default function WatchlistTable({
                                             alignItems="center"
                                         >
                                             <img
-                                                src={person.icon}
+                                                src={personIcon}
                                                 alt='avatar'
                                                 style={{
                                                     marginRight: '1em'
                                                 }}
                                             />
                                             <Typography variant="subtitle2" noWrap>
-                                                {person.name}
+                                                {personName}
                                             </Typography>
                                         </Stack>
-                                    </TableCell>
-
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                    >
-                                        {assignee.haveAssignee ?
-                                            <Tooltip
-                                                title={assignee.name}
-                                                placement="bottom-end"
-                                                arrow
-                                            >
-                                                <img src={assignee.icon} alt='icon' />
-                                            </Tooltip> :
-                                            ""}
                                     </TableCell>
 
                                     <TableCell
@@ -211,7 +194,7 @@ export default function WatchlistTable({
                                         padding="none"
                                     >
                                         <Typography variant="subtitle2" noWrap>
-                                            {time}
+                                            {timeText}
                                         </Typography>
                                     </TableCell>
 

@@ -3,7 +3,6 @@ import { useState } from 'react';
 // material
 import {
     Box,
-    Typography,
     Stack,
     IconButton,
     Menu,
@@ -20,8 +19,8 @@ import { styled } from '@mui/material/styles';
 
 
 // assets
-import triunghi from '../assets/triunghi.svg';
-import x from '../assets/x.svg';
+import triunghi from '../../../assets/triunghi.svg';
+import x from '../../../assets/x.svg';
 
 
 const useStyles = makeStyles(() => ({
@@ -106,14 +105,15 @@ export default function TriunghiMenuIssuesAssignee({ data }) {
                         <List sx={{ height: 'max-content' }}>
                             {data.map((row) => {
                                 const { id,
-                                    assignee,
+                                    assigneeIcon,
+                                    assigneeName,
                                 } = row;
                                 return (
                                     <ListItem key={id} style={{ backgroundColor: '#FFFFFF' }}>
                                         <ListItemAvatar>
-                                            <img src={assignee.icon} alt='avatar' />
+                                            <img src={assigneeIcon} alt='avatar' />
                                         </ListItemAvatar>
-                                        <ListItemText primary={assignee.name} />
+                                        <ListItemText primary={assigneeName} />
                                     </ListItem>
                                 );
                             })}

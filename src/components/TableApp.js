@@ -18,11 +18,11 @@ import {
 
 // components
 import Iconify from './Iconify';
-import WatchlistTable from './WatchlistTable';
-import PRTable from './PRTable';
-import CommitsTable from './CommitsTable';
-import IssuesTable from './IssuesTable';
-import ContributorsTable from './ContributorsTable';
+import WatchlistTable from './watchlistTable/WatchlistTable';
+import PRTable from './prTable/PRTable';
+import CommitsTable from './commitsTable/CommitsTable';
+import IssuesTable from './issuesTable/IssuesTable';
+import ContributorsTable from './contributorTable/ContributorsTable';
 
 
 // mock
@@ -163,6 +163,8 @@ export default function TableApp() {
 
     const [orderBy, setOrderBy] = useState('showId');
 
+    const [isSorted, setIsSorted] = useState(false);
+
     const [searchData, setSearchData] = useState([]);
 
     const [data, setData] = useState([]);
@@ -194,7 +196,7 @@ export default function TableApp() {
                     break;
                 case 2:
                     setSearchData(filter(array, (_user) =>
-                        _user.project.title.toLowerCase().indexOf(query.toLowerCase()) !== -1));
+                        _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
                     break;
                 case 3:
                     setSearchData(filter(array, (_user) =>
@@ -202,7 +204,7 @@ export default function TableApp() {
                     break;
                 case 4:
                     setSearchData(filter(array, (_user) =>
-                        _user.person.name.toLowerCase().indexOf(query.toLowerCase()) !== -1));
+                        _user.personName.toLowerCase().indexOf(query.toLowerCase()) !== -1));
                     break;
                 default: break;
             }
@@ -229,28 +231,82 @@ export default function TableApp() {
         switch (newValue) {
             case 0:
                 setOrderBy('showId');
-                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), filterName);
+                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
                 break;
             case 1:
                 setOrderBy('showId');
-                applySortFilter(PRDATA, getComparator(order, "showId"), filterName);
+                applySortFilter(PRDATA, getComparator(order, "showId"), '');
                 break;
             case 2:
                 setOrderBy('showId');
-                applySortFilter(ISSUESDATA, getComparator(order, "showId"), filterName);
+                applySortFilter(ISSUESDATA, getComparator(order, "showId"), '');
                 break;
             case 3:
                 setOrderBy('showId');
-                applySortFilter(COMMITSDATA, getComparator(order, "showId"), filterName);
+                applySortFilter(COMMITSDATA, getComparator(order, "showId"), '');
                 break;
             case 4:
-                setOrderBy('person.name');
-                applySortFilter(CONTRIBUTORSDATA, getComparator(order, 'person.name'), filterName);
+                setOrderBy('personName');
+                applySortFilter(CONTRIBUTORSDATA, getComparator(order, 'personName'), '');
                 break;
             default: console.log(newValue); break;
         }
     };
 
+    const handleSortChange = (orderByNew) => {
+        if (isSorted) {
+            switch (value) {
+                case 0:
+                    setOrderBy('showId');
+                    applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
+                    break;
+                case 1:
+                    setOrderBy('showId');
+                    applySortFilter(PRDATA, getComparator(order, "showId"), '');
+                    break;
+                case 2:
+                    setOrderBy('showId');
+                    applySortFilter(ISSUESDATA, getComparator(order, "showId"), '');
+                    break;
+                case 3:
+                    setOrderBy('showId');
+                    applySortFilter(COMMITSDATA, getComparator(order, "showId"), '');
+                    break;
+                case 4:
+                    setOrderBy('personName');
+                    applySortFilter(CONTRIBUTORSDATA, getComparator(order, 'personName'), '');
+                    break;
+                default: console.log(value); break;
+            }
+            setIsSorted(false);
+        }
+        else {
+            switch (value) {
+                case 0:
+                    setOrderBy(orderByNew);
+                    applySortFilter(WATCHLISTDATA, getComparator(order, orderByNew), '');
+                    break;
+                case 1:
+                    setOrderBy(orderByNew);
+                    applySortFilter(PRDATA, getComparator(order, orderByNew), '');
+                    break;
+                case 2:
+                    setOrderBy(orderByNew);
+                    applySortFilter(ISSUESDATA, getComparator(order, orderByNew), '');
+                    break;
+                case 3:
+                    setOrderBy(orderByNew);
+                    applySortFilter(COMMITSDATA, getComparator(order, orderByNew), '');
+                    break;
+                case 4:
+                    setOrderBy(orderByNew);
+                    applySortFilter(CONTRIBUTORSDATA, getComparator(order, orderByNew), '');
+                    break;
+                default: console.log(value); break;
+            }
+            setIsSorted(true);
+        }
+    }
 
     const handleFilterByName = (event) => {
         applySortFilter(data, getComparator(order, orderBy), event.target.value);
@@ -314,6 +370,7 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     data={data}
                     searchData={searchData}
+
                 />
             )}
 
@@ -332,6 +389,7 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     data={data}
                     searchData={searchData}
+                    handleSortChange={handleSortChange}
                 />
             )}
 

@@ -3,10 +3,8 @@ import { Typography, TableRow, TableCell, TableHead, Stack } from '@mui/material
 
 import { makeStyles } from '@mui/styles';
 
-
 // assets
-import triunghi from '../assets/triunghi.svg';
-
+import triunghi from '../../assets/triunghi.svg';
 
 
 // ----------------------------------------------------------------------
@@ -24,7 +22,7 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function WatchlistHead() {
+export default function CommitsHead() {
 
     const classes = useStyles();
 
@@ -32,13 +30,14 @@ export default function WatchlistHead() {
         <TableHead>
             <TableRow className={classes.rowHead}>
 
-                <TableCell />
-
                 <TableCell
                     align="left"
                     component="th"
                     scope="row"
                     padding="none"
+                    style={{
+                        width: '12em'
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -48,12 +47,12 @@ export default function WatchlistHead() {
                             variant="h6"
                             noWrap
                             style={{
-                                marginLeft: '1.3em',
                                 fontWeight: 450,
-                                opacity: 0.75
+                                opacity: 0.75,
+                                marginLeft: '2em'
                             }}
                         >
-                            #
+                            Hash
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
@@ -70,7 +69,7 @@ export default function WatchlistHead() {
                         alignItems="center"
                     >
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
-                            Name
+                            Commit
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
@@ -87,41 +86,7 @@ export default function WatchlistHead() {
                         alignItems="center"
                     >
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
-                            Participants
-                        </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
-                    </Stack>
-                </TableCell>
-
-                <TableCell
-                    align="left"
-                    component="th"
-                    scope="row"
-                    padding="none"
-                >
-                    <Stack
-                        direction="row"
-                        alignItems="center"
-                    >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
-                            Status
-                        </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
-                    </Stack>
-                </TableCell>
-
-                <TableCell
-                    align="left"
-                    component="th"
-                    scope="row"
-                    padding="none"
-                >
-                    <Stack
-                        direction="row"
-                        alignItems="center"
-                    >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
-                            Comments
+                            Contributor
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
@@ -145,6 +110,6 @@ export default function WatchlistHead() {
                 </TableCell>
 
             </TableRow>
-        </TableHead >
+        </TableHead>
     );
 }

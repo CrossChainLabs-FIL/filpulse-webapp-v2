@@ -1,22 +1,13 @@
 // material
-import {
-    Typography,
-    TableRow,
-    TableCell,
-    TableHead,
-    Stack,
-} from '@mui/material';
+import { Typography, TableRow, TableCell, TableHead, Stack } from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
 
-// components
-import TriunghiMenuIssuesAuthor from './TriunghiMenuIssuesAuthor';
-import TriunghiMenuIssuesIssue from './TriunghiMenuIssuesIssue';
-import TriunghiMenuIssuesId from './TriunghiMenuIssuesId';
-import TriunghiMenuIssuesAssignee from './TriunghiMenuIssuesAssignee';
 
 // assets
-import triunghi from '../assets/triunghi.svg';
+import triunghi from '../../assets/triunghi.svg';
+
+
 
 // ----------------------------------------------------------------------
 
@@ -33,9 +24,7 @@ const useStyles = makeStyles(() => ({
 
 
 
-
-
-export default function IssuesHead({ data }) {
+export default function WatchlistHead() {
 
     const classes = useStyles();
 
@@ -50,19 +39,23 @@ export default function IssuesHead({ data }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    style={{
-                        width: '8em'
-                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            style={{
+                                marginLeft: '1.3em',
+                                fontWeight: 450,
+                                opacity: 0.75
+                            }}
+                        >
                             #
                         </Typography>
-
-                        <TriunghiMenuIssuesId data={data} />
+                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
                 </TableCell>
 
@@ -77,10 +70,9 @@ export default function IssuesHead({ data }) {
                         alignItems="center"
                     >
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
-                            Issue
+                            Name
                         </Typography>
-
-                        <TriunghiMenuIssuesIssue data={data} />
+                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
                 </TableCell>
 
@@ -95,28 +87,9 @@ export default function IssuesHead({ data }) {
                         alignItems="center"
                     >
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
-                            Contributor
+                            Participants
                         </Typography>
-
-                        <TriunghiMenuIssuesAuthor data={data} />
-                    </Stack>
-                </TableCell>
-
-                <TableCell
-                    align="left"
-                    component="th"
-                    scope="row"
-                    padding="none"
-                >
-                    <Stack
-                        direction="row"
-                        alignItems="center"
-                    >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
-                            Assignee
-                        </Typography>
-
-                        <TriunghiMenuIssuesAssignee data={data} />
+                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
                 </TableCell>
 
@@ -148,6 +121,23 @@ export default function IssuesHead({ data }) {
                         alignItems="center"
                     >
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            Comments
+                        </Typography>
+                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                    </Stack>
+                </TableCell>
+
+                <TableCell
+                    align="left"
+                    component="th"
+                    scope="row"
+                    padding="none"
+                >
+                    <Stack
+                        direction="row"
+                        alignItems="center"
+                    >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Last Updated
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -155,6 +145,6 @@ export default function IssuesHead({ data }) {
                 </TableCell>
 
             </TableRow>
-        </TableHead>
+        </TableHead >
     );
 }

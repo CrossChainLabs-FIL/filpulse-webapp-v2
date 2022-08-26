@@ -1,11 +1,23 @@
 // material
-import { Typography, TableRow, TableCell, TableHead, Stack } from '@mui/material';
+import {
+    Typography,
+    TableRow,
+    TableCell,
+    TableHead,
+    Stack,
+    IconButton
+} from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
 
-// assets
-import triunghi from '../assets/triunghi.svg';
+// components
+import TriunghiMenuIssuesAuthor from './headMenus/TriunghiMenuIssuesAuthor';
+import TriunghiMenuIssuesIssue from './headMenus/TriunghiMenuIssuesIssue';
+import TriunghiMenuIssuesId from './headMenus/TriunghiMenuIssuesId';
+import TriunghiMenuIssuesAssignee from './headMenus/TriunghiMenuIssuesAssignee';
 
+// assets
+import triunghi from '../../assets/triunghi.svg';
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +34,13 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function CommitsHead() {
+
+export default function IssuesHead({
+    data,
+    handleSortChange
+}) {
+
+
 
     const classes = useStyles();
 
@@ -30,31 +48,26 @@ export default function CommitsHead() {
         <TableHead>
             <TableRow className={classes.rowHead}>
 
+                <TableCell />
+
                 <TableCell
                     align="left"
                     component="th"
                     scope="row"
                     padding="none"
                     style={{
-                        width: '12em'
+                        width: '8em'
                     }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            style={{
-                                fontWeight: 450,
-                                opacity: 0.75,
-                                marginLeft: '2em'
-                            }}
-                        >
-                            Hash
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            #
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuIssuesId data={data} />
                     </Stack>
                 </TableCell>
 
@@ -69,9 +82,10 @@ export default function CommitsHead() {
                         alignItems="center"
                     >
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
-                            Commit
+                            Issue
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuIssuesIssue data={data} />
                     </Stack>
                 </TableCell>
 
@@ -87,6 +101,42 @@ export default function CommitsHead() {
                     >
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Contributor
+                        </Typography>
+
+                        <TriunghiMenuIssuesAuthor data={data} />
+                    </Stack>
+                </TableCell>
+
+                <TableCell
+                    align="left"
+                    component="th"
+                    scope="row"
+                    padding="none"
+                >
+                    <Stack
+                        direction="row"
+                        alignItems="center"
+                    >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            Assignee
+                        </Typography>
+
+                        <TriunghiMenuIssuesAssignee data={data} />
+                    </Stack>
+                </TableCell>
+
+                <TableCell
+                    align="left"
+                    component="th"
+                    scope="row"
+                    padding="none"
+                >
+                    <Stack
+                        direction="row"
+                        alignItems="center"
+                    >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            Status
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
@@ -105,7 +155,14 @@ export default function CommitsHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Last Updated
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={(e) => handleSortChange("timeNumber")}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 

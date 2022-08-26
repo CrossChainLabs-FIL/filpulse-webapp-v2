@@ -19,8 +19,8 @@ import { styled } from '@mui/material/styles';
 
 
 // assets
-import triunghi from '../assets/triunghi.svg';
-import x from '../assets/x.svg';
+import triunghi from '../../../assets/triunghi.svg';
+import x from '../../../assets/x.svg';
 
 
 const useStyles = makeStyles(() => ({
@@ -43,7 +43,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuIssuesIssue({ data }) {
+export default function TriunghiMenuIssuesId({ data }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -86,7 +86,7 @@ export default function TriunghiMenuIssuesIssue({ data }) {
                             alignItems="center"
                         >
                             <Box>
-                                Issue's name
+                                Filter by ID
                             </Box>
                             <IconButton onClick={handleClose} style={{ marginLeft: 'auto' }}>
                                 <img src={x} alt='x' />
@@ -98,18 +98,18 @@ export default function TriunghiMenuIssuesIssue({ data }) {
                             }}
                             // value={filterName}
                             // onChange={(e) => handleFilterByName(e)}
-                            placeholder="Filter issues"
+                            placeholder="Filter ID"
                         />
                     </Box >
                     <Paper style={{ maxHeight: '16.3em', overflow: 'auto' }}>
                         <List sx={{ height: 'max-content' }}>
                             {data.map((row) => {
                                 const { id,
-                                    project,
+                                    showId,
                                 } = row;
                                 return (
                                     <ListItem key={id} style={{ backgroundColor: '#FFFFFF' }}>
-                                        <ListItemText primary={project.title} secondary={project.subtitle} />
+                                        <ListItemText primary={showId} />
                                     </ListItem>
                                 );
                             })}

@@ -3,7 +3,6 @@ import { useState } from 'react';
 // material
 import {
     Box,
-    Typography,
     Stack,
     IconButton,
     Menu,
@@ -11,7 +10,6 @@ import {
     OutlinedInput,
     ListItem,
     ListItemText,
-    ListItemAvatar,
     Paper,
 } from '@mui/material';
 
@@ -20,8 +18,8 @@ import { styled } from '@mui/material/styles';
 
 
 // assets
-import triunghi from '../assets/triunghi.svg';
-import x from '../assets/x.svg';
+import triunghi from '../../../assets/triunghi.svg';
+import x from '../../../assets/x.svg';
 
 
 const useStyles = makeStyles(() => ({
@@ -44,7 +42,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuIssuesAuthor({ data }) {
+export default function TriunghiMenuIssuesIssue({ data }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -87,7 +85,7 @@ export default function TriunghiMenuIssuesAuthor({ data }) {
                             alignItems="center"
                         >
                             <Box>
-                                Filter by author
+                                Issue's name
                             </Box>
                             <IconButton onClick={handleClose} style={{ marginLeft: 'auto' }}>
                                 <img src={x} alt='x' />
@@ -99,21 +97,19 @@ export default function TriunghiMenuIssuesAuthor({ data }) {
                             }}
                             // value={filterName}
                             // onChange={(e) => handleFilterByName(e)}
-                            placeholder="Filter users"
+                            placeholder="Filter issues"
                         />
                     </Box >
                     <Paper style={{ maxHeight: '16.3em', overflow: 'auto' }}>
                         <List sx={{ height: 'max-content' }}>
                             {data.map((row) => {
                                 const { id,
-                                    person,
+                                    projectTitle,
+                                    projectSubtitle,
                                 } = row;
                                 return (
                                     <ListItem key={id} style={{ backgroundColor: '#FFFFFF' }}>
-                                        <ListItemAvatar>
-                                            <img src={person.icon} alt='avatar' />
-                                        </ListItemAvatar>
-                                        <ListItemText primary={person.name} />
+                                        <ListItemText primary={projectTitle} secondary={projectSubtitle} />
                                     </ListItem>
                                 );
                             })}

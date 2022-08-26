@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 
 import {
     Box,
+    Stack,
     Checkbox,
     CardHeader,
     Table,
@@ -12,20 +13,18 @@ import {
     Typography,
     TableContainer,
     Paper,
-    Badge,
-    Stack
+    Tooltip
 } from '@mui/material';
 
 
 // components
-import SearchNotFound from './SearchNotFound';
-import TableEmpty from './TableEmpty';
-import WatchlistHead from './WatchlistHead';
+import SearchNotFound from '../SearchNotFound';
+import TableEmpty from '../TableEmpty';
+import IssuesHead from './IssuesHead';
 
 // assets
-import steaPlin from '../assets/steaPlin.svg';
-import steaGol from '../assets/steaGol.svg';
-import comment from '../assets/comment.svg';
+import steaPlin from '../../assets/steaPlin.svg';
+import steaGol from '../../assets/steaGol.svg';
 
 
 const useStyles = makeStyles(() => ({
@@ -43,18 +42,15 @@ const useStyles = makeStyles(() => ({
         height: '1.5em',
         borderRadius: 5,
         backgroundColor: '#E0F3E0'
-    },
-    customBadge: {
-        backgroundColor: "#F05B47",
-        color: "white"
     }
 }));
 
-export default function WatchlistTable({
+export default function IssuesTable({
     filterName,
     isSearchEmpty,
     data,
-    searchData
+    searchData,
+    handleSortChange,
 }) {
 
     const classes = useStyles();
@@ -76,17 +72,22 @@ export default function WatchlistTable({
             >
                 <Table stickyHeader>
 
-                    <WatchlistHead />
+                    <IssuesHead data={data} handleSortChange={handleSortChange} />
 
                     <TableBody>
                         {showData.map((row) => {
                             const { id,
                                 showId,
-                                project,
-                                participant,
-                                status,
-                                comments,
-                                time } = row;
+                                projectTitle,
+                                projectSubtitle,
+                                personIcon,
+                                personName,
+                                haveAssignee,
+                                assigneeIcon,
+                                assigneeName,
+                                merged,
+                                timeText,
+                                timeNumber } = row;
                             return (
                                 <TableRow
                                     hover
@@ -105,12 +106,12 @@ export default function WatchlistTable({
                                         component="th"
                                         scope="row"
                                         padding="none"
-                                        style={{ height: '6em' }}
+                                        style={{
+                                            height: '5em',
+                                            paddingLeft: 0,
+                                        }}
                                     >
-                                        <Typography
-                                            variant="subtitle2"
-                                            noWrap
-                                        >
+                                        <Typography variant="subtitle2" noWrap>
                                             {showId}
                                         </Typography>
                                     </TableCell>
@@ -136,10 +137,10 @@ export default function WatchlistTable({
                                                         marginTop: '0.45em'
                                                     }}
                                                 >
-                                                    {project.title}
+                                                    {projectTitle}
                                                 </Typography>
                                             }
-                                            subheader={project.subtitle}
+                                            subheader={projectSubtitle}
                                         />
 
                                     </TableCell>
@@ -150,11 +151,38 @@ export default function WatchlistTable({
                                         scope="row"
                                         padding="none"
                                     >
-                                        {participant.map((avatar) => {
-                                            return (
-                                                <img key={avatar} src={avatar} alt="avatar" />
-                                            )
-                                        })}
+                                        <Stack
+                                            direction="row"
+                                            alignItems="center"
+                                        >
+                                            <img
+                                                src={personIcon}
+                                                alt='avatar'
+                                                style={{
+                                                    marginRight: '1em'
+                                                }}
+                                            />
+                                            <Typography variant="subtitle2" noWrap>
+                                                {personName}
+                                            </Typography>
+                                        </Stack>
+                                    </TableCell>
+
+                                    <TableCell
+                                        align="left"
+                                        component="th"
+                                        scope="row"
+                                        padding="none"
+                                    >
+                                        {haveAssignee ?
+                                            <Tooltip
+                                                title={assigneeName}
+                                                placement="bottom-end"
+                                                arrow
+                                            >
+                                                <img src={assigneeIcon} alt='icon' />
+                                            </Tooltip> :
+                                            ""}
                                     </TableCell>
 
                                     <TableCell
@@ -164,7 +192,7 @@ export default function WatchlistTable({
                                         padding="none"
                                     >
 
-                                        {status ?
+                                        {merged ?
                                             (
                                                 <Box className={classes.mergedBox}>
                                                     <Typography variant="subtitle2" noWrap color='#434991'>
@@ -188,39 +216,8 @@ export default function WatchlistTable({
                                         scope="row"
                                         padding="none"
                                     >
-                                        <Stack
-                                            direction="row"
-                                            alignItems="center"
-                                        >
-                                            <Badge
-                                                badgeContent={comments.unseen}
-                                                // color='primary'
-                                                anchorOrigin={{
-                                                    vertical: 'top',
-                                                    horizontal: 'left',
-                                                }}
-                                                classes={{ badge: classes.customBadge }}
-                                                style={{
-                                                    marginLeft: '0.25em',
-                                                    marginRight: '0.25em',
-                                                }}
-                                            >
-                                                <img src={comment} alt='comment' />
-                                            </Badge>
-                                            <Typography variant="subtitle2" noWrap >
-                                                {comments.total}
-                                            </Typography>
-                                        </Stack>
-                                    </TableCell>
-
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                    >
                                         <Typography variant="subtitle2" noWrap>
-                                            {time}
+                                            {timeText}
                                         </Typography>
                                     </TableCell>
 

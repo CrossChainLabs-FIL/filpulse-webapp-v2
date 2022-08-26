@@ -4,7 +4,7 @@ import { Typography, TableRow, TableCell, TableHead, Stack } from '@mui/material
 import { makeStyles } from '@mui/styles';
 
 // assets
-import triunghi from '../assets/triunghi.svg';
+import triunghi from '../../assets/triunghi.svg';
 
 
 // ----------------------------------------------------------------------
@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function ContributorHead() {
+export default function PRHead() {
 
     const classes = useStyles();
 
@@ -30,28 +30,56 @@ export default function ContributorHead() {
         <TableHead>
             <TableRow className={classes.rowHead}>
 
+                <TableCell />
+
                 <TableCell
                     align="left"
                     component="th"
                     scope="row"
                     padding="none"
                     style={{
-                        width: '22em'
+                        width: '8em'
                     }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            style={{
-                                fontWeight: 450,
-                                opacity: 0.75,
-                                marginLeft: '3em'
-                            }}
-                        >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            #
+                        </Typography>
+                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                    </Stack>
+                </TableCell>
+
+                <TableCell
+                    align="left"
+                    component="th"
+                    scope="row"
+                    padding="none"
+                >
+                    <Stack
+                        direction="row"
+                        alignItems="center"
+                    >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            PR
+                        </Typography>
+                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                    </Stack>
+                </TableCell>
+
+                <TableCell
+                    align="left"
+                    component="th"
+                    scope="row"
+                    padding="none"
+                >
+                    <Stack
+                        direction="row"
+                        alignItems="center"
+                    >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Contributor
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -69,11 +97,12 @@ export default function ContributorHead() {
                         alignItems="center"
                     >
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
-                            Project
+                            Status
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
                 </TableCell>
+
 
                 <TableCell
                     align="left"
@@ -86,86 +115,10 @@ export default function ContributorHead() {
                         alignItems="center"
                     >
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
-                            Commits
+                            Last Updated
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
-                </TableCell>
-
-                <TableCell
-                    align="left"
-                    component="th"
-                    scope="row"
-                    padding="none"
-                >
-                    <Stack
-                        direction="row"
-                        alignItems="center"
-                        style={{ marginTop: '1.2em' }}
-                    >
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            style={{
-                                fontWeight: 450,
-                                opacity: 0.75,
-                                fontSize: 15
-                            }}
-                        >
-                            PRs
-                        </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
-                    </Stack>
-                    <Typography
-                        variant="subtitle2"
-                        noWrap
-                        style={{
-                            fontWeight: 450,
-                            opacity: 0.75,
-                            marginTop: 0,
-                            fontSize: 12
-                        }}
-                    >
-                        merged / open
-                    </Typography>
-                </TableCell>
-
-                <TableCell
-                    align="left"
-                    component="th"
-                    scope="row"
-                    padding="none"
-                >
-                    <Stack
-                        direction="row"
-                        alignItems="center"
-                        style={{ marginTop: '1.2em' }}
-                    >
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            style={{
-                                fontWeight: 450,
-                                opacity: 0.75,
-                                fontSize: 15
-                            }}
-                        >
-                            Issues
-                        </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
-                    </Stack>
-                    <Typography
-                        variant="subtitle2"
-                        noWrap
-                        style={{
-                            fontWeight: 450,
-                            opacity: 0.75,
-                            marginTop: 0,
-                            fontSize: 12
-                        }}
-                    >
-                        open/closed
-                    </Typography>
                 </TableCell>
 
             </TableRow>

@@ -16,8 +16,8 @@ import {
 
 
 // components
-import SearchNotFound from './SearchNotFound';
-import TableEmpty from './TableEmpty';
+import SearchNotFound from '../SearchNotFound';
+import TableEmpty from '../TableEmpty';
 import ContributorHead from './ContributorHead';
 
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export default function WatchlistTable({
+export default function ContributorsTable({
     filterName,
     isSearchEmpty,
     data,
@@ -64,11 +64,15 @@ export default function WatchlistTable({
                     <TableBody>
                         {showData.map((row) => {
                             const { id,
-                                person,
+                                personIcon,
+                                personName,
                                 project,
                                 commits,
-                                pr,
-                                issues } = row;
+                                prMin,
+                                prMax,
+                                issuesMin,
+                                issuesMax
+                            } = row;
                             return (
                                 <TableRow
                                     hover
@@ -88,14 +92,14 @@ export default function WatchlistTable({
                                             style={{ marginLeft: '4em' }}
                                         >
                                             <img
-                                                src={person.icon}
+                                                src={personIcon}
                                                 alt='avatar'
                                                 style={{
                                                     marginRight: '1em'
                                                 }}
                                             />
                                             <Typography variant="subtitle2" noWrap>
-                                                {person.name}
+                                                {personName}
                                             </Typography>
                                         </Stack>
                                     </TableCell>
@@ -135,14 +139,14 @@ export default function WatchlistTable({
                                             sx={{ width: '17em' }}
                                         >
                                             <Typography variant="subtitle2" noWrap>
-                                                {pr.min}
+                                                {prMin}
                                             </Typography>
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
                                                 sx={{ marginLeft: "auto" }}
                                             >
-                                                {pr.max}
+                                                {prMax}
                                             </Typography>
                                         </Stack>
                                         <Box sx={{ width: '100%' }}>
@@ -151,7 +155,7 @@ export default function WatchlistTable({
                                                     width: "17em"
                                                 }}
                                                 variant='determinate'
-                                                value={(pr.min * 100) / pr.max}
+                                                value={(prMin * 100) / prMax}
                                             />
                                         </Box>
                                     </TableCell>
@@ -168,14 +172,14 @@ export default function WatchlistTable({
                                             sx={{ width: '17em' }}
                                         >
                                             <Typography variant="subtitle2" noWrap>
-                                                {issues.min}
+                                                {issuesMin}
                                             </Typography>
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
                                                 sx={{ marginLeft: "auto" }}
                                             >
-                                                {issues.max}
+                                                {issuesMax}
                                             </Typography>
                                         </Stack>
                                         <Box sx={{ width: '100%' }} >
@@ -184,7 +188,7 @@ export default function WatchlistTable({
                                                     width: "17em"
                                                 }}
                                                 variant='determinate'
-                                                value={(issues.min * 100) / issues.max}
+                                                value={(issuesMin * 100) / issuesMax}
                                                 classes={{
                                                     colorPrimary: classes.colorPrimary,
                                                     barColorPrimary: classes.barColorPrimary
