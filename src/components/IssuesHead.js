@@ -50,12 +50,15 @@ export default function IssuesHead({ data }) {
                     component="th"
                     scope="row"
                     padding="none"
+                    style={{
+                        width: '8em'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap>
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             #
                         </Typography>
 
@@ -73,7 +76,7 @@ export default function IssuesHead({ data }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Issue
                         </Typography>
 
@@ -91,8 +94,8 @@ export default function IssuesHead({ data }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
-                            Author
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            Contributor
                         </Typography>
 
                         <TriunghiMenuIssuesAuthor data={data} />
@@ -109,7 +112,7 @@ export default function IssuesHead({ data }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Assignee
                         </Typography>
 
@@ -127,7 +130,7 @@ export default function IssuesHead({ data }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Status
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -144,7 +147,7 @@ export default function IssuesHead({ data }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Last Updated
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />

@@ -38,20 +38,7 @@ const watchlistData = [...Array(24)].map(() => {
         avatar3
       ],
     ]),
-    assignee: sample([
-      {
-        haveAssignee: 0,
-        icon: avatar4,
-      },
-      {
-        haveAssignee: 1,
-        icon: avatar1,
-      },
-      {
-        haveAssignee: 1,
-        icon: avatar4,
-      },
-    ]),
+    status: sample([0, 1]),
     comments: sample([
       {
         total: '5',

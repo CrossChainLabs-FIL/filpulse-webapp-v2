@@ -85,6 +85,7 @@ export default function WatchlistTable({
                                         <Stack
                                             direction="row"
                                             alignItems="center"
+                                            style={{ marginLeft: '4em' }}
                                         >
                                             <img
                                                 src={person.icon}

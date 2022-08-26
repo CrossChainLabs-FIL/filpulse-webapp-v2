@@ -2,6 +2,7 @@
 import { makeStyles } from '@mui/styles';
 
 import {
+    Box,
     Checkbox,
     CardHeader,
     Table,
@@ -31,6 +32,22 @@ const useStyles = makeStyles(() => ({
     table: {
         maxHeight: "40em",
     },
+    mergedBox: {
+        width: '6em',
+        height: '1.5em',
+        borderRadius: 5,
+        backgroundColor: '#CFD2F5'
+    },
+    openBox: {
+        width: '4em',
+        height: '1.5em',
+        borderRadius: 5,
+        backgroundColor: '#E0F3E0'
+    },
+    customBadge: {
+        backgroundColor: "#F05B47",
+        color: "white"
+    }
 }));
 
 export default function WatchlistTable({
@@ -67,7 +84,7 @@ export default function WatchlistTable({
                                 showId,
                                 project,
                                 participant,
-                                assignee,
+                                status,
                                 comments,
                                 time } = row;
                             return (
@@ -141,12 +158,28 @@ export default function WatchlistTable({
                                     </TableCell>
 
                                     <TableCell
-                                        align="left"
+                                        align="center"
                                         component="th"
                                         scope="row"
                                         padding="none"
                                     >
-                                        {assignee.haveAssignee ? <img src={assignee.icon} alt='icon' /> : ""}
+
+                                        {status ?
+                                            (
+                                                <Box className={classes.mergedBox}>
+                                                    <Typography variant="subtitle2" noWrap color='#434991'>
+                                                        Merged
+                                                    </Typography>
+                                                </Box>
+                                            ) :
+                                            (
+                                                <Box className={classes.openBox}>
+                                                    <Typography variant="subtitle2" noWrap color='#2B840E'>
+                                                        Open
+                                                    </Typography>
+                                                </Box>
+                                            )
+                                        }
                                     </TableCell>
 
                                     <TableCell
@@ -161,14 +194,15 @@ export default function WatchlistTable({
                                         >
                                             <Badge
                                                 badgeContent={comments.unseen}
-                                                color='primary'
+                                                // color='primary'
                                                 anchorOrigin={{
                                                     vertical: 'top',
                                                     horizontal: 'left',
                                                 }}
+                                                classes={{ badge: classes.customBadge }}
                                                 style={{
                                                     marginLeft: '0.25em',
-                                                    marginRight: '0.25em'
+                                                    marginRight: '0.25em',
                                                 }}
                                             >
                                                 <img src={comment} alt='comment' />

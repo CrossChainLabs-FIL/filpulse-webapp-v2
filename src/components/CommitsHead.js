@@ -35,12 +35,23 @@ export default function CommitsHead() {
                     component="th"
                     scope="row"
                     padding="none"
+                    style={{
+                        width: '12em'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            style={{
+                                fontWeight: 450,
+                                opacity: 0.75,
+                                marginLeft: '2em'
+                            }}
+                        >
                             Hash
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -57,7 +68,7 @@ export default function CommitsHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Commit
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -74,8 +85,8 @@ export default function CommitsHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap>
-                            Author
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            Contributor
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
@@ -91,7 +102,7 @@ export default function CommitsHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Last Updated
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />

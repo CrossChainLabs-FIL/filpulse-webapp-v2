@@ -35,12 +35,23 @@ export default function ContributorHead() {
                     component="th"
                     scope="row"
                     padding="none"
+                    style={{
+                        width: '22em'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            style={{
+                                fontWeight: 450,
+                                opacity: 0.75,
+                                marginLeft: '3em'
+                            }}
+                        >
                             Contributor
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -57,7 +68,7 @@ export default function ContributorHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Project
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -74,7 +85,7 @@ export default function ContributorHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Commits
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -90,14 +101,32 @@ export default function ContributorHead() {
                     <Stack
                         direction="row"
                         alignItems="center"
+                        style={{ marginTop: '1.2em' }}
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            style={{
+                                fontWeight: 450,
+                                opacity: 0.75,
+                                fontSize: 15
+                            }}
+                        >
                             PRs
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
-                    <Typography variant="subtitle2" noWrap>
-                        merged/open
+                    <Typography
+                        variant="subtitle2"
+                        noWrap
+                        style={{
+                            fontWeight: 450,
+                            opacity: 0.75,
+                            marginTop: 0,
+                            fontSize: 12
+                        }}
+                    >
+                        merged / open
                     </Typography>
                 </TableCell>
 
@@ -110,13 +139,31 @@ export default function ContributorHead() {
                     <Stack
                         direction="row"
                         alignItems="center"
+                        style={{ marginTop: '1.2em' }}
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            style={{
+                                fontWeight: 450,
+                                opacity: 0.75,
+                                fontSize: 15
+                            }}
+                        >
                             Issues
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
-                    <Typography variant="subtitle2" noWrap>
+                    <Typography
+                        variant="subtitle2"
+                        noWrap
+                        style={{
+                            fontWeight: 450,
+                            opacity: 0.75,
+                            marginTop: 0,
+                            fontSize: 12
+                        }}
+                    >
                         open/closed
                     </Typography>
                 </TableCell>

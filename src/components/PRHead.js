@@ -37,12 +37,15 @@ export default function PRHead() {
                     component="th"
                     scope="row"
                     padding="none"
+                    style={{
+                        width: '8em'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             #
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -59,7 +62,7 @@ export default function PRHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             PR
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -76,7 +79,7 @@ export default function PRHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Contributor
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -93,7 +96,7 @@ export default function PRHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Status
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -111,7 +114,7 @@ export default function PRHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Last Updated
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />

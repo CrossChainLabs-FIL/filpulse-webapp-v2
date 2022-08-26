@@ -44,7 +44,15 @@ export default function WatchlistHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ marginLeft: '1.3em' }}>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            style={{
+                                marginLeft: '1.3em',
+                                fontWeight: 450,
+                                opacity: 0.75
+                            }}
+                        >
                             #
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -61,7 +69,7 @@ export default function WatchlistHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Name
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -78,7 +86,7 @@ export default function WatchlistHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap>
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Participants
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -95,8 +103,8 @@ export default function WatchlistHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
-                            Assignee
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            Status
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
@@ -112,7 +120,7 @@ export default function WatchlistHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Comments
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -129,7 +137,7 @@ export default function WatchlistHead() {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Last Updated
                         </Typography>
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -137,6 +145,6 @@ export default function WatchlistHead() {
                 </TableCell>
 
             </TableRow>
-        </TableHead>
+        </TableHead >
     );
 }

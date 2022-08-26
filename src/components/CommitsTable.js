@@ -77,7 +77,7 @@ export default function WatchlistTable({
                                             variant="subtitle2"
                                             noWrap
                                             style={{
-                                                marginLeft: '1.1em',
+                                                marginLeft: '2.5em',
                                                 opacity: 0.72
                                             }}
                                         >
