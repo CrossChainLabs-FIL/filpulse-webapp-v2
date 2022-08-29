@@ -12,6 +12,7 @@ import { makeStyles } from '@mui/styles';
 
 // components
 import TriunghiMenuContributorContributor from './headMenus/TriunghiMenuContributorContributor';
+import TriunghiMenuContributorProject from './headMenus/TriunghiMenuContributorProject'
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -85,7 +86,8 @@ export default function ContributorHead({
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Project
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuContributorProject data={data} />
                     </Stack>
                 </TableCell>
 
@@ -135,7 +137,14 @@ export default function ContributorHead({
                         >
                             PRs
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={(e) => handleSortChange("prMin", 'asc')}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                     <Typography
                         variant="subtitle2"
@@ -173,7 +182,14 @@ export default function ContributorHead({
                         >
                             Issues
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={(e) => handleSortChange("issuesMin", 'asc')}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                     <Typography
                         variant="subtitle2"

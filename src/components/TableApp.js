@@ -385,7 +385,7 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     data={data}
                     searchData={searchData}
-
+                    handleSortChange={handleSortChange}
                 />
             )}
 
@@ -395,6 +395,7 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     data={data}
                     searchData={searchData}
+                    handleSortChange={handleSortChange}
                 />
             )}
 
@@ -414,6 +415,7 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     data={data}
                     searchData={searchData}
+                    handleSortChange={handleSortChange}
                 />
             }
 

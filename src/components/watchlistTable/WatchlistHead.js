@@ -1,8 +1,19 @@
 // material
-import { Typography, TableRow, TableCell, TableHead, Stack } from '@mui/material';
+import {
+    Typography,
+    TableRow,
+    TableCell,
+    TableHead,
+    Stack,
+    IconButton
+} from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
 
+// components
+import TriunghiMenuWLId from './headMenus/TriunghiMenuWLId';
+import TriunghiMenuWLName from './headMenus/TriunghiMenuWLName';
+import TriunghiMenuWLParticipants from './headMenus/TriunghiMenuWLParticipants';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -24,7 +35,10 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function WatchlistHead() {
+export default function WatchlistHead({
+    data,
+    handleSortChange
+}) {
 
     const classes = useStyles();
 
@@ -55,7 +69,8 @@ export default function WatchlistHead() {
                         >
                             #
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuWLId data={data} />
                     </Stack>
                 </TableCell>
 
@@ -72,7 +87,8 @@ export default function WatchlistHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Name
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuWLName data={data} />
                     </Stack>
                 </TableCell>
 
@@ -89,7 +105,8 @@ export default function WatchlistHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Participants
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuWLParticipants data={data} />
                     </Stack>
                 </TableCell>
 
@@ -106,6 +123,7 @@ export default function WatchlistHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Status
                         </Typography>
+
                         <img src={triunghi} alt='triunghi' className={classes.triunghi} />
                     </Stack>
                 </TableCell>
@@ -123,7 +141,14 @@ export default function WatchlistHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Comments
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={(e) => handleSortChange("commentsTotal", 'asc')}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -140,7 +165,14 @@ export default function WatchlistHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Last Updated
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={(e) => handleSortChange("timeNumber", 'asc')}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 

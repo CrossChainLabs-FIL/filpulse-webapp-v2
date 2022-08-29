@@ -1,7 +1,20 @@
 // material
-import { Typography, TableRow, TableCell, TableHead, Stack } from '@mui/material';
+import {
+    Typography,
+    TableRow,
+    TableCell,
+    TableHead,
+    Stack,
+    IconButton
+} from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
+
+// components
+import TriunghiMenuPrContributor from './headMenus/TriunghiMenuPrContributor';
+import TriunghiMenuPrId from './headMenus/TriunghiMenuPrId';
+import TriunghiMenuPrPr from './headMenus/TriunghiMenuPrPr';
+import TriunghiMenuPrStatus from './headMenus/TriunghiMenuPrStatus';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -22,7 +35,10 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function PRHead() {
+export default function PRHead({
+    data,
+    handleSortChange
+}) {
 
     const classes = useStyles();
 
@@ -48,7 +64,8 @@ export default function PRHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             #
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuPrId data={data} />
                     </Stack>
                 </TableCell>
 
@@ -65,7 +82,8 @@ export default function PRHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             PR
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuPrPr data={data} />
                     </Stack>
                 </TableCell>
 
@@ -82,7 +100,8 @@ export default function PRHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Contributor
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuPrContributor data={data} />
                     </Stack>
                 </TableCell>
 
@@ -99,7 +118,8 @@ export default function PRHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Status
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuPrStatus data={data} />
                     </Stack>
                 </TableCell>
 
@@ -117,7 +137,14 @@ export default function PRHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Last Updated
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={(e) => handleSortChange("timeNumber", 'asc')}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 

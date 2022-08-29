@@ -47,7 +47,8 @@ export default function PRTable({
     filterName,
     isSearchEmpty,
     data,
-    searchData
+    searchData,
+    handleSortChange
 }) {
 
     const classes = useStyles();
@@ -69,7 +70,7 @@ export default function PRTable({
             >
                 <Table stickyHeader>
 
-                    <PRHead />
+                    <PRHead data={data} handleSortChange={handleSortChange} />
 
                     <TableBody>
                         {showData.map((row) => {

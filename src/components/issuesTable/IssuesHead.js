@@ -15,6 +15,7 @@ import TriunghiMenuIssuesAuthor from './headMenus/TriunghiMenuIssuesAuthor';
 import TriunghiMenuIssuesIssue from './headMenus/TriunghiMenuIssuesIssue';
 import TriunghiMenuIssuesId from './headMenus/TriunghiMenuIssuesId';
 import TriunghiMenuIssuesAssignee from './headMenus/TriunghiMenuIssuesAssignee';
+import TriunghiMenuIssuesStatus from './headMenus/TriunghiMenuIssuesStatus'
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -138,7 +139,8 @@ export default function IssuesHead({
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Status
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuIssuesStatus data={data} />
                     </Stack>
                 </TableCell>
 

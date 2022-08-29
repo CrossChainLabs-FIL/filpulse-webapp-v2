@@ -29,7 +29,8 @@ export default function CommitsTable({
     filterName,
     isSearchEmpty,
     data,
-    searchData
+    searchData,
+    handleSortChange
 }) {
 
     const classes = useStyles();
@@ -51,7 +52,7 @@ export default function CommitsTable({
             >
                 <Table stickyHeader>
 
-                    <CommitsHead />
+                    <CommitsHead data={data} handleSortChange={handleSortChange} />
 
                     <TableBody>
                         {showData.map((row) => {

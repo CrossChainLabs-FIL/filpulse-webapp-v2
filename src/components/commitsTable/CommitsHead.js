@@ -1,7 +1,19 @@
 // material
-import { Typography, TableRow, TableCell, TableHead, Stack } from '@mui/material';
+import {
+    Typography,
+    TableRow,
+    TableCell,
+    TableHead,
+    Stack,
+    IconButton
+} from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
+
+// components
+import TriunghiMenuCommitsCommit from './headMenus/TriunghiMenuCommitsCommit';
+import TriunghiMenuCommitsContributor from './headMenus/TriunghiMenuCommitsContributor';
+import TriunghiMenuCommitsHash from './headMenus/TriunghiMenuCommitsHash';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -22,7 +34,10 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function CommitsHead() {
+export default function CommitsHead({
+    data,
+    handleSortChange
+}) {
 
     const classes = useStyles();
 
@@ -54,7 +69,8 @@ export default function CommitsHead() {
                         >
                             Hash
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuCommitsHash data={data} />
                     </Stack>
                 </TableCell>
 
@@ -71,7 +87,8 @@ export default function CommitsHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Commit
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuCommitsCommit data={data} />
                     </Stack>
                 </TableCell>
 
@@ -88,7 +105,8 @@ export default function CommitsHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Contributor
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <TriunghiMenuCommitsContributor data={data} />
                     </Stack>
                 </TableCell>
 
@@ -105,7 +123,14 @@ export default function CommitsHead() {
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Last Updated
                         </Typography>
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={(e) => handleSortChange("timeNumber", 'asc')}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 

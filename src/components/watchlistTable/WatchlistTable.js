@@ -54,7 +54,8 @@ export default function WatchlistTable({
     filterName,
     isSearchEmpty,
     data,
-    searchData
+    searchData,
+    handleSortChange
 }) {
 
     const classes = useStyles();
@@ -76,7 +77,7 @@ export default function WatchlistTable({
             >
                 <Table stickyHeader>
 
-                    <WatchlistHead />
+                    <WatchlistHead data={data} handleSortChange={handleSortChange} />
 
                     <TableBody>
                         {showData.map((row) => {

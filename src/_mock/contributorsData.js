@@ -40,24 +40,24 @@ const createObject = () => {
   ]);
   const pr = sample([
     {
-      min: '4',
-      max: "845",
+      min: 4,
+      max: 845,
     },
     {
-      min: '1',
-      max: "181",
+      min: 1,
+      max: 181,
     },
   ]);
   const prMin = pr.min;
   const prMax = pr.max;
   const issues = sample([
     {
-      min: '27',
-      max: "77",
+      min: 27,
+      max: 77,
     },
     {
-      min: '8',
-      max: "17",
+      min: 8,
+      max: 17,
     },
   ]);
   const issuesMin = issues.min;
