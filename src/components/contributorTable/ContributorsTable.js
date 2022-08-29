@@ -137,7 +137,7 @@ export default function ContributorsTable({
                                         <Stack
                                             direction="row"
                                             alignItems="center"
-                                            sx={{ width: '17em' }}
+                                            sx={{ width: '12em' }}
                                         >
                                             <Typography variant="subtitle2" noWrap>
                                                 {prMin}
@@ -153,7 +153,9 @@ export default function ContributorsTable({
                                         <Box sx={{ width: '100%' }}>
                                             <LinearProgress
                                                 sx={{
-                                                    width: "17em"
+                                                    width: "12em",
+                                                    height: '0.4em',
+                                                    borderRadius: 5,
                                                 }}
                                                 variant='determinate'
                                                 value={(prMin * 100) / prMax}
@@ -170,7 +172,7 @@ export default function ContributorsTable({
                                         <Stack
                                             direction="row"
                                             alignItems="center"
-                                            sx={{ width: '17em' }}
+                                            sx={{ width: '12em' }}
                                         >
                                             <Typography variant="subtitle2" noWrap>
                                                 {issuesMin}
@@ -186,7 +188,10 @@ export default function ContributorsTable({
                                         <Box sx={{ width: '100%' }} >
                                             <LinearProgress
                                                 sx={{
-                                                    width: "17em"
+                                                    width: "12em",
+                                                    height: '0.4em',
+                                                    borderRadius: 5,
+
                                                 }}
                                                 variant='determinate'
                                                 value={(issuesMin * 100) / issuesMax}

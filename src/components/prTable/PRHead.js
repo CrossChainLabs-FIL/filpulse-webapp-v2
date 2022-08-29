@@ -31,6 +31,18 @@ const useStyles = makeStyles(() => ({
     rowHead: {
         height: '4em',
     },
+    id: {
+        width: '10em'
+    },
+    pr: {
+        width: '32em'
+    },
+    contributor: {
+        width: '22em'
+    },
+    status: {
+        width: '15em'
+    }
 }));
 
 
@@ -53,9 +65,7 @@ export default function PRHead({
                     component="th"
                     scope="row"
                     padding="none"
-                    style={{
-                        width: '8em'
-                    }}
+                    className={classes.id}
                 >
                     <Stack
                         direction="row"
@@ -74,6 +84,7 @@ export default function PRHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.pr}
                 >
                     <Stack
                         direction="row"
@@ -92,6 +103,7 @@ export default function PRHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.contributor}
                 >
                     <Stack
                         direction="row"
@@ -110,6 +122,7 @@ export default function PRHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.status}
                 >
                     <Stack
                         direction="row"

@@ -31,6 +31,21 @@ const useStyles = makeStyles(() => ({
     rowHead: {
         height: '4em',
     },
+    id: {
+        width: '8em'
+    },
+    issue: {
+        width: '35em'
+    },
+    contributor: {
+        width: '16em'
+    },
+    assignee: {
+        width: '15em'
+    },
+    status: {
+        width: '8em'
+    }
 }));
 
 
@@ -56,9 +71,7 @@ export default function IssuesHead({
                     component="th"
                     scope="row"
                     padding="none"
-                    style={{
-                        width: '8em'
-                    }}
+                    className={classes.id}
                 >
                     <Stack
                         direction="row"
@@ -77,6 +90,7 @@ export default function IssuesHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.issue}
                 >
                     <Stack
                         direction="row"
@@ -95,6 +109,7 @@ export default function IssuesHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.contributor}
                 >
                     <Stack
                         direction="row"
@@ -113,6 +128,7 @@ export default function IssuesHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.assignee}
                 >
                     <Stack
                         direction="row"
@@ -131,6 +147,7 @@ export default function IssuesHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.status}
                 >
                     <Stack
                         direction="row"

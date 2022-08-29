@@ -42,7 +42,15 @@ const useStyles = makeStyles(() => ({
         height: '1.5em',
         borderRadius: 5,
         backgroundColor: '#E0F3E0'
-    }
+    },
+    projectElipsis: {
+        maxWidth: "25em",
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        lineHeight: '1em',
+        marginTop: '0.45em'
+    },
 }));
 
 export default function IssuesTable({
@@ -132,10 +140,7 @@ export default function IssuesTable({
                                                 <Typography
                                                     variant="subtitle2"
                                                     noWrap
-                                                    style={{
-                                                        lineHeight: '1em',
-                                                        marginTop: '0.45em'
-                                                    }}
+                                                    className={classes.projectElipsis}
                                                 >
                                                     {projectTitle}
                                                 </Typography>

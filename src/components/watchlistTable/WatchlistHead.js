@@ -31,6 +31,21 @@ const useStyles = makeStyles(() => ({
     rowHead: {
         height: '4em',
     },
+    id: {
+        width: '8em'
+    },
+    name: {
+        width: '35em'
+    },
+    participant: {
+        width: '13em'
+    },
+    status: {
+        width: '15em'
+    },
+    comments: {
+        width: '12em'
+    }
 }));
 
 
@@ -53,6 +68,7 @@ export default function WatchlistHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.id}
                 >
                     <Stack
                         direction="row"
@@ -79,6 +95,7 @@ export default function WatchlistHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.name}
                 >
                     <Stack
                         direction="row"
@@ -97,6 +114,7 @@ export default function WatchlistHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.participant}
                 >
                     <Stack
                         direction="row"
@@ -115,6 +133,7 @@ export default function WatchlistHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.status}
                 >
                     <Stack
                         direction="row"
@@ -133,6 +152,7 @@ export default function WatchlistHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.comments}
                 >
                     <Stack
                         direction="row"

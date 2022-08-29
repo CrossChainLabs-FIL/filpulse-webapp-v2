@@ -29,6 +29,18 @@ const useStyles = makeStyles(() => ({
     rowHead: {
         height: '4em',
     },
+    contributor: {
+        width: '22em'
+    },
+    project: {
+        width: '18em'
+    },
+    commits: {
+        width: '18em'
+    },
+    pr: {
+        width: '25em'
+    }
 }));
 
 
@@ -49,9 +61,7 @@ export default function ContributorHead({
                     component="th"
                     scope="row"
                     padding="none"
-                    style={{
-                        width: '22em'
-                    }}
+                    className={classes.contributor}
                 >
                     <Stack
                         direction="row"
@@ -78,6 +88,7 @@ export default function ContributorHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.project}
                 >
                     <Stack
                         direction="row"
@@ -96,6 +107,7 @@ export default function ContributorHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.commits}
                 >
                     <Stack
                         direction="row"
@@ -120,6 +132,7 @@ export default function ContributorHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.pr}
                 >
                     <Stack
                         direction="row"
