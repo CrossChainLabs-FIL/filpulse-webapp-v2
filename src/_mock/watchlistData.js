@@ -43,12 +43,12 @@ const createObject = () => {
   const merged = sample([1, 0]);
   const comments = sample([
     {
-      total: '5',
-      unseen: "2",
+      total: 5,
+      unseen: 2,
     },
     {
-      total: '2',
-      unseen: "1",
+      total: 2,
+      unseen: 1,
     },
   ]);
   const commentsTotal = comments.total;
