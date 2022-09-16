@@ -29,17 +29,32 @@ const createObject = () => {
   const projectSubtitle = project.subtitle;
   const participant = sample([
     [
-      avatar1,
-      avatar2
+      {
+        icon: avatar1,
+        name: "nume1"
+      },
+      {
+        icon: avatar2,
+        name: "nume2"
+      }
     ],
     [
-      avatar1,
-      avatar2,
-      avatar3
+      {
+        icon: avatar1,
+        name: "nume1"
+      },
+      {
+        icon: avatar2,
+        name: "nume2"
+      },
+      {
+        icon: avatar3,
+        name: "nume3"
+      }
     ],
   ]);
-  const participantIcons = participant;
-  // const participantName = participant.name;
+  const participantIcons = participant.map((currentParticipant) => currentParticipant.icon);
+  const participantName = participant.map((currentParticipant) => currentParticipant.name);
   const merged = sample([1, 0]);
   const comments = sample([
     {
@@ -72,6 +87,7 @@ const createObject = () => {
     projectTitle: projectTitle,
     projectSubtitle: projectSubtitle,
     participantIcons: participantIcons,
+    participantName: participantName,
     merged: merged,
     commentsTotal: commentsTotal,
     commentsUnseen: commentsUnseen,

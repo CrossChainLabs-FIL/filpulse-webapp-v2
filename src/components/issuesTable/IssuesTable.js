@@ -12,7 +12,7 @@ import {
     TableCell,
     Typography,
     TableContainer,
-    Paper,
+    Link,
     Tooltip
 } from '@mui/material';
 
@@ -88,11 +88,14 @@ export default function IssuesTable({
                                 showId,
                                 projectTitle,
                                 projectSubtitle,
+                                projectLink,
                                 personIcon,
                                 personName,
+                                personLink,
                                 haveAssignee,
                                 assigneeIcon,
                                 assigneeName,
+                                assigneeLink,
                                 merged,
                                 timeText,
                                 timeNumber } = row;
@@ -145,7 +148,11 @@ export default function IssuesTable({
                                                     {projectTitle}
                                                 </Typography>
                                             }
-                                            subheader={projectSubtitle}
+                                            subheader={
+                                                <Link target="_blank" rel="noopener" href={projectLink} >
+                                                    {projectSubtitle}
+                                                </Link>
+                                            }
                                         />
 
                                     </TableCell>
@@ -168,7 +175,9 @@ export default function IssuesTable({
                                                 }}
                                             />
                                             <Typography variant="subtitle2" noWrap>
-                                                {personName}
+                                                <Link target="_blank" rel="noopener" href={personLink} >
+                                                    {personName}
+                                                </Link>
                                             </Typography>
                                         </Stack>
                                     </TableCell>
@@ -185,7 +194,9 @@ export default function IssuesTable({
                                                 placement="bottom-end"
                                                 arrow
                                             >
-                                                <img src={assigneeIcon} alt='icon' />
+                                                <Link target="_blank" rel="noopener" href={assigneeLink} >
+                                                    <img src={assigneeIcon} alt='icon' />
+                                                </Link>
                                             </Tooltip> :
                                             ""}
                                     </TableCell>

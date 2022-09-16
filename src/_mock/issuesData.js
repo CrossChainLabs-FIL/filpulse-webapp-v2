@@ -20,54 +20,66 @@ const createObject = () => {
     {
       title: 'Stuck in FinalizeSector ',
       subtitle: "filecoin-project/lotus",
+      link: "https://www.google.com"
     },
     {
       title: 'Incompatibility with a ledger-wallet using  "lotus multe cuvinte pt puncte puncte',
       subtitle: "filecoin-project/lotus",
+      link: "https://www.google.com"
     },
   ]);
   const projectTitle = project.title;
   const projectSubtitle = project.subtitle;
+  const projectLink = project.link;
   const person = sample([
     {
       icon: avatar1,
       name: "Aloxaf",
+      link: "https://www.google.com"
     },
     {
       icon: avatar2,
       name: "magik6k",
+      link: "https://www.google.com"
     },
     {
       icon: avatar3,
       name: "simlecode",
+      link: "https://www.google.com"
     },
     {
       icon: avatar4,
       name: "ZenGround0",
+      link: "https://www.google.com"
     },
   ]);
   const personIcon = person.icon;
   const personName = person.name;
+  const personLink = person.link;
   const assignee = sample([
     {
       haveAssignee: 0,
       icon: avatar4,
       name: "ZenGround0",
+      link: "https://www.google.com"
     },
     {
       haveAssignee: 1,
       icon: avatar1,
       name: "Aloxaf",
+      link: "https://www.google.com"
     },
     {
       haveAssignee: 1,
       icon: avatar4,
       name: "ZenGround0",
+      link: "https://www.google.com"
     },
   ]);
   const haveAssignee = assignee.haveAssignee;
   const assigneeIcon = assignee.icon;
   const assigneeName = assignee.name;
+  const assigneeLink = assignee.link;
   const merged = sample([1, 0]);
   const time = sample([
     {
@@ -87,11 +99,14 @@ const createObject = () => {
     showId: showId,
     projectTitle: projectTitle,
     projectSubtitle: projectSubtitle,
+    projectLink: projectLink,
     personIcon: personIcon,
     personName: personName,
+    personLink: personLink,
     haveAssignee: haveAssignee,
     assigneeIcon: assigneeIcon,
     assigneeName: assigneeName,
+    assigneeLink: assigneeLink,
     merged: merged,
     timeText,
     timeNumber

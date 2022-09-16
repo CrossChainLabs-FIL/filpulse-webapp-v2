@@ -86,6 +86,7 @@ export default function WatchlistTable({
                                 projectTitle,
                                 projectSubtitle,
                                 participantIcons,
+                                participantName,
                                 merged,
                                 commentsTotal,
                                 commentsUnseen,

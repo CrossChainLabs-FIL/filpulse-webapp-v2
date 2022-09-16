@@ -7,14 +7,13 @@ import {
     IconButton,
     Menu,
     List,
-    OutlinedInput,
-    ListItem,
+    MenuItem,
     Paper,
     Typography,
+    Divider
 } from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
-import { styled } from '@mui/material/styles';
 
 
 // assets
@@ -24,8 +23,38 @@ import x from '../../../assets/x.svg';
 
 const useStyles = makeStyles(() => ({
     triunghi: {
-        marginLeft: '0.35em',
+        marginLeft: '0.25em',
         marginTop: '0.15em'
+    },
+    titleBox: {
+        marginBottom: '0.25em',
+        backgroundColor: '#FFFFFF',
+        marginBottom: "0.5em",
+        width: "13em"
+    },
+    filterText: {
+        marginTop: "0.5em",
+        marginLeft: '0.5em',
+        height: '1.75em',
+    },
+    list: {
+        height: 'max-content',
+    },
+    menu: {
+        marginTop: '1.5em',
+    },
+    x: {
+        height: "0.6em"
+    },
+    mainBox: {
+        maxHeight: '100%',
+        backgroundColor: '#FFFFFF',
+        padding: 0,
+    },
+    paper: {
+        maxHeight: '25em',
+        overflow: 'auto',
+        padding: 0,
     },
     mergedBox: {
         width: '6em',
@@ -38,17 +67,6 @@ const useStyles = makeStyles(() => ({
         height: '1.5em',
         borderRadius: 5,
         backgroundColor: '#E0F3E0'
-    }
-}));
-
-const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
-    height: 40,
-    width: 250,
-    marginBottom: 5,
-    fontSize: 15,
-    [theme.breakpoints.down('xl')]: {
-        height: 30,
-        width: 200,
     }
 }));
 
@@ -86,48 +104,53 @@ export default function TriunghiMenuPrStatus({ data }) {
                 onClose={handleClose}
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 transformOrigin={{ vertical: "top", horizontal: "right" }}
-                style={{
-                    marginTop: '1.5em'
+                MenuListProps={{
+                    style: {
+                        backgroundColor: "#fff",
+                        padding: '0px',
+                    }
                 }}
+                className={classes.menu}
             >
-                <Box style={{ maxHeight: '20em', backgroundColor: '#FFFFFF', padding: 0 }}>
-                    <Box style={{ backgroundColor: '#FFFFFF' }}>
+                <Box className={classes.mainBox}>
+                    <Box className={classes.titleBox}>
                         <Stack
                             direction="row"
                             alignItems="center"
                         >
-                            <Box>
+                            <Box className={classes.filterText}>
                                 Filter by status
                             </Box>
                             <IconButton onClick={handleClose} style={{ marginLeft: 'auto' }}>
-                                <img src={x} alt='x' />
+                                <img src={x} alt='x' className={classes.x} />
                             </IconButton>
                         </Stack>
-                        <SearchStyle
-                            style={{
-                                marginBottom: 0,
-                            }}
-                            // value={filterName}
-                            // onChange={(e) => handleFilterByName(e)}
-                            placeholder="Filter status"
-                        />
+                        <Divider />
                     </Box >
-                    <Paper style={{ maxHeight: '16.3em', overflow: 'auto' }}>
-                        <List sx={{ height: 'max-content' }}>
-                            <ListItem style={{ backgroundColor: '#FFFFFF' }}>
+                    <Paper className={classes.paper}>
+                        <List className={classes.list} disablePadding={true}>
+                            <MenuItem
+                                style={{ backgroundColor: '#FFFFFF', }}
+                                onClick={handleClose}
+                            >
                                 <Box className={classes.mergedBox}>
                                     <Typography variant="subtitle2" noWrap color='#434991'>
                                         Merged
                                     </Typography>
                                 </Box>
-                            </ListItem>
-                            <ListItem style={{ backgroundColor: '#FFFFFF' }}>
+                            </MenuItem>
+                            <Divider />
+                            <MenuItem
+                                style={{ backgroundColor: '#FFFFFF', }}
+                                onClick={handleClose}
+                            >
                                 <Box className={classes.openBox}>
                                     <Typography variant="subtitle2" noWrap color='#2B840E'>
                                         Open
                                     </Typography>
                                 </Box>
-                            </ListItem>
+                            </MenuItem>
+                            <Divider />
                         </List>
                     </Paper>
                 </Box>

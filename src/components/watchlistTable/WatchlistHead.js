@@ -12,6 +12,7 @@ import { makeStyles } from '@mui/styles';
 
 // components
 import TriunghiMenuWLId from './headMenus/TriunghiMenuWLId';
+import TriunghiMenuWLStatus from './headMenus/TriunghiMenuWLStatus';
 import TriunghiMenuWLName from './headMenus/TriunghiMenuWLName';
 import TriunghiMenuWLParticipants from './headMenus/TriunghiMenuWLParticipants';
 
@@ -143,7 +144,7 @@ export default function WatchlistHead({
                             Status
                         </Typography>
 
-                        <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        <TriunghiMenuWLStatus data={data} />
                     </Stack>
                 </TableCell>
 
