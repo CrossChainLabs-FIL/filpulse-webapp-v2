@@ -11,7 +11,8 @@ import {
     MenuItem,
     ListItemText,
     Paper,
-    Divider
+    Divider,
+    Typography
 } from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
@@ -29,9 +30,8 @@ const useStyles = makeStyles(() => ({
         marginTop: '0.15em'
     },
     titleBox: {
-        marginBottom: '0.25em',
         backgroundColor: '#FFFFFF',
-        marginBottom: "0.5em"
+        marginBottom: "0.45em"
     },
     filterText: {
         marginTop: "0.5em",
@@ -56,7 +56,13 @@ const useStyles = makeStyles(() => ({
         maxHeight: '25em',
         overflow: 'auto',
         padding: 0,
-    }
+    },
+    projectElipsis: {
+        maxWidth: "23em",
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+    },
 }));
 
 const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
@@ -142,8 +148,22 @@ export default function TriunghiMenuCommitsCommit({ data }) {
                                 } = row;
                                 return (
                                     <>
-                                        <MenuItem key={id} style={{ backgroundColor: '#FFFFFF' }}>
-                                            <ListItemText primary={projectTitle} secondary={projectSubtitle} />
+                                        <MenuItem
+                                            key={id}
+                                            style={{ backgroundColor: '#FFFFFF' }}
+                                            onClick={handleClose}
+                                        >
+                                            <ListItemText
+                                                primary={
+                                                    <Typography
+                                                        noWrap
+                                                        className={classes.projectElipsis}
+                                                    >
+                                                        {projectTitle}
+                                                    </Typography>
+                                                }
+                                                secondary={projectSubtitle}
+                                            />
                                         </MenuItem>
                                         <Divider />
                                     </>

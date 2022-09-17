@@ -10,7 +10,7 @@ import {
     TableCell,
     Typography,
     TableContainer,
-    Paper
+    Link
 } from '@mui/material';
 
 // components
@@ -60,8 +60,10 @@ export default function CommitsTable({
                                 showId,
                                 projectTitle,
                                 projectSubtitle,
+                                projectLink,
                                 personIcon,
                                 personName,
+                                personLink,
                                 timeNumber,
                                 timeText } = row;
                             return (
@@ -106,14 +108,18 @@ export default function CommitsTable({
                                                     variant="subtitle2"
                                                     noWrap
                                                     style={{
-                                                        lineHeight: '1em',
+                                                        lineHeight: '1.1em',
                                                         marginTop: '0.45em'
                                                     }}
                                                 >
                                                     {projectTitle}
                                                 </Typography>
                                             }
-                                            subheader={projectSubtitle}
+                                            subheader={
+                                                <Link target="_blank" rel="noopener" href={projectLink} >
+                                                    {projectSubtitle}
+                                                </Link>
+                                            }
                                         />
 
                                     </TableCell>
@@ -136,7 +142,9 @@ export default function CommitsTable({
                                                 }}
                                             />
                                             <Typography variant="subtitle2" noWrap>
-                                                {personName}
+                                                <Link target="_blank" rel="noopener" href={personLink} >
+                                                    {personName}
+                                                </Link>
                                             </Typography>
                                         </Stack>
                                     </TableCell>

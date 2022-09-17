@@ -9,7 +9,6 @@ import {
     List,
     MenuItem,
     Paper,
-    Typography,
     Divider
 } from '@mui/material';
 
@@ -19,6 +18,9 @@ import { makeStyles } from '@mui/styles';
 // assets
 import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
+import PRClosed from '../../../assets/PRClosed.svg';
+import PROpen from '../../../assets/PROpen.svg';
+import IssuesOpen from '../../../assets/IssuesOpen.svg';
 
 
 const useStyles = makeStyles(() => ({
@@ -27,9 +29,8 @@ const useStyles = makeStyles(() => ({
         marginTop: '0.15em'
     },
     titleBox: {
-        marginBottom: '0.25em',
         backgroundColor: '#FFFFFF',
-        marginBottom: "0.5em",
+        marginBottom: "0.45em",
         width: "13em"
     },
     filterText: {
@@ -56,18 +57,6 @@ const useStyles = makeStyles(() => ({
         overflow: 'auto',
         padding: 0,
     },
-    mergedBox: {
-        width: '6em',
-        height: '1.5em',
-        borderRadius: 5,
-        backgroundColor: '#CFD2F5'
-    },
-    openBox: {
-        width: '4em',
-        height: '1.5em',
-        borderRadius: 5,
-        backgroundColor: '#E0F3E0'
-    }
 }));
 
 
@@ -133,22 +122,28 @@ export default function TriunghiMenuWLStatus({ data }) {
                                 style={{ backgroundColor: '#FFFFFF', }}
                                 onClick={handleClose}
                             >
-                                <Box className={classes.mergedBox}>
-                                    <Typography variant="subtitle2" noWrap color='#434991'>
-                                        Merged
-                                    </Typography>
-                                </Box>
+                                <img src={PRClosed} alt="prclosed" />
                             </MenuItem>
                             <Divider />
                             <MenuItem
                                 style={{ backgroundColor: '#FFFFFF', }}
                                 onClick={handleClose}
                             >
-                                <Box className={classes.openBox}>
-                                    <Typography variant="subtitle2" noWrap color='#2B840E'>
-                                        Open
-                                    </Typography>
-                                </Box>
+                                <img src={PROpen} alt="propen" />
+                            </MenuItem>
+                            <Divider />
+                            <MenuItem
+                                style={{ backgroundColor: '#FFFFFF', }}
+                                onClick={handleClose}
+                            >
+                                <img src={IssuesOpen} alt="issuesopen" />
+                            </MenuItem>
+                            <Divider />
+                            <MenuItem
+                                style={{ backgroundColor: '#FFFFFF', }}
+                                onClick={handleClose}
+                            >
+                                <img src={IssuesOpen} alt="issuesclosed" />
                             </MenuItem>
                             <Divider />
                         </List>

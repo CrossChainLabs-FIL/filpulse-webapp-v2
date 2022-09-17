@@ -19,34 +19,42 @@ const createObject = () => {
     {
       title: 'fix: build: use GOCC when building lotus-fountain',
       subtitle: "filecoin-project/lotus",
+      link: "https://www.google.com"
     },
     {
       title: 'feat: sealing: SectorPipelineStats api',
       subtitle: "filecoin-project/lotus",
+      link: "https://www.google.com"
     },
   ]);
   const projectTitle = project.title;
   const projectSubtitle = project.subtitle;
+  const projectLink = project.link;
   const person = sample([
     {
       icon: avatar1,
       name: "Aloxaf",
+      link: "https://www.google.com"
     },
     {
       icon: avatar2,
       name: "magik6k",
+      link: "https://www.google.com"
     },
     {
       icon: avatar3,
       name: "simlecode",
+      link: "https://www.google.com"
     },
     {
       icon: avatar4,
       name: "ZenGround0",
+      link: "https://www.google.com"
     },
   ]);
   const personIcon = person.icon;
   const personName = person.name;
+  const personLink = person.link;
   const merged = sample([1, 0]);
   const time = sample([
     {
@@ -66,8 +74,10 @@ const createObject = () => {
     showId: showId,
     projectTitle: projectTitle,
     projectSubtitle: projectSubtitle,
+    projectLink: projectLink,
     personIcon: personIcon,
     personName: personName,
+    personLink: personLink,
     merged: merged,
     timeText,
     timeNumber

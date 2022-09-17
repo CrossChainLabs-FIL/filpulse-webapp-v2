@@ -11,7 +11,7 @@ import {
     TableCell,
     Typography,
     TableContainer,
-    Paper
+    Link
 } from '@mui/material';
 
 
@@ -67,7 +67,9 @@ export default function ContributorsTable({
                             const { id,
                                 personIcon,
                                 personName,
-                                project,
+                                personLink,
+                                projectName,
+                                projectLink,
                                 commits,
                                 prMin,
                                 prMax,
@@ -100,7 +102,9 @@ export default function ContributorsTable({
                                                 }}
                                             />
                                             <Typography variant="subtitle2" noWrap>
-                                                {personName}
+                                                <Link target="_blank" rel="noopener" href={personLink} >
+                                                    {personName}
+                                                </Link>
                                             </Typography>
                                         </Stack>
                                     </TableCell>
@@ -113,7 +117,9 @@ export default function ContributorsTable({
                                         padding="none"
                                     >
                                         <Typography variant="subtitle2" noWrap>
-                                            {project}
+                                            <Link target="_blank" rel="noopener" href={projectLink} >
+                                                {projectName}
+                                            </Link>
                                         </Typography>
                                     </TableCell>
 

@@ -44,7 +44,7 @@ const useStyles = makeStyles(() => ({
         width: '15em'
     },
     status: {
-        width: '8em'
+        width: '9.3em'
     }
 }));
 

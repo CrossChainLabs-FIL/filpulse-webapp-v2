@@ -6,7 +6,6 @@ import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
 import {
-    Box,
     Stack,
     Paper,
     Tabs,

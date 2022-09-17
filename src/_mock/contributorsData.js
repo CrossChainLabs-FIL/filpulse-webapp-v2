@@ -15,25 +15,39 @@ const createObject = () => {
     {
       icon: avatar1,
       name: "Aloxaf",
+      link: "https://www.google.com"
     },
     {
       icon: avatar2,
       name: "magik6k",
+      link: "https://www.google.com"
     },
     {
       icon: avatar3,
       name: "simlecode",
+      link: "https://www.google.com"
     },
     {
       icon: avatar4,
       name: "ZenGround0",
+      link: "https://www.google.com"
     },
   ]);
   const personIcon = person.icon;
   const personName = person.name;
+  const personLink = person.link;
   const project = sample([
-    'filecoin-project/lotus'
+    {
+      name: 'filecoin-project/lotus',
+      link: "https://www.google.com"
+    },
+    {
+      name: 'filecoin-project/lotus',
+      link: "https://www.google.com"
+    },
   ]);
+  const projectName = project.name;
+  const projectLink = project.link
   const commits = sample([
     '3,315',
     '1,181'
@@ -67,12 +81,14 @@ const createObject = () => {
     id: id,
     personIcon: personIcon,
     personName: personName,
-    project,
-    commits,
-    prMin,
-    prMax,
-    issuesMin,
-    issuesMax
+    personLink: personLink,
+    projectName: projectName,
+    projectLink: projectLink,
+    commits: commits,
+    prMin: prMin,
+    prMax: prMax,
+    issuesMin: issuesMin,
+    issuesMax: issuesMax
   });
 }
 

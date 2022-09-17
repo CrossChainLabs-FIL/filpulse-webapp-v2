@@ -2,7 +2,6 @@
 import { makeStyles } from '@mui/styles';
 
 import {
-    Box,
     Checkbox,
     CardHeader,
     Table,
@@ -11,9 +10,10 @@ import {
     TableCell,
     Typography,
     TableContainer,
-    Paper,
+    Link,
     Badge,
-    Stack
+    Stack,
+    Tooltip
 } from '@mui/material';
 
 
@@ -26,23 +26,14 @@ import WatchlistHead from './WatchlistHead';
 import steaPlin from '../../assets/steaPlin.svg';
 import steaGol from '../../assets/steaGol.svg';
 import comment from '../../assets/comment.svg';
+import PRClosed from '../../assets/PRClosed.svg';
+import PROpen from '../../assets/PROpen.svg';
+import IssuesOpen from '../../assets/IssuesOpen.svg';
 
 
 const useStyles = makeStyles(() => ({
     table: {
         maxHeight: "40em",
-    },
-    mergedBox: {
-        width: '6em',
-        height: '1.5em',
-        borderRadius: 5,
-        backgroundColor: '#CFD2F5'
-    },
-    openBox: {
-        width: '4em',
-        height: '1.5em',
-        borderRadius: 5,
-        backgroundColor: '#E0F3E0'
     },
     customBadge: {
         backgroundColor: "#F05B47",
@@ -87,6 +78,7 @@ export default function WatchlistTable({
                                 projectSubtitle,
                                 participantIcons,
                                 participantName,
+                                participantLink,
                                 merged,
                                 commentsTotal,
                                 commentsUnseen,
@@ -102,6 +94,7 @@ export default function WatchlistTable({
                                         <Checkbox
                                             icon={<img src={steaGol} alt='steaGol' />}
                                             checkedIcon={<img src={steaPlin} alt='steaPlin' />}
+                                            checked={true}
                                         />
                                     </TableCell>
 
@@ -155,36 +148,36 @@ export default function WatchlistTable({
                                         scope="row"
                                         padding="none"
                                     >
-                                        {participantIcons.map((avatar) => {
+                                        {participantIcons.map((avatar, index) => {
                                             return (
-                                                <img key={avatar} src={avatar} alt="avatar" />
+                                                <Tooltip
+                                                    title={participantName[index]}
+                                                    placement="bottom-end"
+                                                    arrow
+                                                >
+                                                    <Link
+                                                        target="_blank"
+                                                        rel="noopener"
+                                                        href={participantLink[index]}
+                                                    >
+                                                        <img key={avatar} src={avatar} alt="avatar" />
+                                                    </Link>
+                                                </Tooltip>
                                             )
                                         })}
                                     </TableCell>
 
                                     <TableCell
-                                        align="center"
+                                        align="left"
                                         component="th"
                                         scope="row"
                                         padding="none"
                                     >
 
-                                        {merged ?
-                                            (
-                                                <Box className={classes.mergedBox}>
-                                                    <Typography variant="subtitle2" noWrap color='#434991'>
-                                                        Merged
-                                                    </Typography>
-                                                </Box>
-                                            ) :
-                                            (
-                                                <Box className={classes.openBox}>
-                                                    <Typography variant="subtitle2" noWrap color='#2B840E'>
-                                                        Open
-                                                    </Typography>
-                                                </Box>
-                                            )
-                                        }
+                                        {merged === 0 && (<img src={PRClosed} alt="prclosed" />)}
+                                        {merged === 1 && (<img src={PROpen} alt="propen" />)}
+                                        {merged === 2 && (<img src={IssuesOpen} alt="issuesopen" />)}
+                                        {merged === 3 && (<img src={IssuesOpen} alt="issuesclosed" />)}
                                     </TableCell>
 
                                     <TableCell

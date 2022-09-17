@@ -2,7 +2,6 @@
 import { makeStyles } from '@mui/styles';
 
 import {
-    Box,
     Checkbox,
     CardHeader,
     Table,
@@ -11,7 +10,7 @@ import {
     TableCell,
     Typography,
     TableContainer,
-    Paper,
+    Link,
     Stack
 } from '@mui/material';
 
@@ -23,24 +22,14 @@ import PRHead from './PRHead';
 // assets
 import steaPlin from '../../assets/steaPlin.svg';
 import steaGol from '../../assets/steaGol.svg';
+import closedBox from '../../assets/ClosedBox.svg';
+import openBox from '../../assets/OpenBox.svg';
 
 
 const useStyles = makeStyles(() => ({
     table: {
         maxHeight: "40em",
     },
-    mergedBox: {
-        width: '6em',
-        height: '1.5em',
-        borderRadius: 5,
-        backgroundColor: '#CFD2F5'
-    },
-    openBox: {
-        width: '4em',
-        height: '1.5em',
-        borderRadius: 5,
-        backgroundColor: '#E0F3E0'
-    }
 }));
 
 export default function PRTable({
@@ -78,8 +67,10 @@ export default function PRTable({
                                 showId,
                                 projectTitle,
                                 projectSubtitle,
+                                projectLink,
                                 personName,
                                 personIcon,
+                                personLink,
                                 merged,
                                 timeText,
                                 timeNumber } = row;
@@ -135,7 +126,11 @@ export default function PRTable({
                                                     {projectTitle}
                                                 </Typography>
                                             }
-                                            subheader={projectSubtitle}
+                                            subheader={
+                                                <Link target="_blank" rel="noopener" href={projectLink} >
+                                                    {projectSubtitle}
+                                                </Link>
+                                            }
                                         />
 
                                     </TableCell>
@@ -158,13 +153,15 @@ export default function PRTable({
                                                 }}
                                             />
                                             <Typography variant="subtitle2" noWrap>
-                                                {personName}
+                                                <Link target="_blank" rel="noopener" href={personLink} >
+                                                    {personName}
+                                                </Link>
                                             </Typography>
                                         </Stack>
                                     </TableCell>
 
                                     <TableCell
-                                        align="center"
+                                        align="left"
                                         component="th"
                                         scope="row"
                                         padding="none"
@@ -172,18 +169,16 @@ export default function PRTable({
 
                                         {merged ?
                                             (
-                                                <Box className={classes.mergedBox}>
-                                                    <Typography variant="subtitle2" noWrap color='#434991'>
-                                                        Merged
-                                                    </Typography>
-                                                </Box>
+                                                <img
+                                                    src={closedBox}
+                                                    alt="closed"
+                                                />
                                             ) :
                                             (
-                                                <Box className={classes.openBox}>
-                                                    <Typography variant="subtitle2" noWrap color='#2B840E'>
-                                                        Open
-                                                    </Typography>
-                                                </Box>
+                                                <img
+                                                    src={openBox}
+                                                    alt="closed"
+                                                />
                                             )
                                         }
                                     </TableCell>

@@ -31,31 +31,37 @@ const createObject = () => {
     [
       {
         icon: avatar1,
-        name: "nume1"
+        name: "nume1",
+        link: "https://www.google.com"
       },
       {
         icon: avatar2,
-        name: "nume2"
+        name: "nume2",
+        link: "https://www.google.com"
       }
     ],
     [
       {
         icon: avatar1,
-        name: "nume1"
+        name: "nume1",
+        link: "https://www.google.com"
       },
       {
         icon: avatar2,
-        name: "nume2"
+        name: "nume2",
+        link: "https://www.google.com"
       },
       {
         icon: avatar3,
-        name: "nume3"
+        name: "nume3",
+        link: "https://www.google.com"
       }
     ],
   ]);
   const participantIcons = participant.map((currentParticipant) => currentParticipant.icon);
   const participantName = participant.map((currentParticipant) => currentParticipant.name);
-  const merged = sample([1, 0]);
+  const participantLink = participant.map((currentParticipant) => currentParticipant.link);
+  const merged = sample([1, 0, 2, 3]);
   const comments = sample([
     {
       total: 5,
@@ -88,6 +94,7 @@ const createObject = () => {
     projectSubtitle: projectSubtitle,
     participantIcons: participantIcons,
     participantName: participantName,
+    participantLink: participantLink,
     merged: merged,
     commentsTotal: commentsTotal,
     commentsUnseen: commentsUnseen,

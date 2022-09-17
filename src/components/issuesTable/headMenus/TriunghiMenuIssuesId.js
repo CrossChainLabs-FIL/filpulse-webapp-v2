@@ -29,9 +29,8 @@ const useStyles = makeStyles(() => ({
         marginTop: '0.15em'
     },
     titleBox: {
-        marginBottom: '0.25em',
         backgroundColor: '#FFFFFF',
-        marginBottom: "0.5em"
+        marginBottom: "0.45em"
     },
     filterText: {
         marginTop: "0.5em",
