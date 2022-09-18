@@ -116,7 +116,14 @@ export default function IssuesTable({
                                         }}
                                     >
                                         <Typography variant="subtitle2" noWrap>
-                                            {showId}
+                                            <Link
+                                                target="_blank"
+                                                rel="noopener"
+                                                href={projectLink}
+                                                color="inherit"
+                                            >
+                                                {showId}
+                                            </Link>
                                         </Typography>
                                     </TableCell>
 
@@ -142,7 +149,12 @@ export default function IssuesTable({
                                                 </Typography>
                                             }
                                             subheader={
-                                                <Link target="_blank" rel="noopener" href={projectLink} >
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={projectLink}
+                                                    color="inherit"
+                                                >
                                                     {projectSubtitle}
                                                 </Link>
                                             }
@@ -168,7 +180,12 @@ export default function IssuesTable({
                                                 }}
                                             />
                                             <Typography variant="subtitle2" noWrap>
-                                                <Link target="_blank" rel="noopener" href={personLink} >
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={personLink}
+                                                    color="inherit"
+                                                >
                                                     {personName}
                                                 </Link>
                                             </Typography>

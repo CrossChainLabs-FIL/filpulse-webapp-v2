@@ -18,15 +18,21 @@ const createObject = () => {
   const project = sample([
     {
       title: 'Import seed phrase into lotus wallet',
-      subtitle: "opened 20 days ago by Schwartz10",
+      subtitle: "opened 20 days ago by ",
+      author: "Schwartz10",
+      link: "https://www.google.com"
     },
     {
       title: 'Remove workaround in checkPreCommitI()',
-      subtitle: "#9054 opened 23 days ago by geoff-vball",
+      subtitle: "#9054 opened 23 days ago by ",
+      author: "geoff-vball",
+      link: "https://www.google.com"
     },
   ]);
   const projectTitle = project.title;
   const projectSubtitle = project.subtitle;
+  const projectAuthor = project.author;
+  const projectLink = project.link;
   const participant = sample([
     [
       {
@@ -92,6 +98,8 @@ const createObject = () => {
     showId: showId,
     projectTitle: projectTitle,
     projectSubtitle: projectSubtitle,
+    projectAuthor: projectAuthor,
+    projectLink: projectLink,
     participantIcons: participantIcons,
     participantName: participantName,
     participantLink: participantLink,

@@ -42,7 +42,15 @@ const useStyles = makeStyles(() => ({
     },
     stea: {
         marginLeft: "0.15em"
-    }
+    },
+    projectElipsis: {
+        maxWidth: "25em",
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        lineHeight: '1em',
+        marginTop: '0.45em'
+    },
 }));
 
 export default function WatchlistTable({
@@ -80,6 +88,8 @@ export default function WatchlistTable({
                                 showId,
                                 projectTitle,
                                 projectSubtitle,
+                                projectAuthor,
+                                projectLink,
                                 participantIcons,
                                 participantName,
                                 participantLink,
@@ -114,7 +124,14 @@ export default function WatchlistTable({
                                             variant="subtitle2"
                                             noWrap
                                         >
-                                            {showId}
+                                            <Link
+                                                target="_blank"
+                                                rel="noopener"
+                                                href={projectLink}
+                                                color="inherit"
+                                            >
+                                                {showId}
+                                            </Link>
                                         </Typography>
                                     </TableCell>
 
@@ -138,11 +155,23 @@ export default function WatchlistTable({
                                                         lineHeight: '1em',
                                                         marginTop: '0.45em'
                                                     }}
+                                                    className={classes.projectElipsis}
                                                 >
                                                     {projectTitle}
                                                 </Typography>
                                             }
-                                            subheader={projectSubtitle}
+                                            subheader={
+                                                <>                                                                {projectSubtitle}
+                                                    < Link
+                                                        target="_blank"
+                                                        rel="noopener"
+                                                        href={projectLink}
+                                                        color="inherit"
+                                                    >
+                                                        {projectAuthor}
+                                                    </Link>
+                                                </>
+                                            }
                                         />
 
                                     </TableCell>
@@ -191,29 +220,37 @@ export default function WatchlistTable({
                                         scope="row"
                                         padding="none"
                                     >
-                                        <Stack
-                                            direction="row"
-                                            alignItems="center"
+                                        < Link
+                                            target="_blank"
+                                            rel="noopener"
+                                            href={projectLink}
+                                            color="inherit"
+                                            underline='none'
                                         >
-                                            <Badge
-                                                badgeContent={commentsUnseen}
-                                                // color='primary'
-                                                anchorOrigin={{
-                                                    vertical: 'top',
-                                                    horizontal: 'left',
-                                                }}
-                                                classes={{ badge: classes.customBadge }}
-                                                style={{
-                                                    marginLeft: '0.25em',
-                                                    marginRight: '0.25em',
-                                                }}
+                                            <Stack
+                                                direction="row"
+                                                alignItems="center"
                                             >
-                                                <img src={comment} alt='comment' />
-                                            </Badge>
-                                            <Typography variant="subtitle2" noWrap >
-                                                {commentsTotal}
-                                            </Typography>
-                                        </Stack>
+                                                <Badge
+                                                    badgeContent={commentsUnseen}
+                                                    // color='primary'
+                                                    anchorOrigin={{
+                                                        vertical: 'top',
+                                                        horizontal: 'left',
+                                                    }}
+                                                    classes={{ badge: classes.customBadge }}
+                                                    style={{
+                                                        marginLeft: '0.25em',
+                                                        marginRight: '0.25em',
+                                                    }}
+                                                >
+                                                    <img src={comment} alt='comment' />
+                                                </Badge>
+                                                <Typography variant="subtitle2" noWrap >
+                                                    {commentsTotal}
+                                                </Typography>
+                                            </Stack>
+                                        </Link>
                                     </TableCell>
 
                                     <TableCell

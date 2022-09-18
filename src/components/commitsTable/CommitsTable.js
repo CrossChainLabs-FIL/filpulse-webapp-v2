@@ -23,6 +23,14 @@ const useStyles = makeStyles(() => ({
     table: {
         maxHeight: "40em",
     },
+    projectElipsis: {
+        maxWidth: "50em",
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        lineHeight: '1em',
+        marginTop: '0.45em'
+    },
 }));
 
 export default function CommitsTable({
@@ -84,10 +92,16 @@ export default function CommitsTable({
                                             noWrap
                                             style={{
                                                 marginLeft: '2.5em',
-                                                opacity: 0.72
                                             }}
                                         >
-                                            {showId}
+                                            <Link
+                                                target="_blank"
+                                                rel="noopener"
+                                                href={projectLink}
+                                                color="inherit"
+                                            >
+                                                {showId}
+                                            </Link>
                                         </Typography>
                                     </TableCell>
 
@@ -111,12 +125,18 @@ export default function CommitsTable({
                                                         lineHeight: '1.1em',
                                                         marginTop: '0.45em'
                                                     }}
+                                                    className={classes.projectElipsis}
                                                 >
                                                     {projectTitle}
                                                 </Typography>
                                             }
                                             subheader={
-                                                <Link target="_blank" rel="noopener" href={projectLink} >
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={projectLink}
+                                                    color="inherit"
+                                                >
                                                     {projectSubtitle}
                                                 </Link>
                                             }
@@ -142,7 +162,12 @@ export default function CommitsTable({
                                                 }}
                                             />
                                             <Typography variant="subtitle2" noWrap>
-                                                <Link target="_blank" rel="noopener" href={personLink} >
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={personLink}
+                                                    color="inherit"
+                                                >
                                                     {personName}
                                                 </Link>
                                             </Typography>

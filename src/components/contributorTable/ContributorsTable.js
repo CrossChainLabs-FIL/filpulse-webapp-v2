@@ -30,7 +30,15 @@ const useStyles = makeStyles(() => ({
     },
     barColorPrimary: {
         backgroundColor: '#FFB803',
-    }
+    },
+    projectElipsis: {
+        maxWidth: "10em",
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        lineHeight: '1em',
+        marginTop: '0.45em'
+    },
 }));
 
 export default function ContributorsTable({
@@ -102,7 +110,12 @@ export default function ContributorsTable({
                                                 }}
                                             />
                                             <Typography variant="subtitle2" noWrap>
-                                                <Link target="_blank" rel="noopener" href={personLink} >
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={personLink}
+                                                    color="inherit"
+                                                >
                                                     {personName}
                                                 </Link>
                                             </Typography>
@@ -116,8 +129,17 @@ export default function ContributorsTable({
                                         scope="row"
                                         padding="none"
                                     >
-                                        <Typography variant="subtitle2" noWrap>
-                                            <Link target="_blank" rel="noopener" href={projectLink} >
+                                        <Typography
+                                            variant="subtitle2"
+                                            noWrap
+                                            className={classes.projectElipsis}
+                                        >
+                                            <Link
+                                                target="_blank"
+                                                rel="noopener"
+                                                href={projectLink}
+                                                color="inherit"
+                                            >
                                                 {projectName}
                                             </Link>
                                         </Typography>
