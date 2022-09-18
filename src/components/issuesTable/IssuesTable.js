@@ -40,6 +40,9 @@ const useStyles = makeStyles(() => ({
         lineHeight: '1em',
         marginTop: '0.45em'
     },
+    stea: {
+        marginLeft: "0.15em"
+    }
 }));
 
 export default function IssuesTable({
@@ -98,6 +101,7 @@ export default function IssuesTable({
                                         <Checkbox
                                             icon={<img src={steaGol} alt='steaGol' />}
                                             checkedIcon={<img src={steaPlin} alt='steaPlin' />}
+                                            className={classes.stea}
                                         />
                                     </TableCell>
 

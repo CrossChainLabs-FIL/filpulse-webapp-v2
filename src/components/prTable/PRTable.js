@@ -30,6 +30,9 @@ const useStyles = makeStyles(() => ({
     table: {
         maxHeight: "40em",
     },
+    stea: {
+        marginLeft: "0.15em"
+    }
 }));
 
 export default function PRTable({
@@ -84,6 +87,7 @@ export default function PRTable({
                                         <Checkbox
                                             icon={<img src={steaGol} alt='steaGol' />}
                                             checkedIcon={<img src={steaPlin} alt='steaPlin' />}
+                                            className={classes.stea}
                                         />
                                     </TableCell>
 

@@ -29,6 +29,7 @@ import comment from '../../assets/comment.svg';
 import PRClosed from '../../assets/PRClosed.svg';
 import PROpen from '../../assets/PROpen.svg';
 import IssuesOpen from '../../assets/IssuesOpen.svg';
+import IssuesClosed from '../../assets/IssuesClosed.svg';
 
 
 const useStyles = makeStyles(() => ({
@@ -38,6 +39,9 @@ const useStyles = makeStyles(() => ({
     customBadge: {
         backgroundColor: "#F05B47",
         color: "white"
+    },
+    stea: {
+        marginLeft: "0.15em"
     }
 }));
 
@@ -95,6 +99,7 @@ export default function WatchlistTable({
                                             icon={<img src={steaGol} alt='steaGol' />}
                                             checkedIcon={<img src={steaPlin} alt='steaPlin' />}
                                             checked={true}
+                                            className={classes.stea}
                                         />
                                     </TableCell>
 
@@ -177,7 +182,7 @@ export default function WatchlistTable({
                                         {merged === 0 && (<img src={PRClosed} alt="prclosed" />)}
                                         {merged === 1 && (<img src={PROpen} alt="propen" />)}
                                         {merged === 2 && (<img src={IssuesOpen} alt="issuesopen" />)}
-                                        {merged === 3 && (<img src={IssuesOpen} alt="issuesclosed" />)}
+                                        {merged === 3 && (<img src={IssuesClosed} alt="issuesclosed" />)}
                                     </TableCell>
 
                                     <TableCell

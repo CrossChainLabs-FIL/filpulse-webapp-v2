@@ -187,11 +187,11 @@ export default function TableApp() {
             switch (value) {
                 case 0:
                     setSearchData(filter(array, (_user) =>
-                        _user.project.title.toLowerCase().indexOf(query.toLowerCase()) !== -1));
+                        _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
                     break;
                 case 1:
                     setSearchData(filter(array, (_user) =>
-                        _user.project.title.toLowerCase().indexOf(query.toLowerCase()) !== -1));
+                        _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
                     break;
                 case 2:
                     setSearchData(filter(array, (_user) =>
@@ -199,7 +199,7 @@ export default function TableApp() {
                     break;
                 case 3:
                     setSearchData(filter(array, (_user) =>
-                        _user.project.title.toLowerCase().indexOf(query.toLowerCase()) !== -1));
+                        _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
                     break;
                 case 4:
                     setSearchData(filter(array, (_user) =>

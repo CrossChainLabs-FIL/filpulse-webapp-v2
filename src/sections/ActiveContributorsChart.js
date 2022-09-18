@@ -25,13 +25,13 @@ export default function ActiveContributors() {
       let contributorsData = [];
       let categories = [];
 
-        contributors.forEach(item => {
-          contributorsData.push(item.active_contributors);
-          categories.push(item.display_month);
+      contributors.forEach(item => {
+        contributorsData.push(item.active_contributors);
+        categories.push(item.display_month);
       });
-     
+
       setState({
-        loading: false, 
+        loading: false,
         categories: categories,
         data: [
           { name: 'Contributors', data: contributorsData }
@@ -52,9 +52,9 @@ export default function ActiveContributors() {
         title="Active Contributors"
         subheader=""
       />
-        <Box  sx={{ mt: 3, mx: 3 }} dir="ltr">
-            <ReactApexChart type="line" series={state.data} options={chartOptions} height={364} />
-        </Box>
+      <Box sx={{ mt: 3, mx: 3, width: "57em" }} dir="ltr">
+        <ReactApexChart type="line" series={state.data} options={chartOptions} height={364} />
+      </Box>
     </Card>
   );
 }

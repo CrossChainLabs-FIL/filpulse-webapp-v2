@@ -21,6 +21,7 @@ import x from '../../../assets/x.svg';
 import PRClosed from '../../../assets/PRClosed.svg';
 import PROpen from '../../../assets/PROpen.svg';
 import IssuesOpen from '../../../assets/IssuesOpen.svg';
+import IssuesClosed from '../../../assets/IssuesClosed.svg';
 
 
 const useStyles = makeStyles(() => ({
@@ -143,7 +144,7 @@ export default function TriunghiMenuWLStatus({ data }) {
                                 style={{ backgroundColor: '#FFFFFF', }}
                                 onClick={handleClose}
                             >
-                                <img src={IssuesOpen} alt="issuesclosed" />
+                                <img src={IssuesClosed} alt="issuesclosed" />
                             </MenuItem>
                             <Divider />
                         </List>

@@ -143,7 +143,7 @@ export default function TriunghiMenuContributorProject({ data }) {
                         <List className={classes.list} disablePadding={true}>
                             {data.map((row) => {
                                 const { id,
-                                    project,
+                                    projectName,
                                 } = row;
                                 return (
                                     <>
@@ -158,7 +158,7 @@ export default function TriunghiMenuContributorProject({ data }) {
                                                         noWrap
                                                         className={classes.projectElipsis}
                                                     >
-                                                        {project}
+                                                        {projectName}
                                                     </Typography>
                                                 }
                                             />
