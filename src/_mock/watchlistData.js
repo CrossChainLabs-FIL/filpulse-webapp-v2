@@ -63,6 +63,28 @@ const createObject = () => {
         link: "https://www.google.com"
       }
     ],
+    [
+      {
+        icon: avatar4,
+        name: "nume4",
+        link: "https://www.google.com"
+      },
+      {
+        icon: avatar1,
+        name: "nume1",
+        link: "https://www.google.com"
+      },
+      {
+        icon: avatar2,
+        name: "nume2",
+        link: "https://www.google.com"
+      },
+      {
+        icon: avatar3,
+        name: "nume3",
+        link: "https://www.google.com"
+      }
+    ],
   ]);
   const participantIcons = participant.map((currentParticipant) => currentParticipant.icon);
   const participantName = participant.map((currentParticipant) => currentParticipant.name);

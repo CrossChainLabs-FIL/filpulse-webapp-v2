@@ -84,7 +84,6 @@ export default function IssuesTable({
                                 personIcon,
                                 personName,
                                 personLink,
-                                haveAssignee,
                                 assigneeIcon,
                                 assigneeName,
                                 assigneeLink,
@@ -198,17 +197,32 @@ export default function IssuesTable({
                                         scope="row"
                                         padding="none"
                                     >
-                                        {haveAssignee ?
-                                            <Tooltip
-                                                title={assigneeName}
-                                                placement="bottom-end"
-                                                arrow
-                                            >
-                                                <Link target="_blank" rel="noopener" href={assigneeLink} >
-                                                    <img src={assigneeIcon} alt='icon' />
-                                                </Link>
-                                            </Tooltip> :
-                                            ""}
+                                        {assigneeIcon.map((avatar, index) => {
+                                            let overflow = false;
+                                            if (index >= 3 && overflow === false) {
+                                                overflow = true;
+                                                return (
+                                                    <span>...</span>
+                                                );
+                                            }
+                                            if (index < 3) {
+                                                return (
+                                                    <Tooltip
+                                                        title={assigneeName[index]}
+                                                        placement="bottom-end"
+                                                        arrow
+                                                    >
+                                                        <Link
+                                                            target="_blank"
+                                                            rel="noopener"
+                                                            href={assigneeLink[index]}
+                                                        >
+                                                            <img key={avatar} src={avatar} alt='icon' />
+                                                        </Link>
+                                                    </Tooltip>
+                                                );
+                                            }
+                                        })}
                                     </TableCell>
 
                                     <TableCell

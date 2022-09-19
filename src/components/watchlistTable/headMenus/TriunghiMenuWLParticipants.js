@@ -142,24 +142,30 @@ export default function TriunghiMenuWLParticipants({ data }) {
                                 } = row;
                                 return (
                                     <>
-                                        <MenuItem
-                                            key={id}
-                                            style={{ backgroundColor: '#FFFFFF', }}
-                                            onClick={handleClose}
-                                        >
-                                            <Avatar
-                                                src={participantIcons[0]}
-                                                alt='avatar'
-                                                sx={{
-                                                    width: 30,
-                                                    height: 30,
-                                                    marginLeft: "1.75em",
-                                                    marginRight: "0.5em"
-                                                }}
-                                            />
-                                            <ListItemText primary={participantName[0]} />
-                                        </MenuItem>
-                                        <Divider />
+                                        {participantName.map((participant, index) => {
+                                            return (
+                                                <>
+                                                    <MenuItem
+                                                        key={id}
+                                                        style={{ backgroundColor: '#FFFFFF', }}
+                                                        onClick={handleClose}
+                                                    >
+                                                        <Avatar
+                                                            src={participantIcons[index]}
+                                                            alt='avatar'
+                                                            sx={{
+                                                                width: 30,
+                                                                height: 30,
+                                                                marginLeft: "1.75em",
+                                                                marginRight: "0.5em"
+                                                            }}
+                                                        />
+                                                        <ListItemText primary={participant} />
+                                                    </MenuItem>
+                                                    <Divider />
+                                                </>
+                                            );
+                                        })}
                                     </>
                                 );
                             })}

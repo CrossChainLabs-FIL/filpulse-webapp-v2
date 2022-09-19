@@ -57,29 +57,69 @@ const createObject = () => {
   const personName = person.name;
   const personLink = person.link;
   const assignee = sample([
-    {
-      haveAssignee: 0,
-      icon: avatar4,
-      name: "ZenGround0",
-      link: "https://www.google.com"
-    },
-    {
-      haveAssignee: 1,
-      icon: avatar1,
-      name: "Aloxaf",
-      link: "https://www.google.com"
-    },
-    {
-      haveAssignee: 1,
-      icon: avatar4,
-      name: "ZenGround0",
-      link: "https://www.google.com"
-    },
+    [
+      {
+        icon: avatar4,
+        name: "ZenGround0",
+        link: "https://www.google.com"
+      },
+      {
+        icon: avatar1,
+        name: "Aloxaf",
+        link: "https://www.google.com"
+      },
+      {
+        icon: avatar4,
+        name: "ZenGround0",
+        link: "https://www.google.com"
+      },
+    ],
+    [],
+    [
+      {
+        icon: avatar1,
+        name: "Aloxaf",
+        link: "https://www.google.com"
+      },
+      {
+        icon: avatar4,
+        name: "ZenGround0",
+        link: "https://www.google.com"
+      },
+    ],
+    [
+      {
+        icon: avatar1,
+        name: "Aloxaf",
+        link: "https://www.google.com"
+      },
+    ],
+    [
+      {
+        icon: avatar2,
+        name: "ZenGround0",
+        link: "https://www.google.com"
+      },
+      {
+        icon: avatar4,
+        name: "ZenGround0",
+        link: "https://www.google.com"
+      },
+      {
+        icon: avatar1,
+        name: "Aloxaf",
+        link: "https://www.google.com"
+      },
+      {
+        icon: avatar4,
+        name: "ZenGround0",
+        link: "https://www.google.com"
+      },
+    ],
   ]);
-  const haveAssignee = assignee.haveAssignee;
-  const assigneeIcon = assignee.icon;
-  const assigneeName = assignee.name;
-  const assigneeLink = assignee.link;
+  const assigneeIcon = assignee.map((currentAssignee) => currentAssignee.icon);
+  const assigneeName = assignee.map((currentAssignee) => currentAssignee.name);
+  const assigneeLink = assignee.map((currentAssignee) => currentAssignee.link);
   const merged = sample([1, 0]);
   const time = sample([
     {
@@ -103,7 +143,6 @@ const createObject = () => {
     personIcon: personIcon,
     personName: personName,
     personLink: personLink,
-    haveAssignee: haveAssignee,
     assigneeIcon: assigneeIcon,
     assigneeName: assigneeName,
     assigneeLink: assigneeLink,

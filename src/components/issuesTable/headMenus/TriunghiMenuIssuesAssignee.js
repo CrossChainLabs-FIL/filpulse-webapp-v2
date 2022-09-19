@@ -142,24 +142,30 @@ export default function TriunghiMenuIssuesAssignee({ data }) {
                                 } = row;
                                 return (
                                     <>
-                                        <MenuItem
-                                            key={id}
-                                            style={{ backgroundColor: '#FFFFFF', }}
-                                            onClick={handleClose}
-                                        >
-                                            <Avatar
-                                                src={assigneeIcon}
-                                                alt='avatar'
-                                                sx={{
-                                                    width: 30,
-                                                    height: 30,
-                                                    marginLeft: "1.75em",
-                                                    marginRight: "0.5em"
-                                                }}
-                                            />
-                                            <ListItemText primary={assigneeName} />
-                                        </MenuItem>
-                                        <Divider />
+                                        {assigneeIcon.map((assignee, index) => {
+                                            return (
+                                                <>
+                                                    <MenuItem
+                                                        key={id}
+                                                        style={{ backgroundColor: '#FFFFFF', }}
+                                                        onClick={handleClose}
+                                                    >
+                                                        <Avatar
+                                                            src={assignee}
+                                                            alt='avatar'
+                                                            sx={{
+                                                                width: 30,
+                                                                height: 30,
+                                                                marginLeft: "1.75em",
+                                                                marginRight: "0.5em"
+                                                            }}
+                                                        />
+                                                        <ListItemText primary={assigneeName[index]} />
+                                                    </MenuItem>
+                                                    <Divider />
+                                                </>
+                                            );
+                                        })}
                                     </>
                                 );
                             })}

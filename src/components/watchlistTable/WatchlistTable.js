@@ -183,21 +183,30 @@ export default function WatchlistTable({
                                         padding="none"
                                     >
                                         {participantIcons.map((avatar, index) => {
-                                            return (
-                                                <Tooltip
-                                                    title={participantName[index]}
-                                                    placement="bottom-end"
-                                                    arrow
-                                                >
-                                                    <Link
-                                                        target="_blank"
-                                                        rel="noopener"
-                                                        href={participantLink[index]}
+                                            let overflow = false;
+                                            if (index >= 3 && overflow === false) {
+                                                overflow = true;
+                                                return (
+                                                    <span>...</span>
+                                                );
+                                            }
+                                            if (index < 3) {
+                                                return (
+                                                    <Tooltip
+                                                        title={participantName[index]}
+                                                        placement="bottom-end"
+                                                        arrow
                                                     >
-                                                        <img key={avatar} src={avatar} alt="avatar" />
-                                                    </Link>
-                                                </Tooltip>
-                                            )
+                                                        <Link
+                                                            target="_blank"
+                                                            rel="noopener"
+                                                            href={participantLink[index]}
+                                                        >
+                                                            <img key={avatar} src={avatar} alt="avatar" />
+                                                        </Link>
+                                                    </Tooltip>
+                                                );
+                                            }
                                         })}
                                     </TableCell>
 
