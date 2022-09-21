@@ -115,6 +115,7 @@ export default function PRTable({
                                                 rel="noopener"
                                                 href={projectLink}
                                                 color="inherit"
+                                                underline="none"
                                             >
                                                 {showId}
                                             </Link>
@@ -183,6 +184,7 @@ export default function PRTable({
                                                     rel="noopener"
                                                     href={personLink}
                                                     color="inherit"
+                                                    underline="none"
                                                 >
                                                     {personName}
                                                 </Link>

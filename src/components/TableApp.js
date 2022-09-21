@@ -58,7 +58,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
     marginBottom: 5,
     fontSize: 15,
     [theme.breakpoints.down('xl')]: {
-        height: 30,
+        height: 35,
         width: 200,
     }
 }));
