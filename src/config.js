@@ -1,3 +1,3 @@
 
-export const API = 'https://api.filpulse.io/';
+export const API = 'http://34.134.184.255/';
 export const PADDING = 92;
