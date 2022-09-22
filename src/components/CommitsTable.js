@@ -10,7 +10,8 @@ import {
     TableCell,
     Typography,
     TableContainer,
-    Paper
+    Paper,
+    Box
 } from '@mui/material';
 
 // components
@@ -18,7 +19,7 @@ import Scrollbar from './Scrollbar';
 import SearchNotFound from './SearchNotFound';
 import TableEmpty from './TableEmpty';
 import CommitsHead from './CommitsHead';
-
+import { fToNow } from '../utils/format';
 
 const useStyles = makeStyles(() => ({
     table: {
@@ -57,10 +58,13 @@ export default function WatchlistTable({
                     <TableBody>
                         {showData.map((row) => {
                             const { id,
-                                showId,
-                                project,
-                                person,
-                                time } = row;
+                                repo,
+                                organisation,
+                                message,
+                                commit_hash,
+                                avatar_url,
+                                dev_name,
+                                commit_date } = row;
                             return (
                                 <TableRow
                                     hover
@@ -82,7 +86,7 @@ export default function WatchlistTable({
                                                 opacity: 0.72
                                             }}
                                         >
-                                            {showId}
+                                            <a target="_blank" href={"https://github.com/" + organisation + "/" + repo + "/commit/" + commit_hash}>{commit_hash?.substring(0,7)}</a>
                                         </Typography>
                                     </TableCell>
 
@@ -107,10 +111,10 @@ export default function WatchlistTable({
                                                         marginTop: '0.45em'
                                                     }}
                                                 >
-                                                    {project.title}
+                                                    {message?.substring(0,50)}
                                                 </Typography>
                                             }
-                                            subheader={project.subtitle}
+                                            subheader={organisation + '/' + repo}
                                         />
 
                                     </TableCell>
@@ -125,15 +129,9 @@ export default function WatchlistTable({
                                             direction="row"
                                             alignItems="center"
                                         >
-                                            <img
-                                                src={person.icon}
-                                                alt='avatar'
-                                                style={{
-                                                    marginRight: '1em'
-                                                }}
-                                            />
+                                        <Box component="img" src={avatar_url} sx={{ width: 30, height: 30, borderRadius: 1.5 }} />
                                             <Typography variant="subtitle2" noWrap>
-                                                {person.name}
+                                                <a target="_blank" href={"https://github.com/" + dev_name}>{dev_name}</a>
                                             </Typography>
                                         </Stack>
                                     </TableCell>
@@ -145,7 +143,7 @@ export default function WatchlistTable({
                                         padding="none"
                                     >
                                         <Typography variant="subtitle2" noWrap>
-                                            {time}
+                                           {fToNow(commit_date)}
                                         </Typography>
                                     </TableCell>
 
