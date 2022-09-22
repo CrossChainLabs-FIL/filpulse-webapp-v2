@@ -24,6 +24,9 @@ import IssuesTable from './issuesTable/IssuesTable';
 import ContributorsTable from './contributorTable/ContributorsTable';
 
 
+import { Client } from '../utils/client';
+
+
 // mock
 import WATCHLISTDATA from '../_mock/watchlistData';
 import PRDATA from '../_mock/PRData';
@@ -33,6 +36,8 @@ import CONTRIBUTORSDATA from '../_mock/contributorsData';
 
 // assets
 import steaPlin from '../assets/steaPlin.svg';
+
+const client = new Client();
 
 
 function descendingComparator(a, b, orderBy) {
@@ -174,6 +179,11 @@ export default function TableApp() {
 
     const [isSearchEmpty, setIsSearchEmpty] = useState(true);
 
+    const [state, setState] = useState({
+        loading: true, commits_data: []
+    });
+
+
     const classes = useStyles();
 
     function applySortFilter(array, comparator, query) {
@@ -216,8 +226,28 @@ export default function TableApp() {
         applySortFilter(WATCHLISTDATA, getComparator(order, orderBy), filterName);
         setIsSearchEmpty(true);
 
+        let interval = setInterval(() => {
+            client.get('tab_commits').then((commits_data) => {
+                setState({
+                    loading: false,
+                    commits_data: commits_data,
+                });
+            });
+        }, 15 * 60 * 1000);
+        client.get('tab_commits').then((commits_data) => {
+            setState({
+                loading: false,
+                commits_data: commits_data,
+            });
+        });
+
+        return function cleanup() {
+            console.log('interval cleanup');
+            clearInterval(interval);
+        };
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [setState]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -244,7 +274,7 @@ export default function TableApp() {
             case 3:
                 setOrderBy('showId');
                 setOrder('asc');
-                applySortFilter(COMMITSDATA, getComparator(order, "showId"), '');
+                applySortFilter(state.commits_data.list, getComparator(order, "showId"), '');
                 break;
             case 4:
                 setOrderBy('personName');

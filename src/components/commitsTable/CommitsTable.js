@@ -10,13 +10,16 @@ import {
     TableCell,
     Typography,
     TableContainer,
-    Link
+    Link,
+    Box
 } from '@mui/material';
 
 // components
 import SearchNotFound from '../SearchNotFound';
 import TableEmpty from '../TableEmpty';
 import CommitsHead from './CommitsHead';
+
+import { fToNow } from '../../utils/format';
 
 
 const useStyles = makeStyles(() => ({
@@ -64,20 +67,17 @@ export default function CommitsTable({
 
                     <TableBody>
                         {showData.map((row) => {
-                            const { id,
-                                showId,
-                                projectTitle,
-                                projectSubtitle,
-                                projectLink,
-                                personIcon,
-                                personName,
-                                personLink,
-                                timeNumber,
-                                timeText } = row;
+                            const { repo,
+                                organisation,
+                                message,
+                                commit_hash,
+                                avatar_url,
+                                dev_name,
+                                commit_date } = row;
                             return (
                                 <TableRow
                                     hover
-                                    key={id}
+                                    key={repo}
                                     tabIndex={-1}
                                 >
                                     <TableCell
@@ -97,10 +97,10 @@ export default function CommitsTable({
                                             <Link
                                                 target="_blank"
                                                 rel="noopener"
-                                                href={projectLink}
+                                                href={"https://github.com/" + organisation + "/" + repo + "/commit/" + commit_hash}
                                                 color="inherit"
                                             >
-                                                {showId}
+                                                {commit_hash?.substring(0, 7)}
                                             </Link>
                                         </Typography>
                                     </TableCell>
@@ -127,17 +127,17 @@ export default function CommitsTable({
                                                     }}
                                                     className={classes.projectElipsis}
                                                 >
-                                                    {projectTitle}
+                                                    {message?.substring(0, 50)}
                                                 </Typography>
                                             }
                                             subheader={
                                                 <Link
                                                     target="_blank"
                                                     rel="noopener"
-                                                    href={projectLink}
+                                                    href={"https://google.com/"}
                                                     color="inherit"
                                                 >
-                                                    {projectSubtitle}
+                                                    {organisation + '/' + repo}
                                                 </Link>
                                             }
                                         />
@@ -154,9 +154,10 @@ export default function CommitsTable({
                                             direction="row"
                                             alignItems="center"
                                         >
-                                            <img
-                                                src={personIcon}
-                                                alt='avatar'
+                                            <Box
+                                                component="img"
+                                                src={avatar_url}
+                                                sx={{ width: 30, height: 30, borderRadius: 1.5 }}
                                                 style={{
                                                     marginRight: '1em'
                                                 }}
@@ -165,10 +166,10 @@ export default function CommitsTable({
                                                 <Link
                                                     target="_blank"
                                                     rel="noopener"
-                                                    href={personLink}
+                                                    href={"https://github.com/" + dev_name}
                                                     color="inherit"
                                                 >
-                                                    {personName}
+                                                    {dev_name}
                                                 </Link>
                                             </Typography>
                                         </Stack>
@@ -181,7 +182,7 @@ export default function CommitsTable({
                                         padding="none"
                                     >
                                         <Typography variant="subtitle2" noWrap>
-                                            {timeText}
+                                            {fToNow(commit_date)}
                                         </Typography>
                                     </TableCell>
 
