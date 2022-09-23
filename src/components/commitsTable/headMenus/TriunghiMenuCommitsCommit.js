@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 // material
 import {
@@ -147,7 +147,7 @@ export default function TriunghiMenuCommitsCommit({ data }) {
                                     projectSubtitle
                                 } = row;
                                 return (
-                                    <>
+                                    <React.Fragment key={id}>
                                         <MenuItem
                                             key={id}
                                             style={{ backgroundColor: '#FFFFFF' }}
@@ -166,7 +166,7 @@ export default function TriunghiMenuCommitsCommit({ data }) {
                                             />
                                         </MenuItem>
                                         <Divider />
-                                    </>
+                                    </React.Fragment>
                                 );
                             })}
                         </List>

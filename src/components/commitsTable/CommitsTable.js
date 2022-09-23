@@ -134,7 +134,7 @@ export default function CommitsTable({
                                                 <Link
                                                     target="_blank"
                                                     rel="noopener"
-                                                    href={"https://google.com/"}
+                                                    href={"https://github.com/" + organisation + "/" + repo}
                                                     color="inherit"
                                                 >
                                                     {organisation + '/' + repo}

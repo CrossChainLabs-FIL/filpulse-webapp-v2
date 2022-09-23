@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 // material
 import {
@@ -147,9 +147,8 @@ export default function TriunghiMenuPrPr({ data }) {
                                     projectSubtitle
                                 } = row;
                                 return (
-                                    <>
+                                    <React.Fragment key={id}>
                                         <MenuItem
-                                            key={id}
                                             style={{ backgroundColor: '#FFFFFF' }}
                                             onClick={handleClose}
                                         >
@@ -166,7 +165,7 @@ export default function TriunghiMenuPrPr({ data }) {
                                             />
                                         </MenuItem>
                                         <Divider />
-                                    </>
+                                    </React.Fragment>
                                 );
                             })}
                         </List>

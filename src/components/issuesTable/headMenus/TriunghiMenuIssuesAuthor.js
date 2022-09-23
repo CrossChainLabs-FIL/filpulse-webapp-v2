@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 // material
 import {
@@ -141,9 +141,8 @@ export default function TriunghiMenuIssuesAuthor({ data }) {
                                     personName,
                                 } = row;
                                 return (
-                                    <>
+                                    <React.Fragment key={id}>
                                         <MenuItem
-                                            key={id}
                                             style={{ backgroundColor: '#FFFFFF', }}
                                             onClick={handleClose}
                                         >
@@ -160,7 +159,7 @@ export default function TriunghiMenuIssuesAuthor({ data }) {
                                             <ListItemText primary={personName} />
                                         </MenuItem>
                                         <Divider />
-                                    </>
+                                    </React.Fragment>
                                 );
                             })}
                         </List>

@@ -187,6 +187,7 @@ export default function TableApp() {
     const classes = useStyles();
 
     function applySortFilter(array, comparator, query) {
+        //mock version
         const stabilizedThis = array.map((el, index) => [el, index]);
         stabilizedThis.sort((a, b) => {
             const order = comparator(a[0], b[0]);
@@ -220,11 +221,46 @@ export default function TableApp() {
             return;
         }
         setData(stabilizedThis.map((el) => el[0]));
+
+        //api version to be
+        // const stabilizedThis = array.map((el, index) => [el, index]);
+        // stabilizedThis.sort((a, b) => {
+        //     const order = comparator(a[0], b[0]);
+        //     if (order !== 0) return order;
+        //     return a[1] - b[1];
+        // });
+        // if (query) {
+        //     switch (value) {
+        //         case 0:
+        //             setSearchData(filter(array, (_user) =>
+        //                 _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
+        //             break;
+        //         case 1:
+        //             setSearchData(filter(array, (_user) =>
+        //                 _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
+        //             break;
+        //         case 2:
+        //             setSearchData(filter(array, (_user) =>
+        //                 _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
+        //             break;
+        //         case 3:
+        //             setSearchData(client.get('tab_commits?search=filecoin&offset=900').list);
+        //             break;
+        //         case 4:
+        //             setSearchData(filter(array, (_user) =>
+        //                 _user.personName.toLowerCase().indexOf(query.toLowerCase()) !== -1));
+        //             break;
+        //         default: break;
+        //     }
+        //     return;
+        // }
+        // setData(stabilizedThis.map((el) => el[0]));
     }
 
     useEffect(() => {
         applySortFilter(WATCHLISTDATA, getComparator(order, orderBy), filterName);
         setIsSearchEmpty(true);
+        // console.log(client.get('tab_commits?search=filecoin&offset=900'));
 
         let interval = setInterval(() => {
             client.get('tab_commits').then((commits_data) => {

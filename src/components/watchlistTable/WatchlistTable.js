@@ -187,7 +187,7 @@ export default function WatchlistTable({
                                             if (index >= 3 && overflow === false) {
                                                 overflow = true;
                                                 return (
-                                                    <span>...</span>
+                                                    <span key={index}>...</span>
                                                 );
                                             }
                                             if (index < 3) {
@@ -196,6 +196,7 @@ export default function WatchlistTable({
                                                         title={participantName[index]}
                                                         placement="bottom-end"
                                                         arrow
+                                                        key={index}
                                                     >
                                                         <Link
                                                             target="_blank"

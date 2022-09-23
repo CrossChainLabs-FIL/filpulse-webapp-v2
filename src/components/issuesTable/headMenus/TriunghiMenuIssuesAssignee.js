@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 // material
 import {
@@ -141,12 +141,11 @@ export default function TriunghiMenuIssuesAssignee({ data }) {
                                     assigneeName,
                                 } = row;
                                 return (
-                                    <>
+                                    <React.Fragment key={id}>
                                         {assigneeIcon.map((assignee, index) => {
                                             return (
-                                                <>
+                                                <React.Fragment key={id}>
                                                     <MenuItem
-                                                        key={id}
                                                         style={{ backgroundColor: '#FFFFFF', }}
                                                         onClick={handleClose}
                                                     >
@@ -163,10 +162,10 @@ export default function TriunghiMenuIssuesAssignee({ data }) {
                                                         <ListItemText primary={assigneeName[index]} />
                                                     </MenuItem>
                                                     <Divider />
-                                                </>
+                                                </React.Fragment>
                                             );
                                         })}
-                                    </>
+                                    </React.Fragment>
                                 );
                             })}
                         </List>
