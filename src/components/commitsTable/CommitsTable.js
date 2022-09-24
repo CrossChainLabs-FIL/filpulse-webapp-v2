@@ -77,7 +77,7 @@ export default function CommitsTable({
                             return (
                                 <TableRow
                                     hover
-                                    key={repo}
+                                    key={commit_hash}
                                     tabIndex={-1}
                                 >
                                     <TableCell

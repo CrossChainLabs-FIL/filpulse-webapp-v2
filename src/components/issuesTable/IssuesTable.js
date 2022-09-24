@@ -202,12 +202,13 @@ export default function IssuesTable({
                                             if (index >= 3 && overflow === false) {
                                                 overflow = true;
                                                 return (
-                                                    <span>...</span>
+                                                    <span key={index}>...</span>
                                                 );
                                             }
                                             if (index < 3) {
                                                 return (
                                                     <Tooltip
+                                                        key={index}
                                                         title={assigneeName[index]}
                                                         placement="bottom-end"
                                                         arrow
@@ -217,7 +218,7 @@ export default function IssuesTable({
                                                             rel="noopener"
                                                             href={assigneeLink[index]}
                                                         >
-                                                            <img key={avatar} src={avatar} alt='icon' />
+                                                            <img src={avatar} alt='icon' />
                                                         </Link>
                                                     </Tooltip>
                                                 );
