@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // material
 import {
@@ -18,10 +18,15 @@ import {
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
+import { Client } from '../../../utils/client';
+
 
 // assets
 import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
+
+
+const client = new Client();
 
 
 const useStyles = makeStyles(() => ({
@@ -82,8 +87,35 @@ export default function TriunghiMenuCommitsContributor({ data }) {
         setAnchorEl(null);
     };
 
+    const [state, setState] = useState({
+        loading: true, commits_data: []
+    });
 
     const classes = useStyles();
+
+    // useEffect(() => {
+    //     let interval = setInterval(() => {
+    //         client.get('tab_commits/filter/contributor').then((commits_data) => {
+    //             setState({
+    //                 loading: false,
+    //                 commits_data: commits_data,
+    //             });
+    //         });
+    //     }, 15 * 60 * 1000);
+    //     client.get('tab_commits/filter/contributor').then((commits_data) => {
+    //         setState({
+    //             loading: false,
+    //             commits_data: commits_data,
+    //         });
+    //     });
+
+    //     return function cleanup() {
+    //         console.log('interval cleanup');
+    //         clearInterval(interval);
+    //     };
+
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [setState]);
 
     return (
         <>
@@ -136,17 +168,15 @@ export default function TriunghiMenuCommitsContributor({ data }) {
                     <Paper className={classes.paper}>
                         <List className={classes.list} disablePadding={true}>
                             {data.map((row) => {
-                                const { id,
-                                    personName,
-                                    personIcon,
+                                const { contributor
                                 } = row;
                                 return (
-                                    <React.Fragment key={id}>
+                                    <React.Fragment key={contributor}>
                                         <MenuItem
                                             style={{ backgroundColor: '#FFFFFF', }}
                                             onClick={handleClose}
                                         >
-                                            <Avatar
+                                            {/* <Avatar
                                                 src={personIcon}
                                                 alt='avatar'
                                                 sx={{
@@ -155,8 +185,8 @@ export default function TriunghiMenuCommitsContributor({ data }) {
                                                     marginLeft: "1.75em",
                                                     marginRight: "0.5em"
                                                 }}
-                                            />
-                                            <ListItemText primary={personName} />
+                                            /> */}
+                                            <ListItemText primary={contributor} />
                                         </MenuItem>
                                         <Divider />
                                     </React.Fragment>

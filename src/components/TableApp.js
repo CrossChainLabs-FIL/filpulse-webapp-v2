@@ -36,6 +36,7 @@ import CONTRIBUTORSDATA from '../_mock/contributorsData';
 
 // assets
 import steaPlin from '../assets/steaPlin.svg';
+import { ar } from 'date-fns/locale';
 
 const client = new Client();
 
@@ -187,7 +188,6 @@ export default function TableApp() {
     const classes = useStyles();
 
     function applySortFilter(array, comparator, query) {
-        //mock version
         const stabilizedThis = array.map((el, index) => [el, index]);
         stabilizedThis.sort((a, b) => {
             const order = comparator(a[0], b[0]);
@@ -221,40 +221,14 @@ export default function TableApp() {
             return;
         }
         setData(stabilizedThis.map((el) => el[0]));
+    }
 
-        //api version to be
-        // const stabilizedThis = array.map((el, index) => [el, index]);
-        // stabilizedThis.sort((a, b) => {
-        //     const order = comparator(a[0], b[0]);
-        //     if (order !== 0) return order;
-        //     return a[1] - b[1];
-        // });
-        // if (query) {
-        //     switch (value) {
-        //         case 0:
-        //             setSearchData(filter(array, (_user) =>
-        //                 _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-        //             break;
-        //         case 1:
-        //             setSearchData(filter(array, (_user) =>
-        //                 _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-        //             break;
-        //         case 2:
-        //             setSearchData(filter(array, (_user) =>
-        //                 _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-        //             break;
-        //         case 3:
-        //             setSearchData(client.get('tab_commits?search=filecoin&offset=900').list);
-        //             break;
-        //         case 4:
-        //             setSearchData(filter(array, (_user) =>
-        //                 _user.personName.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-        //             break;
-        //         default: break;
-        //     }
-        //     return;
-        // }
-        // setData(stabilizedThis.map((el) => el[0]));
+    function tableFilter(array, query) {
+        if (query) {
+            setSearchData(array);
+            return;
+        }
+        setData(array);
     }
 
     useEffect(() => {
@@ -310,7 +284,7 @@ export default function TableApp() {
             case 3:
                 setOrderBy('showId');
                 setOrder('asc');
-                applySortFilter(state.commits_data.list, getComparator(order, "showId"), '');
+                tableFilter(state.commits_data.list, '');
                 break;
             case 4:
                 setOrderBy('personName');
@@ -387,12 +361,26 @@ export default function TableApp() {
     }
 
     const handleFilterByName = (event) => {
-        applySortFilter(data, getComparator(order, orderBy), event.target.value);
+        // applySortFilter(data, getComparator(order, orderBy), event.target.value);
         if (event.target.value) {
             setIsSearchEmpty(false);
+            client.get(`tab_commits?search=${event.target.value}&offset=900`).then((commits_data) => {
+                setState({
+                    loading: false,
+                    commits_data: commits_data,
+                });
+            });
+            tableFilter(state.commits_data.list, event.target.value);
         }
         else {
             setIsSearchEmpty(true);
+            client.get('tab_commits').then((commits_data) => {
+                setState({
+                    loading: false,
+                    commits_data: commits_data,
+                });
+            });
+            tableFilter(state.commits_data.list, event.target.value);
         }
         setFilterName(event.target.value);
     };
