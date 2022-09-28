@@ -18,10 +18,14 @@ import {
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
+import { Client } from '../../../utils/client';
+
 
 // assets
 import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
+
+const client = new Client();
 
 
 const useStyles = makeStyles(() => ({
@@ -78,15 +82,52 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuCommitsCommit({ data }) {
+export default function TriunghiMenuCommitsCommit(handleMenuFilter) {
+
+    const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
+    const [state, setState] = useState({
+        loading: true, commits_data: []
+    });
     const open = Boolean(anchorEl);
+
+
     const handleClick = (event) => {
+        client.get('tab_commits/filter/project').then((project_data) => {
+            setState({
+                loading: false,
+                project_data: project_data,
+            });
+        });
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
+    function handleFilterClose(organisation, repo) {
+        handleClose();
+        handleMenuFilter(`organisation=${organisation}&repo=${repo}`);
+    }
+
+    const handleFilterByName = (event) => {
+        if (event.target.value) {
+            client.get(`tab_commits/filter/project?search=${event.target.value}`).then((project_data) => {
+                setState({
+                    loading: false,
+                    project_data: project_data,
+                });
+            });
+        }
+        else {
+            client.get('tab_commits/filter/project').then((project_data) => {
+                setState({
+                    loading: false,
+                    project_data: project_data,
+                });
+            });
+        }
+        setFilterName(event.target.value);
+    }
 
 
     const classes = useStyles();
@@ -133,25 +174,23 @@ export default function TriunghiMenuCommitsCommit({ data }) {
                         </Stack>
                         <Divider />
                         <SearchStyle
-                            // value={filterName}
-                            // onChange={(e) => handleFilterByName(e)}
+                            value={filterName}
+                            onChange={(e) => handleFilterByName(e)}
                             placeholder="Filter commit"
                         />
                         <Divider />
                     </Box >
                     <Paper className={classes.paper}>
                         <List className={classes.list} disablePadding={true}>
-                            {data.map((row) => {
-                                const { id,
-                                    projectTitle,
-                                    projectSubtitle
+                            {state.project_data?.list.map((row) => {
+                                const { repo,
+                                    organisation
                                 } = row;
                                 return (
-                                    <React.Fragment key={id}>
+                                    <React.Fragment key={repo}>
                                         <MenuItem
-                                            key={id}
                                             style={{ backgroundColor: '#FFFFFF' }}
-                                            onClick={handleClose}
+                                            onClick={() => handleFilterClose(organisation, repo)}
                                         >
                                             <ListItemText
                                                 primary={
@@ -159,10 +198,9 @@ export default function TriunghiMenuCommitsCommit({ data }) {
                                                         noWrap
                                                         className={classes.projectElipsis}
                                                     >
-                                                        {projectTitle}
+                                                        {organisation + "/" + repo}
                                                     </Typography>
                                                 }
-                                                secondary={projectSubtitle}
                                             />
                                         </MenuItem>
                                         <Divider />

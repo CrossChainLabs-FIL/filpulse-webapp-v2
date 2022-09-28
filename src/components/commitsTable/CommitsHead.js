@@ -30,13 +30,20 @@ const useStyles = makeStyles(() => ({
     rowHead: {
         height: '4em',
     },
+    commit: {
+        width: '50em'
+    },
+    contributor: {
+        width: '18em'
+    },
 }));
 
 
 
 export default function CommitsHead({
     data,
-    handleSortChange
+    handleSortChange,
+    handleMenuFilter
 }) {
 
     const classes = useStyles();
@@ -79,6 +86,7 @@ export default function CommitsHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.commit}
                 >
                     <Stack
                         direction="row"
@@ -88,7 +96,7 @@ export default function CommitsHead({
                             Commit
                         </Typography>
 
-                        <TriunghiMenuCommitsCommit data={data} />
+                        <TriunghiMenuCommitsCommit handleMenuFilter={handleMenuFilter} />
                     </Stack>
                 </TableCell>
 
@@ -97,6 +105,7 @@ export default function CommitsHead({
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.contributor}
                 >
                     <Stack
                         direction="row"
@@ -106,7 +115,7 @@ export default function CommitsHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuCommitsContributor data={data} />
+                        <TriunghiMenuCommitsContributor handleMenuFilter={handleMenuFilter} />
                     </Stack>
                 </TableCell>
 
@@ -126,7 +135,7 @@ export default function CommitsHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleSortChange("timeNumber", 'asc')}
+                            onClick={(e) => handleSortChange()}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

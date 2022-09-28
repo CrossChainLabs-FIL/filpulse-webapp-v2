@@ -77,45 +77,57 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuCommitsContributor({ data }) {
+export default function TriunghiMenuCommitsContributor({ handleMenuFilter }) {
+
+    const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
+    const [state, setState] = useState({
+        loading: true, commits_data: []
+    });
     const open = Boolean(anchorEl);
+
+
     const handleClick = (event) => {
+        client.get('tab_commits/filter/contributor').then((contributor_data) => {
+            setState({
+                loading: false,
+                contributor_data: contributor_data,
+            });
+        });
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
 
-    const [state, setState] = useState({
-        loading: true, commits_data: []
-    });
+    function handleFilterClose(contributor) {
+        handleClose();
+        handleMenuFilter(`contributor=${contributor}`);
+    }
+
+    const handleFilterByName = (event) => {
+        if (event.target.value) {
+            client.get(`tab_commits/filter/contributor?search=${event.target.value}`).then((contributor_data) => {
+                setState({
+                    loading: false,
+                    contributor_data: contributor_data,
+                });
+            });
+        }
+        else {
+            client.get('tab_commits/filter/contributor').then((contributor_data) => {
+                setState({
+                    loading: false,
+                    contributor_data: contributor_data,
+                });
+            });
+        }
+        setFilterName(event.target.value);
+    }
+
+
 
     const classes = useStyles();
-
-    // useEffect(() => {
-    //     let interval = setInterval(() => {
-    //         client.get('tab_commits/filter/contributor').then((commits_data) => {
-    //             setState({
-    //                 loading: false,
-    //                 commits_data: commits_data,
-    //             });
-    //         });
-    //     }, 15 * 60 * 1000);
-    //     client.get('tab_commits/filter/contributor').then((commits_data) => {
-    //         setState({
-    //             loading: false,
-    //             commits_data: commits_data,
-    //         });
-    //     });
-
-    //     return function cleanup() {
-    //         console.log('interval cleanup');
-    //         clearInterval(interval);
-    //     };
-
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [setState]);
 
     return (
         <>
@@ -159,22 +171,22 @@ export default function TriunghiMenuCommitsContributor({ data }) {
                         </Stack>
                         <Divider />
                         <SearchStyle
-                            // value={filterName}
-                            // onChange={(e) => handleFilterByName(e)}
+                            value={filterName}
+                            onChange={(e) => handleFilterByName(e)}
                             placeholder="Filter user"
                         />
                         <Divider />
                     </Box >
                     <Paper className={classes.paper}>
                         <List className={classes.list} disablePadding={true}>
-                            {data.map((row) => {
+                            {state.contributor_data?.list.map((row) => {
                                 const { contributor
                                 } = row;
                                 return (
                                     <React.Fragment key={contributor}>
                                         <MenuItem
                                             style={{ backgroundColor: '#FFFFFF', }}
-                                            onClick={handleClose}
+                                            onClick={() => handleFilterClose(contributor)}
                                         >
                                             {/* <Avatar
                                                 src={personIcon}

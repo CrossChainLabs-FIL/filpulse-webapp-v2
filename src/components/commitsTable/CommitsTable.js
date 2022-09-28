@@ -40,17 +40,18 @@ export default function CommitsTable({
     filterName,
     isSearchEmpty,
     data,
-    searchData,
+    handleMenuFilter,
+    // searchData,
     handleSortChange
 }) {
 
     const classes = useStyles();
 
-    const isUserNotFound = searchData.length === 0;
+    const isUserNotFound = data.length === 0 && !isSearchEmpty;
 
-    const tableEmpty = data.length === 0;
+    const tableEmpty = data.length === 0 && isSearchEmpty;
 
-    const showData = isSearchEmpty ? data : searchData;
+    // const showData = isSearchEmpty ? data : searchData;
 
     return (
         <>
@@ -63,10 +64,10 @@ export default function CommitsTable({
             >
                 <Table stickyHeader>
 
-                    <CommitsHead data={data} handleSortChange={handleSortChange} />
+                    <CommitsHead data={data} handleSortChange={handleSortChange} handleMenuFilter={handleMenuFilter} />
 
                     <TableBody>
-                        {showData.map((row) => {
+                        {data.map((row) => {
                             const { repo,
                                 organisation,
                                 message,

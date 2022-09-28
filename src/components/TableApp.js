@@ -11,7 +11,7 @@ import {
     Tabs,
     Tab,
     OutlinedInput,
-    InputAdornment
+    InputAdornment,
 } from '@mui/material';
 
 
@@ -36,7 +36,6 @@ import CONTRIBUTORSDATA from '../_mock/contributorsData';
 
 // assets
 import steaPlin from '../assets/steaPlin.svg';
-import { ar } from 'date-fns/locale';
 
 const client = new Client();
 
@@ -223,27 +222,13 @@ export default function TableApp() {
         setData(stabilizedThis.map((el) => el[0]));
     }
 
-    function tableFilter(array, query) {
-        if (query) {
-            setSearchData(array);
-            return;
-        }
-        setData(array);
-    }
 
     useEffect(() => {
         applySortFilter(WATCHLISTDATA, getComparator(order, orderBy), filterName);
         setIsSearchEmpty(true);
         // console.log(client.get('tab_commits?search=filecoin&offset=900'));
 
-        let interval = setInterval(() => {
-            client.get('tab_commits').then((commits_data) => {
-                setState({
-                    loading: false,
-                    commits_data: commits_data,
-                });
-            });
-        }, 15 * 60 * 1000);
+
         client.get('tab_commits').then((commits_data) => {
             setState({
                 loading: false,
@@ -251,10 +236,25 @@ export default function TableApp() {
             });
         });
 
-        return function cleanup() {
-            console.log('interval cleanup');
-            clearInterval(interval);
-        };
+        // let interval = setInterval(() => {
+        //     client.get('tab_commits').then((commits_data) => {
+        //         setState({
+        //             loading: false,
+        //             commits_data: commits_data,
+        //         });
+        //     });
+        // }, 15 * 60 * 1000);
+        // client.get('tab_commits').then((commits_data) => {
+        //     setState({
+        //         loading: false,
+        //         commits_data: commits_data,
+        //     });
+        // });
+
+        // return function cleanup() {
+        //     console.log('interval cleanup');
+        //     clearInterval(interval);
+        // };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setState]);
@@ -284,7 +284,7 @@ export default function TableApp() {
             case 3:
                 setOrderBy('showId');
                 setOrder('asc');
-                tableFilter(state.commits_data.list, '');
+                setData(state.commits_data.list);
                 break;
             case 4:
                 setOrderBy('personName');
@@ -294,6 +294,58 @@ export default function TableApp() {
             default: console.log(newValue); break;
         }
     };
+
+    const handleSort = () => {
+        switch (value) {
+            case 3:
+                if (order === 'asc') {
+                    client.get(`tab_commits?sortBy=commit_date&sortMode=desc`).then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                        setOrder('desc');
+                    });
+                }
+                else {
+                    client.get(`tab_commits?sortBy=commit_date&sortMode=asc`).then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                        setOrder('asc');
+                    });
+                }
+                break;
+            default: console.log(value); break;
+        }
+    }
+
+    function handleMenuFilter(value) {
+        // va trebui switch pt taburi
+        client.get(`tab_commits?${value}`).then((commits_data) => {
+            setState({
+                loading: false,
+                commits_data: commits_data,
+            });
+            setData(commits_data.list);
+            setFilterName("");
+        });
+    }
+
+    const clearFilter = () => {
+        // va trebui switch pt taburi
+        client.get(`tab_commits`).then((commits_data) => {
+            setState({
+                loading: false,
+                commits_data: commits_data,
+            });
+            setData(commits_data.list);
+            setFilterName("");
+        });
+    }
 
     const handleSortChange = (orderByNew, orderNew) => {
         if (isSorted) {
@@ -362,15 +414,23 @@ export default function TableApp() {
 
     const handleFilterByName = (event) => {
         // applySortFilter(data, getComparator(order, orderBy), event.target.value);
+
         if (event.target.value) {
             setIsSearchEmpty(false);
-            client.get(`tab_commits?search=${event.target.value}&offset=900`).then((commits_data) => {
+            client.get(`tab_commits?search=${event.target.value}`).then((commits_data) => {
                 setState({
                     loading: false,
                     commits_data: commits_data,
                 });
+                setData(commits_data.list);
             });
-            tableFilter(state.commits_data.list, event.target.value);
+            // let commits_data = await client.get(`tab_commits?search=${event.target.value}`);
+            // setState({
+            //     loading: false,
+            //     commits_data: commits_data,
+            // });
+            // setData(commits_data.list);
+
         }
         else {
             setIsSearchEmpty(true);
@@ -379,8 +439,14 @@ export default function TableApp() {
                     loading: false,
                     commits_data: commits_data,
                 });
+                setData(commits_data.list);
             });
-            tableFilter(state.commits_data.list, event.target.value);
+            // let commits_data = await client.get(`tab_commits`);
+            // setState({
+            //     loading: false,
+            //     commits_data: commits_data,
+            // });
+            // setData(commits_data.list);
         }
         setFilterName(event.target.value);
     };
@@ -412,6 +478,7 @@ export default function TableApp() {
                     <StyledTab label='Commits' classes={{ root: classes.commitsTab }} />
                     <StyledTab label='Contributors' classes={{ root: classes.contributorsTab }} />
                 </StyledTabs>
+                <div onClick={() => clearFilter()}>clear</div>
                 <SearchStyle
                     style={{
                         marginLeft: "auto",
@@ -465,8 +532,9 @@ export default function TableApp() {
                     filterName={filterName}
                     isSearchEmpty={isSearchEmpty}
                     data={data}
-                    searchData={searchData}
-                    handleSortChange={handleSortChange}
+                    // searchData={searchData}
+                    handleMenuFilter={handleMenuFilter}
+                    handleSortChange={handleSort}
                 />
             }
 
