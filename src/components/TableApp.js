@@ -283,7 +283,7 @@ export default function TableApp() {
                 break;
             case 3:
                 setOrderBy('showId');
-                setOrder('asc');
+                setOrder('desc');
                 setData(state.commits_data.list);
                 break;
             case 4:
@@ -299,7 +299,7 @@ export default function TableApp() {
         switch (value) {
             case 3:
                 if (order === 'asc') {
-                    client.get(`tab_commits?sortBy=commit_date&sortMode=desc`).then((commits_data) => {
+                    client.get(`tab_commits?sortBy=commit_date&sortType=desc`).then((commits_data) => {
                         setState({
                             loading: false,
                             commits_data: commits_data,
@@ -309,7 +309,7 @@ export default function TableApp() {
                     });
                 }
                 else {
-                    client.get(`tab_commits?sortBy=commit_date&sortMode=asc`).then((commits_data) => {
+                    client.get(`tab_commits?sortBy=commit_date&sortType=asc`).then((commits_data) => {
                         setState({
                             loading: false,
                             commits_data: commits_data,
