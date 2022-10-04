@@ -153,7 +153,7 @@ export default function PRHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleSortChange("timeNumber", 'asc')}
+                            onClick={(e) => handleSortChange()}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

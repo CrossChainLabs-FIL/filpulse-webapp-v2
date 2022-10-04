@@ -94,6 +94,7 @@ export default function TriunghiMenuCommitsContributor({ handleMenuFilter }) {
                 contributor_data: contributor_data,
             });
         });
+        setFilterName('');
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
@@ -180,7 +181,8 @@ export default function TriunghiMenuCommitsContributor({ handleMenuFilter }) {
                     <Paper className={classes.paper}>
                         <List className={classes.list} disablePadding={true}>
                             {state.contributor_data?.list.map((row) => {
-                                const { contributor
+                                const { contributor,
+                                    avatar_url
                                 } = row;
                                 return (
                                     <React.Fragment key={contributor}>
@@ -188,8 +190,8 @@ export default function TriunghiMenuCommitsContributor({ handleMenuFilter }) {
                                             style={{ backgroundColor: '#FFFFFF', }}
                                             onClick={() => handleFilterClose(contributor)}
                                         >
-                                            {/* <Avatar
-                                                src={personIcon}
+                                            <Avatar
+                                                src={avatar_url}
                                                 alt='avatar'
                                                 sx={{
                                                     width: 30,
@@ -197,7 +199,7 @@ export default function TriunghiMenuCommitsContributor({ handleMenuFilter }) {
                                                     marginLeft: "1.75em",
                                                     marginRight: "0.5em"
                                                 }}
-                                            /> */}
+                                            />
                                             <ListItemText primary={contributor} />
                                         </MenuItem>
                                         <Divider />

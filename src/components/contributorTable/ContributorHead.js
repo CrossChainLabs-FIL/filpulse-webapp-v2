@@ -46,8 +46,8 @@ const useStyles = makeStyles(() => ({
 
 
 export default function ContributorHead({
-    data,
-    handleSortChange
+    handleSortChange,
+    handleMenuFilter
 }) {
 
     const classes = useStyles();
@@ -79,7 +79,7 @@ export default function ContributorHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuContributorContributor data={data} />
+                        <TriunghiMenuContributorContributor handleMenuFilter={handleMenuFilter} />
                     </Stack>
                 </TableCell>
 
@@ -98,7 +98,7 @@ export default function ContributorHead({
                             Project
                         </Typography>
 
-                        <TriunghiMenuContributorProject data={data} />
+                        <TriunghiMenuContributorProject handleMenuFilter={handleMenuFilter} />
                     </Stack>
                 </TableCell>
 

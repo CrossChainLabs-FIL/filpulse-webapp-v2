@@ -82,7 +82,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuCommitsCommit(handleMenuFilter) {
+export default function TriunghiMenuCommitsCommit({ handleMenuFilter }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
@@ -99,6 +99,7 @@ export default function TriunghiMenuCommitsCommit(handleMenuFilter) {
                 project_data: project_data,
             });
         });
+        setFilterName('');
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {

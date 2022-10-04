@@ -12,6 +12,7 @@ import {
     Tab,
     OutlinedInput,
     InputAdornment,
+    breadcrumbsClasses,
 } from '@mui/material';
 
 
@@ -180,7 +181,7 @@ export default function TableApp() {
     const [isSearchEmpty, setIsSearchEmpty] = useState(true);
 
     const [state, setState] = useState({
-        loading: true, commits_data: []
+        loading: true, commits_data: [], contributors_data: [], pr_data: [], issues_data: []
     });
 
 
@@ -226,13 +227,17 @@ export default function TableApp() {
     useEffect(() => {
         applySortFilter(WATCHLISTDATA, getComparator(order, orderBy), filterName);
         setIsSearchEmpty(true);
-        // console.log(client.get('tab_commits?search=filecoin&offset=900'));
-
 
         client.get('tab_commits').then((commits_data) => {
             setState({
                 loading: false,
                 commits_data: commits_data,
+            });
+        });
+        client.get('tab_issues').then((issues_data) => {
+            setState({
+                loading: false,
+                issues_data: issues_data,
             });
         });
 
@@ -260,10 +265,14 @@ export default function TableApp() {
     }, [setState]);
 
     const handleChange = (event, newValue) => {
+        setState({
+            loading: true
+        });
         setValue(newValue);
         // setSelected([]);
         setFilterName('');
         setIsSearchEmpty(true);
+        setData([]);
         // handleTop();
         switch (newValue) {
             case 0:
@@ -272,24 +281,48 @@ export default function TableApp() {
                 applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
                 break;
             case 1:
-                setOrderBy('showId');
-                setOrder('asc');
-                applySortFilter(PRDATA, getComparator(order, "showId"), '');
+                client.get('tab_prs').then((pr_data) => {
+                    setState({
+                        loading: false,
+                        pr_data: pr_data,
+                    });
+                    setOrderBy('showId');
+                    setOrder('asc');
+                    setData(pr_data.list);
+                });
                 break;
             case 2:
-                setOrderBy('showId');
-                setOrder('asc');
-                applySortFilter(ISSUESDATA, getComparator(order, "showId"), '');
+                client.get('tab_issues').then((issues_data) => {
+                    setState({
+                        loading: false,
+                        issues_data: issues_data,
+                    });
+                    setOrderBy('showId');
+                    setOrder('asc');
+                    setData(issues_data.list);
+                });
                 break;
             case 3:
-                setOrderBy('showId');
-                setOrder('desc');
-                setData(state.commits_data.list);
+                client.get('tab_commits').then((commits_data) => {
+                    setState({
+                        loading: false,
+                        commits_data: commits_data,
+                    });
+                    setOrderBy('showId');
+                    setOrder('desc');
+                    setData(commits_data.list);
+                });
                 break;
             case 4:
-                setOrderBy('personName');
-                setOrder('asc');
-                applySortFilter(CONTRIBUTORSDATA, getComparator(order, 'personName'), '');
+                client.get('tab_contributors').then((contributors_data) => {
+                    setState({
+                        loading: false,
+                        contributors_data: contributors_data,
+                    });
+                    setOrderBy('personName');
+                    setOrder('asc');
+                    setData(contributors_data.list);
+                });
                 break;
             default: console.log(newValue); break;
         }
@@ -297,6 +330,50 @@ export default function TableApp() {
 
     const handleSort = () => {
         switch (value) {
+            case 1:
+                if (order === 'asc') {
+                    client.get(`tab_prs?sortBy=updated_at&sortType=desc`).then((pr_data) => {
+                        setState({
+                            loading: false,
+                            pr_data: pr_data,
+                        });
+                        setData(pr_data.list);
+                        setOrder('desc');
+                    });
+                }
+                else {
+                    client.get(`tab_prs?sortBy=updated_at&sortType=asc`).then((pr_data) => {
+                        setState({
+                            loading: false,
+                            pr_data: pr_data,
+                        });
+                        setData(pr_data.list);
+                        setOrder('asc');
+                    });
+                }
+                break;
+            case 2:
+                if (order === 'asc') {
+                    client.get(`tab_issues?sortBy=updated_at&sortType=desc`).then((issues_data) => {
+                        setState({
+                            loading: false,
+                            issues_data: issues_data,
+                        });
+                        setData(issues_data.list);
+                        setOrder('desc');
+                    });
+                }
+                else {
+                    client.get(`tab_issues?sortBy=updated_at&sortType=asc`).then((issues_data) => {
+                        setState({
+                            loading: false,
+                            issues_data: issues_data,
+                        });
+                        setData(issues_data.list);
+                        setOrder('asc');
+                    });
+                }
+                break;
             case 3:
                 if (order === 'asc') {
                     client.get(`tab_commits?sortBy=commit_date&sortType=desc`).then((commits_data) => {
@@ -323,28 +400,115 @@ export default function TableApp() {
         }
     }
 
-    function handleMenuFilter(value) {
-        // va trebui switch pt taburi
-        client.get(`tab_commits?${value}`).then((commits_data) => {
-            setState({
-                loading: false,
-                commits_data: commits_data,
-            });
-            setData(commits_data.list);
-            setFilterName("");
+    function handleMenuFilter(link_value) {
+        setData([]);
+        setState({
+            loading: true
         });
+        switch (value) {
+            case 0:
+                setOrderBy('showId');
+                setOrder('asc');
+                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
+                return;
+            case 1:
+                client.get(`tab_prs?${link_value}`).then((pr_data) => {
+                    setState({
+                        loading: false,
+                        pr_data: pr_data,
+                    });
+                    setData(pr_data.list);
+                    setFilterName("");
+                });
+                break;
+            case 2:
+                client.get(`tab_issues?${link_value}`).then((issues_data) => {
+                    setState({
+                        loading: false,
+                        issues_data: issues_data,
+                    });
+                    setData(issues_data.list);
+                    setFilterName("");
+                });
+                break;
+            case 3:
+                client.get(`tab_commits?${link_value}`).then((commits_data) => {
+                    setState({
+                        loading: false,
+                        commits_data: commits_data,
+                    });
+                    setData(commits_data.list);
+                    setFilterName("");
+                });
+                break;
+            case 4:
+                client.get(`tab_contributors?${link_value}`).then((contributors_data) => {
+                    setState({
+                        loading: false,
+                        contributors_data: contributors_data,
+                    });
+                    setData(contributors_data.list);
+                    setFilterName("");
+                });
+                break;
+            default: console.log(value); break;
+        }
     }
 
     const clearFilter = () => {
-        // va trebui switch pt taburi
-        client.get(`tab_commits`).then((commits_data) => {
-            setState({
-                loading: false,
-                commits_data: commits_data,
-            });
-            setData(commits_data.list);
-            setFilterName("");
+        setData([]);
+        setState({
+            loading: true
         });
+        switch (value) {
+            case 0:
+                setOrderBy('showId');
+                setOrder('asc');
+                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
+                setFilterName("");
+                return;
+            case 1:
+                client.get('tab_prs').then((pr_data) => {
+                    setState({
+                        loading: false,
+                        pr_data: pr_data,
+                    });
+                    setData(pr_data.list);
+                    setFilterName("");
+                });
+                break;
+            case 2:
+                client.get('tab_issues').then((issues_data) => {
+                    setState({
+                        loading: false,
+                        issues_data: issues_data,
+                    });
+                    setData(issues_data.list);
+                    setFilterName("");
+                });
+                break;
+            case 3:
+                client.get(`tab_commits`).then((commits_data) => {
+                    setState({
+                        loading: false,
+                        commits_data: commits_data,
+                    });
+                    setData(commits_data.list);
+                    setFilterName("");
+                });
+                break;
+            case 4:
+                client.get('tab_contributors').then((contributors_data) => {
+                    setState({
+                        loading: false,
+                        contributors_data: contributors_data,
+                    });
+                    setData(contributors_data.list);
+                    setFilterName("");
+                });
+                break;
+            default: console.log(value); break;
+        }
     }
 
     const handleSortChange = (orderByNew, orderNew) => {
@@ -512,8 +676,10 @@ export default function TableApp() {
                     filterName={filterName}
                     isSearchEmpty={isSearchEmpty}
                     data={data}
-                    searchData={searchData}
-                    handleSortChange={handleSortChange}
+                    state={state}
+                    // searchData={searchData}
+                    handleMenuFilter={handleMenuFilter}
+                    handleSortChange={handleSort}
                 />
             )}
 
@@ -522,8 +688,10 @@ export default function TableApp() {
                     filterName={filterName}
                     isSearchEmpty={isSearchEmpty}
                     data={data}
-                    searchData={searchData}
-                    handleSortChange={handleSortChange}
+                    state={state}
+                    // searchData={searchData}
+                    handleMenuFilter={handleMenuFilter}
+                    handleSortChange={handleSort}
                 />
             )}
 
@@ -532,6 +700,7 @@ export default function TableApp() {
                     filterName={filterName}
                     isSearchEmpty={isSearchEmpty}
                     data={data}
+                    state={state}
                     // searchData={searchData}
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
@@ -543,7 +712,9 @@ export default function TableApp() {
                     filterName={filterName}
                     isSearchEmpty={isSearchEmpty}
                     data={data}
-                    searchData={searchData}
+                    state={state}
+                    // searchData={searchData}
+                    handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSortChange}
                 />
             }

@@ -40,6 +40,7 @@ export default function CommitsTable({
     filterName,
     isSearchEmpty,
     data,
+    state,
     handleMenuFilter,
     // searchData,
     handleSortChange
@@ -65,132 +66,134 @@ export default function CommitsTable({
                 <Table stickyHeader>
 
                     <CommitsHead data={data} handleSortChange={handleSortChange} handleMenuFilter={handleMenuFilter} />
-
-                    <TableBody>
-                        {data.map((row) => {
-                            const { repo,
-                                organisation,
-                                message,
-                                commit_hash,
-                                avatar_url,
-                                dev_name,
-                                commit_date } = row;
-                            return (
-                                <TableRow
-                                    hover
-                                    key={commit_hash}
-                                    tabIndex={-1}
-                                >
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                        style={{ height: '5em' }}
+                    {state.loading && (<span>loading</span>)}
+                    {!state.loading && (
+                        <TableBody>
+                            {data.map((row) => {
+                                const { repo,
+                                    organisation,
+                                    message,
+                                    commit_hash,
+                                    avatar_url,
+                                    dev_name,
+                                    commit_date } = row;
+                                return (
+                                    <TableRow
+                                        hover
+                                        key={commit_hash}
+                                        tabIndex={-1}
                                     >
-                                        <Typography
-                                            variant="subtitle2"
-                                            noWrap
-                                            style={{
-                                                marginLeft: '2.5em',
-                                            }}
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                            style={{ height: '5em' }}
                                         >
-                                            <Link
-                                                target="_blank"
-                                                rel="noopener"
-                                                href={"https://github.com/" + organisation + "/" + repo + "/commit/" + commit_hash}
-                                                color="inherit"
-                                            >
-                                                {commit_hash?.substring(0, 7)}
-                                            </Link>
-                                        </Typography>
-                                    </TableCell>
-
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                    >
-                                        <CardHeader
-                                            style={{ background: "transparent" }}
-                                            sx={{
-                                                boxShadow: 0,
-                                                padding: 0,
-                                            }}
-                                            title={
-                                                <Typography
-                                                    variant="subtitle2"
-                                                    noWrap
-                                                    style={{
-                                                        lineHeight: '1.1em',
-                                                        marginTop: '0.45em'
-                                                    }}
-                                                    className={classes.projectElipsis}
-                                                >
-                                                    {message?.substring(0, 50)}
-                                                </Typography>
-                                            }
-                                            subheader={
-                                                <Link
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                    href={"https://github.com/" + organisation + "/" + repo}
-                                                    color="inherit"
-                                                >
-                                                    {organisation + '/' + repo}
-                                                </Link>
-                                            }
-                                        />
-
-                                    </TableCell>
-
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                    >
-                                        <Stack
-                                            direction="row"
-                                            alignItems="center"
-                                        >
-                                            <Box
-                                                component="img"
-                                                src={avatar_url}
-                                                sx={{ width: 30, height: 30, borderRadius: 1.5 }}
+                                            <Typography
+                                                variant="subtitle2"
+                                                noWrap
                                                 style={{
-                                                    marginRight: '1em'
+                                                    marginLeft: '2.5em',
                                                 }}
-                                            />
-                                            <Typography variant="subtitle2" noWrap>
+                                            >
                                                 <Link
                                                     target="_blank"
                                                     rel="noopener"
-                                                    href={"https://github.com/" + dev_name}
+                                                    href={"https://github.com/" + organisation + "/" + repo + "/commit/" + commit_hash}
                                                     color="inherit"
                                                 >
-                                                    {dev_name}
+                                                    {commit_hash?.substring(0, 7)}
                                                 </Link>
                                             </Typography>
-                                        </Stack>
-                                    </TableCell>
+                                        </TableCell>
 
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                    >
-                                        <Typography variant="subtitle2" noWrap>
-                                            {fToNow(commit_date)}
-                                        </Typography>
-                                    </TableCell>
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                        >
+                                            <CardHeader
+                                                style={{ background: "transparent" }}
+                                                sx={{
+                                                    boxShadow: 0,
+                                                    padding: 0,
+                                                }}
+                                                title={
+                                                    <Typography
+                                                        variant="subtitle2"
+                                                        noWrap
+                                                        style={{
+                                                            lineHeight: '1.1em',
+                                                            marginTop: '0.45em'
+                                                        }}
+                                                        className={classes.projectElipsis}
+                                                    >
+                                                        {message?.substring(0, 50)}
+                                                    </Typography>
+                                                }
+                                                subheader={
+                                                    <Link
+                                                        target="_blank"
+                                                        rel="noopener"
+                                                        href={"https://github.com/" + organisation + "/" + repo}
+                                                        color="inherit"
+                                                    >
+                                                        {organisation + '/' + repo}
+                                                    </Link>
+                                                }
+                                            />
 
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
+                                        </TableCell>
+
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                        >
+                                            <Stack
+                                                direction="row"
+                                                alignItems="center"
+                                            >
+                                                <Box
+                                                    component="img"
+                                                    src={avatar_url}
+                                                    sx={{ width: 30, height: 30, borderRadius: 1.5 }}
+                                                    style={{
+                                                        marginRight: '1em'
+                                                    }}
+                                                />
+                                                <Typography variant="subtitle2" noWrap>
+                                                    <Link
+                                                        target="_blank"
+                                                        rel="noopener"
+                                                        href={"https://github.com/" + dev_name}
+                                                        color="inherit"
+                                                    >
+                                                        {dev_name}
+                                                    </Link>
+                                                </Typography>
+                                            </Stack>
+                                        </TableCell>
+
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                        >
+                                            <Typography variant="subtitle2" noWrap>
+                                                {fToNow(commit_date)}
+                                            </Typography>
+                                        </TableCell>
+
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    )}
 
                     {isUserNotFound && !tableEmpty && !isSearchEmpty && (
                         <TableBody>
@@ -202,7 +205,7 @@ export default function CommitsTable({
                         </TableBody>
                     )}
 
-                    {tableEmpty && (
+                    {tableEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
