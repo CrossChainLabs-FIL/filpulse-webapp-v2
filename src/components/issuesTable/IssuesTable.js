@@ -78,22 +78,31 @@ export default function IssuesTable({
             >
                 <Table stickyHeader>
 
-                    <IssuesHead data={data} handleSortChange={handleSortChange} />
+                    <IssuesHead data={data} handleSortChange={handleSortChange} handleMenuFilter={handleMenuFilter} />
 
-                    {state.loading && (<span>loading</span>)}
+                    {state.loading && (
+                        <TableBody>
+                            <TableRow>
+                                <TableCell>
+                                    <Typography>loading</Typography>
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    )}
                     {!state.loading && (
                         <TableBody>
                             {data.map((row) => {
                                 const id = faker.datatype.uuid();
-                                const { issue_number,
-                                    title,
-                                    repo,
-                                    organisation,
-                                    html_url,
-                                    pr_state,
-                                    avatar_url,
+                                const {
                                     assignees,
+                                    avatar_url,
                                     dev_name,
+                                    html_url,
+                                    issue_number,
+                                    issue_state,
+                                    organisation,
+                                    repo,
+                                    title,
                                     updated_at } = row;
                                 return (
                                     <TableRow
@@ -126,7 +135,7 @@ export default function IssuesTable({
                                                     href={html_url}
                                                     color="inherit"
                                                 >
-                                                    {issue_number}
+                                                    {`#${issue_number}`}
                                                 </Link>
                                             </Typography>
                                         </TableCell>
@@ -203,7 +212,8 @@ export default function IssuesTable({
                                             scope="row"
                                             padding="none"
                                         >
-                                            {assignees?.map((item, index) => {
+                                            <Typography>aici assignees</Typography>
+                                            {/* {assignees?.map((item, index) => {
                                                 let overflow = false;
                                                 if (index >= 3 && overflow === false) {
                                                     overflow = true;
@@ -236,7 +246,7 @@ export default function IssuesTable({
                                                         </Tooltip>
                                                     );
                                                 }
-                                            })}
+                                            })} */}
                                         </TableCell>
 
                                         <TableCell
@@ -246,7 +256,7 @@ export default function IssuesTable({
                                             padding="none"
                                         >
 
-                                            {pr_state === 'closed' ?
+                                            {issue_state === 'closed' ?
                                                 (
                                                     <img
                                                         src={closedBox}

@@ -49,7 +49,8 @@ const useStyles = makeStyles(() => ({
 
 export default function PRHead({
     data,
-    handleSortChange
+    handleSortChange,
+    handleMenuFilter
 }) {
 
     const classes = useStyles();
@@ -94,7 +95,7 @@ export default function PRHead({
                             PR
                         </Typography>
 
-                        <TriunghiMenuPrPr data={data} />
+                        <TriunghiMenuPrPr handleMenuFilter={handleMenuFilter} />
                     </Stack>
                 </TableCell>
 
@@ -113,7 +114,7 @@ export default function PRHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuPrContributor data={data} />
+                        <TriunghiMenuPrContributor handleMenuFilter={handleMenuFilter} />
                     </Stack>
                 </TableCell>
 
@@ -132,7 +133,7 @@ export default function PRHead({
                             Status
                         </Typography>
 
-                        <TriunghiMenuPrStatus data={data} />
+                        <TriunghiMenuPrStatus />
                     </Stack>
                 </TableCell>
 

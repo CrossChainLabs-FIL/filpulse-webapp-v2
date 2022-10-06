@@ -72,7 +72,15 @@ export default function ContributorsTable({
                 <Table stickyHeader>
 
                     <ContributorHead handleSortChange={handleSortChange} handleMenuFilter={handleMenuFilter} />
-                    {state.loading && (<div>loading</div>)}
+                    {state.loading && (
+                        <TableBody>
+                            <TableRow>
+                                <TableCell>
+                                    <Typography>loading</Typography>
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    )}
                     {!state.loading && (
                         <TableBody>
                             {data.map((row) => {

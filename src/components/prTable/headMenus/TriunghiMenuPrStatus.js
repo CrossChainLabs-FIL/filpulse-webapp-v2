@@ -60,7 +60,7 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function TriunghiMenuPrStatus({ data }) {
+export default function TriunghiMenuPrStatus() {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {

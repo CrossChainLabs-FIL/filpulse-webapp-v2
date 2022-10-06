@@ -53,7 +53,8 @@ const useStyles = makeStyles(() => ({
 
 export default function IssuesHead({
     data,
-    handleSortChange
+    handleSortChange,
+    handleMenuFilter
 }) {
 
 
@@ -100,7 +101,7 @@ export default function IssuesHead({
                             Issue
                         </Typography>
 
-                        <TriunghiMenuIssuesIssue data={data} />
+                        <TriunghiMenuIssuesIssue handleMenuFilter={handleMenuFilter} />
                     </Stack>
                 </TableCell>
 
@@ -119,7 +120,7 @@ export default function IssuesHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuIssuesAuthor data={data} />
+                        <TriunghiMenuIssuesAuthor handleMenuFilter={handleMenuFilter} />
                     </Stack>
                 </TableCell>
 
@@ -138,7 +139,7 @@ export default function IssuesHead({
                             Assignee
                         </Typography>
 
-                        <TriunghiMenuIssuesAssignee data={data} />
+                        {/* <TriunghiMenuIssuesAssignee data={data} /> */}
                     </Stack>
                 </TableCell>
 

@@ -287,7 +287,7 @@ export default function TableApp() {
                         pr_data: pr_data,
                     });
                     setOrderBy('showId');
-                    setOrder('asc');
+                    setOrder('desc');
                     setData(pr_data.list);
                 });
                 break;
@@ -298,7 +298,7 @@ export default function TableApp() {
                         issues_data: issues_data,
                     });
                     setOrderBy('showId');
-                    setOrder('asc');
+                    setOrder('desc');
                     setData(issues_data.list);
                 });
                 break;
@@ -329,6 +329,10 @@ export default function TableApp() {
     };
 
     const handleSort = () => {
+        setData([]);
+        setState({
+            loading: true
+        });
         switch (value) {
             case 1:
                 if (order === 'asc') {
@@ -578,16 +582,54 @@ export default function TableApp() {
 
     const handleFilterByName = (event) => {
         // applySortFilter(data, getComparator(order, orderBy), event.target.value);
-
+        setData([]);
+        setState({
+            loading: true
+        });
         if (event.target.value) {
             setIsSearchEmpty(false);
-            client.get(`tab_commits?search=${event.target.value}`).then((commits_data) => {
-                setState({
-                    loading: false,
-                    commits_data: commits_data,
-                });
-                setData(commits_data.list);
-            });
+            switch (value) {
+                case 0:
+                    break;
+                case 1:
+                    client.get(`tab_prs?search=${event.target.value}`).then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                    });
+                    break;
+                case 2:
+                    client.get(`tab_issues?search=${event.target.value}`).then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                    });
+                    break;
+                case 3:
+                    client.get(`tab_commits?search=${event.target.value}`).then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                    });
+                    break;
+                case 4:
+                    client.get(`tab_contributors?search=${event.target.value}`).then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                    });
+                    break;
+                default: console.log("def"); break;
+            }
+
             // let commits_data = await client.get(`tab_commits?search=${event.target.value}`);
             // setState({
             //     loading: false,
@@ -598,13 +640,48 @@ export default function TableApp() {
         }
         else {
             setIsSearchEmpty(true);
-            client.get('tab_commits').then((commits_data) => {
-                setState({
-                    loading: false,
-                    commits_data: commits_data,
-                });
-                setData(commits_data.list);
-            });
+            switch (value) {
+                case 0:
+                    break;
+                case 1:
+                    client.get('tab_prs').then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                    });
+                    break;
+                case 2:
+                    client.get('tab_issues').then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                    });
+                    break;
+                case 3:
+                    client.get('tab_commits').then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                    });
+                    break;
+                case 4:
+                    client.get('tab_contributors').then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                    });
+                    break;
+                default: console.log("def"); break;
+            }
+
             // let commits_data = await client.get(`tab_commits`);
             // setState({
             //     loading: false,

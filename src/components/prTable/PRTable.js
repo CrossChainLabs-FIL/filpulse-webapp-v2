@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
 
@@ -75,12 +76,21 @@ export default function PRTable({
             >
                 <Table stickyHeader>
 
-                    <PRHead data={data} handleSortChange={handleSortChange} />
+                    <PRHead data={data} handleSortChange={handleSortChange} handleMenuFilter={handleMenuFilter} />
 
-                    {state.loading && (<span>loading</span>)}
+                    {state.loading && (
+                        <TableBody>
+                            <TableRow>
+                                <TableCell>
+                                    <Typography>loading</Typography>
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    )}
                     {!state.loading && (
                         <TableBody>
                             {data.map((row) => {
+                                const id = faker.datatype.uuid();
                                 const { pr_number,
                                     title,
                                     repo,
@@ -93,7 +103,7 @@ export default function PRTable({
                                 return (
                                     <TableRow
                                         hover
-                                        key={pr_number}
+                                        key={id}
                                         tabIndex={-1}
                                     >
                                         <TableCell padding="checkbox">
@@ -239,7 +249,7 @@ export default function PRTable({
                         </TableBody>
                     )}
 
-                    {isUserNotFound && !tableEmpty && !isSearchEmpty && (
+                    {isUserNotFound && !tableEmpty && !isSearchEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>

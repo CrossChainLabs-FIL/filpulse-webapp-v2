@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
 
@@ -66,10 +67,19 @@ export default function CommitsTable({
                 <Table stickyHeader>
 
                     <CommitsHead data={data} handleSortChange={handleSortChange} handleMenuFilter={handleMenuFilter} />
-                    {state.loading && (<span>loading</span>)}
+                    {state.loading && (
+                        <TableBody>
+                            <TableRow>
+                                <TableCell>
+                                    <Typography>loading</Typography>
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    )}
                     {!state.loading && (
                         <TableBody>
                             {data.map((row) => {
+                                const id = faker.datatype.uuid();
                                 const { repo,
                                     organisation,
                                     message,
@@ -80,7 +90,7 @@ export default function CommitsTable({
                                 return (
                                     <TableRow
                                         hover
-                                        key={commit_hash}
+                                        key={id}
                                         tabIndex={-1}
                                     >
                                         <TableCell

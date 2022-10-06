@@ -18,10 +18,14 @@ import {
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
+import { Client } from '../../../utils/client';
+
 
 // assets
 import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
+
+const client = new Client();
 
 
 const useStyles = makeStyles(() => ({
@@ -72,16 +76,54 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuPrContributor({ data }) {
+export default function TriunghiMenuPrContributor({ handleMenuFilter }) {
+
+    const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
+    const [state, setState] = useState({
+        loading: true
+    });
     const open = Boolean(anchorEl);
+
+
     const handleClick = (event) => {
+        client.get('tab_prs/filter/contributor').then((contributor_data) => {
+            setState({
+                loading: false,
+                contributor_data: contributor_data,
+            });
+        });
+        setFilterName('');
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
 
+    function handleFilterClose(contributor) {
+        handleClose();
+        handleMenuFilter(`contributor=${contributor}`);
+    }
+
+    const handleFilterByName = (event) => {
+        if (event.target.value) {
+            client.get(`tab_commits/filter/contributor?search=${event.target.value}`).then((contributor_data) => {
+                setState({
+                    loading: false,
+                    contributor_data: contributor_data,
+                });
+            });
+        }
+        else {
+            client.get('tab_commits/filter/contributor').then((contributor_data) => {
+                setState({
+                    loading: false,
+                    contributor_data: contributor_data,
+                });
+            });
+        }
+        setFilterName(event.target.value);
+    }
 
     const classes = useStyles();
 
@@ -127,27 +169,26 @@ export default function TriunghiMenuPrContributor({ data }) {
                         </Stack>
                         <Divider />
                         <SearchStyle
-                            // value={filterName}
-                            // onChange={(e) => handleFilterByName(e)}
+                            value={filterName}
+                            onChange={(e) => handleFilterByName(e)}
                             placeholder="Filter assignees"
                         />
                         <Divider />
                     </Box >
                     <Paper className={classes.paper}>
                         <List className={classes.list} disablePadding={true}>
-                            {data.map((row) => {
-                                const { id,
-                                    personName,
-                                    personIcon,
+                            {state.contributor_data?.list.map((row) => {
+                                const { contributor,
+                                    avatar_url
                                 } = row;
                                 return (
-                                    <React.Fragment key={id}>
+                                    <React.Fragment key={contributor}>
                                         <MenuItem
                                             style={{ backgroundColor: '#FFFFFF', }}
-                                            onClick={handleClose}
+                                            onClick={() => handleFilterClose(contributor)}
                                         >
                                             <Avatar
-                                                src={personIcon}
+                                                src={avatar_url}
                                                 alt='avatar'
                                                 sx={{
                                                     width: 30,
@@ -156,7 +197,7 @@ export default function TriunghiMenuPrContributor({ data }) {
                                                     marginRight: "0.5em"
                                                 }}
                                             />
-                                            <ListItemText primary={personName} />
+                                            <ListItemText primary={contributor} />
                                         </MenuItem>
                                         <Divider />
                                     </React.Fragment>

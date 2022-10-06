@@ -91,7 +91,6 @@ export default function TriunghiMenuCommitsCommit({ handleMenuFilter }) {
     });
     const open = Boolean(anchorEl);
 
-
     const handleClick = (event) => {
         client.get('tab_commits/filter/project').then((project_data) => {
             setState({
