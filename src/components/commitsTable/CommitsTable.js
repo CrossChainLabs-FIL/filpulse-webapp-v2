@@ -205,7 +205,7 @@ export default function CommitsTable({
                         </TableBody>
                     )}
 
-                    {isUserNotFound && !tableEmpty && !isSearchEmpty && (
+                    {isUserNotFound && !tableEmpty && !isSearchEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>

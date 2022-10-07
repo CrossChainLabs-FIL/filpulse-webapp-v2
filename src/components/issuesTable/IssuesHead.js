@@ -41,7 +41,7 @@ const useStyles = makeStyles(() => ({
         width: '16em'
     },
     assignee: {
-        width: '15em'
+        width: '13em'
     },
     status: {
         width: '9.3em'
@@ -139,7 +139,7 @@ export default function IssuesHead({
                             Assignee
                         </Typography>
 
-                        {/* <TriunghiMenuIssuesAssignee data={data} /> */}
+                        <TriunghiMenuIssuesAssignee data={data} />
                     </Stack>
                 </TableCell>
 

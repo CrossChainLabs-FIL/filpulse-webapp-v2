@@ -135,7 +135,7 @@ export default function TriunghiMenuIssuesAssignee({ data }) {
                     </Box >
                     <Paper className={classes.paper}>
                         <List className={classes.list} disablePadding={true}>
-                            {data.map((row) => {
+                            {/* {data.map((row) => {
                                 const { id,
                                     assigneeIcon,
                                     assigneeName,
@@ -167,7 +167,7 @@ export default function TriunghiMenuIssuesAssignee({ data }) {
                                         })}
                                     </React.Fragment>
                                 );
-                            })}
+                            })} */}
                         </List>
                     </Paper>
                 </Box>

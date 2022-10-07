@@ -198,7 +198,10 @@ export default function ContributorsTable({
                                                         borderRadius: 5,
                                                     }}
                                                     variant='determinate'
-                                                    value={(open_issues * 100) / closed_issues}
+                                                    value={
+                                                        (closed_issues === 0) ? 0 :
+                                                            ((open_issues * 100) / closed_issues)
+                                                    }
                                                 />
                                             </Box>
                                         </TableCell>
@@ -250,7 +253,7 @@ export default function ContributorsTable({
                     )}
 
 
-                    {isUserNotFound && !tableEmpty && !isSearchEmpty && (
+                    {isUserNotFound && !tableEmpty && !isSearchEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>

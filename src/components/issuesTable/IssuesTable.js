@@ -212,15 +212,13 @@ export default function IssuesTable({
                                             scope="row"
                                             padding="none"
                                         >
-                                            <Typography>aici assignees</Typography>
-                                            {/* {assignees?.map((item, index) => {
-                                                let overflow = false;
-                                                if (index >= 3 && overflow === false) {
-                                                    overflow = true;
-                                                    return (
-                                                        <span key={index}>...</span>
-                                                    );
-                                                }
+
+                                            {JSON.parse(assignees).map((item, index) => {
+                                                // if (index >= 3) {
+                                                //     return (
+                                                //         <span key={index}>...</span>
+                                                //     );
+                                                // }
                                                 if (index < 3) {
                                                     return (
                                                         <Tooltip
@@ -246,7 +244,7 @@ export default function IssuesTable({
                                                         </Tooltip>
                                                     );
                                                 }
-                                            })} */}
+                                            })}
                                         </TableCell>
 
                                         <TableCell
@@ -290,7 +288,7 @@ export default function IssuesTable({
                         </TableBody>
                     )}
 
-                    {isUserNotFound && !tableEmpty && !isSearchEmpty && (
+                    {isUserNotFound && !tableEmpty && !isSearchEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>
