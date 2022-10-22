@@ -16,16 +16,16 @@ export default function ActiveContributors() {
 
   useEffect(() => {
     client.get('active_contributors').then((contributors) => {
-      contributors.pop();
+      contributors.list.pop();
 
-      if (contributors.length > 12) {
+      if (contributors.list.length > 12) {
         //remove first length - 12 elements
-        contributors.splice(0, contributors.length - 12);
+        contributors.list.splice(0, contributors.list.length - 12);
       }
       let contributorsData = [];
       let categories = [];
 
-      contributors.forEach(item => {
+      contributors.list.forEach(item => {
         contributorsData.push(item.active_contributors);
         categories.push(item.display_month);
       });

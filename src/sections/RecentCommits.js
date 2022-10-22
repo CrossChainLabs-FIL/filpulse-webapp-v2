@@ -83,14 +83,7 @@ export default function RecentCommits() {
   }, [setState]);
 
   return (
-    // <Card>
-    //   <CardHeader title="Recent Commits" />
-    //     <Stack spacing={3} sx={{ p: 3, pr: 0 }}>
-    //       {state.recent_commits.map((item) => (
-    //         <CommitItem key={item.commit_hash} item={item} />
-    //       ))}
-    //     </Stack>
-    // </Card>
+
     <TableApp />
   );
 }
