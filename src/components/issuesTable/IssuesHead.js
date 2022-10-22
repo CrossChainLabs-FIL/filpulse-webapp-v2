@@ -19,6 +19,7 @@ import TriunghiMenuIssuesStatus from './headMenus/TriunghiMenuIssuesStatus'
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
+import clearFilter from '../../assets/clearFilter.svg';
 
 // ----------------------------------------------------------------------
 
@@ -54,7 +55,8 @@ const useStyles = makeStyles(() => ({
 export default function IssuesHead({
     data,
     handleSortChange,
-    handleMenuFilter
+    handleMenuFilter,
+    clearFilterFunction
 }) {
 
 
@@ -121,6 +123,14 @@ export default function IssuesHead({
                         </Typography>
 
                         <TriunghiMenuIssuesAuthor handleMenuFilter={handleMenuFilter} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={clearFilterFunction}
+                            style={{ padding: 0, marginLeft: '0.25em' }}
+                        >
+                            <img src={clearFilter} alt='clear' />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 

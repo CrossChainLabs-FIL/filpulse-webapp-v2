@@ -54,7 +54,8 @@ export default function PRTable({
     state,
     handleMenuFilter,
     // searchData,
-    handleSortChange
+    handleSortChange,
+    clearFilter
 }) {
 
     const classes = useStyles();
@@ -76,7 +77,12 @@ export default function PRTable({
             >
                 <Table stickyHeader>
 
-                    <PRHead data={data} handleSortChange={handleSortChange} handleMenuFilter={handleMenuFilter} />
+                    <PRHead
+                        data={data}
+                        handleSortChange={handleSortChange}
+                        handleMenuFilter={handleMenuFilter}
+                        clearFilterFunction={clearFilter}
+                    />
 
                     {state.loading && (
                         <TableBody>

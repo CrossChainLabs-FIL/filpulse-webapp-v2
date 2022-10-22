@@ -18,6 +18,7 @@ import TriunghiMenuPrStatus from './headMenus/TriunghiMenuPrStatus';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
+import clearFilter from '../../assets/clearFilter.svg';
 
 
 // ----------------------------------------------------------------------
@@ -50,7 +51,8 @@ const useStyles = makeStyles(() => ({
 export default function PRHead({
     data,
     handleSortChange,
-    handleMenuFilter
+    handleMenuFilter,
+    clearFilterFunction
 }) {
 
     const classes = useStyles();
@@ -115,6 +117,14 @@ export default function PRHead({
                         </Typography>
 
                         <TriunghiMenuPrContributor handleMenuFilter={handleMenuFilter} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={clearFilterFunction}
+                            style={{ padding: 0, marginLeft: '0.25em' }}
+                        >
+                            <img src={clearFilter} alt='clear' />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 

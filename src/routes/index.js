@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
+import { useState } from 'react';
 
 import DashboardLayout from '../layouts/dashboard';
 
@@ -13,7 +14,7 @@ const Loadable = (Component) => (props) => {
 
 export default function Router() {
   return useRoutes([
-    { path: '/', element: ( <DashboardLayout /> ), children: [ { element: <Dashboard />, index: true },],},
+    { path: '/', element: (<DashboardLayout />), children: [{ element: <Dashboard />, index: true },], },
     { path: '*', element: <Navigate to="/" replace /> },
   ]);
 }

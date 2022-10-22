@@ -718,7 +718,6 @@ export default function TableApp() {
                     <StyledTab label='Commits' classes={{ root: classes.commitsTab }} />
                     <StyledTab label='Contributors' classes={{ root: classes.contributorsTab }} />
                 </StyledTabs>
-                <div onClick={() => clearFilter()}>clear</div>
                 <SearchStyle
                     style={{
                         marginLeft: "auto",
@@ -744,6 +743,7 @@ export default function TableApp() {
                     data={data}
                     searchData={searchData}
                     handleSortChange={handleSortChange}
+                    clearFilter={clearFilter}
                 />
             )}
 
@@ -756,6 +756,7 @@ export default function TableApp() {
                     // searchData={searchData}
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
+                    clearFilter={clearFilter}
                 />
             )}
 
@@ -768,6 +769,7 @@ export default function TableApp() {
                     // searchData={searchData}
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
+                    clearFilter={clearFilter}
                 />
             )}
 
@@ -780,6 +782,7 @@ export default function TableApp() {
                     // searchData={searchData}
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
+                    clearFilter={clearFilter}
                 />
             }
 
@@ -792,6 +795,7 @@ export default function TableApp() {
                     // searchData={searchData}
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSortChange}
+                    clearFilter={clearFilter}
                 />
             }
 

@@ -1,9 +1,19 @@
 import { alpha, styled } from '@mui/material/styles';
-import { AppBar, Toolbar, Typography, Container, Grid } from '@mui/material';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  Grid,
+  IconButton,
+} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import logo from "../../../logo.svg";
+import exit from "../../../assets/exit.svg";
+
+import Login from "../../../components/Login"
 
 const BG_COLOR = '#ffffff';
 
@@ -18,8 +28,8 @@ const RootStyle = styled(AppBar)(({ theme }) => ({
 }));
 
 const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
-    minHeight: HEIGHT,
-    padding: theme.spacing(0, 5)
+  minHeight: HEIGHT,
+  padding: theme.spacing(0, 5)
 }));
 
 const TextTypography = styled(Typography)(({ theme }) => ({
@@ -43,10 +53,12 @@ const useStyles = makeStyles((theme) =>
     },
     logo: {
       maxWidth: 40,
-      marginRight: '10px'
+      marginRight: '10px',
+      marginLeft: '9.5em'
     }
   })
 );
+
 
 export default function DashboardNavbar() {
   const classes = useStyles();
@@ -54,13 +66,12 @@ export default function DashboardNavbar() {
   return (
     <AppBar sx={{ boxShadow: 0, bgcolor: BG_COLOR }}>
       <ToolbarStyle disableGutters>
-      <Container maxWidth='xl'>
-          <Grid container>
-            <Grid item xs={12} md={0}/>
-            <img src={logo} alt="" className={classes.logo} />
-            <TextTypography>FilPulse</TextTypography>
-          </Grid>
-        </Container>
+        <img src={logo} alt="" className={classes.logo} />
+        <TextTypography>FilPulse</TextTypography>
+        <Login />
+        <IconButton style={{ marginRight: '6.75em' }}>
+          <img src={exit} alt="exit" />
+        </IconButton >
       </ToolbarStyle>
     </AppBar>
   );

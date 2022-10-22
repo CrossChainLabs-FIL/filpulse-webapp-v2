@@ -57,6 +57,7 @@ export default function IssuesTable({
     handleMenuFilter,
     // searchData,
     handleSortChange,
+    clearFilter
 }) {
 
     const classes = useStyles();
@@ -78,7 +79,12 @@ export default function IssuesTable({
             >
                 <Table stickyHeader>
 
-                    <IssuesHead data={data} handleSortChange={handleSortChange} handleMenuFilter={handleMenuFilter} />
+                    <IssuesHead
+                        data={data}
+                        handleSortChange={handleSortChange}
+                        handleMenuFilter={handleMenuFilter}
+                        clearFilterFunction={clearFilter}
+                    />
 
                     {state.loading && (
                         <TableBody>

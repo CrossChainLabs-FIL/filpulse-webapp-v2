@@ -2,12 +2,12 @@ import { Outlet } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 
 import { PADDING } from '../../config';
- import DashboardHeader from './header';
+import DashboardHeader from './header';
 
 const RootStyle = styled('div')(() => ({
-    display: 'flex',
-    minHeight: '100%',
-  
+  display: 'flex',
+  minHeight: '100%',
+
 }));
 
 const MainStyle = styled('main')(() => ({
@@ -22,7 +22,7 @@ const MainStyle = styled('main')(() => ({
 export default function DashboardLayout() {
   return (
     <RootStyle>
-      { <DashboardHeader/> }
+      {<DashboardHeader />}
       <MainStyle >
         <Outlet />
       </MainStyle>

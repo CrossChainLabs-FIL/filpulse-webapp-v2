@@ -5,7 +5,8 @@ import {
     TableCell,
     TableHead,
     Stack,
-    IconButton
+    IconButton,
+    Tooltip
 } from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
@@ -16,6 +17,8 @@ import TriunghiMenuContributorProject from './headMenus/TriunghiMenuContributorP
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
+import clearFilter from '../../assets/clearFilter.svg';
+import info from '../../assets/info.svg';
 
 
 // ----------------------------------------------------------------------
@@ -36,10 +39,10 @@ const useStyles = makeStyles(() => ({
         width: '18em'
     },
     commits: {
-        width: '18em'
+        width: '15em'
     },
     pr: {
-        width: '25em'
+        width: '24em'
     }
 }));
 
@@ -47,7 +50,8 @@ const useStyles = makeStyles(() => ({
 
 export default function ContributorHead({
     handleSortChange,
-    handleMenuFilter
+    handleMenuFilter,
+    clearFilterFunction
 }) {
 
     const classes = useStyles();
@@ -80,6 +84,14 @@ export default function ContributorHead({
                         </Typography>
 
                         <TriunghiMenuContributorContributor handleMenuFilter={handleMenuFilter} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={clearFilterFunction}
+                            style={{ padding: 0, marginLeft: '0.25em' }}
+                        >
+                            <img src={clearFilter} alt='clear' />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -139,6 +151,16 @@ export default function ContributorHead({
                         alignItems="center"
                         style={{ marginTop: '1.2em' }}
                     >
+                        <Tooltip
+                            title='info'
+                            arrow
+                            style={{
+                                marginRight: '0.35em'
+                            }}
+                        >
+                            <img src={info} alt='info' />
+                        </Tooltip>
+
                         <Typography
                             variant="h6"
                             noWrap
@@ -166,10 +188,11 @@ export default function ContributorHead({
                             fontWeight: 450,
                             opacity: 0.75,
                             marginTop: 0,
-                            fontSize: 12
+                            fontSize: 12,
+                            marginLeft: '1.8em'
                         }}
                     >
-                        merged / open
+                        open - merged
                     </Typography>
                 </TableCell>
 
@@ -184,6 +207,16 @@ export default function ContributorHead({
                         alignItems="center"
                         style={{ marginTop: '1.2em' }}
                     >
+                        <Tooltip
+                            title='info'
+                            arrow
+                            style={{
+                                marginRight: '0.35em'
+                            }}
+                        >
+                            <img src={info} alt='info' />
+                        </Tooltip>
+
                         <Typography
                             variant="h6"
                             noWrap
@@ -211,10 +244,11 @@ export default function ContributorHead({
                             fontWeight: 450,
                             opacity: 0.75,
                             marginTop: 0,
-                            fontSize: 12
+                            fontSize: 12,
+                            marginLeft: '1.8em'
                         }}
                     >
-                        open/closed
+                        open - closed
                     </Typography>
                 </TableCell>
 

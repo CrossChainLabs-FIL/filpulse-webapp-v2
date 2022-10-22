@@ -58,7 +58,8 @@ export default function WatchlistTable({
     isSearchEmpty,
     data,
     searchData,
-    handleSortChange
+    handleSortChange,
+    clearFilter
 }) {
 
     const classes = useStyles();
@@ -80,7 +81,11 @@ export default function WatchlistTable({
             >
                 <Table stickyHeader>
 
-                    <WatchlistHead data={data} handleSortChange={handleSortChange} />
+                    <WatchlistHead
+                        data={data}
+                        handleSortChange={handleSortChange}
+                        clearFilterFunction={clearFilter}
+                    />
 
                     <TableBody>
                         {showData.map((row) => {
@@ -240,6 +245,9 @@ export default function WatchlistTable({
                                             <Stack
                                                 direction="row"
                                                 alignItems="center"
+                                                style={{
+                                                    marginLeft: '2.1em'
+                                                }}
                                             >
                                                 <Badge
                                                     badgeContent={commentsUnseen}

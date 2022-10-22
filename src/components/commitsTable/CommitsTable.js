@@ -44,7 +44,8 @@ export default function CommitsTable({
     state,
     handleMenuFilter,
     // searchData,
-    handleSortChange
+    handleSortChange,
+    clearFilter
 }) {
 
     const classes = useStyles();
@@ -66,7 +67,13 @@ export default function CommitsTable({
             >
                 <Table stickyHeader>
 
-                    <CommitsHead data={data} handleSortChange={handleSortChange} handleMenuFilter={handleMenuFilter} />
+                    <CommitsHead
+                        data={data}
+                        handleSortChange={handleSortChange}
+                        handleMenuFilter={handleMenuFilter}
+                        clearFilterFunction={clearFilter}
+                    />
+
                     {state.loading && (
                         <TableBody>
                             <TableRow>

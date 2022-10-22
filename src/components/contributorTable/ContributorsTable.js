@@ -49,7 +49,8 @@ export default function ContributorsTable({
     state,
     handleMenuFilter,
     // searchData,
-    handleSortChange
+    handleSortChange,
+    clearFilter
 }) {
 
     const classes = useStyles();
@@ -71,7 +72,11 @@ export default function ContributorsTable({
             >
                 <Table stickyHeader>
 
-                    <ContributorHead handleSortChange={handleSortChange} handleMenuFilter={handleMenuFilter} />
+                    <ContributorHead
+                        handleSortChange={handleSortChange}
+                        handleMenuFilter={handleMenuFilter}
+                        clearFilterFunction={clearFilter}
+                    />
                     {state.loading && (
                         <TableBody>
                             <TableRow>
@@ -95,6 +100,23 @@ export default function ContributorsTable({
                                     open_prs,
                                     merged_prs
                                 } = row;
+
+                                let prValue;
+                                if (Number(merged_prs) === 0) {
+                                    prValue = 0;
+                                }
+                                else {
+                                    prValue = ((Number(open_prs) * 100) / Number(merged_prs));
+                                }
+
+                                let issueValue;
+                                if (Number(closed_issues) === 0) {
+                                    issueValue = 0;
+                                }
+                                else {
+                                    issueValue = (Number(open_issues) * 100) / Number(closed_issues);
+                                }
+
                                 return (
                                     <TableRow
                                         hover
@@ -177,20 +199,20 @@ export default function ContributorsTable({
                                             <Stack
                                                 direction="row"
                                                 alignItems="center"
-                                                sx={{ width: '12em' }}
+                                                sx={{ width: '12em', marginLeft: '1.5em' }}
                                             >
                                                 <Typography variant="subtitle2" noWrap>
-                                                    {open_issues}
+                                                    {open_prs}
                                                 </Typography>
                                                 <Typography
                                                     variant="subtitle2"
                                                     noWrap
                                                     sx={{ marginLeft: "auto" }}
                                                 >
-                                                    {closed_issues}
+                                                    {merged_prs}
                                                 </Typography>
                                             </Stack>
-                                            <Box sx={{ width: '100%' }}>
+                                            <Box sx={{ width: '100%', marginLeft: '1.5em' }}>
                                                 <LinearProgress
                                                     sx={{
                                                         width: "12em",
@@ -198,10 +220,7 @@ export default function ContributorsTable({
                                                         borderRadius: 5,
                                                     }}
                                                     variant='determinate'
-                                                    value={
-                                                        (closed_issues === 0) ? 0 :
-                                                            ((open_issues * 100) / closed_issues)
-                                                    }
+                                                    value={prValue}
                                                 />
                                             </Box>
                                         </TableCell>
@@ -215,29 +234,29 @@ export default function ContributorsTable({
                                             <Stack
                                                 direction="row"
                                                 alignItems="center"
-                                                sx={{ width: '12em' }}
+                                                sx={{ width: '12em', marginLeft: '1.5em' }}
                                             >
                                                 <Typography variant="subtitle2" noWrap>
-                                                    {open_prs}
+                                                    {open_issues}
                                                 </Typography>
                                                 <Typography
                                                     variant="subtitle2"
                                                     noWrap
                                                     sx={{ marginLeft: "auto" }}
                                                 >
-                                                    {merged_prs}
+                                                    {closed_issues}
                                                 </Typography>
                                             </Stack>
-                                            <Box sx={{ width: '100%' }} >
+                                            <Box sx={{ width: '100%', marginLeft: '1.5em' }} >
                                                 <LinearProgress
                                                     sx={{
                                                         width: "12em",
                                                         height: '0.4em',
                                                         borderRadius: 5,
-
+                                                        marginRight: '0em'
                                                     }}
                                                     variant='determinate'
-                                                    value={(open_prs * 100) / merged_prs}
+                                                    value={issueValue}
                                                     classes={{
                                                         colorPrimary: classes.colorPrimary,
                                                         barColorPrimary: classes.barColorPrimary

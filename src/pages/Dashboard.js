@@ -22,6 +22,7 @@ export default function Dashboard() {
   const themeStretch = false;
 
   const [state, setState] = useState({ loading: true, commits: '', repositories: '', contributors: '', prs: '' });
+
   useEffect(() => {
     setState({ loading: true });
 

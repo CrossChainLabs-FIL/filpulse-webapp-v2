@@ -5,7 +5,8 @@ import {
     TableCell,
     TableHead,
     Stack,
-    IconButton
+    IconButton,
+    Tooltip
 } from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
@@ -18,7 +19,8 @@ import TriunghiMenuWLParticipants from './headMenus/TriunghiMenuWLParticipants';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
-
+import clearFilter from '../../assets/clearFilter.svg';
+import info from '../../assets/info.svg';
 
 
 // ----------------------------------------------------------------------
@@ -42,10 +44,10 @@ const useStyles = makeStyles(() => ({
         width: '13em'
     },
     status: {
-        width: '15em'
+        width: '13em'
     },
     comments: {
-        width: '12em'
+        width: '14em'
     }
 }));
 
@@ -53,7 +55,8 @@ const useStyles = makeStyles(() => ({
 
 export default function WatchlistHead({
     data,
-    handleSortChange
+    handleSortChange,
+    clearFilterFunction
 }) {
 
     const classes = useStyles();
@@ -126,6 +129,14 @@ export default function WatchlistHead({
                         </Typography>
 
                         <TriunghiMenuWLParticipants data={data} />
+
+                        <IconButton
+                            id="basic-button"
+                            onClick={clearFilterFunction}
+                            style={{ padding: 0, marginLeft: '0.25em' }}
+                        >
+                            <img src={clearFilter} alt='clear' />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -159,6 +170,16 @@ export default function WatchlistHead({
                         direction="row"
                         alignItems="center"
                     >
+                        <Tooltip
+                            title='info'
+                            arrow
+                            style={{
+                                marginRight: '0.35em'
+                            }}
+                        >
+                            <img src={info} alt='info' />
+                        </Tooltip>
+
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Comments
                         </Typography>
