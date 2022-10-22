@@ -1,4 +1,4 @@
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 import { Container, Grid } from '@mui/material';
 import { useState, useEffect } from 'react';
 import Page from '../components/Page';
@@ -6,7 +6,6 @@ import { Footer } from '../components/Footer';
 import { Client } from '../utils/client';
 
 import {
-  RecentCommits,
   Commits,
   CardWidget,
   TopContributors,
@@ -14,10 +13,12 @@ import {
   ActiveContributors,
 } from '../sections';
 
+import TableApp from '../components/TableApp';
+
 const client = new Client();
 
 export default function Dashboard() {
-  const theme = useTheme();
+  // const theme = useTheme();
   const themeStretch = false;
 
   const [state, setState] = useState({ loading: true, commits: '', repositories: '', contributors: '', prs: '' });
@@ -84,7 +85,7 @@ export default function Dashboard() {
           </Grid>
 
           <Grid item xs={12} lg={12}>
-            <RecentCommits />
+            <TableApp />
           </Grid>
 
         </Grid>
