@@ -48,8 +48,8 @@ const StyledTabs = styled((props) => (
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({
         textTransform: 'none',
-        fontWeight: theme.typography.fontWeightRegular,
-        fontSize: theme.typography.pxToRem(15),
+        fontWeight: 750,
+        fontSize: theme.typography.pxToRem(20),
         marginRight: theme.spacing(3),
         color: "#000000",
         '&.Mui-selected': {
@@ -88,6 +88,7 @@ export default function Login() {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        setForgot(false);
     };
 
     const handleClickOpen = () => {
@@ -120,7 +121,7 @@ export default function Login() {
                 <DialogContent
                     style={{
                         backgroundColor: "#FFFFFF",
-                        height: '40em',
+                        height: '43em',
                         width: '30em'
                     }}
                 >
@@ -133,14 +134,15 @@ export default function Login() {
                                 height: '1em',
                                 width: '1em',
                                 marginLeft: 'auto',
-                                marginBottom: '3em'
+                                marginBottom: '2.5em'
                             }}
                         />
                         <StyledTabs
                             value={value}
                             onChange={handleChange}
                             style={{
-                                marginLeft: '6.5em'
+                                marginLeft: '6.5em',
+                                marginBottom: '1em'
                             }}
                         >
                             <StyledTab label='Login' />
@@ -187,8 +189,9 @@ export default function Login() {
                             <>
                                 <Typography
                                     style={{
-                                        marginLeft: "5em",
-                                        marginTop: '1em',
+                                        marginLeft: "4em",
+                                        marginTop: '0.25em',
+                                        fontWeight: 650
                                     }}
                                     onClick={handleForgot}
                                     variant='h5'
@@ -268,7 +271,7 @@ export default function Login() {
                                     fullWidth
                                     style={{
                                         width: '15em',
-                                        marginLeft: '5.5em'
+                                        marginLeft: '5.5em',
                                     }}
                                 />
                                 <TextField
@@ -352,7 +355,7 @@ export default function Login() {
                                 marginLeft: '7em',
                                 height: '3em',
                                 width: '15em',
-                                marginTop: '7em'
+                                marginTop: '2em'
                             }}
                         >
                             Change password
@@ -367,7 +370,7 @@ export default function Login() {
                                 marginLeft: '7em',
                                 height: '3em',
                                 width: '15em',
-                                marginTop: '7em'
+                                marginTop: '2em'
                             }}
                         >
                             Create account
