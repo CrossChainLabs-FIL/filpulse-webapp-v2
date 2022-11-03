@@ -30,6 +30,9 @@ export function fDateTimeSuffix(date) {
 }
 
 export function fToNow(date) {
+  if (!date) {
+    return;
+  }
   return formatDistanceToNow(new Date(date), {
     addSuffix: true
   });

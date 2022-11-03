@@ -219,7 +219,7 @@ export default function IssuesTable({
                                             padding="none"
                                         >
 
-                                            {JSON.parse(assignees).map((item, index) => {
+                                            {assignees ? JSON.parse(assignees).map((item, index) => {
                                                 // if (index >= 3) {
                                                 //     return (
                                                 //         <span key={index}>...</span>
@@ -250,7 +250,8 @@ export default function IssuesTable({
                                                         </Tooltip>
                                                     );
                                                 }
-                                            })}
+                                            }) : ''
+                                            }
                                         </TableCell>
 
                                         <TableCell
