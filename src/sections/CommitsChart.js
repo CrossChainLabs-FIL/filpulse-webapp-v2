@@ -48,7 +48,7 @@ export default function Commits() {
   });
 
   return (
-    <Card>
+    <Card className='boxShadowContainer'>
       <CardHeader
         title="Commits"
         subheader=""

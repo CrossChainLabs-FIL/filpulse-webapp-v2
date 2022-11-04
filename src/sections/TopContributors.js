@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import { Box, Stack, Card, Typography, CardHeader } from '@mui/material';
+import { Box, Stack, Card, Typography, CardHeader, Link } from '@mui/material';
 import { Client } from '../utils/client';
 
 const client = new Client();
@@ -21,7 +21,14 @@ function ContributorItem({ item }) {
       <Box component="img" src={avatar_url} sx={{ width: 30, height: 30, borderRadius: 1.5 }} />
       <Box sx={{ minWidth: 240 }}>
         <Typography variant="subtitle2" noWrap>
-          <a target="_blank" href={"https://github.com/" + dev_name}>{dev_name}</a>
+          <Link
+            target="_blank"
+            rel="noopener"
+            href={"https://github.com/" + dev_name}
+            color="inherit"
+          >
+            {dev_name}
+          </Link>
         </Typography>
       </Box>
       <Box flexGrow={2}></Box>
@@ -47,7 +54,7 @@ export default function TopContributors() {
   }, [setState]);
 
   return (
-    <Card>
+    <Card className='boxShadowContainer'>
       <CardHeader title="Contributors of the month" />
       <Stack spacing={5.37} sx={{ p: 5.4, pr: 0 }}>
         {state.top_contributors.map((item) => (

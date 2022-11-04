@@ -17,13 +17,13 @@ export default function CardWidget({ name, value }) {
   const theme = useTheme();
 
   return (
-    <RootStyle>
-    <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
-      <Box sx={{ flexGrow: 1 }}>
-        <Typography align="center" variant="h3">{value}</Typography>
-        <Typography align="center" variant="h6">{name}</Typography>
-      </Box>
-    </Card>
+    <RootStyle className='boxShadowContainer'>
+      <Card sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography align="center" variant="h3">{value}</Typography>
+          <Typography align="center" variant="h6">{name}</Typography>
+        </Box>
+      </Card>
     </RootStyle>
   );
 }

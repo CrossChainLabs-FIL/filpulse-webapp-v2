@@ -32,7 +32,7 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
 export default function Issues() {
   const theme = useTheme();
   const [state, setState] = useState({ loading: true, chartData: [0, 0] });
-  
+
   useEffect(() => {
     client.get('overview').then((overview) => {
       let open = parseInt((overview?.issues_open) ? overview?.issues_open : 0);
@@ -80,7 +80,7 @@ export default function Issues() {
   });
 
   return (
-    <Card>
+    <Card className='boxShadowContainer'>
       <CardHeader title="Issues" />
       <ChartWrapperStyle dir="ltr">
         <ReactApexChart type="donut" series={state.chartData} options={chartOptions} height={310} />

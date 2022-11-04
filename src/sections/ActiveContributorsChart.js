@@ -47,7 +47,7 @@ export default function ActiveContributors() {
   });
 
   return (
-    <Card>
+    <Card className='boxShadowContainer'>
       <CardHeader
         title="Active Contributors"
         subheader=""
