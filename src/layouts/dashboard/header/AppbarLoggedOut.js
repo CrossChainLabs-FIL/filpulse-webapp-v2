@@ -137,7 +137,7 @@ export default function AppbarLoggedOut() {
                             loading
                         </div>
                     ) : (
-                        <div style={{ marginLeft: 'auto' }}>
+                        <div style={{ marginLeft: 'auto', marginTop: '0.4em', marginRight: '0.5em' }}>
                             {
                                 // Link to request GitHub access
                             }

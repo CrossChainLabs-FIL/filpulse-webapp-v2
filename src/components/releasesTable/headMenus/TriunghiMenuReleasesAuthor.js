@@ -10,16 +10,15 @@ import {
     OutlinedInput,
     MenuItem,
     ListItemText,
+    Avatar,
     Paper,
-    Divider,
-    Typography
+    Divider
 } from '@mui/material';
 
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
 import { Client } from '../../../utils/client';
-
 
 // assets
 import triunghi from '../../../assets/triunghi.svg';
@@ -54,19 +53,13 @@ const useStyles = makeStyles(() => ({
     mainBox: {
         maxHeight: '100%',
         backgroundColor: '#FFFFFF',
-        padding: 0
+        padding: 0,
     },
     paper: {
         maxHeight: '25em',
         overflow: 'auto',
         padding: 0,
-    },
-    projectElipsis: {
-        maxWidth: "23em",
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-    },
+    }
 }));
 
 const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
@@ -82,7 +75,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuIssuesIssue({ handleMenuFilter }) {
+export default function TriunghiMenuReleasesAuthor({ handleMenuFilter }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
@@ -92,39 +85,38 @@ export default function TriunghiMenuIssuesIssue({ handleMenuFilter }) {
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
-        client.get('tab_issues/filter/project').then((project_data) => {
+        client.get('tab_releases/filter/contributor').then((contributor_data) => {
             setState({
                 loading: false,
-                project_data: project_data,
+                contributor_data: contributor_data,
             });
         });
         setFilterName('');
         setAnchorEl(event.currentTarget);
     };
-
     const handleClose = () => {
         setAnchorEl(null);
     };
 
-    function handleFilterClose(organisation, repo) {
+    function handleFilterClose(contributor) {
         handleClose();
-        handleMenuFilter(`organisation=${organisation}&repo=${repo}`);
+        handleMenuFilter(`contributor=${contributor}`);
     }
 
     const handleFilterByName = (event) => {
         if (event.target.value) {
-            client.get(`tab_issues/filter/project?search=${event.target.value}`).then((project_data) => {
+            client.get(`tab_releases/filter/contributor?search=${event.target.value}`).then((contributor_data) => {
                 setState({
                     loading: false,
-                    project_data: project_data,
+                    contributor_data: contributor_data,
                 });
             });
         }
         else {
-            client.get('tab_issues/filter/project').then((project_data) => {
+            client.get('tab_releases/filter/contributor').then((contributor_data) => {
                 setState({
                     loading: false,
-                    project_data: project_data,
+                    contributor_data: contributor_data,
                 });
             });
         }
@@ -168,7 +160,7 @@ export default function TriunghiMenuIssuesIssue({ handleMenuFilter }) {
                             alignItems="center"
                         >
                             <Box className={classes.filterText}>
-                                Issue's name
+                                Filter by author
                             </Box>
                             <IconButton onClick={handleClose} style={{ marginLeft: 'auto' }}>
                                 <img src={x} alt='x' className={classes.x} />
@@ -178,32 +170,33 @@ export default function TriunghiMenuIssuesIssue({ handleMenuFilter }) {
                         <SearchStyle
                             value={filterName}
                             onChange={(e) => handleFilterByName(e)}
-                            placeholder="Filter issues"
+                            placeholder="Filter users"
                         />
                         <Divider />
                     </Box >
                     <Paper className={classes.paper}>
                         <List className={classes.list} disablePadding={true}>
-                            {state.project_data?.list.map((row) => {
-                                const { repo,
-                                    organisation
+                            {state.contributor_data?.list.map((row) => {
+                                const { contributor,
+                                    avatar_url
                                 } = row;
                                 return (
-                                    <React.Fragment key={repo}>
+                                    <React.Fragment key={contributor}>
                                         <MenuItem
-                                            style={{ backgroundColor: '#FFFFFF' }}
-                                            onClick={() => handleFilterClose(organisation, repo)}
+                                            style={{ backgroundColor: '#FFFFFF', }}
+                                            onClick={() => handleFilterClose(contributor)}
                                         >
-                                            <ListItemText
-                                                primary={
-                                                    <Typography
-                                                        noWrap
-                                                        className={classes.projectElipsis}
-                                                    >
-                                                        {organisation + "/" + repo}
-                                                    </Typography>
-                                                }
+                                            <Avatar
+                                                src={avatar_url}
+                                                alt='avatar'
+                                                sx={{
+                                                    width: 30,
+                                                    height: 30,
+                                                    marginLeft: "1.75em",
+                                                    marginRight: "0.5em"
+                                                }}
                                             />
+                                            <ListItemText primary={contributor} />
                                         </MenuItem>
                                         <Divider />
                                     </React.Fragment>

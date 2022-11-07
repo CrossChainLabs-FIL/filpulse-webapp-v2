@@ -86,10 +86,16 @@ export default function AppbarLoggedIn() {
     const accountInfo = () => {
         const { avatar_url, login } = state.user;
         return (
-            <div style={{ marginLeft: 'auto' }}>
-                <img src={avatar_url} alt="Avatar" style={{ height: '2em' }} />
+            <div
+                style={{
+                    marginLeft: 'auto',
+                    display: "flex",
+                    flexDirection: 'row'
+                }}
+            >
+                <img src={avatar_url} alt="Avatar" style={{ height: '2em', marginRight: '0.5em' }} />
                 <TextTypography>{login}</TextTypography>
-            </div>
+            </div >
         )
     }
 

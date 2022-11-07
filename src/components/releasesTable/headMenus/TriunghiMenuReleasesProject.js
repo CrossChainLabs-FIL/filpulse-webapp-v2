@@ -82,7 +82,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuIssuesIssue({ handleMenuFilter }) {
+export default function TriunghiMenuReleasesProject({ handleMenuFilter }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
@@ -92,7 +92,7 @@ export default function TriunghiMenuIssuesIssue({ handleMenuFilter }) {
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
-        client.get('tab_issues/filter/project').then((project_data) => {
+        client.get('tab_releases/filter/project').then((project_data) => {
             setState({
                 loading: false,
                 project_data: project_data,
@@ -113,7 +113,7 @@ export default function TriunghiMenuIssuesIssue({ handleMenuFilter }) {
 
     const handleFilterByName = (event) => {
         if (event.target.value) {
-            client.get(`tab_issues/filter/project?search=${event.target.value}`).then((project_data) => {
+            client.get(`tab_releases/filter/project?search=${event.target.value}`).then((project_data) => {
                 setState({
                     loading: false,
                     project_data: project_data,
@@ -121,7 +121,7 @@ export default function TriunghiMenuIssuesIssue({ handleMenuFilter }) {
             });
         }
         else {
-            client.get('tab_issues/filter/project').then((project_data) => {
+            client.get('tab_releases/filter/project').then((project_data) => {
                 setState({
                     loading: false,
                     project_data: project_data,
@@ -168,7 +168,7 @@ export default function TriunghiMenuIssuesIssue({ handleMenuFilter }) {
                             alignItems="center"
                         >
                             <Box className={classes.filterText}>
-                                Issue's name
+                                Project's name
                             </Box>
                             <IconButton onClick={handleClose} style={{ marginLeft: 'auto' }}>
                                 <img src={x} alt='x' className={classes.x} />
@@ -178,7 +178,7 @@ export default function TriunghiMenuIssuesIssue({ handleMenuFilter }) {
                         <SearchStyle
                             value={filterName}
                             onChange={(e) => handleFilterByName(e)}
-                            placeholder="Filter issues"
+                            placeholder="Filter projects"
                         />
                         <Divider />
                     </Box >

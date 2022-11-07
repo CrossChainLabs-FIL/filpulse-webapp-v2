@@ -21,6 +21,7 @@ import WatchlistTable from './watchlistTable/WatchlistTable';
 import PRTable from './prTable/PRTable';
 import CommitsTable from './commitsTable/CommitsTable';
 import IssuesTable from './issuesTable/IssuesTable';
+import ReleasesTable from './releasesTable/ReleasesTable';
 import ContributorsTable from './contributorTable/ContributorsTable';
 
 
@@ -106,6 +107,15 @@ const useStyles = makeStyles(() => ({
         marginTop: '1em',
         paddingBottom: 0
     },
+    releasesTab: {
+        height: '3em',
+        minHeight: '3em',
+        minWidth: '3em',
+        width: '5em',
+        marginRight: '3em',
+        marginTop: '1em',
+        paddingBottom: 0
+    },
     commitsTab: {
         height: '3em',
         minHeight: '3em',
@@ -180,7 +190,7 @@ export default function TableApp() {
     const [isSearchEmpty, setIsSearchEmpty] = useState(true);
 
     const [state, setState] = useState({
-        loading: true, commits_data: [], contributors_data: [], pr_data: [], issues_data: []
+        loading: true, commits_data: [], contributors_data: [], pr_data: [], issues_data: [], releases_data: []
     });
 
 
@@ -224,7 +234,17 @@ export default function TableApp() {
 
 
     useEffect(() => {
-        applySortFilter(WATCHLISTDATA, getComparator(order, orderBy), filterName);
+        // applySortFilter(WATCHLISTDATA, getComparator(order, orderBy), filterName);
+        client.get('tab_prs').then((pr_data) => {
+            setState({
+                loading: false,
+                pr_data: pr_data,
+            });
+            setOrderBy('showId');
+            setOrder('desc');
+            setData(pr_data.list);
+        });
+
         setIsSearchEmpty(true);
 
         client.get('tab_commits').then((commits_data) => {
@@ -275,11 +295,6 @@ export default function TableApp() {
         // handleTop();
         switch (newValue) {
             case 0:
-                setOrderBy('showId');
-                setOrder('asc');
-                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
-                break;
-            case 1:
                 client.get('tab_prs').then((pr_data) => {
                     setState({
                         loading: false,
@@ -290,7 +305,7 @@ export default function TableApp() {
                     setData(pr_data.list);
                 });
                 break;
-            case 2:
+            case 1:
                 client.get('tab_issues').then((issues_data) => {
                     setState({
                         loading: false,
@@ -299,6 +314,17 @@ export default function TableApp() {
                     setOrderBy('showId');
                     setOrder('desc');
                     setData(issues_data.list);
+                });
+                break;
+            case 2:
+                client.get('tab_releases').then((releases_data) => {
+                    setState({
+                        loading: false,
+                        releases_data: releases_data,
+                    });
+                    setOrderBy('showId');
+                    setOrder('desc');
+                    setData(releases_data.list);
                 });
                 break;
             case 3:
@@ -323,6 +349,11 @@ export default function TableApp() {
                     setData(contributors_data.list);
                 });
                 break;
+            case 5:
+                setOrderBy('showId');
+                setOrder('asc');
+                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
+                break;
             default: console.log(newValue); break;
         }
     };
@@ -333,7 +364,7 @@ export default function TableApp() {
             loading: true
         });
         switch (value) {
-            case 1:
+            case 0:
                 if (order === 'asc') {
                     client.get(`tab_prs?sortBy=updated_at&sortType=desc`).then((pr_data) => {
                         setState({
@@ -355,7 +386,7 @@ export default function TableApp() {
                     });
                 }
                 break;
-            case 2:
+            case 1:
                 if (order === 'asc') {
                     client.get(`tab_issues?sortBy=updated_at&sortType=desc`).then((issues_data) => {
                         setState({
@@ -368,6 +399,28 @@ export default function TableApp() {
                 }
                 else {
                     client.get(`tab_issues?sortBy=updated_at&sortType=asc`).then((issues_data) => {
+                        setState({
+                            loading: false,
+                            issues_data: issues_data,
+                        });
+                        setData(issues_data.list);
+                        setOrder('asc');
+                    });
+                }
+                break;
+            case 2:
+                if (order === 'asc') {
+                    client.get(`tab_releases?sortBy=updated_at&sortType=desc`).then((issues_data) => {
+                        setState({
+                            loading: false,
+                            issues_data: issues_data,
+                        });
+                        setData(issues_data.list);
+                        setOrder('desc');
+                    });
+                }
+                else {
+                    client.get(`tab_releases?sortBy=updated_at&sortType=asc`).then((issues_data) => {
                         setState({
                             loading: false,
                             issues_data: issues_data,
@@ -410,11 +463,6 @@ export default function TableApp() {
         });
         switch (value) {
             case 0:
-                setOrderBy('showId');
-                setOrder('asc');
-                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
-                return;
-            case 1:
                 client.get(`tab_prs?${link_value}`).then((pr_data) => {
                     setState({
                         loading: false,
@@ -424,8 +472,18 @@ export default function TableApp() {
                     setFilterName("");
                 });
                 break;
-            case 2:
+            case 1:
                 client.get(`tab_issues?${link_value}`).then((issues_data) => {
+                    setState({
+                        loading: false,
+                        issues_data: issues_data,
+                    });
+                    setData(issues_data.list);
+                    setFilterName("");
+                });
+                break;
+            case 2:
+                client.get(`tab_releases?${link_value}`).then((issues_data) => {
                     setState({
                         loading: false,
                         issues_data: issues_data,
@@ -454,6 +512,11 @@ export default function TableApp() {
                     setFilterName("");
                 });
                 break;
+            case 5:
+                setOrderBy('showId');
+                setOrder('asc');
+                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
+                return;
             default: console.log(value); break;
         }
     }
@@ -465,12 +528,6 @@ export default function TableApp() {
         });
         switch (value) {
             case 0:
-                setOrderBy('showId');
-                setOrder('asc');
-                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
-                setFilterName("");
-                return;
-            case 1:
                 client.get('tab_prs').then((pr_data) => {
                     setState({
                         loading: false,
@@ -480,8 +537,18 @@ export default function TableApp() {
                     setFilterName("");
                 });
                 break;
-            case 2:
+            case 1:
                 client.get('tab_issues').then((issues_data) => {
+                    setState({
+                        loading: false,
+                        issues_data: issues_data,
+                    });
+                    setData(issues_data.list);
+                    setFilterName("");
+                });
+                break;
+            case 2:
+                client.get('tab_releases').then((issues_data) => {
                     setState({
                         loading: false,
                         issues_data: issues_data,
@@ -510,6 +577,12 @@ export default function TableApp() {
                     setFilterName("");
                 });
                 break;
+            case 5:
+                setOrderBy('showId');
+                setOrder('asc');
+                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
+                setFilterName("");
+                return;
             default: console.log(value); break;
         }
     }
@@ -520,27 +593,27 @@ export default function TableApp() {
                 case 0:
                     setOrderBy('showId');
                     setOrder('asc');
-                    applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
+                    applySortFilter(PRDATA, getComparator(order, "showId"), '');
                     break;
                 case 1:
                     setOrderBy('showId');
                     setOrder('asc');
-                    applySortFilter(PRDATA, getComparator(order, "showId"), '');
+                    applySortFilter(ISSUESDATA, getComparator(order, "showId"), '');
                     break;
                 case 2:
                     setOrderBy('showId');
                     setOrder('asc');
-                    applySortFilter(ISSUESDATA, getComparator(order, "showId"), '');
-                    break;
-                case 3:
-                    setOrderBy('showId');
-                    setOrder('asc');
                     applySortFilter(COMMITSDATA, getComparator(order, "showId"), '');
                     break;
-                case 4:
+                case 3:
                     setOrderBy('personName');
                     setOrder('asc');
                     applySortFilter(CONTRIBUTORSDATA, getComparator(order, 'personName'), '');
+                    break;
+                case 4:
+                    setOrderBy('showId');
+                    setOrder('asc');
+                    applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
                     break;
                 default: console.log(value); break;
             }
@@ -551,27 +624,27 @@ export default function TableApp() {
                 case 0:
                     setOrderBy(orderByNew);
                     setOrder(orderNew);
-                    applySortFilter(WATCHLISTDATA, getComparator(orderNew, orderByNew), '');
+                    applySortFilter(PRDATA, getComparator(orderNew, orderByNew), '');
                     break;
                 case 1:
                     setOrderBy(orderByNew);
                     setOrder(orderNew);
-                    applySortFilter(PRDATA, getComparator(orderNew, orderByNew), '');
+                    applySortFilter(ISSUESDATA, getComparator(orderNew, orderByNew), '');
                     break;
                 case 2:
                     setOrderBy(orderByNew);
                     setOrder(orderNew);
-                    applySortFilter(ISSUESDATA, getComparator(orderNew, orderByNew), '');
+                    applySortFilter(COMMITSDATA, getComparator(orderNew, orderByNew), '');
                     break;
                 case 3:
                     setOrderBy(orderByNew);
                     setOrder(orderNew);
-                    applySortFilter(COMMITSDATA, getComparator(orderNew, orderByNew), '');
+                    applySortFilter(CONTRIBUTORSDATA, getComparator(orderNew, orderByNew), '');
                     break;
                 case 4:
                     setOrderBy(orderByNew);
                     setOrder(orderNew);
-                    applySortFilter(CONTRIBUTORSDATA, getComparator(orderNew, orderByNew), '');
+                    applySortFilter(WATCHLISTDATA, getComparator(orderNew, orderByNew), '');
                     break;
                 default: console.log(value); break;
             }
@@ -589,8 +662,6 @@ export default function TableApp() {
             setIsSearchEmpty(false);
             switch (value) {
                 case 0:
-                    break;
-                case 1:
                     client.get(`tab_prs?search=${event.target.value}`).then((commits_data) => {
                         setState({
                             loading: false,
@@ -599,8 +670,17 @@ export default function TableApp() {
                         setData(commits_data.list);
                     });
                     break;
-                case 2:
+                case 1:
                     client.get(`tab_issues?search=${event.target.value}`).then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                    });
+                    break;
+                case 2:
+                    client.get(`tab_releases?search=${event.target.value}`).then((commits_data) => {
                         setState({
                             loading: false,
                             commits_data: commits_data,
@@ -626,6 +706,8 @@ export default function TableApp() {
                         setData(commits_data.list);
                     });
                     break;
+                case 5:
+                    break;
                 default: console.log("def"); break;
             }
 
@@ -640,9 +722,8 @@ export default function TableApp() {
         else {
             setIsSearchEmpty(true);
             switch (value) {
+
                 case 0:
-                    break;
-                case 1:
                     client.get('tab_prs').then((commits_data) => {
                         setState({
                             loading: false,
@@ -651,8 +732,17 @@ export default function TableApp() {
                         setData(commits_data.list);
                     });
                     break;
-                case 2:
+                case 1:
                     client.get('tab_issues').then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
+                    });
+                    break;
+                case 2:
+                    client.get('tab_releases').then((commits_data) => {
                         setState({
                             loading: false,
                             commits_data: commits_data,
@@ -677,6 +767,8 @@ export default function TableApp() {
                         });
                         setData(commits_data.list);
                     });
+                    break;
+                case 5:
                     break;
                 default: console.log("def"); break;
             }
@@ -703,20 +795,21 @@ export default function TableApp() {
                     value={value}
                     onChange={handleChange}
                     style={{
-                        marginLeft: "1.15em",
+                        marginLeft: "4.5em",
                         marginTop: 'auto'
                     }}
                 >
+                    <StyledTab label='PRs' classes={{ root: classes.prTab }} />
+                    <StyledTab label='Issues' classes={{ root: classes.issuesTab }} />
+                    <StyledTab label='Releases' classes={{ root: classes.releasesTab }} />
+                    <StyledTab label='Commits' classes={{ root: classes.commitsTab }} />
+                    <StyledTab label='Contributors' classes={{ root: classes.contributorsTab }} />
                     <StyledTab
                         icon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
                         iconPosition='start'
                         label='Watchlist'
                         classes={{ root: classes.watchlistTab }}
                     />
-                    <StyledTab label='PRs' classes={{ root: classes.prTab }} />
-                    <StyledTab label='Issues' classes={{ root: classes.issuesTab }} />
-                    <StyledTab label='Commits' classes={{ root: classes.commitsTab }} />
-                    <StyledTab label='Contributors' classes={{ root: classes.contributorsTab }} />
                 </StyledTabs>
                 <SearchStyle
                     style={{
@@ -736,18 +829,9 @@ export default function TableApp() {
                 />
             </Stack>
 
-            {value === 0 && (
-                <WatchlistTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    searchData={searchData}
-                    handleSortChange={handleSortChange}
-                    clearFilter={clearFilter}
-                />
-            )}
 
-            {value === 1 && (
+
+            {value === 0 && (
                 <PRTable
                     filterName={filterName}
                     isSearchEmpty={isSearchEmpty}
@@ -760,8 +844,21 @@ export default function TableApp() {
                 />
             )}
 
-            {value === 2 && (
+            {value === 1 && (
                 <IssuesTable
+                    filterName={filterName}
+                    isSearchEmpty={isSearchEmpty}
+                    data={data}
+                    state={state}
+                    // searchData={searchData}
+                    handleMenuFilter={handleMenuFilter}
+                    handleSortChange={handleSort}
+                    clearFilter={clearFilter}
+                />
+            )}
+
+            {value === 2 && (
+                <ReleasesTable
                     filterName={filterName}
                     isSearchEmpty={isSearchEmpty}
                     data={data}
@@ -798,6 +895,17 @@ export default function TableApp() {
                     clearFilter={clearFilter}
                 />
             }
+
+            {value === 5 && (
+                <WatchlistTable
+                    filterName={filterName}
+                    isSearchEmpty={isSearchEmpty}
+                    data={data}
+                    searchData={searchData}
+                    handleSortChange={handleSortChange}
+                    clearFilter={clearFilter}
+                />
+            )}
 
         </Paper>
     );
