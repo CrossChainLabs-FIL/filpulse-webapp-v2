@@ -17,4 +17,14 @@ export class Client {
 
     return response.data;
   }
+
+  async post(endpoint, data) {
+    const response = await axios.post(this.api + endpoint, data);
+
+    if (!response || response.status !== 200) {
+      return undefined;
+    }
+
+    return response.data;
+  }
 }

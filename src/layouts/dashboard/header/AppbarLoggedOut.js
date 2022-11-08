@@ -18,6 +18,12 @@ import account from "../../../assets/account.svg";
 
 // import Login from "../../../components/Login"
 
+
+import { Client } from '../../../utils/client';
+
+const client = new Client();
+
+
 const BG_COLOR = '#ffffff';
 
 const HEIGHT = 92;
@@ -97,26 +103,19 @@ export default function AppbarLoggedOut() {
                 code: newUrl[1]
             };
 
-            const proxy_url = state.proxy_url;
-
-            // Use code parameter and other parameters to make POST request to proxy_server
-            fetch(proxy_url, {
-                method: "POST",
-                body: JSON.stringify(requestData)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    dispatch({
-                        type: "LOGIN",
-                        payload: { user: data, isLoggedIn: true }
-                    });
-                })
-                .catch(error => {
-                    setData({
-                        isLoading: false,
-                        errorMessage: "Sorry! Login failed"
-                    });
+            client.post('authenticate', requestData).then(response => {
+                console.log(response);
+                dispatch({
+                    type: "LOGIN",
+                    payload: { user: response, isLoggedIn: true }
                 });
+            })
+            .catch(error => {
+                setData({
+                    isLoading: false,
+                    errorMessage: "Sorry! Login failed"
+                });
+            });
         }
     }, [state, dispatch, data]);
 
