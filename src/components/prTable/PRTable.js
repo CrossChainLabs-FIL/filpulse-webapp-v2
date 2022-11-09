@@ -55,7 +55,8 @@ export default function PRTable({
     handleMenuFilter,
     // searchData,
     handleSortChange,
-    clearFilter
+    clearFilter,
+    globalFilter
 }) {
 
     const classes = useStyles();
@@ -82,6 +83,7 @@ export default function PRTable({
                         handleSortChange={handleSortChange}
                         handleMenuFilter={handleMenuFilter}
                         clearFilterFunction={clearFilter}
+                        globalFilter={globalFilter}
                     />
 
                     {state.loading && (

@@ -52,7 +52,8 @@ export default function PRHead({
     data,
     handleSortChange,
     handleMenuFilter,
-    clearFilterFunction
+    clearFilterFunction,
+    globalFilter
 }) {
 
     const classes = useStyles();
@@ -116,15 +117,12 @@ export default function PRHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuPrContributor handleMenuFilter={handleMenuFilter} />
+                        <TriunghiMenuPrContributor
+                            handleMenuFilter={handleMenuFilter}
+                            globalFilter={globalFilter}
+                            clearFilterFunction={clearFilterFunction}
+                        />
 
-                        <IconButton
-                            id="basic-button"
-                            onClick={clearFilterFunction}
-                            style={{ padding: 0, marginLeft: '0.25em' }}
-                        >
-                            <img src={clearFilter} alt='clear' />
-                        </IconButton>
                     </Stack>
                 </TableCell>
 

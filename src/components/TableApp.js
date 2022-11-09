@@ -523,21 +523,45 @@ export default function TableApp() {
         }
     }
 
-    const clearFilter = () => {
+    const clearFilter = (toBeCleared, last) => {
         setData([]);
         setState({
             loading: true
         });
         switch (value) {
             case 0:
-                client.get('tab_prs').then((pr_data) => {
-                    setState({
-                        loading: false,
-                        pr_data: pr_data,
+                if (filterLink.match('&' + toBeCleared + last) === null) {
+                    if (filterLink.match(toBeCleared + last + '&') === null) {
+                        client.get('tab_prs').then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setFilterLink('');
+                            setData(pr_data.list);
+                        });
+                    }
+                    else {
+                        client.get('tab_prs' + filterLink.replace(toBeCleared + last + '&', '')).then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setFilterLink(filterLink.replace(toBeCleared + last + '&', ''));
+                            setData(pr_data.list);
+                        });
+                    }
+                } else {
+                    client.get('tab_prs' + filterLink.replace('&' + toBeCleared + last, '')).then((pr_data) => {
+                        setState({
+                            loading: false,
+                            pr_data: pr_data,
+                        });
+                        setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
+                        setData(pr_data.list);
                     });
-                    setData(pr_data.list);
-                    setFilterName("");
-                });
+                }
+
                 break;
             case 1:
                 client.get('tab_issues').then((issues_data) => {
@@ -589,58 +613,43 @@ export default function TableApp() {
         }
     }
 
-    const globalFilter = (addonValue, oldFilterName) => {
+    const globalFilter = (addonValue, last) => {
         setData([]);
         setState({
             loading: true
         });
         switch (value) {
             case 0:
-                if (addonValue === '') {
-                    console.log('checkGol', filterLink);
-                    client.get('tab_prs' + filterLink).then((pr_data) => {
-                        setState({
-                            loading: false,
-                            pr_data: pr_data,
-                        });
-                        setData(pr_data.list);
-                    });
-                    break;
-                }
                 if (filterLink === '') {
-                    setFilterLink('?' + addonValue);
                     client.get('tab_prs' + '?' + addonValue).then((pr_data) => {
                         setState({
                             loading: false,
                             pr_data: pr_data,
                         });
+                        setFilterLink('?' + addonValue);
                         setData(pr_data.list);
                     });
                 }
                 else {
-                    if (!isSearchEmpty && addonValue.match(`search=${oldFilterName}`)[0] === `search=${oldFilterName}`) {
-                        // console.log(filterLink);
-                        let aux = filterLink;
-                        aux.replace(`search=${oldFilterName}`, addonValue);
-                        setFilterLink(aux);
-                        // console.log(addonValue, ' ', filterName, ' ', oldFilterName, aux);
-                        client.get('tab_prs' + aux).then((pr_data) => {
+                    if (filterLink.match("contributor=") === null) {
+                        client.get('tab_prs' + filterLink + '&' + addonValue).then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
+                            setFilterLink(filterLink + '&' + addonValue);
                             setData(pr_data.list);
                         });
-                        break;
-                    }
-                    setFilterLink(filterLink + '&' + addonValue);
-                    client.get('tab_prs' + filterLink + '&' + addonValue).then((pr_data) => {
-                        setState({
-                            loading: false,
-                            pr_data: pr_data,
+                    } else if (last !== '') {
+                        client.get('tab_prs' + filterLink.replace(`contributor=${last}`, addonValue)).then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setFilterLink(filterLink.replace(`contributor=${last}`, addonValue));
+                            setData(pr_data.list);
                         });
-                        setData(pr_data.list);
-                    });
+                    }
                 }
                 break;
             case 1:
@@ -759,21 +768,49 @@ export default function TableApp() {
     }
 
     const handleFilterByName = (event) => {
+        setData([]);
+        setState({
+            loading: true
+        });
+        console.log(filterLink);
         if (event.target.value !== '') {
             setIsSearchEmpty(false);
-            const aux = filterName;
-            setFilterName(event.target.value);
+
             // console.log(event.target.value, ' ', filterName, ' ', aux);
-            globalFilter(`search=${event.target.value}`, aux);
-            /*switch (value) {
+            // globalFilter(`search=${event.target.value}`, aux);
+            switch (value) {
                 case 0:
-                    client.get(`tab_prs?search=${event.target.value}`).then((commits_data) => {
-                        setState({
-                            loading: false,
-                            commits_data: commits_data,
+                    if (filterLink === '') {
+                        client.get('tab_prs' + '?' + `search=${event.target.value}`).then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setFilterLink('?' + `search=${event.target.value}`);
+                            setData(pr_data.list);
                         });
-                        setData(commits_data.list);
-                    });
+                    }
+                    else {
+                        if (!isSearchEmpty) {
+                            client.get('tab_prs' + filterLink.replace(`search=${filterName}`, `search=${event.target.value}`)).then((pr_data) => {
+                                setState({
+                                    loading: false,
+                                    pr_data: pr_data,
+                                });
+                                setFilterLink(filterLink.replace(`search=${filterName}`, `search=${event.target.value}`));
+                                setData(pr_data.list);
+                            });
+                            break;
+                        }
+                        client.get('tab_prs' + filterLink + '&' + `search=${event.target.value}`).then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setFilterLink(filterLink + '&' + `search=${event.target.value}`);
+                            setData(pr_data.list);
+                        });
+                    }
                     break;
                 case 1:
                     client.get(`tab_issues?search=${event.target.value}`).then((commits_data) => {
@@ -814,7 +851,7 @@ export default function TableApp() {
                 case 5:
                     break;
                 default: console.log("def"); break;
-            }*/
+            }
 
             // let commits_data = await client.get(`tab_commits?search=${event.target.value}`);
             // setState({
@@ -826,27 +863,26 @@ export default function TableApp() {
         }
         else {
             setIsSearchEmpty(true);
-            setFilterName(event.target.value);
-            let aux = 'a' + filterLink;
-            console.log(aux, aux.match("a?search=")[0]);
-            if (aux.match("a&search=") !== null && aux.match("a&search=")[0] === "a&search=") {
-                aux = aux.replace('a&search=', '');
+            let aux = filterLink;
+            if (aux.match("&search=") !== null) {
+                aux = aux.replace(`&search=${filterName}`, '');
+            } else {
+                aux = aux.replace(`?search=${filterName}`, '');
             }
-            if (aux.match("a?search=") !== null && aux.match("a?search=")[0] === "a?search=") {
-                console.log('checkaux')
-                aux = aux.replace('a?search=', '');
-            }
+
             console.log(aux);
-            setFilterLink(aux);
-            globalFilter('');
-            /*switch (value) {
+            // globalFilter('', aux);
+            switch (value) {
                 case 0:
-                    client.get('tab_prs').then((commits_data) => {
+                    console.log('checkGol', filterLink, filterName, isSearchEmpty);
+                    client.get('tab_prs' + aux).then((pr_data) => {
                         setState({
                             loading: false,
-                            commits_data: commits_data,
+                            pr_data: pr_data,
                         });
-                        setData(commits_data.list);
+                        setFilterLink(aux);
+                        setData(pr_data.list);
+
                     });
                     break;
                 case 1:
@@ -888,7 +924,7 @@ export default function TableApp() {
                 case 5:
                     break;
                 default: console.log("def"); break;
-            }*/
+            }
 
             // let commits_data = await client.get(`tab_commits`);
             // setState({
@@ -897,6 +933,7 @@ export default function TableApp() {
             // });
             // setData(commits_data.list);
         }
+        setFilterName(event.target.value);
     };
 
     return (
@@ -957,6 +994,7 @@ export default function TableApp() {
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
                     clearFilter={clearFilter}
+                    globalFilter={globalFilter}
                 />
             )}
 

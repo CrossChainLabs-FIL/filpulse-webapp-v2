@@ -24,6 +24,7 @@ import { Client } from '../../../utils/client';
 // assets
 import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
+import clearFilter from '../../../assets/clearFilter.svg';
 
 const client = new Client();
 
@@ -76,13 +77,15 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuPrContributor({ handleMenuFilter }) {
+export default function TriunghiMenuPrContributor({ handleMenuFilter, globalFilter, clearFilterFunction }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
     const [state, setState] = useState({
         loading: true
     });
+    const [isSorted, setIsSorted] = useState(false);
+    const [last, setLast] = useState('');
     const open = Boolean(anchorEl);
 
 
@@ -102,12 +105,14 @@ export default function TriunghiMenuPrContributor({ handleMenuFilter }) {
 
     function handleFilterClose(contributor) {
         handleClose();
-        handleMenuFilter(`contributor=${contributor}`);
+        setIsSorted(true);
+        setLast(contributor);
+        globalFilter(`contributor=${contributor}`, last);
     }
 
     const handleFilterByName = (event) => {
         if (event.target.value) {
-            client.get(`tab_commits/filter/contributor?search=${event.target.value}`).then((contributor_data) => {
+            client.get(`tab_prs/filter/contributor?search=${event.target.value}`).then((contributor_data) => {
                 setState({
                     loading: false,
                     contributor_data: contributor_data,
@@ -115,7 +120,7 @@ export default function TriunghiMenuPrContributor({ handleMenuFilter }) {
             });
         }
         else {
-            client.get('tab_commits/filter/contributor').then((contributor_data) => {
+            client.get('tab_prs/filter/contributor').then((contributor_data) => {
                 setState({
                     loading: false,
                     contributor_data: contributor_data,
@@ -139,6 +144,15 @@ export default function TriunghiMenuPrContributor({ handleMenuFilter }) {
             >
                 <img src={triunghi} alt='triunghi' className={classes.triunghi} />
             </IconButton>
+            {isSorted ?
+                <IconButton
+                    id="basic-button"
+                    onClick={() => { setIsSorted(false); setLast(''); clearFilterFunction('contributor=', last); }}
+                    style={{ padding: 0, marginLeft: '0.25em' }}
+                >
+                    <img src={clearFilter} alt='clear' />
+                </IconButton> : ''
+            }
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
