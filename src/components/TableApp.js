@@ -369,24 +369,24 @@ export default function TableApp() {
             case 0:
                 if (filterLink === '') {
                     if (order === 'asc') {
+                        setFilterLink('');
                         client.get('tab_prs').then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
                             setOrder('desc');
-                            setFilterLink('');
                             setData(pr_data.list);
                         });
                     }
                     else {
+                        setFilterLink('?' + `sortBy=updated_at&sortType=asc`);
                         client.get('tab_prs' + '?' + `sortBy=updated_at&sortType=asc`).then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
                             setOrder('asc');
-                            setFilterLink('?' + `sortBy=updated_at&sortType=asc`);
                             setData(pr_data.list);
                         });
                     }
@@ -395,46 +395,46 @@ export default function TableApp() {
                     if (order === 'asc') {
                         if (filterLink.match(`&sortBy=updated_at&sortType=asc`) === null) {
                             if (filterLink.match(`sortBy=updated_at&sortType=asc&`) === null) {
+                                setFilterLink('');
                                 client.get('tab_prs').then((pr_data) => {
                                     setState({
                                         loading: false,
                                         pr_data: pr_data,
                                     });
                                     setOrder('desc');
-                                    setFilterLink('');
                                     setData(pr_data.list);
                                 });
                             } else {
+                                setFilterLink(filterLink.replace(`sortBy=updated_at&sortType=asc&`, ''));
                                 client.get('tab_prs' + filterLink.replace(`sortBy=updated_at&sortType=asc&`, '')).then((pr_data) => {
                                     setState({
                                         loading: false,
                                         pr_data: pr_data,
                                     });
                                     setOrder('desc');
-                                    setFilterLink(filterLink.replace(`sortBy=updated_at&sortType=asc&`, ''));
                                     setData(pr_data.list);
                                 });
                             }
                         } else {
+                            setFilterLink(filterLink.replace(`&sortBy=updated_at&sortType=asc`, ''));
                             client.get('tab_prs' + filterLink.replace(`&sortBy=updated_at&sortType=asc`, '')).then((pr_data) => {
                                 setState({
                                     loading: false,
                                     pr_data: pr_data,
                                 });
                                 setOrder('desc');
-                                setFilterLink(filterLink.replace(`&sortBy=updated_at&sortType=asc`, ''));
                                 setData(pr_data.list);
                             });
                         }
                     }
                     else {
+                        setFilterLink(filterLink + `&sortBy=updated_at&sortType=asc`);
                         client.get('tab_prs' + filterLink + `&sortBy=updated_at&sortType=asc`).then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
                             setOrder('asc');
-                            setFilterLink(filterLink + `&sortBy=updated_at&sortType=asc`);
                             setData(pr_data.list);
                         });
                     }
@@ -584,36 +584,35 @@ export default function TableApp() {
             case 0:
                 if (filterLink.match('&' + toBeCleared + last) === null) {
                     if (filterLink.match(toBeCleared + last + '&') === null) {
+                        setFilterLink('');
                         client.get('tab_prs').then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
-                            setFilterLink('');
                             setData(pr_data.list);
                         });
                     }
                     else {
+                        setFilterLink(filterLink.replace(toBeCleared + last + '&', ''));
                         client.get('tab_prs' + filterLink.replace(toBeCleared + last + '&', '')).then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
-                            setFilterLink(filterLink.replace(toBeCleared + last + '&', ''));
                             setData(pr_data.list);
                         });
                     }
                 } else {
+                    setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
                     client.get('tab_prs' + filterLink.replace('&' + toBeCleared + last, '')).then((pr_data) => {
                         setState({
                             loading: false,
                             pr_data: pr_data,
                         });
-                        setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
                         setData(pr_data.list);
                     });
                 }
-
                 break;
             case 1:
                 client.get('tab_issues').then((issues_data) => {
@@ -673,32 +672,32 @@ export default function TableApp() {
         switch (value) {
             case 0:
                 if (filterLink === '') {
+                    setFilterLink('?' + addonValue);
                     client.get('tab_prs' + '?' + addonValue).then((pr_data) => {
                         setState({
                             loading: false,
                             pr_data: pr_data,
                         });
-                        setFilterLink('?' + addonValue);
                         setData(pr_data.list);
                     });
                 }
                 else {
                     if (filterLink.match(filterType) === null) {
+                        setFilterLink(filterLink + '&' + addonValue);
                         client.get('tab_prs' + filterLink + '&' + addonValue).then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
-                            setFilterLink(filterLink + '&' + addonValue);
                             setData(pr_data.list);
                         });
                     } else if (last !== '') {
+                        setFilterLink(filterLink.replace(filterType + last, addonValue));
                         client.get('tab_prs' + filterLink.replace(filterType + last, addonValue)).then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
-                            setFilterLink(filterLink.replace(filterType + last, addonValue));
                             setData(pr_data.list);
                         });
                     }
@@ -824,7 +823,6 @@ export default function TableApp() {
         setState({
             loading: true
         });
-        console.log(filterLink);
         if (event.target.value !== '') {
             setIsSearchEmpty(false);
 
@@ -833,33 +831,33 @@ export default function TableApp() {
             switch (value) {
                 case 0:
                     if (filterLink === '') {
+                        setFilterLink('?' + `search=${event.target.value}`);
                         client.get('tab_prs' + '?' + `search=${event.target.value}`).then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
-                            setFilterLink('?' + `search=${event.target.value}`);
                             setData(pr_data.list);
                         });
                     }
                     else {
                         if (!isSearchEmpty) {
+                            setFilterLink(filterLink.replace(`search=${filterName}`, `search=${event.target.value}`));
                             client.get('tab_prs' + filterLink.replace(`search=${filterName}`, `search=${event.target.value}`)).then((pr_data) => {
                                 setState({
                                     loading: false,
                                     pr_data: pr_data,
                                 });
-                                setFilterLink(filterLink.replace(`search=${filterName}`, `search=${event.target.value}`));
                                 setData(pr_data.list);
                             });
                             break;
                         }
+                        setFilterLink(filterLink + '&' + `search=${event.target.value}`);
                         client.get('tab_prs' + filterLink + '&' + `search=${event.target.value}`).then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
-                            setFilterLink(filterLink + '&' + `search=${event.target.value}`);
                             setData(pr_data.list);
                         });
                     }
