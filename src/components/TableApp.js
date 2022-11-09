@@ -173,7 +173,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 
 export default function TableApp() {
 
-    const [order, setOrder] = useState('asc');
+    const [order, setOrder] = useState('desc');
 
     const [orderBy, setOrderBy] = useState('showId');
 
@@ -367,25 +367,77 @@ export default function TableApp() {
         });
         switch (value) {
             case 0:
-                if (order === 'asc') {
-                    client.get(`tab_prs?sortBy=updated_at&sortType=desc`).then((pr_data) => {
-                        setState({
-                            loading: false,
-                            pr_data: pr_data,
+                if (filterLink === '') {
+                    if (order === 'asc') {
+                        client.get('tab_prs').then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setOrder('desc');
+                            setFilterLink('');
+                            setData(pr_data.list);
                         });
-                        setData(pr_data.list);
-                        setOrder('desc');
-                    });
+                    }
+                    else {
+                        client.get('tab_prs' + '?' + `sortBy=updated_at&sortType=asc`).then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setOrder('asc');
+                            setFilterLink('?' + `sortBy=updated_at&sortType=asc`);
+                            setData(pr_data.list);
+                        });
+                    }
                 }
                 else {
-                    client.get(`tab_prs?sortBy=updated_at&sortType=asc`).then((pr_data) => {
-                        setState({
-                            loading: false,
-                            pr_data: pr_data,
+                    if (order === 'asc') {
+                        if (filterLink.match(`&sortBy=updated_at&sortType=asc`) === null) {
+                            if (filterLink.match(`sortBy=updated_at&sortType=asc&`) === null) {
+                                client.get('tab_prs').then((pr_data) => {
+                                    setState({
+                                        loading: false,
+                                        pr_data: pr_data,
+                                    });
+                                    setOrder('desc');
+                                    setFilterLink('');
+                                    setData(pr_data.list);
+                                });
+                            } else {
+                                client.get('tab_prs' + filterLink.replace(`sortBy=updated_at&sortType=asc&`, '')).then((pr_data) => {
+                                    setState({
+                                        loading: false,
+                                        pr_data: pr_data,
+                                    });
+                                    setOrder('desc');
+                                    setFilterLink(filterLink.replace(`sortBy=updated_at&sortType=asc&`, ''));
+                                    setData(pr_data.list);
+                                });
+                            }
+                        } else {
+                            client.get('tab_prs' + filterLink.replace(`&sortBy=updated_at&sortType=asc`, '')).then((pr_data) => {
+                                setState({
+                                    loading: false,
+                                    pr_data: pr_data,
+                                });
+                                setOrder('desc');
+                                setFilterLink(filterLink.replace(`&sortBy=updated_at&sortType=asc`, ''));
+                                setData(pr_data.list);
+                            });
+                        }
+                    }
+                    else {
+                        client.get('tab_prs' + filterLink + `&sortBy=updated_at&sortType=asc`).then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setOrder('asc');
+                            setFilterLink(filterLink + `&sortBy=updated_at&sortType=asc`);
+                            setData(pr_data.list);
                         });
-                        setData(pr_data.list);
-                        setOrder('asc');
-                    });
+                    }
                 }
                 break;
             case 1:
