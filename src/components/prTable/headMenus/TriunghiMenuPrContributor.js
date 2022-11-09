@@ -107,7 +107,7 @@ export default function TriunghiMenuPrContributor({ handleMenuFilter, globalFilt
         handleClose();
         setIsSorted(true);
         setLast(contributor);
-        globalFilter(`contributor=${contributor}`, last);
+        globalFilter(`contributor=${contributor}`, 'contributor=', last);
     }
 
     const handleFilterByName = (event) => {

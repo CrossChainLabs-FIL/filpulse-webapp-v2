@@ -613,7 +613,7 @@ export default function TableApp() {
         }
     }
 
-    const globalFilter = (addonValue, last) => {
+    const globalFilter = (addonValue, filterType, last) => {
         setData([]);
         setState({
             loading: true
@@ -631,7 +631,7 @@ export default function TableApp() {
                     });
                 }
                 else {
-                    if (filterLink.match("contributor=") === null) {
+                    if (filterLink.match(filterType) === null) {
                         client.get('tab_prs' + filterLink + '&' + addonValue).then((pr_data) => {
                             setState({
                                 loading: false,
@@ -641,12 +641,12 @@ export default function TableApp() {
                             setData(pr_data.list);
                         });
                     } else if (last !== '') {
-                        client.get('tab_prs' + filterLink.replace(`contributor=${last}`, addonValue)).then((pr_data) => {
+                        client.get('tab_prs' + filterLink.replace(filterType + last, addonValue)).then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
-                            setFilterLink(filterLink.replace(`contributor=${last}`, addonValue));
+                            setFilterLink(filterLink.replace(filterType + last, addonValue));
                             setData(pr_data.list);
                         });
                     }
