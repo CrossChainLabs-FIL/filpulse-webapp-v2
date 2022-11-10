@@ -193,7 +193,7 @@ export default function TableApp() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     const [state, setState] = useState({
-        loading: true, commits_data: [], contributors_data: [], pr_data: [], issues_data: [], releases_data: []
+        loading: true, commits_data: [], contributors_data: [], pr_data: [], issues_data: [], releases_data: [], watchlist_data: []
     });
 
 
@@ -353,10 +353,15 @@ export default function TableApp() {
                 });
                 break;
             case 5:
-                setOrderBy('showId');
-                setOrder('asc');
-                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
-                break;
+                const user = JSON.parse(localStorage.getItem("user"));
+                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
+                        setState({
+                            loading: false,
+                            watchlist_data: watchlist_data,
+                        });
+                        setData(watchlist_data.list);
+                    });
+                    break;
             default: console.log(newValue); break;
         }
     };
@@ -620,10 +625,15 @@ export default function TableApp() {
                 });
                 break;
             case 5:
-                setOrderBy('showId');
-                setOrder('asc');
-                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
-                return;
+                const user = JSON.parse(localStorage.getItem("user"));
+                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
+                        setState({
+                            loading: false,
+                            watchlist_data: watchlist_data,
+                        });
+                        setData(watchlist_data.list);
+                    });
+                    break;
             default: console.log(value); break;
         }
     }
@@ -731,11 +741,15 @@ export default function TableApp() {
                 });
                 break;
             case 5:
-                setOrderBy('showId');
-                setOrder('asc');
-                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
-                setFilterName("");
-                return;
+                const user = JSON.parse(localStorage.getItem("user"));
+                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
+                        setState({
+                            loading: false,
+                            watchlist_data: watchlist_data,
+                        });
+                        setData(watchlist_data.list);
+                    });
+                    break;
             default: console.log(value); break;
         }
     }
@@ -843,11 +857,15 @@ export default function TableApp() {
                 });
                 break;
             case 5:
-                setOrderBy('showId');
-                setOrder('asc');
-                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
-                setFilterName("");
-                return;
+                const user = JSON.parse(localStorage.getItem("user"));
+                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
+                        setState({
+                            loading: false,
+                            watchlist_data: watchlist_data,
+                        });
+                        setData(watchlist_data.list);
+                    });
+                    break;
             default: console.log(value); break;
         }
     }
@@ -1019,6 +1037,14 @@ export default function TableApp() {
                     });
                     break;
                 case 5:
+                    const user = JSON.parse(localStorage.getItem("user"));
+                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
+                        setState({
+                            loading: false,
+                            watchlist_data: watchlist_data,
+                        });
+                        setData(watchlist_data.list);
+                    });
                     break;
                 default: console.log("def"); break;
             }
@@ -1088,6 +1114,14 @@ export default function TableApp() {
                     });
                     break;
                 case 5:
+                    const user = JSON.parse(localStorage.getItem("user"));
+                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
+                        setState({
+                            loading: false,
+                            watchlist_data: watchlist_data,
+                        });
+                        setData(watchlist_data.list);
+                    });
                     break;
                 default: console.log("def"); break;
             }

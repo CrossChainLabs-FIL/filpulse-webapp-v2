@@ -70,6 +70,8 @@ export default function WatchlistTable({
 
     const showData = isSearchEmpty ? data : searchData;
 
+    console.log(data);
+
     return (
         <>
             <TableContainer
