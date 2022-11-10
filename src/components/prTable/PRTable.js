@@ -140,7 +140,7 @@ export default function PRTable({
                                                     color="inherit"
                                                     underline="none"
                                                 >
-                                                    {`#${number}`}
+                                                    {number}
                                                 </Link>
                                             </Typography>
                                         </TableCell>

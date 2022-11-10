@@ -77,14 +77,15 @@ export default function IssuesTable({
     // const showData = isSearchEmpty ? data : searchData;
 
     const starOnChange = (e) => {
-        let data = {
-            issue_number: e.target.id,
+        let index = e.target.id;
+        let params = {
+            number: data[index].number,
+            repo: data[index].repo,
+            organisation: data[index].organisation,
             follow: e.target.checked,
         }
 
-        console.log(data);
-
-        client.post_with_token('issues/follow', data, user.token);
+        client.post_with_token('issues/follow', params, user.token);
     }
 
     return (
@@ -117,7 +118,7 @@ export default function IssuesTable({
                     )}
                     {!state.loading && (
                         <TableBody>
-                            {data.map((row) => {
+                            {data.map((row, index) => {
                                 const id = faker.datatype.uuid();
                                 const {
                                     assignees,
@@ -138,7 +139,8 @@ export default function IssuesTable({
                                     >
                                         <TableCell padding="checkbox">
                                             <Checkbox
-                                                id={number}
+                                                id={index}
+                                                repo={repo}
                                                 icon={<img src={steaGol} alt='steaGol' />}
                                                 checkedIcon={<img src={steaPlin} alt='steaPlin' />}
                                                 onChange={(e) => starOnChange(e)}
