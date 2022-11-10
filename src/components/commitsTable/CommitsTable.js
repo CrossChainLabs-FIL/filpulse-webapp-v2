@@ -121,6 +121,7 @@ export default function CommitsTable({
                                                     rel="noopener"
                                                     href={"https://github.com/" + organisation + "/" + repo + "/commit/" + commit_hash}
                                                     color="inherit"
+                                                    underline="none"
                                                 >
                                                     {commit_hash?.substring(0, 7)}
                                                 </Link>
@@ -136,10 +137,6 @@ export default function CommitsTable({
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                style={{
-                                                    lineHeight: '1.1em',
-                                                    marginTop: '0.45em'
-                                                }}
                                                 className={classes.projectElipsis}
                                             >
                                                 {message?.substring(0, 50)}
@@ -155,17 +152,15 @@ export default function CommitsTable({
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                style={{
-                                                    lineHeight: '1.1em',
-                                                    marginTop: '0.45em'
-                                                }}
                                                 className={classes.projectElipsis}
+                                                color='#65898F'
                                             >
                                                 <Link
                                                     target="_blank"
                                                     rel="noopener"
                                                     href={"https://github.com/" + organisation + "/" + repo}
                                                     color="inherit"
+                                                    underline="none"
                                                 >
                                                     {organisation + '/' + repo}
                                                 </Link>
@@ -198,6 +193,7 @@ export default function CommitsTable({
                                                         rel="noopener"
                                                         href={"https://github.com/" + dev_name}
                                                         color="inherit"
+                                                        underline="none"
                                                     >
                                                         {dev_name}
                                                     </Link>

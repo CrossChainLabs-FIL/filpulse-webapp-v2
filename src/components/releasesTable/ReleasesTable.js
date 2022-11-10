@@ -166,7 +166,15 @@ export default function ReleasesTable({
                                                 noWrap
                                                 className={classes.projectElipsis}
                                             >
-                                                {organisation + '/' + repo}
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={"https://github.com/" + organisation + "/" + repo}
+                                                    color="inherit"
+                                                    underline="none"
+                                                >
+                                                    {organisation + '/' + repo}
+                                                </Link>
                                             </Typography>
                                         </TableCell>
 
@@ -195,6 +203,7 @@ export default function ReleasesTable({
                                                         rel="noopener"
                                                         href={"https://github.com/" + dev_name}
                                                         color="inherit"
+                                                        underline="none"
                                                     >
                                                         {dev_name}
                                                     </Link>

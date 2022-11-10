@@ -32,16 +32,19 @@ const useStyles = makeStyles(() => ({
         height: '4em',
     },
     id: {
-        width: '10em'
+        width: '5.5em'
     },
     pr: {
-        width: '32em'
+        width: '34em'
+    },
+    project: {
+        width: '18em'
     },
     contributor: {
-        width: '22em'
+        width: '15em'
     },
     status: {
-        width: '15em'
+        width: '10em'
     }
 }));
 
@@ -102,6 +105,32 @@ export default function PRHead({
                     >
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             PR
+                        </Typography>
+
+                        {/* <TriunghiMenuPrPr handleMenuFilter={handleMenuFilter} /> */}
+                        <IconButton
+                            id="basic-button"
+                            // onClick={(e) => handleSortChange()}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
+                    </Stack>
+                </TableCell>
+
+                <TableCell
+                    align="left"
+                    component="th"
+                    scope="row"
+                    padding="none"
+                    className={classes.project}
+                >
+                    <Stack
+                        direction="row"
+                        alignItems="center"
+                    >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            Project
                         </Typography>
 
                         {/* <TriunghiMenuPrPr handleMenuFilter={handleMenuFilter} /> */}

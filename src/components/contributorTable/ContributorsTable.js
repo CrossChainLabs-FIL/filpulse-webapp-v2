@@ -151,6 +151,7 @@ export default function ContributorsTable({
                                                         rel="noopener"
                                                         href={"https://github.com/" + dev_name}
                                                         color="inherit"
+                                                        underline="none"
                                                     >
                                                         {dev_name}
                                                     </Link>
@@ -175,6 +176,7 @@ export default function ContributorsTable({
                                                     rel="noopener"
                                                     href={"https://github.com/" + organisation + "/" + repo}
                                                     color="inherit"
+                                                    underline="none"
                                                 >
                                                     {organisation + '/' + repo}
                                                 </Link>

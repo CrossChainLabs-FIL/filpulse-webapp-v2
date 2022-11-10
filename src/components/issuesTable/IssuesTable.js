@@ -164,6 +164,7 @@ export default function IssuesTable({
                                                     rel="noopener"
                                                     href={html_url}
                                                     color="inherit"
+                                                    underline="none"
                                                 >
                                                     {`#${number}`}
                                                 </Link>
@@ -202,6 +203,7 @@ export default function IssuesTable({
                                                     rel="noopener"
                                                     href={"https://github.com/" + organisation + "/" + repo}
                                                     color="inherit"
+                                                    underline="none"
                                                 >
                                                     {organisation + '/' + repo}
                                                 </Link>
@@ -232,6 +234,7 @@ export default function IssuesTable({
                                                         rel="noopener"
                                                         href={"https://github.com/" + dev_name}
                                                         color="inherit"
+                                                        underline="none"
                                                     >
                                                         {dev_name}
                                                     </Link>

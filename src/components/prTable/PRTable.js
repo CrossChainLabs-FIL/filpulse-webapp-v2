@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
         marginLeft: "0.15em"
     },
     projectElipsis: {
-        maxWidth: "25em",
+        maxWidth: "32em",
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
@@ -151,37 +151,37 @@ export default function PRTable({
                                             scope="row"
                                             padding="none"
                                         >
-                                            <CardHeader
-                                                style={{ background: "transparent" }}
-                                                sx={{
-                                                    boxShadow: 0,
-                                                    padding: 0,
-                                                }}
-                                                title={
-                                                    <Typography
-                                                        variant="subtitle2"
-                                                        noWrap
-                                                        style={{
-                                                            lineHeight: '1em',
-                                                            marginTop: '0.45em'
-                                                        }}
-                                                        className={classes.projectElipsis}
-                                                    >
-                                                        {title}
-                                                    </Typography>
-                                                }
-                                                subheader={
-                                                    <Link
-                                                        target="_blank"
-                                                        rel="noopener"
-                                                        href={"https://github.com/" + organisation + "/" + repo}
-                                                        color="inherit"
-                                                    >
-                                                        {organisation + '/' + repo}
-                                                    </Link>
-                                                }
-                                            />
+                                            <Typography
+                                                variant="subtitle2"
+                                                noWrap
+                                                className={classes.projectElipsis}
+                                            >
+                                                {title}
+                                            </Typography>
+                                        </TableCell>
 
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                        >
+                                            <Typography
+                                                variant="subtitle2"
+                                                noWrap
+                                                className={classes.projectElipsis}
+                                                color='#65898F'
+                                            >
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={"https://github.com/" + organisation + "/" + repo}
+                                                    color="inherit"
+                                                    underline="none"
+                                                >
+                                                    {organisation + '/' + repo}
+                                                </Link>
+                                            </Typography>
                                         </TableCell>
 
                                         <TableCell
