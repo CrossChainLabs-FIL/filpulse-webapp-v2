@@ -250,19 +250,6 @@ export default function TableApp() {
 
         setIsSearchEmpty(true);
 
-        client.get('tab_commits').then((commits_data) => {
-            setState({
-                loading: false,
-                commits_data: commits_data,
-            });
-        });
-        client.get('tab_issues').then((issues_data) => {
-            setState({
-                loading: false,
-                issues_data: issues_data,
-            });
-        });
-
         // let interval = setInterval(() => {
         //     client.get('tab_commits').then((commits_data) => {
         //         setState({
@@ -516,25 +503,77 @@ export default function TableApp() {
                 }
                 break;
             case 2:
-                if (order === 'asc') {
-                    client.get(`tab_releases?sortBy=updated_at&sortType=desc`).then((issues_data) => {
-                        setState({
-                            loading: false,
-                            issues_data: issues_data,
+                if (filterLink === '') {
+                    if (order === 'asc') {
+                        setFilterLink('');
+                        client.get('tab_releases').then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setOrder('desc');
+                            setData(releases_data.list);
                         });
-                        setData(issues_data.list);
-                        setOrder('desc');
-                    });
+                    }
+                    else {
+                        setFilterLink('?' + `sortBy=updated_at&sortType=asc`);
+                        client.get('tab_releases' + '?' + `sortBy=updated_at&sortType=asc`).then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setOrder('asc');
+                            setData(releases_data.list);
+                        });
+                    }
                 }
                 else {
-                    client.get(`tab_releases?sortBy=updated_at&sortType=asc`).then((issues_data) => {
-                        setState({
-                            loading: false,
-                            issues_data: issues_data,
+                    if (order === 'asc') {
+                        if (filterLink.match(`&sortBy=updated_at&sortType=asc`) === null) {
+                            if (filterLink.match(`sortBy=updated_at&sortType=asc&`) === null) {
+                                setFilterLink('');
+                                client.get('tab_releases').then((releases_data) => {
+                                    setState({
+                                        loading: false,
+                                        releases_data: releases_data,
+                                    });
+                                    setOrder('desc');
+                                    setData(releases_data.list);
+                                });
+                            } else {
+                                setFilterLink(filterLink.replace(`sortBy=updated_at&sortType=asc&`, ''));
+                                client.get('tab_releases' + filterLink.replace(`sortBy=updated_at&sortType=asc&`, '')).then((releases_data) => {
+                                    setState({
+                                        loading: false,
+                                        releases_data: releases_data,
+                                    });
+                                    setOrder('desc');
+                                    setData(releases_data.list);
+                                });
+                            }
+                        } else {
+                            setFilterLink(filterLink.replace(`&sortBy=updated_at&sortType=asc`, ''));
+                            client.get('tab_releases' + filterLink.replace(`&sortBy=updated_at&sortType=asc`, '')).then((releases_data) => {
+                                setState({
+                                    loading: false,
+                                    releases_data: releases_data,
+                                });
+                                setOrder('desc');
+                                setData(releases_data.list);
+                            });
+                        }
+                    }
+                    else {
+                        setFilterLink(filterLink + `&sortBy=updated_at&sortType=asc`);
+                        client.get('tab_releases' + filterLink + `&sortBy=updated_at&sortType=asc`).then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setOrder('asc');
+                            setData(releases_data.list);
                         });
-                        setData(issues_data.list);
-                        setOrder('asc');
-                    });
+                    }
                 }
                 break;
             case 3:
@@ -590,12 +629,12 @@ export default function TableApp() {
                 });
                 break;
             case 2:
-                client.get(`tab_releases?${link_value}`).then((issues_data) => {
+                client.get(`tab_releases?${link_value}`).then((releases_data) => {
                     setState({
                         loading: false,
-                        issues_data: issues_data,
+                        releases_data: releases_data,
                     });
-                    setData(issues_data.list);
+                    setData(releases_data.list);
                     setFilterName("");
                 });
                 break;
@@ -628,7 +667,7 @@ export default function TableApp() {
         }
     }
 
-    const clearFilter = (toBeCleared, last) => {
+    const clearFilter = (toBeCleared, last, toBeCleared2, last2) => {
         setData([]);
         setState({
             loading: true
@@ -701,34 +740,169 @@ export default function TableApp() {
                 }
                 break;
             case 2:
-                client.get('tab_releases').then((issues_data) => {
-                    setState({
-                        loading: false,
-                        issues_data: issues_data,
-                    });
-                    setData(issues_data.list);
-                    setFilterName("");
-                });
+                if (filterLink.match('&' + toBeCleared + last) === null) {
+                    if (toBeCleared2 !== undefined) {
+                        if (filterLink.match(toBeCleared2 + last2 + '&') === null) {
+                            setFilterLink('');
+                            client.get('tab_releases').then((releases_data) => {
+                                setState({
+                                    loading: false,
+                                    releases_data: releases_data,
+                                });
+                                setData(releases_data.list);
+                            });
+                        }
+                        else {
+                            setFilterLink(filterLink.replace(toBeCleared + last + '&' + toBeCleared2 + last2 + '&', ''));
+                            client.get('tab_releases' + filterLink.replace(toBeCleared + last + '&' + toBeCleared2 + last2 + '&', '')).then((releases_data) => {
+                                setState({
+                                    loading: false,
+                                    releases_data: releases_data,
+                                });
+                                setData(releases_data.list);
+                            });
+                        }
+                    }
+                    else if (filterLink.match(toBeCleared + last + '&') === null) {
+                        setFilterLink('');
+                        client.get('tab_releases').then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setData(releases_data.list);
+                        });
+                    }
+                    else {
+                        setFilterLink(filterLink.replace(toBeCleared + last + '&', ''));
+                        client.get('tab_releases' + filterLink.replace(toBeCleared + last + '&', '')).then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setData(releases_data.list);
+                        });
+                    }
+                } else {
+                    if (toBeCleared2 !== undefined) {
+                        setFilterLink(filterLink.replace('&' + toBeCleared + last + '&' + toBeCleared2 + last2, ''));
+                        client.get('tab_releases' + filterLink.replace('&' + toBeCleared + last + '&' + toBeCleared2 + last2, '')).then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setData(releases_data.list);
+                        });
+                    } else {
+                        setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
+                        client.get('tab_releases' + filterLink.replace('&' + toBeCleared + last, '')).then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setData(releases_data.list);
+                        });
+                    }
+                }
                 break;
             case 3:
-                client.get(`tab_commits`).then((commits_data) => {
-                    setState({
-                        loading: false,
-                        commits_data: commits_data,
+                if (filterLink.match('&' + toBeCleared + last) === null) {
+                    if (filterLink.match(toBeCleared + last + '&') === null) {
+                        setFilterLink('');
+                        client.get('tab_commits').then((commits_data) => {
+                            setState({
+                                loading: false,
+                                commits_data: commits_data,
+                            });
+                            setData(commits_data.list);
+                        });
+                    }
+                    else {
+                        setFilterLink(filterLink.replace(toBeCleared + last + '&', ''));
+                        client.get('tab_commits' + filterLink.replace(toBeCleared + last + '&', '')).then((commits_data) => {
+                            setState({
+                                loading: false,
+                                commits_data: commits_data,
+                            });
+                            setData(commits_data.list);
+                        });
+                    }
+                } else {
+                    setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
+                    client.get('tab_commits' + filterLink.replace('&' + toBeCleared + last, '')).then((commits_data) => {
+                        setState({
+                            loading: false,
+                            commits_data: commits_data,
+                        });
+                        setData(commits_data.list);
                     });
-                    setData(commits_data.list);
-                    setFilterName("");
-                });
+                }
                 break;
             case 4:
-                client.get('tab_contributors').then((contributors_data) => {
-                    setState({
-                        loading: false,
-                        contributors_data: contributors_data,
-                    });
-                    setData(contributors_data.list);
-                    setFilterName("");
-                });
+                if (filterLink.match('&' + toBeCleared + last) === null) {
+                    if (toBeCleared2 !== undefined) {
+                        if (filterLink.match(toBeCleared2 + last2 + '&') === null) {
+                            setFilterLink('');
+                            client.get('tab_contributors').then((contributors_data) => {
+                                setState({
+                                    loading: false,
+                                    contributors_data: contributors_data,
+                                });
+                                setData(contributors_data.list);
+                            });
+                        }
+                        else {
+                            setFilterLink(filterLink.replace(toBeCleared + last + '&' + toBeCleared2 + last2 + '&', ''));
+                            client.get('tab_contributors' + filterLink.replace(toBeCleared + last + '&' + toBeCleared2 + last2 + '&', '')).then((contributors_data) => {
+                                setState({
+                                    loading: false,
+                                    contributors_data: contributors_data,
+                                });
+                                setData(contributors_data.list);
+                            });
+                        }
+                    }
+                    else if (filterLink.match(toBeCleared + last + '&') === null) {
+                        setFilterLink('');
+                        client.get('tab_contributors').then((contributors_data) => {
+                            setState({
+                                loading: false,
+                                contributors_data: contributors_data,
+                            });
+                            setData(contributors_data.list);
+                        });
+                    }
+                    else {
+                        setFilterLink(filterLink.replace(toBeCleared + last + '&', ''));
+                        client.get('tab_contributors' + filterLink.replace(toBeCleared + last + '&', '')).then((contributors_data) => {
+                            setState({
+                                loading: false,
+                                contributors_data: contributors_data,
+                            });
+                            setData(contributors_data.list);
+                        });
+                    }
+                } else {
+                    if (toBeCleared2 !== undefined) {
+                        setFilterLink(filterLink.replace('&' + toBeCleared + last + '&' + toBeCleared2 + last2, ''));
+                        client.get('tab_contributors' + filterLink.replace('&' + toBeCleared + last + '&' + toBeCleared2 + last2, '')).then((contributors_data) => {
+                            setState({
+                                loading: false,
+                                contributors_data: contributors_data,
+                            });
+                            setData(contributors_data.list);
+                        });
+                    } else {
+                        setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
+                        client.get('tab_contributors' + filterLink.replace('&' + toBeCleared + last, '')).then((contributors_data) => {
+                            setState({
+                                loading: false,
+                                contributors_data: contributors_data,
+                            });
+                            setData(contributors_data.list);
+                        });
+                    }
+                }
                 break;
             case 5:
                 setOrderBy('showId');
@@ -740,7 +914,7 @@ export default function TableApp() {
         }
     }
 
-    const globalFilter = (addonValue, filterType, last) => {
+    const globalFilter = (addonValue, filterType, last, addonValue2, filterType2, last2) => {
         setData([]);
         setState({
             loading: true
@@ -813,34 +987,214 @@ export default function TableApp() {
                 }
                 break;
             case 2:
-                client.get('tab_releases').then((issues_data) => {
-                    setState({
-                        loading: false,
-                        issues_data: issues_data,
-                    });
-                    setData(issues_data.list);
-                    setFilterName("");
-                });
+                if (filterLink === '') {
+                    if (addonValue2 !== undefined) {
+                        setFilterLink('?' + addonValue + '&' + addonValue2);
+                        client.get('tab_releases' + '?' + addonValue + '&' + addonValue2).then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setData(releases_data.list);
+                        });
+                    } else {
+                        setFilterLink('?' + addonValue);
+                        client.get('tab_releases' + '?' + addonValue).then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setData(releases_data.list);
+                        });
+                    }
+                }
+                else {
+                    if (filterLink.match(filterType) === null) {
+                        if (addonValue2 !== undefined) {
+                            setFilterLink(filterLink + '&' + addonValue + '&' + addonValue2);
+                            client.get('tab_releases' + filterLink + '&' + addonValue + '&' + addonValue2).then((releases_data) => {
+                                setState({
+                                    loading: false,
+                                    releases_data: releases_data,
+                                });
+                                setData(releases_data.list);
+                            });
+                        } else {
+                            setFilterLink(filterLink + '&' + addonValue);
+                            client.get('tab_releases' + filterLink + '&' + addonValue).then((releases_data) => {
+                                setState({
+                                    loading: false,
+                                    releases_data: releases_data,
+                                });
+                                setData(releases_data.list);
+                            });
+                        }
+                    } else if (last2 !== undefined) {
+                        let aux = filterLink;
+                        aux = aux.replace(filterType + last, addonValue);
+                        aux = aux.replace(filterType2 + last2, addonValue2);
+                        // setFilterLink(filterLink.replace(filterType + last, addonValue));
+                        // setFilterLink(filterLink.replace(filterType2 + last2, addonValue2));
+                        setFilterLink(aux);
+                        client.get('tab_releases' + aux).then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setData(releases_data.list);
+                        });
+                    }
+                    else if (last !== '') {
+                        setFilterLink(filterLink.replace(filterType + last, addonValue));
+                        client.get('tab_releases' + filterLink.replace(filterType + last, addonValue)).then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setData(releases_data.list);
+                        });
+                    }
+                }
                 break;
             case 3:
-                client.get(`tab_commits`).then((commits_data) => {
-                    setState({
-                        loading: false,
-                        commits_data: commits_data,
-                    });
-                    setData(commits_data.list);
-                    setFilterName("");
-                });
+                if (filterLink === '') {
+                    if (addonValue2 !== undefined) {
+                        setFilterLink('?' + addonValue + '&' + addonValue2);
+                        client.get('tab_commits' + '?' + addonValue + '&' + addonValue2).then((commits_data) => {
+                            setState({
+                                loading: false,
+                                commits_data: commits_data,
+                            });
+                            setData(commits_data.list);
+                        });
+                    } else {
+                        setFilterLink('?' + addonValue);
+                        client.get('tab_commits' + '?' + addonValue).then((commits_data) => {
+                            setState({
+                                loading: false,
+                                commits_data: commits_data,
+                            });
+                            setData(commits_data.list);
+                        });
+                    }
+                }
+                else {
+                    if (filterLink.match(filterType) === null) {
+                        if (addonValue2 !== undefined) {
+                            setFilterLink(filterLink + '&' + addonValue + '&' + addonValue2);
+                            client.get('tab_commits' + filterLink + '&' + addonValue + '&' + addonValue2).then((commits_data) => {
+                                setState({
+                                    loading: false,
+                                    commits_data: commits_data,
+                                });
+                                setData(commits_data.list);
+                            });
+                        } else {
+                            setFilterLink(filterLink + '&' + addonValue);
+                            client.get('tab_commits' + filterLink + '&' + addonValue).then((commits_data) => {
+                                setState({
+                                    loading: false,
+                                    commits_data: commits_data,
+                                });
+                                setData(commits_data.list);
+                            });
+                        }
+                    } else if (last2 !== undefined) {
+                        let aux = filterLink;
+                        aux = aux.replace(filterType + last, addonValue);
+                        aux = aux.replace(filterType2 + last2, addonValue2);
+                        // setFilterLink(filterLink.replace(filterType + last, addonValue));
+                        // setFilterLink(filterLink.replace(filterType2 + last2, addonValue2));
+                        setFilterLink(aux);
+                        client.get('tab_commits' + aux).then((commits_data) => {
+                            setState({
+                                loading: false,
+                                commits_data: commits_data,
+                            });
+                            setData(commits_data.list);
+                        });
+                    }
+                    else if (last !== '') {
+                        setFilterLink(filterLink.replace(filterType + last, addonValue));
+                        client.get('tab_commits' + filterLink.replace(filterType + last, addonValue)).then((commits_data) => {
+                            setState({
+                                loading: false,
+                                commits_data: commits_data,
+                            });
+                            setData(commits_data.list);
+                        });
+                    }
+                }
                 break;
             case 4:
-                client.get('tab_contributors').then((contributors_data) => {
-                    setState({
-                        loading: false,
-                        contributors_data: contributors_data,
-                    });
-                    setData(contributors_data.list);
-                    setFilterName("");
-                });
+                if (filterLink === '') {
+                    if (addonValue2 !== undefined) {
+                        setFilterLink('?' + addonValue + '&' + addonValue2);
+                        client.get('tab_contributors' + '?' + addonValue + '&' + addonValue2).then((contributors_data) => {
+                            setState({
+                                loading: false,
+                                contributors_data: contributors_data,
+                            });
+                            setData(contributors_data.list);
+                        });
+                    } else {
+                        setFilterLink('?' + addonValue);
+                        client.get('tab_contributors' + '?' + addonValue).then((contributors_data) => {
+                            setState({
+                                loading: false,
+                                contributors_data: contributors_data,
+                            });
+                            setData(contributors_data.list);
+                        });
+                    }
+                }
+                else {
+                    if (filterLink.match(filterType) === null) {
+                        if (addonValue2 !== undefined) {
+                            setFilterLink(filterLink + '&' + addonValue + '&' + addonValue2);
+                            client.get('tab_contributors' + filterLink + '&' + addonValue + '&' + addonValue2).then((contributors_data) => {
+                                setState({
+                                    loading: false,
+                                    contributors_data: contributors_data,
+                                });
+                                setData(contributors_data.list);
+                            });
+                        } else {
+                            setFilterLink(filterLink + '&' + addonValue);
+                            client.get('tab_contributors' + filterLink + '&' + addonValue).then((contributors_data) => {
+                                setState({
+                                    loading: false,
+                                    contributors_data: contributors_data,
+                                });
+                                setData(contributors_data.list);
+                            });
+                        }
+                    } else if (last2 !== undefined) {
+                        let aux = filterLink;
+                        aux = aux.replace(filterType + last, addonValue);
+                        aux = aux.replace(filterType2 + last2, addonValue2);
+                        // setFilterLink(filterLink.replace(filterType + last, addonValue));
+                        // setFilterLink(filterLink.replace(filterType2 + last2, addonValue2));
+                        setFilterLink(aux);
+                        client.get('tab_contributors' + aux).then((contributors_data) => {
+                            setState({
+                                loading: false,
+                                contributors_data: contributors_data,
+                            });
+                            setData(contributors_data.list);
+                        });
+                    }
+                    else if (last !== '') {
+                        setFilterLink(filterLink.replace(filterType + last, addonValue));
+                        client.get('tab_contributors' + filterLink.replace(filterType + last, addonValue)).then((contributors_data) => {
+                            setState({
+                                loading: false,
+                                contributors_data: contributors_data,
+                            });
+                            setData(contributors_data.list);
+                        });
+                    }
+                }
                 break;
             case 5:
                 setOrderBy('showId');
@@ -992,31 +1346,103 @@ export default function TableApp() {
                     }
                     break;
                 case 2:
-                    client.get(`tab_releases?search=${event.target.value}`).then((commits_data) => {
-                        setState({
-                            loading: false,
-                            commits_data: commits_data,
+                    if (filterLink === '') {
+                        setFilterLink('?' + `search=${event.target.value}`);
+                        client.get('tab_releases' + '?' + `search=${event.target.value}`).then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setData(releases_data.list);
                         });
-                        setData(commits_data.list);
-                    });
+                    }
+                    else {
+                        if (!isSearchEmpty) {
+                            setFilterLink(filterLink.replace(`search=${filterName}`, `search=${event.target.value}`));
+                            client.get('tab_releases' + filterLink.replace(`search=${filterName}`, `search=${event.target.value}`)).then((releases_data) => {
+                                setState({
+                                    loading: false,
+                                    releases_data: releases_data,
+                                });
+                                setData(releases_data.list);
+                            });
+                            break;
+                        }
+                        setFilterLink(filterLink + '&' + `search=${event.target.value}`);
+                        client.get('tab_releases' + filterLink + '&' + `search=${event.target.value}`).then((releases_data) => {
+                            setState({
+                                loading: false,
+                                releases_data: releases_data,
+                            });
+                            setData(releases_data.list);
+                        });
+                    }
                     break;
                 case 3:
-                    client.get(`tab_commits?search=${event.target.value}`).then((commits_data) => {
-                        setState({
-                            loading: false,
-                            commits_data: commits_data,
+                    if (filterLink === '') {
+                        setFilterLink('?' + `search=${event.target.value}`);
+                        client.get('tab_commits' + '?' + `search=${event.target.value}`).then((commits_data) => {
+                            setState({
+                                loading: false,
+                                commits_data: commits_data,
+                            });
+                            setData(commits_data.list);
                         });
-                        setData(commits_data.list);
-                    });
+                    }
+                    else {
+                        if (!isSearchEmpty) {
+                            setFilterLink(filterLink.replace(`search=${filterName}`, `search=${event.target.value}`));
+                            client.get('tab_commits' + filterLink.replace(`search=${filterName}`, `search=${event.target.value}`)).then((commits_data) => {
+                                setState({
+                                    loading: false,
+                                    commits_data: commits_data,
+                                });
+                                setData(commits_data.list);
+                            });
+                            break;
+                        }
+                        setFilterLink(filterLink + '&' + `search=${event.target.value}`);
+                        client.get('tab_commits' + filterLink + '&' + `search=${event.target.value}`).then((commits_data) => {
+                            setState({
+                                loading: false,
+                                commits_data: commits_data,
+                            });
+                            setData(commits_data.list);
+                        });
+                    }
                     break;
                 case 4:
-                    client.get(`tab_contributors?search=${event.target.value}`).then((commits_data) => {
-                        setState({
-                            loading: false,
-                            commits_data: commits_data,
+                    if (filterLink === '') {
+                        setFilterLink('?' + `search=${event.target.value}`);
+                        client.get('tab_contributors' + '?' + `search=${event.target.value}`).then((contributors_data) => {
+                            setState({
+                                loading: false,
+                                contributors_data: contributors_data,
+                            });
+                            setData(contributors_data.list);
                         });
-                        setData(commits_data.list);
-                    });
+                    }
+                    else {
+                        if (!isSearchEmpty) {
+                            setFilterLink(filterLink.replace(`search=${filterName}`, `search=${event.target.value}`));
+                            client.get('tab_contributors' + filterLink.replace(`search=${filterName}`, `search=${event.target.value}`)).then((contributors_data) => {
+                                setState({
+                                    loading: false,
+                                    contributors_data: contributors_data,
+                                });
+                                setData(contributors_data.list);
+                            });
+                            break;
+                        }
+                        setFilterLink(filterLink + '&' + `search=${event.target.value}`);
+                        client.get('tab_contributors' + filterLink + '&' + `search=${event.target.value}`).then((contributors_data) => {
+                            setState({
+                                loading: false,
+                                contributors_data: contributors_data,
+                            });
+                            setData(contributors_data.list);
+                        });
+                    }
                     break;
                 case 5:
                     break;
@@ -1061,16 +1487,18 @@ export default function TableApp() {
                     });
                     break;
                 case 2:
-                    client.get('tab_releases').then((commits_data) => {
+                    setFilterLink(aux);
+                    client.get('tab_releases' + aux).then((releases_data) => {
                         setState({
                             loading: false,
-                            commits_data: commits_data,
+                            releases_data: releases_data,
                         });
-                        setData(commits_data.list);
+                        setData(releases_data.list);
                     });
                     break;
                 case 3:
-                    client.get('tab_commits').then((commits_data) => {
+                    setFilterLink(aux);
+                    client.get('tab_commits' + aux).then((commits_data) => {
                         setState({
                             loading: false,
                             commits_data: commits_data,
@@ -1079,12 +1507,13 @@ export default function TableApp() {
                     });
                     break;
                 case 4:
-                    client.get('tab_contributors').then((commits_data) => {
+                    setFilterLink(aux);
+                    client.get('tab_contributors' + aux).then((contributors_data) => {
                         setState({
                             loading: false,
-                            commits_data: commits_data,
+                            contributors_data: contributors_data,
                         });
-                        setData(commits_data.list);
+                        setData(contributors_data.list);
                     });
                     break;
                 case 5:
@@ -1188,6 +1617,7 @@ export default function TableApp() {
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
                     clearFilter={clearFilter}
+                    globalFilter={globalFilter}
                 />
             )}
 
@@ -1201,6 +1631,7 @@ export default function TableApp() {
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
                     clearFilter={clearFilter}
+                    globalFilter={globalFilter}
                 />
             }
 
@@ -1214,6 +1645,7 @@ export default function TableApp() {
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSortChange}
                     clearFilter={clearFilter}
+                    globalFilter={globalFilter}
                 />
             }
 

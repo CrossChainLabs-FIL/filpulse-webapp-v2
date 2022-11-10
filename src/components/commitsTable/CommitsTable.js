@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
         maxHeight: "40em",
     },
     projectElipsis: {
-        maxWidth: "50em",
+        maxWidth: "32em",
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
@@ -45,7 +45,8 @@ export default function CommitsTable({
     handleMenuFilter,
     // searchData,
     handleSortChange,
-    clearFilter
+    clearFilter,
+    globalFilter
 }) {
 
     const classes = useStyles();
@@ -72,6 +73,7 @@ export default function CommitsTable({
                         handleSortChange={handleSortChange}
                         handleMenuFilter={handleMenuFilter}
                         clearFilterFunction={clearFilter}
+                        globalFilter={globalFilter}
                     />
 
                     {state.loading && (
@@ -131,36 +133,44 @@ export default function CommitsTable({
                                             scope="row"
                                             padding="none"
                                         >
-                                            <CardHeader
-                                                style={{ background: "transparent" }}
-                                                sx={{
-                                                    boxShadow: 0,
-                                                    padding: 0,
+                                            <Typography
+                                                variant="subtitle2"
+                                                noWrap
+                                                style={{
+                                                    lineHeight: '1.1em',
+                                                    marginTop: '0.45em'
                                                 }}
-                                                title={
-                                                    <Typography
-                                                        variant="subtitle2"
-                                                        noWrap
-                                                        style={{
-                                                            lineHeight: '1.1em',
-                                                            marginTop: '0.45em'
-                                                        }}
-                                                        className={classes.projectElipsis}
-                                                    >
-                                                        {message?.substring(0, 50)}
-                                                    </Typography>
-                                                }
-                                                subheader={
-                                                    <Link
-                                                        target="_blank"
-                                                        rel="noopener"
-                                                        href={"https://github.com/" + organisation + "/" + repo}
-                                                        color="inherit"
-                                                    >
-                                                        {organisation + '/' + repo}
-                                                    </Link>
-                                                }
-                                            />
+                                                className={classes.projectElipsis}
+                                            >
+                                                {message?.substring(0, 50)}
+                                            </Typography>
+                                        </TableCell>
+
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                        >
+                                            <Typography
+                                                variant="subtitle2"
+                                                noWrap
+                                                style={{
+                                                    lineHeight: '1.1em',
+                                                    marginTop: '0.45em'
+                                                }}
+                                                className={classes.projectElipsis}
+                                            >
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={"https://github.com/" + organisation + "/" + repo}
+                                                    color="inherit"
+                                                >
+                                                    {organisation + '/' + repo}
+                                                </Link>
+                                            </Typography>
+
 
                                         </TableCell>
 

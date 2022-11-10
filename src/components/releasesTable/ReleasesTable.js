@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
         maxHeight: "40em",
     },
     projectElipsis: {
-        maxWidth: "25em",
+        maxWidth: "14em",
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
@@ -58,7 +58,8 @@ export default function ReleasesTable({
     handleMenuFilter,
     // searchData,
     handleSortChange,
-    clearFilter
+    clearFilter,
+    globalFilter
 }) {
 
     const classes = useStyles();
@@ -81,10 +82,10 @@ export default function ReleasesTable({
                 <Table stickyHeader>
 
                     <ReleasesHead
-                        data={data}
                         handleSortChange={handleSortChange}
                         handleMenuFilter={handleMenuFilter}
                         clearFilterFunction={clearFilter}
+                        globalFilter={globalFilter}
                     />
 
                     {state.loading && (

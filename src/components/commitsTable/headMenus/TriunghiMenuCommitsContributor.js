@@ -24,6 +24,8 @@ import { Client } from '../../../utils/client';
 // assets
 import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
+import clearFilter from '../../../assets/clearFilter.svg';
+import bara from '../../../assets/bara.svg';
 
 
 const client = new Client();
@@ -32,7 +34,7 @@ const client = new Client();
 const useStyles = makeStyles(() => ({
     triunghi: {
         marginLeft: '0.25em',
-        marginTop: '0.15em'
+        // marginTop: '0.15em'
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
@@ -77,13 +79,15 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuCommitsContributor({ handleMenuFilter }) {
+export default function TriunghiMenuCommitsContributor({ handleMenuFilter, clearFilterFunction, globalFilter }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
     const [state, setState] = useState({
         loading: true, commits_data: []
     });
+    const [isSorted, setIsSorted] = useState(false);
+    const [last, setLast] = useState('');
     const open = Boolean(anchorEl);
 
 
@@ -103,7 +107,9 @@ export default function TriunghiMenuCommitsContributor({ handleMenuFilter }) {
 
     function handleFilterClose(contributor) {
         handleClose();
-        handleMenuFilter(`contributor=${contributor}`);
+        setIsSorted(true);
+        setLast(contributor);
+        globalFilter(`contributor=${contributor}`, 'contributor=', last);
     }
 
     const handleFilterByName = (event) => {
@@ -140,8 +146,17 @@ export default function TriunghiMenuCommitsContributor({ handleMenuFilter }) {
                 onClick={handleClick}
                 style={{ padding: 0 }}
             >
-                <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                <img src={bara} alt='bara' className={classes.triunghi} />
             </IconButton>
+            {isSorted ?
+                <IconButton
+                    id="basic-button"
+                    onClick={() => { setIsSorted(false); setLast(''); clearFilterFunction('contributor=', last); }}
+                    style={{ padding: 0, marginLeft: '0.25em' }}
+                >
+                    <img src={clearFilter} alt='clear' />
+                </IconButton> : ''
+            }
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}

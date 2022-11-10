@@ -19,7 +19,6 @@ import TriunghiMenuIssuesStatus from './headMenus/TriunghiMenuIssuesStatus'
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
-import clearFilter from '../../assets/clearFilter.svg';
 
 // ----------------------------------------------------------------------
 
@@ -109,6 +108,32 @@ export default function IssuesHead({
                     >
                         <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
                             Issue
+                        </Typography>
+
+                        {/* <TriunghiMenuIssuesIssue handleMenuFilter={handleMenuFilter} /> */}
+                        <IconButton
+                            id="basic-button"
+                            // onClick={(e) => handleSortChange()}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
+                    </Stack>
+                </TableCell>
+
+                <TableCell
+                    align="left"
+                    component="th"
+                    scope="row"
+                    padding="none"
+                    className={classes.issue}
+                >
+                    <Stack
+                        direction="row"
+                        alignItems="center"
+                    >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            Project
                         </Typography>
 
                         {/* <TriunghiMenuIssuesIssue handleMenuFilter={handleMenuFilter} /> */}

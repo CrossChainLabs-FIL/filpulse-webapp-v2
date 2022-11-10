@@ -124,8 +124,8 @@ export default function IssuesTable({
                                     avatar_url,
                                     dev_name,
                                     html_url,
-                                    issue_number,
-                                    issue_state,
+                                    number,
+                                    state,
                                     organisation,
                                     repo,
                                     title,
@@ -138,7 +138,7 @@ export default function IssuesTable({
                                     >
                                         <TableCell padding="checkbox">
                                             <Checkbox
-                                                id={issue_number}
+                                                id={number}
                                                 icon={<img src={steaGol} alt='steaGol' />}
                                                 checkedIcon={<img src={steaPlin} alt='steaPlin' />}
                                                 onChange={(e) => starOnChange(e)}
@@ -163,7 +163,7 @@ export default function IssuesTable({
                                                     href={html_url}
                                                     color="inherit"
                                                 >
-                                                    {`#${issue_number}`}
+                                                    {`#${number}`}
                                                 </Link>
                                             </Typography>
                                         </TableCell>
@@ -174,33 +174,36 @@ export default function IssuesTable({
                                             scope="row"
                                             padding="none"
                                         >
-                                            <CardHeader
-                                                style={{ background: "transparent" }}
-                                                sx={{
-                                                    boxShadow: 0,
-                                                    padding: 0,
-                                                }}
-                                                title={
-                                                    <Typography
-                                                        variant="subtitle2"
-                                                        noWrap
-                                                        className={classes.projectElipsis}
-                                                    >
-                                                        {title}
-                                                    </Typography>
-                                                }
-                                                subheader={
-                                                    <Link
-                                                        target="_blank"
-                                                        rel="noopener"
-                                                        href={"https://github.com/" + organisation + "/" + repo}
-                                                        color="inherit"
-                                                    >
-                                                        {organisation + '/' + repo}
-                                                    </Link>
-                                                }
-                                            />
+                                            <Typography
+                                                variant="subtitle2"
+                                                noWrap
+                                                className={classes.projectElipsis}
+                                            >
+                                                {title}
+                                            </Typography>
+                                        </TableCell>
 
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                        >
+                                            <Typography
+                                                variant="subtitle2"
+                                                noWrap
+                                                className={classes.projectElipsis}
+                                                color='#65898F'
+                                            >
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={"https://github.com/" + organisation + "/" + repo}
+                                                    color="inherit"
+                                                >
+                                                    {organisation + '/' + repo}
+                                                </Link>
+                                            </Typography>
                                         </TableCell>
 
                                         <TableCell
@@ -283,7 +286,7 @@ export default function IssuesTable({
                                             padding="none"
                                         >
 
-                                            {issue_state === 'closed' ?
+                                            {state === 'closed' ?
                                                 (
                                                     <img
                                                         src={closedBox}

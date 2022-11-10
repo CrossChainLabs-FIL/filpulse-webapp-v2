@@ -1,3 +1,4 @@
+import { useState } from 'react';
 // material
 import {
     Typography,
@@ -32,7 +33,10 @@ const useStyles = makeStyles(() => ({
         height: '4em',
     },
     commit: {
-        width: '50em'
+        width: '38em'
+    },
+    project: {
+        width: '20em'
     },
     contributor: {
         width: '18em'
@@ -45,8 +49,11 @@ export default function CommitsHead({
     data,
     handleSortChange,
     handleMenuFilter,
-    clearFilterFunction
+    clearFilterFunction,
+    globalFilter
 }) {
+
+    const [order, setOrder] = useState('desc');
 
     const classes = useStyles();
 
@@ -79,7 +86,14 @@ export default function CommitsHead({
                             Hash
                         </Typography>
 
-                        <TriunghiMenuCommitsHash data={data} />
+                        {/* <TriunghiMenuCommitsHash data={data} /> */}
+                        <IconButton
+                            id="basic-button"
+                            // onClick={(e) => handleSortChange()}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -98,7 +112,40 @@ export default function CommitsHead({
                             Commit
                         </Typography>
 
-                        <TriunghiMenuCommitsCommit handleMenuFilter={handleMenuFilter} />
+                        {/* <TriunghiMenuCommitsCommit handleMenuFilter={handleMenuFilter} /> */}
+                        <IconButton
+                            id="basic-button"
+                            // onClick={(e) => handleSortChange()}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
+                    </Stack>
+                </TableCell>
+
+                <TableCell
+                    align="left"
+                    component="th"
+                    scope="row"
+                    padding="none"
+                    className={classes.project}
+                >
+                    <Stack
+                        direction="row"
+                        alignItems="center"
+                    >
+                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                            Project
+                        </Typography>
+
+                        {/* <TriunghiMenuCommitsCommit handleMenuFilter={handleMenuFilter} /> */}
+                        <IconButton
+                            id="basic-button"
+                            // onClick={(e) => handleSortChange()}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -117,15 +164,12 @@ export default function CommitsHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuCommitsContributor handleMenuFilter={handleMenuFilter} />
+                        <TriunghiMenuCommitsContributor
+                            handleMenuFilter={handleMenuFilter}
+                            clearFilterFunction={clearFilterFunction}
+                            globalFilter={globalFilter}
+                        />
 
-                        <IconButton
-                            id="basic-button"
-                            onClick={clearFilterFunction}
-                            style={{ padding: 0, marginLeft: '0.25em' }}
-                        >
-                            <img src={clearFilter} alt='clear' />
-                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -145,7 +189,16 @@ export default function CommitsHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleSortChange()}
+                            onClick={(e) => {
+                                if (order === 'asc') {
+                                    setOrder('desc');
+                                    clearFilterFunction('sortBy', 'updated_at', "sortType", 'asc');
+                                }
+                                else {
+                                    setOrder('asc');
+                                    globalFilter('sortBy=updated_at', 'sortBy=', '', "sortType=asc", 'sortType=', '');
+                                }
+                            }}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

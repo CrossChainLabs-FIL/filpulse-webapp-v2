@@ -24,6 +24,8 @@ import { Client } from '../../../utils/client';
 // assets
 import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
+import clearFilter from '../../../assets/clearFilter.svg';
+import bara from '../../../assets/bara.svg';
 
 const client = new Client();
 
@@ -31,7 +33,7 @@ const client = new Client();
 const useStyles = makeStyles(() => ({
     triunghi: {
         marginLeft: '0.25em',
-        marginTop: '0.15em'
+        // marginTop: '0.15em'
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
@@ -82,13 +84,16 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuContributorProject({ handleMenuFilter }) {
+export default function TriunghiMenuContributorProject({ handleMenuFilter, clearFilterFunction, globalFilter }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
     const [state, setState] = useState({
         loading: true, commits_data: []
     });
+    const [isSorted, setIsSorted] = useState(false);
+    const [lastOrganisation, setLastOrganisation] = useState('');
+    const [lastRepo, setLastRepo] = useState('');
     const open = Boolean(anchorEl);
 
 
@@ -105,10 +110,15 @@ export default function TriunghiMenuContributorProject({ handleMenuFilter }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     function handleFilterClose(organisation, repo) {
         handleClose();
-        handleMenuFilter(`repo=${repo}&organisation=${organisation}`);
+        setIsSorted(true);
+        setLastOrganisation(organisation);
+        setLastRepo(repo);
+        globalFilter(`organisation=${organisation}`, 'organisation=', lastOrganisation, `repo=${repo}`, 'repo=', lastRepo);
     }
+
     const handleFilterByName = (event) => {
         if (event.target.value) {
             client.get(`tab_contributors/filter/project?search=${event.target.value}`).then((project_data) => {
@@ -141,8 +151,22 @@ export default function TriunghiMenuContributorProject({ handleMenuFilter }) {
                 onClick={handleClick}
                 style={{ padding: 0 }}
             >
-                <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                <img src={bara} alt='bara' className={classes.triunghi} />
             </IconButton>
+            {isSorted ?
+                <IconButton
+                    id="basic-button"
+                    onClick={() => {
+                        setIsSorted(false);
+                        setLastOrganisation('');
+                        setLastRepo('');
+                        clearFilterFunction('organisation=', lastOrganisation, 'repo=', lastRepo);
+                    }}
+                    style={{ padding: 0, marginLeft: '0.25em' }}
+                >
+                    <img src={clearFilter} alt='clear' />
+                </IconButton> : ''
+            }
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}

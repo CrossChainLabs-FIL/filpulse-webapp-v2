@@ -31,10 +31,10 @@ const useStyles = makeStyles(() => ({
         height: '4em',
     },
     id: {
-        width: '12em'
+        width: '9em'
     },
     release: {
-        width: '16em'
+        width: '18em'
     },
     project: {
         width: '20em'
@@ -51,10 +51,10 @@ const useStyles = makeStyles(() => ({
 
 
 export default function ReleasesHead({
-    data,
     handleSortChange,
     handleMenuFilter,
-    clearFilterFunction
+    clearFilterFunction,
+    globalFilter
 }) {
 
 
@@ -108,6 +108,13 @@ export default function ReleasesHead({
                         </Typography>
 
                         {/* <TriunghiMenuIssuesIssue handleMenuFilter={handleMenuFilter} /> */}
+                        <IconButton
+                            id="basic-button"
+                            // onClick={(e) => handleSortChange()}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -126,7 +133,11 @@ export default function ReleasesHead({
                             Project
                         </Typography>
 
-                        <TriunghiMenuReleasesProject handleMenuFilter={handleMenuFilter} />
+                        <TriunghiMenuReleasesProject
+                            handleMenuFilter={handleMenuFilter}
+                            clearFilterFunction={clearFilterFunction}
+                            globalFilter={globalFilter}
+                        />
                     </Stack>
                 </TableCell>
 
@@ -145,15 +156,11 @@ export default function ReleasesHead({
                             Author
                         </Typography>
 
-                        <TriunghiMenuReleasesAuthor handleMenuFilter={handleMenuFilter} />
-
-                        <IconButton
-                            id="basic-button"
-                            onClick={clearFilterFunction}
-                            style={{ padding: 0, marginLeft: '0.25em' }}
-                        >
-                            <img src={clearFilter} alt='clear' />
-                        </IconButton>
+                        <TriunghiMenuReleasesAuthor
+                            handleMenuFilter={handleMenuFilter}
+                            clearFilterFunction={clearFilterFunction}
+                            globalFilter={globalFilter}
+                        />
                     </Stack>
                 </TableCell>
 
@@ -172,7 +179,10 @@ export default function ReleasesHead({
                             Status
                         </Typography>
 
-                        <TriunghiMenuReleasesStatus data={data} />
+                        <TriunghiMenuReleasesStatus
+                            globalFilter={globalFilter}
+                            clearFilterFunction={clearFilterFunction}
+                        />
                     </Stack>
                 </TableCell>
 

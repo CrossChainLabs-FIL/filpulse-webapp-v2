@@ -18,7 +18,6 @@ import TriunghiMenuPrStatus from './headMenus/TriunghiMenuPrStatus';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
-import clearFilter from '../../assets/clearFilter.svg';
 
 
 // ----------------------------------------------------------------------

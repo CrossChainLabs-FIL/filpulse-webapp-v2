@@ -50,7 +50,8 @@ export default function ContributorsTable({
     handleMenuFilter,
     // searchData,
     handleSortChange,
-    clearFilter
+    clearFilter,
+    globalFilter
 }) {
 
     const classes = useStyles();
@@ -76,6 +77,7 @@ export default function ContributorsTable({
                         handleSortChange={handleSortChange}
                         handleMenuFilter={handleMenuFilter}
                         clearFilterFunction={clearFilter}
+                        globalFilter={globalFilter}
                     />
                     {state.loading && (
                         <TableBody>
@@ -98,15 +100,15 @@ export default function ContributorsTable({
                                     open_issues,
                                     closed_issues,
                                     open_prs,
-                                    merged_prs
+                                    closed_prs
                                 } = row;
 
                                 let prValue;
-                                if (Number(merged_prs) === 0) {
+                                if (Number(closed_prs) === 0) {
                                     prValue = 0;
                                 }
                                 else {
-                                    prValue = ((Number(open_prs) * 100) / Number(merged_prs));
+                                    prValue = ((Number(open_prs) * 100) / Number(closed_prs));
                                 }
 
                                 let issueValue;
@@ -209,7 +211,7 @@ export default function ContributorsTable({
                                                     noWrap
                                                     sx={{ marginLeft: "auto" }}
                                                 >
-                                                    {merged_prs}
+                                                    {closed_prs}
                                                 </Typography>
                                             </Stack>
                                             <Box sx={{ width: '100%', marginLeft: '1.5em' }}>

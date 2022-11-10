@@ -21,12 +21,13 @@ import x from '../../../assets/x.svg';
 import preRelease from '../../../assets/preRelease.svg';
 import latest from '../../../assets/latest.svg';
 import released from '../../../assets/released.svg';
-
+import clearFilter from '../../../assets/clearFilter.svg';
+import bara from '../../../assets/bara.svg';
 
 const useStyles = makeStyles(() => ({
     triunghi: {
         marginLeft: '0.25em',
-        marginTop: '0.15em'
+        // marginTop: '0.15em'
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
@@ -61,8 +62,10 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function TriunghiMenuReleasesStatus({ data }) {
+export default function TriunghiMenuReleasesStatus({ globalFilter, clearFilterFunction }) {
     const [anchorEl, setAnchorEl] = useState(null);
+    const [isSorted, setIsSorted] = useState(false);
+    const [last, setLast] = useState('');
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -70,6 +73,13 @@ export default function TriunghiMenuReleasesStatus({ data }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    function handleFilterClose(status) {
+        handleClose();
+        setIsSorted(true);
+        setLast(status);
+        globalFilter(`status=${status}`, 'status=', last);
+    }
 
 
     const classes = useStyles();
@@ -84,8 +94,17 @@ export default function TriunghiMenuReleasesStatus({ data }) {
                 onClick={handleClick}
                 style={{ padding: 0 }}
             >
-                <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                <img src={bara} alt='bara' className={classes.triunghi} />
             </IconButton>
+            {isSorted ?
+                <IconButton
+                    id="basic-button"
+                    onClick={() => { setIsSorted(false); setLast(''); clearFilterFunction('status=', last); }}
+                    style={{ padding: 0, marginLeft: '0.25em' }}
+                >
+                    <img src={clearFilter} alt='clear' />
+                </IconButton> : ''
+            }
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -120,31 +139,31 @@ export default function TriunghiMenuReleasesStatus({ data }) {
                         <List className={classes.list} disablePadding={true}>
                             <MenuItem
                                 style={{ backgroundColor: '#FFFFFF', }}
-                                onClick={handleClose}
+                                onClick={() => handleFilterClose('Pre-release')}
                             >
                                 <img
                                     src={preRelease}
-                                    alt="closed"
+                                    alt="preRelease"
                                 />
                             </MenuItem>
                             <Divider />
                             <MenuItem
                                 style={{ backgroundColor: '#FFFFFF', }}
-                                onClick={handleClose}
+                                onClick={() => handleFilterClose('Released')}
                             >
                                 <img
                                     src={released}
-                                    alt="closed"
+                                    alt="released"
                                 />
                             </MenuItem>
                             <Divider />
                             <MenuItem
                                 style={{ backgroundColor: '#FFFFFF', }}
-                                onClick={handleClose}
+                                onClick={() => handleFilterClose('Latest')}
                             >
                                 <img
                                     src={latest}
-                                    alt="closed"
+                                    alt="latest"
                                 />
                             </MenuItem>
                             <Divider />

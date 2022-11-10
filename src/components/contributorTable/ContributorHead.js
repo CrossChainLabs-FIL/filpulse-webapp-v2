@@ -51,7 +51,8 @@ const useStyles = makeStyles(() => ({
 export default function ContributorHead({
     handleSortChange,
     handleMenuFilter,
-    clearFilterFunction
+    clearFilterFunction,
+    globalFilter
 }) {
 
     const classes = useStyles();
@@ -83,15 +84,11 @@ export default function ContributorHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuContributorContributor handleMenuFilter={handleMenuFilter} />
-
-                        <IconButton
-                            id="basic-button"
-                            onClick={clearFilterFunction}
-                            style={{ padding: 0, marginLeft: '0.25em' }}
-                        >
-                            <img src={clearFilter} alt='clear' />
-                        </IconButton>
+                        <TriunghiMenuContributorContributor
+                            handleMenuFilter={handleMenuFilter}
+                            clearFilterFunction={clearFilterFunction}
+                            globalFilter={globalFilter}
+                        />
                     </Stack>
                 </TableCell>
 
@@ -110,7 +107,11 @@ export default function ContributorHead({
                             Project
                         </Typography>
 
-                        <TriunghiMenuContributorProject handleMenuFilter={handleMenuFilter} />
+                        <TriunghiMenuContributorProject
+                            handleMenuFilter={handleMenuFilter}
+                            clearFilterFunction={clearFilterFunction}
+                            globalFilter={globalFilter}
+                        />
                     </Stack>
                 </TableCell>
 
