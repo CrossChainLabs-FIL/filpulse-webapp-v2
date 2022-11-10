@@ -79,7 +79,14 @@ export default function PRHead({
                             #
                         </Typography>
 
-                        <TriunghiMenuPrId data={data} />
+                        {/* <TriunghiMenuPrId data={data} /> */}
+                        <IconButton
+                            id="basic-button"
+                            // onClick={(e) => handleSortChange()}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -98,7 +105,14 @@ export default function PRHead({
                             PR
                         </Typography>
 
-                        <TriunghiMenuPrPr handleMenuFilter={handleMenuFilter} />
+                        {/* <TriunghiMenuPrPr handleMenuFilter={handleMenuFilter} /> */}
+                        <IconButton
+                            id="basic-button"
+                            // onClick={(e) => handleSortChange()}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -141,7 +155,10 @@ export default function PRHead({
                             Status
                         </Typography>
 
-                        <TriunghiMenuPrStatus />
+                        <TriunghiMenuPrStatus
+                            globalFilter={globalFilter}
+                            clearFilterFunction={clearFilterFunction}
+                        />
                     </Stack>
                 </TableCell>
 

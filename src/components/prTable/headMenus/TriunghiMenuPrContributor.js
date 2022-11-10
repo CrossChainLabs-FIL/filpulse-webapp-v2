@@ -25,6 +25,7 @@ import { Client } from '../../../utils/client';
 import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
 import clearFilter from '../../../assets/clearFilter.svg';
+import bara from '../../../assets/bara.svg';
 
 const client = new Client();
 
@@ -32,7 +33,7 @@ const client = new Client();
 const useStyles = makeStyles(() => ({
     triunghi: {
         marginLeft: '0.25em',
-        marginTop: '0.15em'
+        // marginTop: '0.15em'
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
@@ -142,7 +143,7 @@ export default function TriunghiMenuPrContributor({ handleMenuFilter, globalFilt
                 onClick={handleClick}
                 style={{ padding: 0 }}
             >
-                <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                <img src={bara} alt='bara' className={classes.triunghi} />
             </IconButton>
             {isSorted ?
                 <IconButton
