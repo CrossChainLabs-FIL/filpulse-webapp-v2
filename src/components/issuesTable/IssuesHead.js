@@ -56,7 +56,8 @@ export default function IssuesHead({
     data,
     handleSortChange,
     handleMenuFilter,
-    clearFilterFunction
+    clearFilterFunction,
+    globalFilter
 }) {
 
 
@@ -84,7 +85,14 @@ export default function IssuesHead({
                             #
                         </Typography>
 
-                        <TriunghiMenuIssuesId data={data} />
+                        {/* <TriunghiMenuIssuesId data={data} /> */}
+                        <IconButton
+                            id="basic-button"
+                            // onClick={(e) => handleSortChange()}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -103,7 +111,14 @@ export default function IssuesHead({
                             Issue
                         </Typography>
 
-                        <TriunghiMenuIssuesIssue handleMenuFilter={handleMenuFilter} />
+                        {/* <TriunghiMenuIssuesIssue handleMenuFilter={handleMenuFilter} /> */}
+                        <IconButton
+                            id="basic-button"
+                            // onClick={(e) => handleSortChange()}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -122,15 +137,11 @@ export default function IssuesHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuIssuesAuthor handleMenuFilter={handleMenuFilter} />
-
-                        <IconButton
-                            id="basic-button"
-                            onClick={clearFilterFunction}
-                            style={{ padding: 0, marginLeft: '0.25em' }}
-                        >
-                            <img src={clearFilter} alt='clear' />
-                        </IconButton>
+                        <TriunghiMenuIssuesAuthor
+                            handleMenuFilter={handleMenuFilter}
+                            clearFilterFunction={clearFilterFunction}
+                            globalFilter={globalFilter}
+                        />
                     </Stack>
                 </TableCell>
 
@@ -149,7 +160,10 @@ export default function IssuesHead({
                             Assignee
                         </Typography>
 
-                        <TriunghiMenuIssuesAssignee data={data} />
+                        <TriunghiMenuIssuesAssignee
+                            clearFilterFunction={clearFilterFunction}
+                            globalFilter={globalFilter}
+                        />
                     </Stack>
                 </TableCell>
 
@@ -168,7 +182,10 @@ export default function IssuesHead({
                             Status
                         </Typography>
 
-                        <TriunghiMenuIssuesStatus data={data} />
+                        <TriunghiMenuIssuesStatus
+                            clearFilterFunction={clearFilterFunction}
+                            globalFilter={globalFilter}
+                        />
                     </Stack>
                 </TableCell>
 

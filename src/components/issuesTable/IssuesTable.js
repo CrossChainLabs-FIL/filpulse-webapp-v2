@@ -57,7 +57,8 @@ export default function IssuesTable({
     handleMenuFilter,
     // searchData,
     handleSortChange,
-    clearFilter
+    clearFilter,
+    globalFilter
 }) {
 
     const classes = useStyles();
@@ -84,6 +85,7 @@ export default function IssuesTable({
                         handleSortChange={handleSortChange}
                         handleMenuFilter={handleMenuFilter}
                         clearFilterFunction={clearFilter}
+                        globalFilter={globalFilter}
                     />
 
                     {state.loading && (

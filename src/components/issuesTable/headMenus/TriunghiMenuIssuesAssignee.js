@@ -18,16 +18,21 @@ import {
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
+import { Client } from '../../../utils/client';
 
 // assets
 import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
+import clearFilter from '../../../assets/clearFilter.svg';
+import bara from '../../../assets/bara.svg';
+
+const client = new Client();
 
 
 const useStyles = makeStyles(() => ({
     triunghi: {
         marginLeft: '0.25em',
-        marginTop: '0.15em'
+        // marginTop: '0.15em'
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
@@ -72,15 +77,57 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuIssuesAssignee({ data }) {
+export default function TriunghiMenuIssuesAssignee({ clearFilterFunction, globalFilter }) {
+    const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
+    const [state, setState] = useState({
+        loading: true, commits_data: []
+    });
+    const [isSorted, setIsSorted] = useState(false);
+    const [last, setLast] = useState('');
     const open = Boolean(anchorEl);
+
     const handleClick = (event) => {
+        client.get('tab_issues/filter/assignee').then((contributor_data) => {
+            setState({
+                loading: false,
+                contributor_data: contributor_data,
+            });
+        });
+        setFilterName('');
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    function handleFilterClose(assignee) {
+        handleClose();
+        setIsSorted(true);
+        setLast(assignee);
+        globalFilter(`assignee=${assignee}`, 'assignee=', last);
+    }
+
+    const handleFilterByName = (event) => {
+        if (event.target.value) {
+            client.get(`tab_issues/filter/assignee?search=${event.target.value}`).then((contributor_data) => {
+                setState({
+                    loading: false,
+                    contributor_data: contributor_data,
+                });
+            });
+        }
+        else {
+            client.get('tab_issues/filter/assignee').then((contributor_data) => {
+                setState({
+                    loading: false,
+                    contributor_data: contributor_data,
+                });
+            });
+        }
+        setFilterName(event.target.value);
+    }
 
 
     const classes = useStyles();
@@ -95,8 +142,17 @@ export default function TriunghiMenuIssuesAssignee({ data }) {
                 onClick={handleClick}
                 style={{ padding: 0 }}
             >
-                <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                <img src={bara} alt='bara' className={classes.triunghi} />
             </IconButton>
+            {isSorted ?
+                <IconButton
+                    id="basic-button"
+                    onClick={() => { setIsSorted(false); setLast(''); clearFilterFunction('assignee=', last); }}
+                    style={{ padding: 0, marginLeft: '0.25em' }}
+                >
+                    <img src={clearFilter} alt='clear' />
+                </IconButton> : ''
+            }
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -127,47 +183,40 @@ export default function TriunghiMenuIssuesAssignee({ data }) {
                         </Stack>
                         <Divider />
                         <SearchStyle
-                            // value={filterName}
-                            // onChange={(e) => handleFilterByName(e)}
+                            value={filterName}
+                            onChange={(e) => handleFilterByName(e)}
                             placeholder="Filter assignees"
                         />
                         <Divider />
                     </Box >
                     <Paper className={classes.paper}>
                         <List className={classes.list} disablePadding={true}>
-                            {/* {data.map((row) => {
-                                const { id,
-                                    assigneeIcon,
-                                    assigneeName,
+                            {state.contributor_data?.list.map((row) => {
+                                const { assignee,
+                                    avatar_url
                                 } = row;
                                 return (
-                                    <React.Fragment key={id}>
-                                        {assigneeIcon.map((assignee, index) => {
-                                            return (
-                                                <React.Fragment key={id}>
-                                                    <MenuItem
-                                                        style={{ backgroundColor: '#FFFFFF', }}
-                                                        onClick={handleClose}
-                                                    >
-                                                        <Avatar
-                                                            src={assignee}
-                                                            alt='avatar'
-                                                            sx={{
-                                                                width: 30,
-                                                                height: 30,
-                                                                marginLeft: "1.75em",
-                                                                marginRight: "0.5em"
-                                                            }}
-                                                        />
-                                                        <ListItemText primary={assigneeName[index]} />
-                                                    </MenuItem>
-                                                    <Divider />
-                                                </React.Fragment>
-                                            );
-                                        })}
+                                    <React.Fragment key={assignee}>
+                                        <MenuItem
+                                            style={{ backgroundColor: '#FFFFFF', }}
+                                            onClick={() => handleFilterClose(assignee)}
+                                        >
+                                            <Avatar
+                                                src={avatar_url}
+                                                alt='avatar'
+                                                sx={{
+                                                    width: 30,
+                                                    height: 30,
+                                                    marginLeft: "1.75em",
+                                                    marginRight: "0.5em"
+                                                }}
+                                            />
+                                            <ListItemText primary={assignee} />
+                                        </MenuItem>
+                                        <Divider />
                                     </React.Fragment>
                                 );
-                            })} */}
+                            })}
                         </List>
                     </Paper>
                 </Box>

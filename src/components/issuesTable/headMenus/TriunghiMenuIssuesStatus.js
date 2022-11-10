@@ -20,12 +20,14 @@ import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
 import closedBox from '../../../assets/ClosedBox.svg';
 import openBox from '../../../assets/OpenBox.svg';
+import clearFilter from '../../../assets/clearFilter.svg';
+import bara from '../../../assets/bara.svg';
 
 
 const useStyles = makeStyles(() => ({
     triunghi: {
         marginLeft: '0.25em',
-        marginTop: '0.15em'
+        // marginTop: '0.15em'
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
@@ -60,8 +62,10 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function TriunghiMenuIssuesStatus({ data }) {
+export default function TriunghiMenuIssuesStatus({ clearFilterFunction, globalFilter }) {
     const [anchorEl, setAnchorEl] = useState(null);
+    const [isSorted, setIsSorted] = useState(false);
+    const [last, setLast] = useState('');
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -69,6 +73,13 @@ export default function TriunghiMenuIssuesStatus({ data }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    function handleFilterClose(status) {
+        handleClose();
+        setIsSorted(true);
+        setLast(status);
+        globalFilter(`status=${status}`, 'status=', last);
+    }
 
 
     const classes = useStyles();
@@ -83,8 +94,17 @@ export default function TriunghiMenuIssuesStatus({ data }) {
                 onClick={handleClick}
                 style={{ padding: 0 }}
             >
-                <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                <img src={bara} alt='bara' className={classes.triunghi} />
             </IconButton>
+            {isSorted ?
+                <IconButton
+                    id="basic-button"
+                    onClick={() => { setIsSorted(false); setLast(''); clearFilterFunction('status=', last); }}
+                    style={{ padding: 0, marginLeft: '0.25em' }}
+                >
+                    <img src={clearFilter} alt='clear' />
+                </IconButton> : ''
+            }
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -119,7 +139,7 @@ export default function TriunghiMenuIssuesStatus({ data }) {
                         <List className={classes.list} disablePadding={true}>
                             <MenuItem
                                 style={{ backgroundColor: '#FFFFFF', }}
-                                onClick={handleClose}
+                                onClick={() => handleFilterClose('closed')}
                             >
                                 <img
                                     src={closedBox}
@@ -129,11 +149,11 @@ export default function TriunghiMenuIssuesStatus({ data }) {
                             <Divider />
                             <MenuItem
                                 style={{ backgroundColor: '#FFFFFF', }}
-                                onClick={handleClose}
+                                onClick={() => handleFilterClose('open')}
                             >
                                 <img
                                     src={openBox}
-                                    alt="closed"
+                                    alt="open"
                                 />
                             </MenuItem>
                             <Divider />
