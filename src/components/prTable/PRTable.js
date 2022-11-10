@@ -99,12 +99,12 @@ export default function PRTable({
                         <TableBody>
                             {data.map((row) => {
                                 const id = faker.datatype.uuid();
-                                const { pr_number,
+                                const { number,
                                     title,
                                     repo,
                                     organisation,
                                     html_url,
-                                    pr_state,
+                                    state,
                                     avatar_url,
                                     dev_name,
                                     updated_at } = row;
@@ -140,7 +140,7 @@ export default function PRTable({
                                                     color="inherit"
                                                     underline="none"
                                                 >
-                                                    {pr_number}
+                                                    {number}
                                                 </Link>
                                             </Typography>
                                         </TableCell>
@@ -223,7 +223,7 @@ export default function PRTable({
                                             padding="none"
                                         >
 
-                                            {pr_state === 'closed' ?
+                                            {state === 'closed' ?
                                                 (
                                                     <img
                                                         src={closedBox}

@@ -192,7 +192,7 @@ export default function ContributorHead({
                             marginLeft: '1.8em'
                         }}
                     >
-                        open - merged
+                        open - closed
                     </Typography>
                 </TableCell>
 

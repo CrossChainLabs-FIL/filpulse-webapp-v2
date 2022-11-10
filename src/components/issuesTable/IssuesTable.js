@@ -77,14 +77,15 @@ export default function IssuesTable({
     // const showData = isSearchEmpty ? data : searchData;
 
     const starOnChange = (e) => {
-        let data = {
-            issue_number: e.target.id,
+        let index = e.target.id;
+        let params = {
+            number: data[index].number,
+            repo: data[index].repo,
+            organisation: data[index].organisation,
             follow: e.target.checked,
         }
 
-        console.log(data);
-
-        client.post_with_token('issues/follow', data, user.token);
+        client.post_with_token('issues/follow', params, user.token);
     }
 
     return (
@@ -117,15 +118,15 @@ export default function IssuesTable({
                     )}
                     {!state.loading && (
                         <TableBody>
-                            {data.map((row) => {
+                            {data.map((row, index) => {
                                 const id = faker.datatype.uuid();
                                 const {
                                     assignees,
                                     avatar_url,
                                     dev_name,
                                     html_url,
-                                    issue_number,
-                                    issue_state,
+                                    number,
+                                    state,
                                     organisation,
                                     repo,
                                     title,
@@ -138,7 +139,8 @@ export default function IssuesTable({
                                     >
                                         <TableCell padding="checkbox">
                                             <Checkbox
-                                                id={issue_number}
+                                                id={index}
+                                                repo={repo}
                                                 icon={<img src={steaGol} alt='steaGol' />}
                                                 checkedIcon={<img src={steaPlin} alt='steaPlin' />}
                                                 onChange={(e) => starOnChange(e)}
@@ -163,7 +165,7 @@ export default function IssuesTable({
                                                     href={html_url}
                                                     color="inherit"
                                                 >
-                                                    {`#${issue_number}`}
+                                                    {`#${number}`}
                                                 </Link>
                                             </Typography>
                                         </TableCell>
@@ -283,7 +285,7 @@ export default function IssuesTable({
                                             padding="none"
                                         >
 
-                                            {issue_state === 'closed' ?
+                                            {state === 'closed' ?
                                                 (
                                                     <img
                                                         src={closedBox}
