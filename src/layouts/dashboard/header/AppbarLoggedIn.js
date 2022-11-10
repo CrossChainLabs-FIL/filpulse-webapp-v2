@@ -84,7 +84,7 @@ export default function AppbarLoggedIn() {
 
 
     const accountInfo = () => {
-        const { avatar_url, login } = state.user;
+        const { avatar_url, dev_name } = state.user;
         return (
             <div
                 style={{
@@ -94,7 +94,7 @@ export default function AppbarLoggedIn() {
                 }}
             >
                 <img src={avatar_url} alt="Avatar" style={{ height: '2em', marginRight: '0.5em' }} />
-                <TextTypography>{login}</TextTypography>
+                <TextTypography>{dev_name}</TextTypography>
             </div >
         )
     }

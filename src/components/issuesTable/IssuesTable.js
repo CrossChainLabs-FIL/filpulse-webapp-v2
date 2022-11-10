@@ -2,6 +2,9 @@ import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
 
+import { Client } from '../../utils/client';
+
+
 import {
     Box,
     Stack,
@@ -67,7 +70,22 @@ export default function IssuesTable({
 
     const tableEmpty = data.length === 0 && isSearchEmpty;
 
+    const client = new Client();
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
     // const showData = isSearchEmpty ? data : searchData;
+
+    const starOnChange = (e) => {
+        let data = {
+            issue_number: e.target.id,
+            follow: e.target.checked,
+        }
+
+        console.log(data);
+
+        client.post_with_token('issues/follow', data, user.token);
+    }
 
     return (
         <>
@@ -120,8 +138,10 @@ export default function IssuesTable({
                                     >
                                         <TableCell padding="checkbox">
                                             <Checkbox
+                                                id={issue_number}
                                                 icon={<img src={steaGol} alt='steaGol' />}
                                                 checkedIcon={<img src={steaPlin} alt='steaPlin' />}
+                                                onChange={(e) => starOnChange(e)}
                                                 className={classes.stea}
                                             />
                                         </TableCell>

@@ -172,7 +172,6 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 );
 
 export default function TableApp() {
-
     const [order, setOrder] = useState('desc');
 
     const [orderBy, setOrderBy] = useState('showId');
@@ -190,6 +189,8 @@ export default function TableApp() {
     const [isSearchEmpty, setIsSearchEmpty] = useState(true);
 
     const [filterLink, setFilterLink] = useState('');
+
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const [state, setState] = useState({
         loading: true, commits_data: [], contributors_data: [], pr_data: [], issues_data: [], releases_data: []

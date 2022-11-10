@@ -27,4 +27,22 @@ export class Client {
 
     return response.data;
   }
+
+  async post_with_token(endpoint, data, token) {
+    const response = await axios.post(
+      this.api + endpoint,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+
+    if (!response || response.status !== 200) {
+      return undefined;
+    }
+
+    return response.data;
+  }
 }
