@@ -130,6 +130,7 @@ export default function IssuesTable({
                                     organisation,
                                     repo,
                                     title,
+                                    follow,
                                     updated_at } = row;
                                 return (
                                     <TableRow
@@ -141,6 +142,7 @@ export default function IssuesTable({
                                             <Checkbox
                                                 id={index}
                                                 repo={repo}
+                                                checked={follow}
                                                 icon={<img src={steaGol} alt='steaGol' />}
                                                 checkedIcon={<img src={steaPlin} alt='steaPlin' />}
                                                 onChange={(e) => starOnChange(e)}
