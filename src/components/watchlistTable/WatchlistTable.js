@@ -105,7 +105,6 @@ export default function WatchlistTable({
                                 created_at,
                                 updated_at,
                             } = row;
-
                             let merged = 0;
 
                             if (!is_pr) {
@@ -270,7 +269,7 @@ export default function WatchlistTable({
                                                         marginLeft: '2.1em'
                                                     }}
                                                 >
-                                                    <Badge badgeContent={new_comments ? new_comments : 0}
+                                                    <Badge badgeContent={Number(new_comments)}
                                                         // color='primary'
                                                         anchorOrigin={{
                                                             vertical: 'top',
