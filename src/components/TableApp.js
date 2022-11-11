@@ -374,7 +374,7 @@ export default function TableApp() {
                         setData(watchlist_data.list);
                     });
                 }
-                    break;
+                break;
             default: console.log(newValue); break;
         }
     };

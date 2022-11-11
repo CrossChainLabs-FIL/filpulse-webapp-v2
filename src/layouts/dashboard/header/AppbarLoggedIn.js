@@ -8,6 +8,9 @@ import {
     Toolbar,
     Typography,
     IconButton,
+    MenuItem,
+    Menu,
+    Button
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
@@ -15,6 +18,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import logo from "../../../logo.svg";
 import exit from "../../../assets/exit.svg";
 import account from "../../../assets/account.svg";
+import triunghi from "../../../assets/triunghi.svg";
 
 // import Login from "../../../components/Login"
 
@@ -78,6 +82,15 @@ export default function AppbarLoggedIn() {
 
     const classes = useStyles();
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
     if (!state.isLoggedIn) {
         return <Navigate to="/login" replace />;
     }
@@ -111,12 +124,45 @@ export default function AppbarLoggedIn() {
                     <img src={logo} alt="" className={classes.logo} />
                     <TextTypography>FilPulse</TextTypography>
                     {accountInfo()}
-                    <IconButton>
-                        <img src={account} alt="account" />
+                    <img src={account} alt="account" />
+                    <IconButton
+                        id="basic-button"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                        style={{ marginRight: '6.75em' }}
+                    >
+                        <img src={triunghi} alt="triunghi" />
                     </IconButton >
-                    <IconButton style={{ marginRight: '6.75em' }} onClick={() => handleLogout()}>
-                        <img src={exit} alt="exit" />
-                    </IconButton >
+                    <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                        transformOrigin={{ vertical: "top", horizontal: "right" }}
+                        MenuListProps={{
+                            style: {
+                                backgroundColor: "#fff",
+                                padding: '0px',
+                            }
+                        }}
+                    >
+                        <Button
+                            variant="contained"
+                            startIcon={<img src={exit} alt='exit' />}
+                            sx={{
+                                backgroundColor: 'transparent',
+                                color: '#000000',
+                                width: '12em',
+
+                            }}
+                            onClick={() => handleLogout()}
+                        >
+                            Sign out
+                        </Button>
+                    </Menu>
                 </ToolbarStyle>
             </AppBar>
             <div className={classes.toolbarMargin} />

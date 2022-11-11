@@ -8,12 +8,16 @@ import {
     Toolbar,
     Typography,
     IconButton,
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    Button
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import logo from "../../../logo.svg";
-import exit from "../../../assets/exit.svg";
+import GithubLogo from "../../../assets/GithubLogo.svg";
 import account from "../../../assets/account.svg";
 
 // import Login from "../../../components/Login"
@@ -88,6 +92,16 @@ export default function AppbarLoggedOut() {
 
     const { client_id, redirect_uri } = state;
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     useEffect(() => {
         // After requesting Github access, Github redirects back to your app with a code parameter
         const url = window.location.href;
@@ -110,12 +124,12 @@ export default function AppbarLoggedOut() {
                     payload: { user: response, isLoggedIn: true }
                 });
             })
-            .catch(error => {
-                setData({
-                    isLoading: false,
-                    errorMessage: "Sorry! Login failed"
+                .catch(error => {
+                    setData({
+                        isLoading: false,
+                        errorMessage: "Sorry! Login failed"
+                    });
                 });
-            });
         }
     }, [state, dispatch, data]);
 
@@ -136,24 +150,57 @@ export default function AppbarLoggedOut() {
                             loading
                         </div>
                     ) : (
-                        <div style={{ marginLeft: 'auto', marginTop: '0.4em', marginRight: '0.5em' }}>
-                            {
-                                // Link to request GitHub access
-                            }
-                            <a
-                                className="login-link"
-                                href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
-                                onClick={() => {
-                                    setData({ ...data, errorMessage: "" });
-                                }}
-                            >
+                        <div style={{ marginLeft: 'auto', marginTop: '0.4em', marginRight: '10em' }}>
+                            <IconButton variant="outlined" onClick={handleClickOpen}>
                                 <img src={account} alt="account" />
-                            </a>
+                            </IconButton>
+                            <Dialog open={open} onClose={handleClose} >
+                                <DialogTitle
+                                    style={{
+                                        backgroundColor: "#EEF4F5",
+                                    }}
+                                >
+                                    {"Get your own watchlist"}
+                                </DialogTitle>
+                                <DialogContent
+                                    style={{
+                                        backgroundColor: "#FFFFFF",
+                                        height: '18em',
+                                        width: '30em'
+                                    }}
+                                >
+                                    <Typography
+                                        style={{
+                                            marginTop: '3.5em',
+                                            marginBottom: '3em',
+                                            marginLeft: '3em'
+                                        }}
+                                    >
+                                        Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
+                                    </Typography>
+                                    <Button
+                                        variant="contained"
+                                        startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                        className="login-link"
+                                        href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
+                                        onClick={() => {
+                                            setData({ ...data, errorMessage: "" });
+                                        }}
+                                        sx={{
+                                            backgroundColor: 'transparent',
+                                            color: '#000000',
+                                            width: '23em',
+                                            marginLeft: '4em'
+                                        }}
+                                    >
+                                        Sign in with Github
+                                    </Button>
+                                </DialogContent>
+
+                            </Dialog>
+
                         </div>
                     )}
-                    <IconButton style={{ marginRight: '6.75em' }}>
-                        <img src={exit} alt="exit" />
-                    </IconButton >
                 </ToolbarStyle>
             </AppBar>
             <div className={classes.toolbarMargin} />
