@@ -83,6 +83,8 @@ export default function PRTable({
             follow: e.target.checked,
         }
 
+        data[index].follow = true;
+
         client.post_with_token('follow', params, user.token);
     }
 
@@ -126,7 +128,11 @@ export default function PRTable({
                                     state,
                                     avatar_url,
                                     dev_name,
+                                    follow,
                                     updated_at } = row;
+                   
+                                        console.log(follow);
+
                                 return (
                                     <TableRow
                                         hover
@@ -136,6 +142,7 @@ export default function PRTable({
                                         <TableCell padding="checkbox">
                                             <Checkbox
                                                 id={index}
+                                                checked={follow}
                                                 icon={<img src={steaGol} alt='steaGol' />}
                                                 checkedIcon={<img src={steaPlin} alt='steaPlin' />}
                                                 onChange={(e) => starOnChange(e)}

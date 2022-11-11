@@ -282,29 +282,54 @@ export default function TableApp() {
         setFilterName('');
         setIsSearchEmpty(true);
         setData([]);
+        const user = JSON.parse(localStorage.getItem("user"));
         // handleTop();
         switch (newValue) {
             case 0:
-                client.get('tab_prs').then((pr_data) => {
-                    setState({
-                        loading: false,
-                        pr_data: pr_data,
+                if (user.token) {
+                    client.post_with_token('tab_prs', { params: 0 }, user.token).then((pr_data) => {
+                        setState({
+                            loading: false,
+                            pr_data: pr_data,
+                        });
+                        setOrderBy('showId');
+                        setOrder('desc');
+                        setData(pr_data.list);
                     });
-                    setOrderBy('showId');
-                    setOrder('desc');
-                    setData(pr_data.list);
-                });
+                } else {
+                    client.get('tab_prs').then((pr_data) => {
+                        setState({
+                            loading: false,
+                            pr_data: pr_data,
+                        });
+                        setOrderBy('showId');
+                        setOrder('desc');
+                        setData(pr_data.list);
+                    });
+                }
                 break;
             case 1:
-                client.get('tab_issues').then((issues_data) => {
-                    setState({
-                        loading: false,
-                        issues_data: issues_data,
+                if (user.token) {
+                    client.post_with_token('tab_issues', { params: 0 }, user.token).then((issues_data) => {
+                        setState({
+                            loading: false,
+                            issues_data: issues_data,
+                        });
+                        setOrderBy('showId');
+                        setOrder('desc');
+                        setData(issues_data.list);
                     });
-                    setOrderBy('showId');
-                    setOrder('desc');
-                    setData(issues_data.list);
-                });
+                } else {
+                    client.get('tab_issues').then((issues_data) => {
+                        setState({
+                            loading: false,
+                            issues_data: issues_data,
+                        });
+                        setOrderBy('showId');
+                        setOrder('desc');
+                        setData(issues_data.list);
+                    });
+                }
                 break;
             case 2:
                 client.get('tab_releases').then((releases_data) => {
@@ -340,15 +365,16 @@ export default function TableApp() {
                 });
                 break;
             case 5:
-                const user = JSON.parse(localStorage.getItem("user"));
-                client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
-                    setState({
-                        loading: false,
-                        watchlist_data: watchlist_data,
+                if (user.token) {
+                    client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
+                        setState({
+                            loading: false,
+                            watchlist_data: watchlist_data,
+                        });
+                        setData(watchlist_data.list);
                     });
-                    setData(watchlist_data.list);
-                });
-                break;
+                }
+                    break;
             default: console.log(newValue); break;
         }
     };
