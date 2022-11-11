@@ -104,11 +104,10 @@ export default function WatchlistTable({
                                 is_pr,
                                 state,
                                 participants,
-                                commentsTotal,
-                                commentsUnseen,
+                                comments,
+                                new_comments,
                                 created_at,
                                 updated_at,
-                                projectLink,
                                  } = row;
 
                             let merged = 0;
@@ -186,7 +185,7 @@ export default function WatchlistTable({
                                                     < Link
                                                         target="_blank"
                                                         rel="noopener"
-                                                        href={projectLink}
+                                                        href={"https://github.com/" + dev_name}
                                                         color="inherit"
                                                     >
                                                         {dev_name}
@@ -224,7 +223,7 @@ export default function WatchlistTable({
                                                         <Link
                                                             target="_blank"
                                                             rel="noopener"
-                                                            href={"https://github.com/" + avatar_url}
+                                                            href={"https://github.com/" + dev_name}
                                                         >
                                                             <Box
                                                                     component="img"
@@ -263,36 +262,37 @@ export default function WatchlistTable({
                                         < Link
                                             target="_blank"
                                             rel="noopener"
-                                            href={projectLink}
                                             color="inherit"
                                             underline='none'
                                         >
-                                            <Stack
-                                                direction="row"
-                                                alignItems="center"
-                                                style={{
-                                                    marginLeft: '2.1em'
-                                                }}
-                                            >
-                                                <Badge
-                                                    badgeContent={commentsUnseen ? commentsUnseen: 1}
-                                                    // color='primary'
-                                                    anchorOrigin={{
-                                                        vertical: 'top',
-                                                        horizontal: 'left',
-                                                    }}
-                                                    classes={{ badge: classes.customBadge }}
+
+                                            {comments ? (
+                                                <Stack
+                                                    direction="row"
+                                                    alignItems="center"
                                                     style={{
-                                                        marginLeft: '0.25em',
-                                                        marginRight: '0.25em',
+                                                        marginLeft: '2.1em'
                                                     }}
                                                 >
-                                                    <img src={comment} alt='comment' />
-                                                </Badge>
-                                                <Typography variant="subtitle2" noWrap >
-                                                    {commentsTotal ? commentsTotal : 100}
-                                                </Typography>
-                                            </Stack>
+                                                    <Badge badgeContent={new_comments ? new_comments : 0}
+                                                        // color='primary'
+                                                        anchorOrigin={{
+                                                            vertical: 'top',
+                                                            horizontal: 'left',
+                                                        }}
+                                                        classes={{ badge: classes.customBadge }}
+                                                        style={{
+                                                            marginLeft: '0.25em',
+                                                            marginRight: '0.25em',
+                                                        }}
+                                                    >
+                                                        <img src={comment} alt='comment' />
+                                                    </Badge>
+                                                    <Typography variant="subtitle2" noWrap >
+                                                        {comments ? comments : ''}
+                                                    </Typography>
+                                                </Stack>) : ''}
+
                                         </Link>
                                     </TableCell>
 
