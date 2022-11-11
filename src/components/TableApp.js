@@ -232,7 +232,6 @@ export default function TableApp() {
                 loading: false,
                 pr_data: pr_data.list,
             });
-            //setOrderBy('showId');
             setOrder('desc');
             setData(pr_data.list);
         });
@@ -262,7 +261,6 @@ export default function TableApp() {
                             loading: false,
                             pr_data: pr_data,
                         });
-                        //setOrderBy('showId');
                         setOrder('desc');
                         setData(pr_data.list);
                     });
@@ -272,7 +270,6 @@ export default function TableApp() {
                             loading: false,
                             pr_data: pr_data,
                         });
-                        //setOrderBy('showId');
                         setOrder('desc');
                         setData(pr_data.list);
                     });
@@ -285,7 +282,6 @@ export default function TableApp() {
                             loading: false,
                             issues_data: issues_data,
                         });
-                        //setOrderBy('showId');
                         setOrder('desc');
                         setData(issues_data.list);
                     });
@@ -295,7 +291,6 @@ export default function TableApp() {
                             loading: false,
                             issues_data: issues_data,
                         });
-                        //setOrderBy('showId');
                         setOrder('desc');
                         setData(issues_data.list);
                     });
@@ -307,7 +302,6 @@ export default function TableApp() {
                         loading: false,
                         releases_data: releases_data,
                     });
-                    //setOrderBy('showId');
                     setOrder('desc');
                     setData(releases_data.list);
                 });
@@ -318,7 +312,6 @@ export default function TableApp() {
                         loading: false,
                         commits_data: commits_data,
                     });
-                    //setOrderBy('showId');
                     setOrder('desc');
                     setData(commits_data.list);
                 });

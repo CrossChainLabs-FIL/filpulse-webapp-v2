@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
@@ -56,7 +57,6 @@ export default function PRTable({
     data,
     state,
     handleMenuFilter,
-    // searchData,
     handleSortChange,
     clearFilter,
     globalFilter
@@ -65,15 +65,33 @@ export default function PRTable({
     const classes = useStyles();
 
     const isUserNotFound = data.length === 0 && !isSearchEmpty;
-
     const tableEmpty = data.length === 0 && isSearchEmpty;
 
-    // const showData = isSearchEmpty ? data : searchData;
+    const [posts, setPosts] = useState([]);
+
+    const fetchPost = async () => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            let response;
+            if (user.token) {
+                response = await client.post_with_token('tab_prs', { params: 0 }, user.token);
+            } else {
+                response = await client.get('tab_prs');
+            }
+;
+            setPosts(response.list);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchPost();
+    }, []);
+
     const client = new Client();
 
     const user = JSON.parse(localStorage.getItem("user"));
-
-    // const showData = isSearchEmpty ? data : searchData;
 
     const starOnChange = (e) => {
         let index = e.target.id;
@@ -84,9 +102,9 @@ export default function PRTable({
             follow: e.target.checked,
         }
 
-        data[index].follow = true;
-
         client.post_with_token('follow', params, user.token);
+
+        fetchPost();
     }
 
     return (
@@ -121,7 +139,7 @@ export default function PRTable({
                     )}
                     {!state.loading && (
                         <TableBody>
-                            {data.map((row, index) => {
+                            {posts.map((row, index) => {
                                 const id = faker.datatype.uuid();
                                 const { number,
                                     title,
