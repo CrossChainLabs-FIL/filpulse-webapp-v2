@@ -13,7 +13,8 @@ import {
     Link,
     Badge,
     Stack,
-    Tooltip
+    Tooltip,
+    Box
 } from '@mui/material';
 
 
@@ -30,6 +31,8 @@ import PRClosed from '../../assets/PRClosed.svg';
 import PROpen from '../../assets/PROpen.svg';
 import IssuesOpen from '../../assets/IssuesOpen.svg';
 import IssuesClosed from '../../assets/IssuesClosed.svg';
+
+import { fToNow } from '../../utils/format';
 
 
 const useStyles = makeStyles(() => ({
@@ -89,26 +92,37 @@ export default function WatchlistTable({
                         clearFilterFunction={clearFilter}
                     />
 
+
+
                     <TableBody>
-                        {showData.map((row) => {
-                            const { id,
-                                showId,
-                                projectTitle,
-                                projectSubtitle,
-                                projectAuthor,
-                                projectLink,
-                                participantIcons,
-                                participantName,
-                                participantLink,
-                                merged,
+                        {showData.map((row, idx) => {
+                            const {
+                                number,
+                                title,
+                                html_url,
+                                dev_name,
+                                is_pr,
+                                state,
+                                participants,
                                 commentsTotal,
                                 commentsUnseen,
-                                timeText,
-                                timeNumber } = row;
+                                created_at,
+                                updated_at,
+                                projectLink,
+                                 } = row;
+
+                            let merged = 0;
+
+                            if (!is_pr) {
+                                merged = 2;
+                            }
+                            if (state == 'open') {
+                                merged++;
+                            }
                             return (
                                 <TableRow
                                     hover
-                                    key={id}
+                                    key={idx}
                                     tabIndex={-1}
                                 >
                                     <TableCell padding="checkbox">
@@ -134,10 +148,10 @@ export default function WatchlistTable({
                                             <Link
                                                 target="_blank"
                                                 rel="noopener"
-                                                href={projectLink}
+                                                href={html_url}
                                                 color="inherit"
                                             >
-                                                {showId}
+                                                {number}
                                             </Link>
                                         </Typography>
                                     </TableCell>
@@ -164,18 +178,18 @@ export default function WatchlistTable({
                                                     }}
                                                     className={classes.projectElipsis}
                                                 >
-                                                    {projectTitle}
+                                                    {title}
                                                 </Typography>
                                             }
                                             subheader={
-                                                <>                                                                {projectSubtitle}
+                                                <>   {"opened " + fToNow(created_at) + " by "}
                                                     < Link
                                                         target="_blank"
                                                         rel="noopener"
                                                         href={projectLink}
                                                         color="inherit"
                                                     >
-                                                        {projectAuthor}
+                                                        {dev_name}
                                                     </Link>
                                                 </>
                                             }
@@ -189,7 +203,9 @@ export default function WatchlistTable({
                                         scope="row"
                                         padding="none"
                                     >
-                                        {participantIcons.map((avatar, index) => {
+                                        {participants ? JSON.parse(participants).map((item, index) => {
+                                            let dev_name = item[0];
+                                            let avatar_url = item[1];
                                             let overflow = false;
                                             if (index >= 3 && overflow === false) {
                                                 overflow = true;
@@ -200,7 +216,7 @@ export default function WatchlistTable({
                                             if (index < 3) {
                                                 return (
                                                     <Tooltip
-                                                        title={participantName[index]}
+                                                        title={dev_name}
                                                         placement="bottom-end"
                                                         arrow
                                                         key={index}
@@ -208,14 +224,21 @@ export default function WatchlistTable({
                                                         <Link
                                                             target="_blank"
                                                             rel="noopener"
-                                                            href={participantLink[index]}
+                                                            href={"https://github.com/" + avatar_url}
                                                         >
-                                                            <img key={avatar} src={avatar} alt="avatar" />
+                                                            <Box
+                                                                    component="img"
+                                                                    src={avatar_url}
+                                                                    sx={{ width: 30, height: 30, borderRadius: 1.5 }}
+                                                                    style={{
+                                                                        marginRight: '1em'
+                                                                    }}
+                                                                />
                                                         </Link>
                                                     </Tooltip>
                                                 );
                                             }
-                                        })}
+                                        }): ''}
                                     </TableCell>
 
                                     <TableCell
@@ -227,8 +250,8 @@ export default function WatchlistTable({
 
                                         {merged === 0 && (<img src={PRClosed} alt="prclosed" />)}
                                         {merged === 1 && (<img src={PROpen} alt="propen" />)}
-                                        {merged === 2 && (<img src={IssuesOpen} alt="issuesopen" />)}
-                                        {merged === 3 && (<img src={IssuesClosed} alt="issuesclosed" />)}
+                                        {merged === 2 && (<img src={IssuesClosed} alt="issuesclosed" />)}
+                                        {merged === 3 && (<img src={IssuesOpen} alt="issuesopen" />)}
                                     </TableCell>
 
                                     <TableCell
@@ -252,7 +275,7 @@ export default function WatchlistTable({
                                                 }}
                                             >
                                                 <Badge
-                                                    badgeContent={commentsUnseen}
+                                                    badgeContent={commentsUnseen ? commentsUnseen: 1}
                                                     // color='primary'
                                                     anchorOrigin={{
                                                         vertical: 'top',
@@ -267,7 +290,7 @@ export default function WatchlistTable({
                                                     <img src={comment} alt='comment' />
                                                 </Badge>
                                                 <Typography variant="subtitle2" noWrap >
-                                                    {commentsTotal}
+                                                    {commentsTotal ? commentsTotal : 100}
                                                 </Typography>
                                             </Stack>
                                         </Link>
@@ -280,7 +303,7 @@ export default function WatchlistTable({
                                         padding="none"
                                     >
                                         <Typography variant="subtitle2" noWrap>
-                                            {timeText}
+                                            {fToNow(updated_at)}
                                         </Typography>
                                     </TableCell>
 
