@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
         height: '4em',
     },
     id: {
-        width: '9em'
+        width: '9em',
     },
     release: {
         width: '18em'
@@ -64,8 +64,6 @@ export default function ReleasesHead({
     return (
         <TableHead>
             <TableRow className={classes.rowHead}>
-
-                <TableCell />
 
                 <TableCell
                     align="left"

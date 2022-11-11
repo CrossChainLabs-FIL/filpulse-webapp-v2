@@ -116,13 +116,6 @@ export default function ReleasesTable({
                                         key={unique_id}
                                         tabIndex={-1}
                                     >
-                                        <TableCell padding="checkbox">
-                                            <Checkbox
-                                                icon={<img src={steaGol} alt='steaGol' />}
-                                                checkedIcon={<img src={steaPlin} alt='steaPlin' />}
-                                                className={classes.stea}
-                                            />
-                                        </TableCell>
 
                                         <TableCell
                                             align="left"

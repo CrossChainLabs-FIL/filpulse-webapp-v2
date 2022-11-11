@@ -108,7 +108,7 @@ export default function WatchlistTable({
                                 new_comments,
                                 created_at,
                                 updated_at,
-                                 } = row;
+                            } = row;
 
                             let merged = 0;
 
@@ -226,18 +226,18 @@ export default function WatchlistTable({
                                                             href={"https://github.com/" + dev_name}
                                                         >
                                                             <Box
-                                                                    component="img"
-                                                                    src={avatar_url}
-                                                                    sx={{ width: 30, height: 30, borderRadius: 1.5 }}
-                                                                    style={{
-                                                                        marginRight: '1em'
-                                                                    }}
-                                                                />
+                                                                component="img"
+                                                                src={avatar_url}
+                                                                sx={{ width: 30, height: 30, borderRadius: 1.5 }}
+                                                                style={{
+                                                                    marginRight: '1em'
+                                                                }}
+                                                            />
                                                         </Link>
                                                     </Tooltip>
                                                 );
                                             }
-                                        }): ''}
+                                        }) : ''}
                                     </TableCell>
 
                                     <TableCell
