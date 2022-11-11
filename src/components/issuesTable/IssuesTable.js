@@ -85,7 +85,7 @@ export default function IssuesTable({
             follow: e.target.checked,
         }
 
-        client.post_with_token('issues/follow', params, user.token);
+        client.post_with_token('follow', params, user.token);
     }
 
     return (

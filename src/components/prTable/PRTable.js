@@ -2,6 +2,8 @@ import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
 
+import { Client } from '../../utils/client';
+
 import {
     Box,
     Checkbox,
@@ -66,6 +68,23 @@ export default function PRTable({
     const tableEmpty = data.length === 0 && isSearchEmpty;
 
     // const showData = isSearchEmpty ? data : searchData;
+    const client = new Client();
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    // const showData = isSearchEmpty ? data : searchData;
+
+    const starOnChange = (e) => {
+        let index = e.target.id;
+        let params = {
+            number: data[index].number,
+            repo: data[index].repo,
+            organisation: data[index].organisation,
+            follow: e.target.checked,
+        }
+
+        client.post_with_token('follow', params, user.token);
+    }
 
     return (
         <>
@@ -97,7 +116,7 @@ export default function PRTable({
                     )}
                     {!state.loading && (
                         <TableBody>
-                            {data.map((row) => {
+                            {data.map((row, index) => {
                                 const id = faker.datatype.uuid();
                                 const { number,
                                     title,
@@ -116,8 +135,10 @@ export default function PRTable({
                                     >
                                         <TableCell padding="checkbox">
                                             <Checkbox
+                                                id={index}
                                                 icon={<img src={steaGol} alt='steaGol' />}
                                                 checkedIcon={<img src={steaPlin} alt='steaPlin' />}
+                                                onChange={(e) => starOnChange(e)}
                                                 className={classes.stea}
                                             />
                                         </TableCell>
