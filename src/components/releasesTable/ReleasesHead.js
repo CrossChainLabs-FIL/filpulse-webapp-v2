@@ -1,3 +1,4 @@
+import { useState } from 'react';
 // material
 import {
     Typography,
@@ -17,7 +18,6 @@ import TriunghiMenuReleasesStatus from './headMenus/TriunghiMenuReleasesStatus'
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
-import clearFilter from '../../assets/clearFilter.svg';
 
 // ----------------------------------------------------------------------
 
@@ -57,7 +57,7 @@ export default function ReleasesHead({
     globalFilter
 }) {
 
-
+    const [order, setOrder] = useState('desc');
 
     const classes = useStyles();
 
@@ -202,7 +202,16 @@ export default function ReleasesHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleSortChange()}
+                            onClick={(e) => {
+                                if (order === 'asc') {
+                                    setOrder('desc');
+                                    clearFilterFunction('sortBy', 'updated_at', "sortType", 'asc');
+                                }
+                                else {
+                                    setOrder('asc');
+                                    globalFilter('sortBy=updated_at', 'sortBy=', '', "sortType=asc", 'sortType=', '');
+                                }
+                            }}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

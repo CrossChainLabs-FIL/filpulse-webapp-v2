@@ -1,3 +1,4 @@
+import { useState } from 'react';
 // material
 import {
     Typography,
@@ -17,7 +18,6 @@ import TriunghiMenuContributorProject from './headMenus/TriunghiMenuContributorP
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
-import clearFilter from '../../assets/clearFilter.svg';
 import info from '../../assets/info.svg';
 
 
@@ -54,6 +54,12 @@ export default function ContributorHead({
     clearFilterFunction,
     globalFilter
 }) {
+
+    const [orderCommits, setOrderCommits] = useState('desc');
+
+    const [orderPrs, setOrderPrs] = useState('desc');
+
+    const [orderIssues, setOrderIssues] = useState('desc');
 
     const classes = useStyles();
 
@@ -132,7 +138,16 @@ export default function ContributorHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleSortChange("commits", 'asc')}
+                            onClick={(e) => {
+                                if (orderCommits === 'asc') {
+                                    setOrderCommits('desc');
+                                    clearFilterFunction('sortBy', 'contributions', "sortType", 'asc');
+                                }
+                                else {
+                                    setOrderCommits('asc');
+                                    globalFilter('sortBy=contributions', 'sortBy=', '', "sortType=asc", 'sortType=', '');
+                                }
+                            }}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -176,7 +191,16 @@ export default function ContributorHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleSortChange("prMin", 'asc')}
+                            onClick={(e) => {
+                                if (orderPrs === 'asc') {
+                                    setOrderPrs('desc');
+                                    clearFilterFunction('sortBy', 'open_prs', "sortType", 'asc');
+                                }
+                                else {
+                                    setOrderPrs('asc');
+                                    globalFilter('sortBy=open_prs', 'sortBy=', '', "sortType=asc", 'sortType=', '');
+                                }
+                            }}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -232,7 +256,16 @@ export default function ContributorHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleSortChange("issuesMin", 'asc')}
+                            onClick={(e) => {
+                                if (orderIssues === 'asc') {
+                                    setOrderIssues('desc');
+                                    clearFilterFunction('sortBy', 'open_issues', "sortType", 'asc');
+                                }
+                                else {
+                                    setOrderIssues('asc');
+                                    globalFilter('sortBy=open_issues', 'sortBy=', '', "sortType=asc", 'sortType=', '');
+                                }
+                            }}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

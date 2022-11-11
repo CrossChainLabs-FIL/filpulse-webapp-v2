@@ -18,7 +18,6 @@ import TriunghiMenuCommitsHash from './headMenus/TriunghiMenuCommitsHash';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
-import clearFilter from '../../assets/clearFilter.svg';
 
 
 // ----------------------------------------------------------------------
