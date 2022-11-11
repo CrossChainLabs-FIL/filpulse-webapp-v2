@@ -60,20 +60,16 @@ export default function WatchlistTable({
     filterName,
     isSearchEmpty,
     data,
-    searchData,
     handleSortChange,
     clearFilter
 }) {
 
     const classes = useStyles();
 
-    const isUserNotFound = searchData.length === 0;
+    const isUserNotFound = data.length === 0 && !isSearchEmpty;
 
-    const tableEmpty = data.length === 0;
+    const tableEmpty = data.length === 0 && isSearchEmpty;
 
-    const showData = isSearchEmpty ? data : searchData;
-
-    console.log(data);
 
     return (
         <>
@@ -95,7 +91,7 @@ export default function WatchlistTable({
 
 
                     <TableBody>
-                        {showData.map((row, idx) => {
+                        {data.map((row, idx) => {
                             const {
                                 number,
                                 title,

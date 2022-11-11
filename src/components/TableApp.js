@@ -174,12 +174,6 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 export default function TableApp() {
     const [order, setOrder] = useState('desc');
 
-    const [orderBy, setOrderBy] = useState('showId');
-
-    const [isSorted, setIsSorted] = useState(false);
-
-    const [searchData, setSearchData] = useState([]);
-
     const [data, setData] = useState([]);
 
     const [value, setValue] = useState(0);
@@ -199,76 +193,18 @@ export default function TableApp() {
 
     const classes = useStyles();
 
-    function applySortFilter(array, comparator, query) {
-        const stabilizedThis = array.map((el, index) => [el, index]);
-        stabilizedThis.sort((a, b) => {
-            const order = comparator(a[0], b[0]);
-            if (order !== 0) return order;
-            return a[1] - b[1];
-        });
-        if (query) {
-            switch (value) {
-                case 0:
-                    setSearchData(filter(array, (_user) =>
-                        _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-                    break;
-                case 1:
-                    setSearchData(filter(array, (_user) =>
-                        _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-                    break;
-                case 2:
-                    setSearchData(filter(array, (_user) =>
-                        _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-                    break;
-                case 3:
-                    setSearchData(filter(array, (_user) =>
-                        _user.projectTitle.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-                    break;
-                case 4:
-                    setSearchData(filter(array, (_user) =>
-                        _user.personName.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-                    break;
-                default: break;
-            }
-            return;
-        }
-        setData(stabilizedThis.map((el) => el[0]));
-    }
-
-
     useEffect(() => {
-        // applySortFilter(WATCHLISTDATA, getComparator(order, orderBy), filterName);
         client.get('tab_prs').then((pr_data) => {
             setState({
                 loading: false,
-                pr_data: pr_data,
+                pr_data: pr_data.list,
             });
-            setOrderBy('showId');
+            //setOrderBy('showId');
             setOrder('desc');
             setData(pr_data.list);
         });
 
         setIsSearchEmpty(true);
-
-        // let interval = setInterval(() => {
-        //     client.get('tab_commits').then((commits_data) => {
-        //         setState({
-        //             loading: false,
-        //             commits_data: commits_data,
-        //         });
-        //     });
-        // }, 15 * 60 * 1000);
-        // client.get('tab_commits').then((commits_data) => {
-        //     setState({
-        //         loading: false,
-        //         commits_data: commits_data,
-        //     });
-        // });
-
-        // return function cleanup() {
-        //     console.log('interval cleanup');
-        //     clearInterval(interval);
-        // };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setState]);
@@ -278,12 +214,12 @@ export default function TableApp() {
             loading: true
         });
         setValue(newValue);
-        // setSelected([]);
         setFilterName('');
         setIsSearchEmpty(true);
         setData([]);
+
         const user = JSON.parse(localStorage.getItem("user"));
-        // handleTop();
+
         switch (newValue) {
             case 0:
                 if (user.token) {
@@ -292,7 +228,7 @@ export default function TableApp() {
                             loading: false,
                             pr_data: pr_data,
                         });
-                        setOrderBy('showId');
+                        //setOrderBy('showId');
                         setOrder('desc');
                         setData(pr_data.list);
                     });
@@ -302,7 +238,7 @@ export default function TableApp() {
                             loading: false,
                             pr_data: pr_data,
                         });
-                        setOrderBy('showId');
+                        //setOrderBy('showId');
                         setOrder('desc');
                         setData(pr_data.list);
                     });
@@ -315,7 +251,7 @@ export default function TableApp() {
                             loading: false,
                             issues_data: issues_data,
                         });
-                        setOrderBy('showId');
+                        //setOrderBy('showId');
                         setOrder('desc');
                         setData(issues_data.list);
                     });
@@ -325,7 +261,7 @@ export default function TableApp() {
                             loading: false,
                             issues_data: issues_data,
                         });
-                        setOrderBy('showId');
+                        //setOrderBy('showId');
                         setOrder('desc');
                         setData(issues_data.list);
                     });
@@ -337,7 +273,7 @@ export default function TableApp() {
                         loading: false,
                         releases_data: releases_data,
                     });
-                    setOrderBy('showId');
+                    //setOrderBy('showId');
                     setOrder('desc');
                     setData(releases_data.list);
                 });
@@ -348,7 +284,7 @@ export default function TableApp() {
                         loading: false,
                         commits_data: commits_data,
                     });
-                    setOrderBy('showId');
+                    //setOrderBy('showId');
                     setOrder('desc');
                     setData(commits_data.list);
                 });
@@ -359,7 +295,7 @@ export default function TableApp() {
                         loading: false,
                         contributors_data: contributors_data,
                     });
-                    setOrderBy('personName');
+                    //setOrderBy('personName');
                     setOrder('asc');
                     setData(contributors_data.list);
                 });
@@ -1324,71 +1260,6 @@ export default function TableApp() {
         }
     }
 
-    const handleSortChange = (orderByNew, orderNew) => {
-        if (isSorted) {
-            switch (value) {
-                case 0:
-                    setOrderBy('showId');
-                    setOrder('asc');
-                    applySortFilter(PRDATA, getComparator(order, "showId"), '');
-                    break;
-                case 1:
-                    setOrderBy('showId');
-                    setOrder('asc');
-                    applySortFilter(ISSUESDATA, getComparator(order, "showId"), '');
-                    break;
-                case 2:
-                    setOrderBy('showId');
-                    setOrder('asc');
-                    applySortFilter(COMMITSDATA, getComparator(order, "showId"), '');
-                    break;
-                case 3:
-                    setOrderBy('personName');
-                    setOrder('asc');
-                    applySortFilter(CONTRIBUTORSDATA, getComparator(order, 'personName'), '');
-                    break;
-                case 4:
-                    setOrderBy('showId');
-                    setOrder('asc');
-                    applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), '');
-                    break;
-                default: console.log(value); break;
-            }
-            setIsSorted(false);
-        }
-        else {
-            switch (value) {
-                case 0:
-                    setOrderBy(orderByNew);
-                    setOrder(orderNew);
-                    applySortFilter(PRDATA, getComparator(orderNew, orderByNew), '');
-                    break;
-                case 1:
-                    setOrderBy(orderByNew);
-                    setOrder(orderNew);
-                    applySortFilter(ISSUESDATA, getComparator(orderNew, orderByNew), '');
-                    break;
-                case 2:
-                    setOrderBy(orderByNew);
-                    setOrder(orderNew);
-                    applySortFilter(COMMITSDATA, getComparator(orderNew, orderByNew), '');
-                    break;
-                case 3:
-                    setOrderBy(orderByNew);
-                    setOrder(orderNew);
-                    applySortFilter(CONTRIBUTORSDATA, getComparator(orderNew, orderByNew), '');
-                    break;
-                case 4:
-                    setOrderBy(orderByNew);
-                    setOrder(orderNew);
-                    applySortFilter(WATCHLISTDATA, getComparator(orderNew, orderByNew), '');
-                    break;
-                default: console.log(value); break;
-            }
-            setIsSorted(true);
-        }
-    }
-
     const handleFilterByName = (event) => {
         setData([]);
         setState({
@@ -1575,13 +1446,6 @@ export default function TableApp() {
                 default: console.log("def"); break;
             }
 
-            // let commits_data = await client.get(`tab_commits?search=${event.target.value}`);
-            // setState({
-            //     loading: false,
-            //     commits_data: commits_data,
-            // });
-            // setData(commits_data.list);
-
         }
         else {
             setIsSearchEmpty(true);
@@ -1655,12 +1519,6 @@ export default function TableApp() {
                 default: console.log("def"); break;
             }
 
-            // let commits_data = await client.get(`tab_commits`);
-            // setState({
-            //     loading: false,
-            //     commits_data: commits_data,
-            // });
-            // setData(commits_data.list);
         }
         setFilterName(event.target.value);
     };
@@ -1719,7 +1577,6 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     data={data}
                     state={state}
-                    // searchData={searchData}
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
                     clearFilter={clearFilter}
@@ -1733,7 +1590,6 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     data={data}
                     state={state}
-                    // searchData={searchData}
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
                     clearFilter={clearFilter}
@@ -1747,7 +1603,6 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     data={data}
                     state={state}
-                    // searchData={searchData}
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
                     clearFilter={clearFilter}
@@ -1761,7 +1616,6 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     data={data}
                     state={state}
-                    // searchData={searchData}
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
                     clearFilter={clearFilter}
@@ -1775,9 +1629,8 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     data={data}
                     state={state}
-                    // searchData={searchData}
                     handleMenuFilter={handleMenuFilter}
-                    handleSortChange={handleSortChange}
+                    handleSortChange={handleSort}
                     clearFilter={clearFilter}
                     globalFilter={globalFilter}
                 />
@@ -1788,8 +1641,7 @@ export default function TableApp() {
                     filterName={filterName}
                     isSearchEmpty={isSearchEmpty}
                     data={data}
-                    searchData={searchData}
-                    handleSortChange={handleSortChange}
+                    handleSortChange={handleSort}
                     clearFilter={clearFilter}
                 />
             )}
