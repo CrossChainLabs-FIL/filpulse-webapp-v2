@@ -24,6 +24,8 @@ import { Client } from '../../../utils/client';
 // assets
 import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
+import clearFilter from '../../../assets/clearFilter.svg';
+import bara from '../../../assets/bara.svg';
 
 const client = new Client();
 
@@ -31,7 +33,7 @@ const client = new Client();
 const useStyles = makeStyles(() => ({
     triunghi: {
         marginLeft: '0.25em',
-        marginTop: '0.15em'
+        // marginTop: '0.15em'
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
@@ -82,17 +84,20 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuPrPr({ handleMenuFilter }) {
+export default function TriunghiMenuCommitsCommit({ handleMenuFilter, globalFilter, clearFilterFunction }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
     const [state, setState] = useState({
-        loading: true
+        loading: true, commits_data: []
     });
+    const [isSorted, setIsSorted] = useState(false);
+    const [lastOrganisation, setLastOrganisation] = useState('');
+    const [lastRepo, setLastRepo] = useState('');
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
-        client.get('tab_prs/filter/project').then((project_data) => {
+        client.get('tab_commits/filter/project').then((project_data) => {
             setState({
                 loading: false,
                 project_data: project_data,
@@ -101,13 +106,17 @@ export default function TriunghiMenuPrPr({ handleMenuFilter }) {
         setFilterName('');
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
 
     function handleFilterClose(organisation, repo) {
         handleClose();
-        handleMenuFilter(`organisation=${organisation}&repo=${repo}`);
+        setIsSorted(true);
+        setLastOrganisation(organisation);
+        setLastRepo(repo);
+        globalFilter(`organisation=${organisation}`, 'organisation=', lastOrganisation, `repo=${repo}`, 'repo=', lastRepo);
     }
 
     const handleFilterByName = (event) => {
@@ -143,8 +152,22 @@ export default function TriunghiMenuPrPr({ handleMenuFilter }) {
                 onClick={handleClick}
                 style={{ padding: 0 }}
             >
-                <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                <img src={bara} alt='bara' className={classes.triunghi} />
             </IconButton>
+            {isSorted ?
+                <IconButton
+                    id="basic-button"
+                    onClick={() => {
+                        setIsSorted(false);
+                        setLastOrganisation('');
+                        setLastRepo('');
+                        clearFilterFunction('organisation=', lastOrganisation, 'repo=', lastRepo);
+                    }}
+                    style={{ padding: 0, marginLeft: '0.25em' }}
+                >
+                    <img src={clearFilter} alt='clear' />
+                </IconButton> : ''
+            }
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -167,7 +190,7 @@ export default function TriunghiMenuPrPr({ handleMenuFilter }) {
                             alignItems="center"
                         >
                             <Box className={classes.filterText}>
-                                Filter by PR's name
+                                Filter by description
                             </Box>
                             <IconButton onClick={handleClose} style={{ marginLeft: 'auto' }}>
                                 <img src={x} alt='x' className={classes.x} />
@@ -177,7 +200,7 @@ export default function TriunghiMenuPrPr({ handleMenuFilter }) {
                         <SearchStyle
                             value={filterName}
                             onChange={(e) => handleFilterByName(e)}
-                            placeholder="Filter name"
+                            placeholder="Filter commit"
                         />
                         <Divider />
                     </Box >

@@ -8,12 +8,12 @@ import Dashboard from './pages/Dashboard';
 export const AuthContext = createContext();
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [stateLogin, dispatch] = useReducer(reducer, initialState);
 
   return (
     <AuthContext.Provider
       value={{
-        state,
+        stateLogin,
         dispatch
       }}
     >

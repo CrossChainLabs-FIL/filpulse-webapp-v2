@@ -13,7 +13,7 @@ import { makeStyles } from '@mui/styles';
 
 // components
 import TriunghiMenuIssuesAuthor from './headMenus/TriunghiMenuIssuesAuthor';
-import TriunghiMenuIssuesIssue from './headMenus/TriunghiMenuIssuesIssue';
+import TriunghiMenuIssuesProject from './headMenus/TriunghiMenuIssuesProject';
 import TriunghiMenuIssuesId from './headMenus/TriunghiMenuIssuesId';
 import TriunghiMenuIssuesAssignee from './headMenus/TriunghiMenuIssuesAssignee';
 import TriunghiMenuIssuesStatus from './headMenus/TriunghiMenuIssuesStatus'
@@ -137,14 +137,11 @@ export default function IssuesHead({
                             Project
                         </Typography>
 
-                        {/* <TriunghiMenuIssuesIssue handleMenuFilter={handleMenuFilter} /> */}
-                        <IconButton
-                            id="basic-button"
-                            // onClick={(e) => handleSortChange()}
-                            style={{ padding: 0 }}
-                        >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
-                        </IconButton>
+                        <TriunghiMenuIssuesProject
+                            handleMenuFilter={handleMenuFilter}
+                            globalFilter={globalFilter}
+                            clearFilterFunction={clearFilterFunction}
+                        />
                     </Stack>
                 </TableCell>
 

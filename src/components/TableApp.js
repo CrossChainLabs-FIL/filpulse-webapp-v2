@@ -1,5 +1,5 @@
 import { filter } from 'lodash';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 // @mui
 import { makeStyles } from '@mui/styles';
@@ -12,6 +12,11 @@ import {
     Tab,
     OutlinedInput,
     InputAdornment,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    Button,
+    Typography
 } from '@mui/material';
 
 
@@ -23,6 +28,7 @@ import CommitsTable from './commitsTable/CommitsTable';
 import IssuesTable from './issuesTable/IssuesTable';
 import ReleasesTable from './releasesTable/ReleasesTable';
 import ContributorsTable from './contributorTable/ContributorsTable';
+import { AuthContext } from "../App";
 
 
 import { Client } from '../utils/client';
@@ -37,6 +43,7 @@ import CONTRIBUTORSDATA from '../_mock/contributorsData';
 
 // assets
 import steaPlin from '../assets/steaPlin.svg';
+import GithubLogo from '../assets/GithubLogo.svg';
 
 const client = new Client();
 
@@ -132,6 +139,14 @@ const useStyles = makeStyles(() => ({
         width: '7em',
         marginTop: '1em',
         paddingBottom: 0
+    },
+    button: {
+        backgroundColor: 'transparent',
+        color: '#000000',
+        '&:hover': {
+            backgroundColor: 'transparent',
+            color: '#000000',
+        },
     }
 }));
 
@@ -172,6 +187,24 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 );
 
 export default function TableApp() {
+    const { stateLogin, dispatch } = useContext(AuthContext);
+
+    const [dataError, setDataError] = useState({ errorMessage: "", isLoading: false });
+
+    const { client_id, redirect_uri } = stateLogin;
+
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
     const [order, setOrder] = useState('desc');
 
     const [data, setData] = useState([]);
@@ -215,6 +248,7 @@ export default function TableApp() {
         });
         setValue(newValue);
         setFilterName('');
+        setFilterLink('');
         setIsSearchEmpty(true);
         setData([]);
 
@@ -647,7 +681,29 @@ export default function TableApp() {
         switch (value) {
             case 0:
                 if (filterLink.match('&' + toBeCleared + last) === null) {
-                    if (filterLink.match(toBeCleared + last + '&') === null) {
+                    if (toBeCleared2 !== undefined) {
+                        if (filterLink.match(toBeCleared2 + last2 + '&') === null) {
+                            setFilterLink('');
+                            client.get('tab_prs').then((pr_data) => {
+                                setState({
+                                    loading: false,
+                                    pr_data: pr_data,
+                                });
+                                setData(pr_data.list);
+                            });
+                        }
+                        else {
+                            setFilterLink(filterLink.replace(toBeCleared + last + '&' + toBeCleared2 + last2 + '&', ''));
+                            client.get('tab_prs' + filterLink.replace(toBeCleared + last + '&' + toBeCleared2 + last2 + '&', '')).then((pr_data) => {
+                                setState({
+                                    loading: false,
+                                    pr_data: pr_data,
+                                });
+                                setData(pr_data.list);
+                            });
+                        }
+                    }
+                    else if (filterLink.match(toBeCleared + last + '&') === null) {
                         setFilterLink('');
                         client.get('tab_prs').then((pr_data) => {
                             setState({
@@ -668,19 +724,52 @@ export default function TableApp() {
                         });
                     }
                 } else {
-                    setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
-                    client.get('tab_prs' + filterLink.replace('&' + toBeCleared + last, '')).then((pr_data) => {
-                        setState({
-                            loading: false,
-                            pr_data: pr_data,
+                    if (toBeCleared2 !== undefined) {
+                        setFilterLink(filterLink.replace('&' + toBeCleared + last + '&' + toBeCleared2 + last2, ''));
+                        client.get('tab_prs' + filterLink.replace('&' + toBeCleared + last + '&' + toBeCleared2 + last2, '')).then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setData(pr_data.list);
                         });
-                        setData(pr_data.list);
-                    });
+                    } else {
+                        setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
+                        client.get('tab_prs' + filterLink.replace('&' + toBeCleared + last, '')).then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setData(pr_data.list);
+                        });
+                    }
                 }
                 break;
             case 1:
                 if (filterLink.match('&' + toBeCleared + last) === null) {
-                    if (filterLink.match(toBeCleared + last + '&') === null) {
+                    if (toBeCleared2 !== undefined) {
+                        if (filterLink.match(toBeCleared2 + last2 + '&') === null) {
+                            setFilterLink('');
+                            client.get('tab_issues').then((issues_data) => {
+                                setState({
+                                    loading: false,
+                                    issues_data: issues_data,
+                                });
+                                setData(issues_data.list);
+                            });
+                        }
+                        else {
+                            setFilterLink(filterLink.replace(toBeCleared + last + '&' + toBeCleared2 + last2 + '&', ''));
+                            client.get('tab_issues' + filterLink.replace(toBeCleared + last + '&' + toBeCleared2 + last2 + '&', '')).then((issues_data) => {
+                                setState({
+                                    loading: false,
+                                    issues_data: issues_data,
+                                });
+                                setData(issues_data.list);
+                            });
+                        }
+                    }
+                    else if (filterLink.match(toBeCleared + last + '&') === null) {
                         setFilterLink('');
                         client.get('tab_issues').then((issues_data) => {
                             setState({
@@ -701,14 +790,25 @@ export default function TableApp() {
                         });
                     }
                 } else {
-                    setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
-                    client.get('tab_issues' + filterLink.replace('&' + toBeCleared + last, '')).then((issues_data) => {
-                        setState({
-                            loading: false,
-                            issues_data: issues_data,
+                    if (toBeCleared2 !== undefined) {
+                        setFilterLink(filterLink.replace('&' + toBeCleared + last + '&' + toBeCleared2 + last2, ''));
+                        client.get('tab_issues' + filterLink.replace('&' + toBeCleared + last + '&' + toBeCleared2 + last2, '')).then((issues_data) => {
+                            setState({
+                                loading: false,
+                                issues_data: issues_data,
+                            });
+                            setData(issues_data.list);
                         });
-                        setData(issues_data.list);
-                    });
+                    } else {
+                        setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
+                        client.get('tab_issues' + filterLink.replace('&' + toBeCleared + last, '')).then((issues_data) => {
+                            setState({
+                                loading: false,
+                                issues_data: issues_data,
+                            });
+                            setData(issues_data.list);
+                        });
+                    }
                 }
                 break;
             case 2:
@@ -779,7 +879,29 @@ export default function TableApp() {
                 break;
             case 3:
                 if (filterLink.match('&' + toBeCleared + last) === null) {
-                    if (filterLink.match(toBeCleared + last + '&') === null) {
+                    if (toBeCleared2 !== undefined) {
+                        if (filterLink.match(toBeCleared2 + last2 + '&') === null) {
+                            setFilterLink('');
+                            client.get('tab_commits').then((commits_data) => {
+                                setState({
+                                    loading: false,
+                                    commits_data: commits_data,
+                                });
+                                setData(commits_data.list);
+                            });
+                        }
+                        else {
+                            setFilterLink(filterLink.replace(toBeCleared + last + '&' + toBeCleared2 + last2 + '&', ''));
+                            client.get('tab_commits' + filterLink.replace(toBeCleared + last + '&' + toBeCleared2 + last2 + '&', '')).then((commits_data) => {
+                                setState({
+                                    loading: false,
+                                    commits_data: commits_data,
+                                });
+                                setData(commits_data.list);
+                            });
+                        }
+                    }
+                    else if (filterLink.match(toBeCleared + last + '&') === null) {
                         setFilterLink('');
                         client.get('tab_commits').then((commits_data) => {
                             setState({
@@ -800,14 +922,25 @@ export default function TableApp() {
                         });
                     }
                 } else {
-                    setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
-                    client.get('tab_commits' + filterLink.replace('&' + toBeCleared + last, '')).then((commits_data) => {
-                        setState({
-                            loading: false,
-                            commits_data: commits_data,
+                    if (toBeCleared2 !== undefined) {
+                        setFilterLink(filterLink.replace('&' + toBeCleared + last + '&' + toBeCleared2 + last2, ''));
+                        client.get('tab_commits' + filterLink.replace('&' + toBeCleared + last + '&' + toBeCleared2 + last2, '')).then((commits_data) => {
+                            setState({
+                                loading: false,
+                                commits_data: commits_data,
+                            });
+                            setData(commits_data.list);
                         });
-                        setData(commits_data.list);
-                    });
+                    } else {
+                        setFilterLink(filterLink.replace('&' + toBeCleared + last, ''));
+                        client.get('tab_commits' + filterLink.replace('&' + toBeCleared + last, '')).then((commits_data) => {
+                            setState({
+                                loading: false,
+                                commits_data: commits_data,
+                            });
+                            setData(commits_data.list);
+                        });
+                    }
                 }
                 break;
             case 4:
@@ -1544,12 +1677,69 @@ export default function TableApp() {
                     <StyledTab label='Releases' classes={{ root: classes.releasesTab }} />
                     <StyledTab label='Commits' classes={{ root: classes.commitsTab }} />
                     <StyledTab label='Contributors' classes={{ root: classes.contributorsTab }} />
-                    <StyledTab
-                        icon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
-                        iconPosition='start'
-                        label='Watchlist'
-                        classes={{ root: classes.watchlistTab }}
-                    />
+                    {!stateLogin.isLoggedIn && (
+                        <>
+                            <StyledTab
+                                icon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
+                                iconPosition='start'
+                                label='Watchlist'
+                                onClick={handleClickOpen}
+                                classes={{ root: classes.watchlistTab }}
+                            />
+                            <Dialog open={open} onClose={handleClose} >
+                                <DialogTitle
+                                    style={{
+                                        backgroundColor: "#EEF4F5",
+                                    }}
+                                >
+                                    {"Get your own watchlist"}
+                                </DialogTitle>
+                                <DialogContent
+                                    style={{
+                                        backgroundColor: "#FFFFFF",
+                                        height: '18em',
+                                        width: '30em'
+                                    }}
+                                >
+                                    <Typography
+                                        style={{
+                                            marginTop: '3.5em',
+                                            marginBottom: '3em',
+                                            marginLeft: '3em'
+                                        }}
+                                    >
+                                        Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
+                                    </Typography>
+                                    <Button
+                                        variant="contained"
+                                        startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                        href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
+                                        onClick={() => {
+                                            setDataError({ ...dataError, errorMessage: "" });
+                                        }}
+                                        sx={{
+                                            backgroundColor: 'transparent',
+                                            color: '#000000',
+                                            width: '23em',
+                                            marginLeft: '4em'
+                                        }}
+                                        className={classes.button}
+                                    >
+                                        Sign in with Github
+                                    </Button>
+                                </DialogContent>
+
+                            </Dialog>
+                        </>
+                    )}
+                    {stateLogin.isLoggedIn && (
+                        <StyledTab
+                            icon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
+                            iconPosition='start'
+                            label='Watchlist'
+                            classes={{ root: classes.watchlistTab }}
+                        />
+                    )}
                 </StyledTabs>
                 <SearchStyle
                     style={{

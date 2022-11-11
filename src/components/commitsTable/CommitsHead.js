@@ -12,7 +12,7 @@ import {
 import { makeStyles } from '@mui/styles';
 
 // components
-import TriunghiMenuCommitsCommit from './headMenus/TriunghiMenuCommitsCommit';
+import TriunghiMenuCommitsProject from './headMenus/TriunghiMenuCommitsProject';
 import TriunghiMenuCommitsContributor from './headMenus/TriunghiMenuCommitsContributor';
 import TriunghiMenuCommitsHash from './headMenus/TriunghiMenuCommitsHash';
 
@@ -137,14 +137,11 @@ export default function CommitsHead({
                             Project
                         </Typography>
 
-                        {/* <TriunghiMenuCommitsCommit handleMenuFilter={handleMenuFilter} /> */}
-                        <IconButton
-                            id="basic-button"
-                            // onClick={(e) => handleSortChange()}
-                            style={{ padding: 0 }}
-                        >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
-                        </IconButton>
+                        <TriunghiMenuCommitsProject
+                            handleMenuFilter={handleMenuFilter}
+                            globalFilter={globalFilter}
+                            clearFilterFunction={clearFilterFunction}
+                        />
                     </Stack>
                 </TableCell>
 

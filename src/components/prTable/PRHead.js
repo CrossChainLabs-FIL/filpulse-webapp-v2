@@ -14,7 +14,7 @@ import { makeStyles } from '@mui/styles';
 // components
 import TriunghiMenuPrContributor from './headMenus/TriunghiMenuPrContributor';
 import TriunghiMenuPrId from './headMenus/TriunghiMenuPrId';
-import TriunghiMenuPrPr from './headMenus/TriunghiMenuPrPr';
+import TriunghiMenuPrProject from './headMenus/TriunghiMenuPrProject';
 import TriunghiMenuPrStatus from './headMenus/TriunghiMenuPrStatus';
 
 // assets
@@ -136,14 +136,11 @@ export default function PRHead({
                             Project
                         </Typography>
 
-                        {/* <TriunghiMenuPrPr handleMenuFilter={handleMenuFilter} /> */}
-                        <IconButton
-                            id="basic-button"
-                            // onClick={(e) => handleSortChange()}
-                            style={{ padding: 0 }}
-                        >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
-                        </IconButton>
+                        <TriunghiMenuPrProject
+                            handleMenuFilter={handleMenuFilter}
+                            globalFilter={globalFilter}
+                            clearFilterFunction={clearFilterFunction}
+                        />
                     </Stack>
                 </TableCell>
 

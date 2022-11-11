@@ -73,12 +73,20 @@ const useStyles = makeStyles((theme) =>
                 marginBottom: "1.5em"
             }
         },
+        button: {
+            backgroundColor: 'transparent',
+            color: '#000000',
+            '&:hover': {
+                backgroundColor: 'transparent',
+                color: '#000000',
+            },
+        }
     })
 );
 
 
 export default function AppbarLoggedIn() {
-    const { state, dispatch } = useContext(AuthContext);
+    const { stateLogin, dispatch } = useContext(AuthContext);
 
     const classes = useStyles();
 
@@ -91,13 +99,13 @@ export default function AppbarLoggedIn() {
         setAnchorEl(null);
     };
 
-    if (!state.isLoggedIn) {
+    if (!stateLogin.isLoggedIn) {
         return <Navigate to="/login" replace />;
     }
 
 
     const accountInfo = () => {
-        const { avatar_url } = state.user;
+        const { avatar_url } = stateLogin.user;
         return (
             <div
                 style={{
@@ -159,6 +167,7 @@ export default function AppbarLoggedIn() {
 
                             }}
                             onClick={() => handleLogout()}
+                            className={classes.button}
                         >
                             Sign out
                         </Button>

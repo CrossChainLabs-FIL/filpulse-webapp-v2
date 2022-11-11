@@ -14,7 +14,8 @@ import {
     Typography,
     TableContainer,
     Link,
-    Tooltip
+    Tooltip,
+    CircularProgress
 } from '@mui/material';
 
 
@@ -92,7 +93,9 @@ export default function ReleasesTable({
                         <TableBody>
                             <TableRow>
                                 <TableCell>
-                                    <Typography>loading</Typography>
+                                    <Box sx={{ display: 'flex' }}>
+                                        <CircularProgress />
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         </TableBody>

@@ -12,7 +12,8 @@ import {
     TableCell,
     Typography,
     TableContainer,
-    Link
+    Link,
+    CircularProgress
 } from '@mui/material';
 
 
@@ -83,7 +84,9 @@ export default function ContributorsTable({
                         <TableBody>
                             <TableRow>
                                 <TableCell>
-                                    <Typography>loading</Typography>
+                                    <Box sx={{ display: 'flex' }}>
+                                        <CircularProgress />
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         </TableBody>

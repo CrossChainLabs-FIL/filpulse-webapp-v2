@@ -79,18 +79,26 @@ const useStyles = makeStyles((theme) =>
                 marginBottom: "1.5em"
             }
         },
+        button: {
+            backgroundColor: 'transparent',
+            color: '#000000',
+            '&:hover': {
+                backgroundColor: 'transparent',
+                color: '#000000',
+            },
+        }
     })
 );
 
 
 export default function AppbarLoggedOut() {
-    const { state, dispatch } = useContext(AuthContext);
+    const { stateLogin, dispatch } = useContext(AuthContext);
 
     const classes = useStyles();
 
     const [data, setData] = useState({ errorMessage: "", isLoading: false });
 
-    const { client_id, redirect_uri } = state;
+    const { client_id, redirect_uri } = stateLogin;
 
     const [open, setOpen] = React.useState(false);
 
@@ -131,9 +139,9 @@ export default function AppbarLoggedOut() {
                     });
                 });
         }
-    }, [state, dispatch, data]);
+    }, [stateLogin, dispatch, data]);
 
-    if (state.isLoggedIn) {
+    if (stateLogin.isLoggedIn) {
         return <Navigate to="/" replace />;
     }
 
@@ -181,7 +189,7 @@ export default function AppbarLoggedOut() {
                                     <Button
                                         variant="contained"
                                         startIcon={<img src={GithubLogo} alt='GithubLogo' />}
-                                        className="login-link"
+                                        className={classes.button}
                                         href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
                                         onClick={() => {
                                             setData({ ...data, errorMessage: "" });

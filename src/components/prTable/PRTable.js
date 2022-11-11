@@ -15,7 +15,8 @@ import {
     Typography,
     TableContainer,
     Link,
-    Stack
+    Stack,
+    CircularProgress
 } from '@mui/material';
 
 // components
@@ -111,7 +112,9 @@ export default function PRTable({
                         <TableBody>
                             <TableRow>
                                 <TableCell>
-                                    <Typography>loading</Typography>
+                                    <Box sx={{ display: 'flex' }}>
+                                        <CircularProgress />
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         </TableBody>
@@ -130,8 +133,8 @@ export default function PRTable({
                                     dev_name,
                                     follow,
                                     updated_at } = row;
-                   
-                                        console.log(follow);
+
+                                console.log(follow);
 
                                 return (
                                     <TableRow

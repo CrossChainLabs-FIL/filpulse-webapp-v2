@@ -12,7 +12,8 @@ import {
     Typography,
     TableContainer,
     Link,
-    Box
+    Box,
+    CircularProgress
 } from '@mui/material';
 
 // components
@@ -80,7 +81,9 @@ export default function CommitsTable({
                         <TableBody>
                             <TableRow>
                                 <TableCell>
-                                    <Typography>loading</Typography>
+                                    <Box sx={{ display: 'flex' }}>
+                                        <CircularProgress />
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         </TableBody>
