@@ -128,7 +128,7 @@ export default function WatchlistHead({
                             Participants
                         </Typography>
 
-                        <TriunghiMenuWLParticipants data={data} />
+                       
 
                         <IconButton
                             id="basic-button"
