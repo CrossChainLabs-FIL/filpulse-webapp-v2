@@ -341,14 +341,14 @@ export default function TableApp() {
                 break;
             case 5:
                 const user = JSON.parse(localStorage.getItem("user"));
-                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
-                        setState({
-                            loading: false,
-                            watchlist_data: watchlist_data,
-                        });
-                        setData(watchlist_data.list);
+                client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
+                    setState({
+                        loading: false,
+                        watchlist_data: watchlist_data,
                     });
-                    break;
+                    setData(watchlist_data.list);
+                });
+                break;
             default: console.log(newValue); break;
         }
     };
@@ -665,14 +665,14 @@ export default function TableApp() {
                 break;
             case 5:
                 const user = JSON.parse(localStorage.getItem("user"));
-                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
-                        setState({
-                            loading: false,
-                            watchlist_data: watchlist_data,
-                        });
-                        setData(watchlist_data.list);
+                client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
+                    setState({
+                        loading: false,
+                        watchlist_data: watchlist_data,
                     });
-                    break;
+                    setData(watchlist_data.list);
+                });
+                break;
             default: console.log(value); break;
         }
     }
@@ -916,14 +916,14 @@ export default function TableApp() {
                 break;
             case 5:
                 const user = JSON.parse(localStorage.getItem("user"));
-                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
-                        setState({
-                            loading: false,
-                            watchlist_data: watchlist_data,
-                        });
-                        setData(watchlist_data.list);
+                client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
+                    setState({
+                        loading: false,
+                        watchlist_data: watchlist_data,
                     });
-                    break;
+                    setData(watchlist_data.list);
+                });
+                break;
             default: console.log(value); break;
         }
     }
@@ -936,26 +936,63 @@ export default function TableApp() {
         switch (value) {
             case 0:
                 if (filterLink === '') {
-                    setFilterLink('?' + addonValue);
-                    client.get('tab_prs' + '?' + addonValue).then((pr_data) => {
-                        setState({
-                            loading: false,
-                            pr_data: pr_data,
-                        });
-                        setData(pr_data.list);
-                    });
-                }
-                else {
-                    if (filterLink.match(filterType) === null) {
-                        setFilterLink(filterLink + '&' + addonValue);
-                        client.get('tab_prs' + filterLink + '&' + addonValue).then((pr_data) => {
+                    if (addonValue2 !== undefined) {
+                        setFilterLink('?' + addonValue + '&' + addonValue2);
+                        client.get('tab_prs' + '?' + addonValue + '&' + addonValue2).then((pr_data) => {
                             setState({
                                 loading: false,
                                 pr_data: pr_data,
                             });
                             setData(pr_data.list);
                         });
-                    } else if (last !== '') {
+                    } else {
+                        setFilterLink('?' + addonValue);
+                        client.get('tab_prs' + '?' + addonValue).then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setData(pr_data.list);
+                        });
+                    }
+                }
+                else {
+                    if (filterLink.match(filterType) === null) {
+                        if (addonValue2 !== undefined) {
+                            setFilterLink(filterLink + '&' + addonValue + '&' + addonValue2);
+                            client.get('tab_prs' + filterLink + '&' + addonValue + '&' + addonValue2).then((pr_data) => {
+                                setState({
+                                    loading: false,
+                                    pr_data: pr_data,
+                                });
+                                setData(pr_data.list);
+                            });
+                        } else {
+                            setFilterLink(filterLink + '&' + addonValue);
+                            client.get('tab_prs' + filterLink + '&' + addonValue).then((pr_data) => {
+                                setState({
+                                    loading: false,
+                                    pr_data: pr_data,
+                                });
+                                setData(pr_data.list);
+                            });
+                        }
+                    } else if (last2 !== undefined) {
+                        let aux = filterLink;
+                        aux = aux.replace(filterType + last, addonValue);
+                        aux = aux.replace(filterType2 + last2, addonValue2);
+                        // setFilterLink(filterLink.replace(filterType + last, addonValue));
+                        // setFilterLink(filterLink.replace(filterType2 + last2, addonValue2));
+                        setFilterLink(aux);
+                        client.get('tab_prs' + aux).then((pr_data) => {
+                            setState({
+                                loading: false,
+                                pr_data: pr_data,
+                            });
+                            setData(pr_data.list);
+                        });
+                    }
+                    else if (last !== '') {
                         setFilterLink(filterLink.replace(filterType + last, addonValue));
                         client.get('tab_prs' + filterLink.replace(filterType + last, addonValue)).then((pr_data) => {
                             setState({
@@ -969,26 +1006,63 @@ export default function TableApp() {
                 break;
             case 1:
                 if (filterLink === '') {
-                    setFilterLink('?' + addonValue);
-                    client.get('tab_issues' + '?' + addonValue).then((issues_data) => {
-                        setState({
-                            loading: false,
-                            issues_data: issues_data,
-                        });
-                        setData(issues_data.list);
-                    });
-                }
-                else {
-                    if (filterLink.match(filterType) === null) {
-                        setFilterLink(filterLink + '&' + addonValue);
-                        client.get('tab_issues' + filterLink + '&' + addonValue).then((issues_data) => {
+                    if (addonValue2 !== undefined) {
+                        setFilterLink('?' + addonValue + '&' + addonValue2);
+                        client.get('tab_issues' + '?' + addonValue + '&' + addonValue2).then((issues_data) => {
                             setState({
                                 loading: false,
                                 issues_data: issues_data,
                             });
                             setData(issues_data.list);
                         });
-                    } else if (last !== '') {
+                    } else {
+                        setFilterLink('?' + addonValue);
+                        client.get('tab_issues' + '?' + addonValue).then((issues_data) => {
+                            setState({
+                                loading: false,
+                                issues_data: issues_data,
+                            });
+                            setData(issues_data.list);
+                        });
+                    }
+                }
+                else {
+                    if (filterLink.match(filterType) === null) {
+                        if (addonValue2 !== undefined) {
+                            setFilterLink(filterLink + '&' + addonValue + '&' + addonValue2);
+                            client.get('tab_issues' + filterLink + '&' + addonValue + '&' + addonValue2).then((issues_data) => {
+                                setState({
+                                    loading: false,
+                                    issues_data: issues_data,
+                                });
+                                setData(issues_data.list);
+                            });
+                        } else {
+                            setFilterLink(filterLink + '&' + addonValue);
+                            client.get('tab_issues' + filterLink + '&' + addonValue).then((issues_data) => {
+                                setState({
+                                    loading: false,
+                                    issues_data: issues_data,
+                                });
+                                setData(issues_data.list);
+                            });
+                        }
+                    } else if (last2 !== undefined) {
+                        let aux = filterLink;
+                        aux = aux.replace(filterType + last, addonValue);
+                        aux = aux.replace(filterType2 + last2, addonValue2);
+                        // setFilterLink(filterLink.replace(filterType + last, addonValue));
+                        // setFilterLink(filterLink.replace(filterType2 + last2, addonValue2));
+                        setFilterLink(aux);
+                        client.get('tab_issues' + aux).then((issues_data) => {
+                            setState({
+                                loading: false,
+                                issues_data: issues_data,
+                            });
+                            setData(issues_data.list);
+                        });
+                    }
+                    else if (last !== '') {
                         setFilterLink(filterLink.replace(filterType + last, addonValue));
                         client.get('tab_issues' + filterLink.replace(filterType + last, addonValue)).then((issues_data) => {
                             setState({
@@ -1212,14 +1286,14 @@ export default function TableApp() {
                 break;
             case 5:
                 const user = JSON.parse(localStorage.getItem("user"));
-                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
-                        setState({
-                            loading: false,
-                            watchlist_data: watchlist_data,
-                        });
-                        setData(watchlist_data.list);
+                client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
+                    setState({
+                        loading: false,
+                        watchlist_data: watchlist_data,
                     });
-                    break;
+                    setData(watchlist_data.list);
+                });
+                break;
             default: console.log(value); break;
         }
     }
@@ -1464,7 +1538,7 @@ export default function TableApp() {
                     break;
                 case 5:
                     const user = JSON.parse(localStorage.getItem("user"));
-                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
+                    client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
                         setState({
                             loading: false,
                             watchlist_data: watchlist_data,
@@ -1544,7 +1618,7 @@ export default function TableApp() {
                     break;
                 case 5:
                     const user = JSON.parse(localStorage.getItem("user"));
-                    client.post_with_token('tab_watchlist', {params :0}, user.token).then((watchlist_data) => {
+                    client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
                         setState({
                             loading: false,
                             watchlist_data: watchlist_data,
