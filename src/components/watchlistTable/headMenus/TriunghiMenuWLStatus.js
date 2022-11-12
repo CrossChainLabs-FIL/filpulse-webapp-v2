@@ -74,10 +74,10 @@ export default function TriunghiMenuWLStatus({ paramsCallback }) {
         setAnchorEl(null);
     };
 
-    function handleFilterClose(is_pr, state) {
+    function handleFilterClose(is_pr, status) {
         handleClose();
         setIsSorted(true);
-        paramsCallback({ is_pr: is_pr, state: state });
+        paramsCallback({ is_pr: is_pr, status: status });
     }
 
 
@@ -100,7 +100,7 @@ export default function TriunghiMenuWLStatus({ paramsCallback }) {
                     id="basic-button"
                     onClick={() => {
                         setIsSorted(false);
-                        paramsCallback({ is_pr: undefined, state: undefined });
+                        paramsCallback({ is_pr: undefined, status: undefined });
                     }}
                     style={{ padding: 0, marginLeft: '0.25em' }}
                 >
