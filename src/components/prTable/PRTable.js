@@ -92,7 +92,7 @@ export default function PRTable({
             let response;
 
             if (user?.token) {
-                response = await client.post_with_token('tab_issues', params, user.token);
+                response = await client.post_with_token('tab_prs', params, user.token);
             } else {
                 response = await client.get('tab_prs', params);
             }
