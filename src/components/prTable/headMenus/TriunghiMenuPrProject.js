@@ -84,7 +84,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuPrProject({ handleMenuFilter, clearFilterFunction, globalFilter, }) {
+export default function TriunghiMenuPrProject({ prParamsCallback }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
@@ -115,7 +115,7 @@ export default function TriunghiMenuPrProject({ handleMenuFilter, clearFilterFun
         setIsSorted(true);
         setLastOrganisation(organisation);
         setLastRepo(repo);
-        globalFilter(`organisation=${organisation}`, 'organisation=', lastOrganisation, `repo=${repo}`, 'repo=', lastRepo);
+        prParamsCallback({repo: repo, organisation: organisation});
     }
 
     const handleFilterByName = (event) => {
@@ -160,7 +160,7 @@ export default function TriunghiMenuPrProject({ handleMenuFilter, clearFilterFun
                         setIsSorted(false);
                         setLastOrganisation('');
                         setLastRepo('');
-                        clearFilterFunction('organisation=', lastOrganisation, 'repo=', lastRepo);
+                        prParamsCallback({repo: undefined, organisation: undefined});
                     }}
                     style={{ padding: 0, marginLeft: '0.25em' }}
                 >

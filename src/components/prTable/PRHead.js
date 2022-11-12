@@ -52,16 +52,16 @@ const useStyles = makeStyles(() => ({
 
 
 export default function PRHead({
-    data,
-    handleSortChange,
-    handleMenuFilter,
-    clearFilterFunction,
-    globalFilter
+    prParamsCallback,
 }) {
 
-    const [order, setOrder] = useState('desc');
-
+    const [isDesc, setIsDesc] = useState(true);
     const classes = useStyles();
+
+    const handleLastUpdatedSort = () => {
+        prParamsCallback({sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc'});
+        setIsDesc(!isDesc);
+    }
 
     return (
         <TableHead>
@@ -113,7 +113,7 @@ export default function PRHead({
                         {/* <TriunghiMenuPrPr handleMenuFilter={handleMenuFilter} /> */}
                         <IconButton
                             id="basic-button"
-                            // onClick={(e) => handleSortChange()}
+                            //onClick={(e) => handleSortChange()}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -137,9 +137,7 @@ export default function PRHead({
                         </Typography>
 
                         <TriunghiMenuPrProject
-                            handleMenuFilter={handleMenuFilter}
-                            globalFilter={globalFilter}
-                            clearFilterFunction={clearFilterFunction}
+                            prParamsCallback={prParamsCallback}
                         />
                     </Stack>
                 </TableCell>
@@ -159,11 +157,7 @@ export default function PRHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuPrContributor
-                            handleMenuFilter={handleMenuFilter}
-                            globalFilter={globalFilter}
-                            clearFilterFunction={clearFilterFunction}
-                        />
+                        <TriunghiMenuPrContributor prParamsCallback={prParamsCallback}/>
 
                     </Stack>
                 </TableCell>
@@ -183,10 +177,7 @@ export default function PRHead({
                             Status
                         </Typography>
 
-                        <TriunghiMenuPrStatus
-                            globalFilter={globalFilter}
-                            clearFilterFunction={clearFilterFunction}
-                        />
+                        <TriunghiMenuPrStatus prParamsCallback={prParamsCallback}/>
                     </Stack>
                 </TableCell>
 
@@ -207,16 +198,7 @@ export default function PRHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => {
-                                if (order === 'asc') {
-                                    setOrder('desc');
-                                    clearFilterFunction('sortBy', 'updated_at', "sortType", 'asc');
-                                }
-                                else {
-                                    setOrder('asc');
-                                    globalFilter('sortBy=updated_at', 'sortBy=', '', "sortType=asc", 'sortType=', '');
-                                }
-                            }}
+                            onClick={handleLastUpdatedSort}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

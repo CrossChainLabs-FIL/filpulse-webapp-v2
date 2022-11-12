@@ -54,6 +54,7 @@ const useStyles = makeStyles(() => ({
 export default function PRTable({
     filterName,
     isSearchEmpty,
+    search,
     //data,
     //state,
     handleMenuFilter,
@@ -68,6 +69,8 @@ export default function PRTable({
     const [state, setState] = useState({
         loading: true
     });
+    const [params, setParams] = useState({
+    });
 
     const [followEvent, setFollowEvent] = useState(false);
 
@@ -81,13 +84,16 @@ export default function PRTable({
             const user = JSON.parse(localStorage.getItem("user"));
             const client = new Client();
 
-            let params = {
-                repo: 'venus',
-                organisation: 'filecoin-project',
-                status: 'closed',
-                sortBy: 'updated_at',
-                sortType: 'asc',
-            }
+            /*let params = {
+                //repo: 'venus',
+                //organisation: 'filecoin-project',
+                //status: 'closed',
+                //sortBy: 'updated_at',
+                //sortType: 'asc',
+                search: search,
+            }*/
+
+            console.log('state.params', params);
 
             let response;
 
@@ -111,7 +117,7 @@ export default function PRTable({
         console.log(followEvent);
         fetchData();
         setFollowEvent(false);
-    }, [followEvent]);
+    }, [params, followEvent, search]);
 
 
 
@@ -142,6 +148,14 @@ export default function PRTable({
         });
     }
 
+    const prParamsCallback = (new_params) => {
+        console.log(new_params);
+        setParams({
+            ...params,
+            ...new_params,
+        });
+    }
+
     return (
         <>
             <TableContainer
@@ -159,6 +173,7 @@ export default function PRTable({
                         handleMenuFilter={handleMenuFilter}
                         clearFilterFunction={clearFilter}
                         globalFilter={globalFilter}
+                        prParamsCallback={prParamsCallback}
                     />
 
                     {state.loading && (

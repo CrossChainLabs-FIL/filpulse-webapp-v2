@@ -196,6 +196,8 @@ export default function TableApp() {
 
     const [open, setOpen] = React.useState(false);
 
+    const [search, setSearch] = React.useState('');
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -227,15 +229,6 @@ export default function TableApp() {
     const classes = useStyles();
 
     useEffect(() => {
-        client.get('tab_prs').then((pr_data) => {
-            setState({
-                loading: false,
-                pr_data: pr_data.list,
-            });
-            setOrder('desc');
-            setData(pr_data.list);
-        });
-
         setIsSearchEmpty(true);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -255,7 +248,7 @@ export default function TableApp() {
 
         switch (newValue) {
             case 0:
-                if (user.token) {
+                /*if (user.token) {
                     client.post_with_token('tab_prs', { params: 0 }, user.token).then((pr_data) => {
                         setState({
                             loading: false,
@@ -273,7 +266,7 @@ export default function TableApp() {
                         setOrder('desc');
                         setData(pr_data.list);
                     });
-                }
+                }*/
                 break;
             case 1:
                 if (user.token) {
@@ -349,7 +342,7 @@ export default function TableApp() {
         });
         switch (value) {
             case 0:
-                if (filterLink === '') {
+                /*if (filterLink === '') {
                     if (order === 'asc') {
                         setFilterLink('');
                         client.get('tab_prs').then((pr_data) => {
@@ -420,7 +413,7 @@ export default function TableApp() {
                             setData(pr_data.list);
                         });
                     }
-                }
+                }*/
                 break;
             case 1:
                 if (filterLink === '') {
@@ -603,14 +596,14 @@ export default function TableApp() {
         });
         switch (value) {
             case 0:
-                client.get(`tab_prs?${link_value}`).then((pr_data) => {
+                /*client.get(`tab_prs?${link_value}`).then((pr_data) => {
                     setState({
                         loading: false,
                         pr_data: pr_data,
                     });
                     setData(pr_data.list);
                     setFilterName("");
-                });
+                });*/
                 break;
             case 1:
                 client.get(`tab_issues?${link_value}`).then((issues_data) => {
@@ -1023,7 +1016,7 @@ export default function TableApp() {
         });
         switch (value) {
             case 0:
-                if (filterLink === '') {
+                /*if (filterLink === '') {
                     if (addonValue2 !== undefined) {
                         setFilterLink('?' + addonValue + '&' + addonValue2);
                         client.get('tab_prs' + '?' + addonValue + '&' + addonValue2).then((pr_data) => {
@@ -1090,7 +1083,7 @@ export default function TableApp() {
                             setData(pr_data.list);
                         });
                     }
-                }
+                }*/
                 break;
             case 1:
                 if (filterLink === '') {
@@ -1649,6 +1642,11 @@ export default function TableApp() {
         setFilterName(event.target.value);
     };
 
+    const handleSearch = (event) => {
+        console.log(event.target.value);
+        setSearch(event.target.value)
+    }
+
     return (
         <Paper className="container">
             <Stack
@@ -1742,7 +1740,7 @@ export default function TableApp() {
                         marginRight: '1em'
                     }}
                     value={filterName}
-                    onChange={(e) => handleFilterByName(e)}
+                    onChange={(e) => handleSearch(e)}
                     placeholder="Search"
                     startAdornment={
                         <InputAdornment position="start">
@@ -1760,6 +1758,7 @@ export default function TableApp() {
                     isSearchEmpty={isSearchEmpty}
                     //data={data}
                     //state={state}
+                    search={search}
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
                     clearFilter={clearFilter}

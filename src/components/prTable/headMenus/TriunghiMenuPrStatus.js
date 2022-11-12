@@ -61,7 +61,7 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function TriunghiMenuPrStatus({ globalFilter, clearFilterFunction }) {
+export default function TriunghiMenuPrStatus({ prParamsCallback }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const [isSorted, setIsSorted] = useState(false);
     const [last, setLast] = useState('');
@@ -76,7 +76,7 @@ export default function TriunghiMenuPrStatus({ globalFilter, clearFilterFunction
         handleClose();
         setIsSorted(true);
         setLast(status);
-        globalFilter(`status=${status}`, 'status=', last);
+        prParamsCallback({status: status});
     }
 
     const classes = useStyles();
@@ -96,7 +96,7 @@ export default function TriunghiMenuPrStatus({ globalFilter, clearFilterFunction
             {isSorted ?
                 <IconButton
                     id="basic-button"
-                    onClick={() => { setIsSorted(false); setLast(''); clearFilterFunction('status=', last); }}
+                    onClick={() => { setIsSorted(false); setLast('');  prParamsCallback({status: undefined}); }}
                     style={{ padding: 0, marginLeft: '0.25em' }}
                 >
                     <img src={clearFilter} alt='clear' />

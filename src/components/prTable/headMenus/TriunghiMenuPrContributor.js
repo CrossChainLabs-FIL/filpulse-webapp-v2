@@ -78,7 +78,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuPrContributor({ handleMenuFilter, globalFilter, clearFilterFunction }) {
+export default function TriunghiMenuPrContributor({ prParamsCallback }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
@@ -108,7 +108,7 @@ export default function TriunghiMenuPrContributor({ handleMenuFilter, globalFilt
         handleClose();
         setIsSorted(true);
         setLast(contributor);
-        globalFilter(`contributor=${contributor}`, 'contributor=', last);
+        prParamsCallback({contributor: contributor})
     }
 
     const handleFilterByName = (event) => {
@@ -148,7 +148,7 @@ export default function TriunghiMenuPrContributor({ handleMenuFilter, globalFilt
             {isSorted ?
                 <IconButton
                     id="basic-button"
-                    onClick={() => { setIsSorted(false); setLast(''); clearFilterFunction('contributor=', last); }}
+                    onClick={() => { setIsSorted(false); setLast(''); prParamsCallback({contributor: undefined}); }}
                     style={{ padding: 0, marginLeft: '0.25em' }}
                 >
                     <img src={clearFilter} alt='clear' />
