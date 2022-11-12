@@ -14,7 +14,6 @@ import { makeStyles } from '@mui/styles';
 // components
 import TriunghiMenuIssuesAuthor from './headMenus/TriunghiMenuIssuesAuthor';
 import TriunghiMenuIssuesProject from './headMenus/TriunghiMenuIssuesProject';
-import TriunghiMenuIssuesId from './headMenus/TriunghiMenuIssuesId';
 import TriunghiMenuIssuesAssignee from './headMenus/TriunghiMenuIssuesAssignee';
 import TriunghiMenuIssuesStatus from './headMenus/TriunghiMenuIssuesStatus'
 
@@ -83,7 +82,6 @@ export default function IssuesHead({ paramsCallback }) {
                             #
                         </Typography>
 
-                        {/* <TriunghiMenuIssuesId data={data} /> */}
                         <IconButton
                             id="basic-button"
                             // onClick={(e) => handleSortChange()}
@@ -109,7 +107,6 @@ export default function IssuesHead({ paramsCallback }) {
                             Issue
                         </Typography>
 
-                        {/* <TriunghiMenuIssuesIssue handleMenuFilter={handleMenuFilter} /> */}
                         <IconButton
                             id="basic-button"
                             // onClick={(e) => handleSortChange()}
@@ -135,7 +132,7 @@ export default function IssuesHead({ paramsCallback }) {
                             Project
                         </Typography>
 
-                        <TriunghiMenuIssuesProject paramsCallback={paramsCallback}/>
+                        <TriunghiMenuIssuesProject paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
@@ -154,7 +151,7 @@ export default function IssuesHead({ paramsCallback }) {
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuIssuesAuthor paramsCallback={paramsCallback}/>
+                        <TriunghiMenuIssuesAuthor paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
@@ -173,7 +170,7 @@ export default function IssuesHead({ paramsCallback }) {
                             Assignee
                         </Typography>
 
-                        <TriunghiMenuIssuesAssignee paramsCallback={paramsCallback}/>
+                        <TriunghiMenuIssuesAssignee paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
@@ -192,7 +189,7 @@ export default function IssuesHead({ paramsCallback }) {
                             Status
                         </Typography>
 
-                        <TriunghiMenuIssuesStatus paramsCallback={paramsCallback}/>
+                        <TriunghiMenuIssuesStatus paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
@@ -212,7 +209,7 @@ export default function IssuesHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            onClick={ handleLastUpdatedSort }
+                            onClick={handleLastUpdatedSort}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

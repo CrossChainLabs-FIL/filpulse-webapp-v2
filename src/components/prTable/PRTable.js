@@ -50,11 +50,11 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function PRTable({search}) {
+export default function PRTable({ search }) {
     const classes = useStyles();
 
     const [data, setData] = useState([]);
-    const [state, setState] = useState({loading: true});
+    const [state, setState] = useState({ loading: true });
     const [params, setParams] = useState({});
     const [followEvent, setFollowEvent] = useState(false);
     const [isUserNotFound, setIsUserNotFound] = useState(false);
@@ -65,7 +65,7 @@ export default function PRTable({search}) {
             let response;
             const user = JSON.parse(localStorage.getItem("user"));
             const client = new Client();
-            
+
             params.search = search;
 
             if (user?.token) {
@@ -75,9 +75,9 @@ export default function PRTable({search}) {
             }
             ;
             setData(response.list);
-            setState({loading: false});
-            setIsUserNotFound(response.list.length == 0 && search);
-            setTableEmpty(response.list.length == 0 && !search);
+            setState({ loading: false });
+            setIsUserNotFound(response.list.length === 0 && search);
+            setTableEmpty(response.list.length === 0 && !search);
 
         } catch (error) {
             console.log(error);
@@ -125,7 +125,7 @@ export default function PRTable({search}) {
             >
                 <Table stickyHeader>
 
-                    <PRHead paramsCallback={paramsCallback}/>
+                    <PRHead paramsCallback={paramsCallback} />
 
                     {state.loading && (
                         <TableBody>

@@ -50,16 +50,15 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function ReleasesHead({
-    handleSortChange,
-    handleMenuFilter,
-    clearFilterFunction,
-    globalFilter
-}) {
+export default function ReleasesHead({ paramsCallback }) {
 
-    const [order, setOrder] = useState('desc');
-
+    const [isDesc, setIsDesc] = useState(true);
     const classes = useStyles();
+
+    const handleLastUpdatedSort = () => {
+        paramsCallback({ sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc' });
+        setIsDesc(!isDesc);
+    }
 
     return (
         <TableHead>
@@ -105,7 +104,6 @@ export default function ReleasesHead({
                             Release
                         </Typography>
 
-                        {/* <TriunghiMenuIssuesIssue handleMenuFilter={handleMenuFilter} /> */}
                         <IconButton
                             id="basic-button"
                             // onClick={(e) => handleSortChange()}
@@ -131,11 +129,7 @@ export default function ReleasesHead({
                             Project
                         </Typography>
 
-                        <TriunghiMenuReleasesProject
-                            handleMenuFilter={handleMenuFilter}
-                            clearFilterFunction={clearFilterFunction}
-                            globalFilter={globalFilter}
-                        />
+                        <TriunghiMenuReleasesProject paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
@@ -154,11 +148,7 @@ export default function ReleasesHead({
                             Author
                         </Typography>
 
-                        <TriunghiMenuReleasesAuthor
-                            handleMenuFilter={handleMenuFilter}
-                            clearFilterFunction={clearFilterFunction}
-                            globalFilter={globalFilter}
-                        />
+                        <TriunghiMenuReleasesAuthor paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
@@ -177,10 +167,7 @@ export default function ReleasesHead({
                             Status
                         </Typography>
 
-                        <TriunghiMenuReleasesStatus
-                            globalFilter={globalFilter}
-                            clearFilterFunction={clearFilterFunction}
-                        />
+                        <TriunghiMenuReleasesStatus paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
@@ -200,16 +187,7 @@ export default function ReleasesHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => {
-                                if (order === 'asc') {
-                                    setOrder('desc');
-                                    clearFilterFunction('sortBy', 'updated_at', "sortType", 'asc');
-                                }
-                                else {
-                                    setOrder('asc');
-                                    globalFilter('sortBy=updated_at', 'sortBy=', '', "sortType=asc", 'sortType=', '');
-                                }
-                            }}
+                            onClick={handleLastUpdatedSort}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

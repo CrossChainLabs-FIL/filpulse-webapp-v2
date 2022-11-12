@@ -1,4 +1,3 @@
-import { filter } from 'lodash';
 import React, { useState, useEffect, useContext } from 'react';
 
 // @mui
@@ -55,13 +54,25 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     table: {
         maxHeight: "40em",
     },
     stea: {
-        // height: '1.2em',
         paddingBottom: '0.3em'
+    },
+    watchlistButton: {
+        height: '3em',
+        minHeight: '3em',
+        minWidth: '8em',
+        width: '8em',
+        marginRight: '3em',
+        marginTop: '2.45em',
+        paddingBottom: 0,
+        color: '#000000',
+        textTransform: 'none',
+        fontWeight: theme.typography.fontWeightRegular,
+        fontSize: theme.typography.pxToRem(15),
     },
     watchlistTab: {
         height: '3em',
@@ -69,8 +80,9 @@ const useStyles = makeStyles(() => ({
         minWidth: '8em',
         width: '8em',
         marginRight: '3em',
-        marginTop: '1em',
-        paddingBottom: 0
+        marginTop: '1.2em',
+        marginBottom: '0.2em',
+        paddingBottom: 0,
     },
     prTab: {
         height: '3em',
@@ -1594,61 +1606,6 @@ export default function TableApp() {
                     <StyledTab label='Releases' classes={{ root: classes.releasesTab }} />
                     <StyledTab label='Commits' classes={{ root: classes.commitsTab }} />
                     <StyledTab label='Contributors' classes={{ root: classes.contributorsTab }} />
-                    {!stateLogin.isLoggedIn && (
-                        <>
-                            <StyledTab
-                                icon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
-                                iconPosition='start'
-                                label='Watchlist'
-                                onClick={handleClickOpen}
-                                classes={{ root: classes.watchlistTab }}
-                            />
-                            <Dialog open={open} onClose={handleClose} >
-                                <DialogTitle
-                                    style={{
-                                        backgroundColor: "#EEF4F5",
-                                    }}
-                                >
-                                    {"Get your own watchlist"}
-                                </DialogTitle>
-                                <DialogContent
-                                    style={{
-                                        backgroundColor: "#FFFFFF",
-                                        height: '18em',
-                                        width: '30em'
-                                    }}
-                                >
-                                    <Typography
-                                        style={{
-                                            marginTop: '3.5em',
-                                            marginBottom: '3em',
-                                            marginLeft: '3em'
-                                        }}
-                                    >
-                                        Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
-                                    </Typography>
-                                    <Button
-                                        variant="contained"
-                                        startIcon={<img src={GithubLogo} alt='GithubLogo' />}
-                                        href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
-                                        onClick={() => {
-                                            setDataError({ ...dataError, errorMessage: "" });
-                                        }}
-                                        sx={{
-                                            backgroundColor: 'transparent',
-                                            color: '#000000',
-                                            width: '23em',
-                                            marginLeft: '4em'
-                                        }}
-                                        className={classes.button}
-                                    >
-                                        Sign in with Github
-                                    </Button>
-                                </DialogContent>
-
-                            </Dialog>
-                        </>
-                    )}
                     {stateLogin.isLoggedIn && (
                         <StyledTab
                             icon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
@@ -1658,6 +1615,62 @@ export default function TableApp() {
                         />
                     )}
                 </StyledTabs>
+                {!stateLogin.isLoggedIn && (
+                    <>
+                        <Button
+                            startIcon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
+                            onClick={handleClickOpen}
+                            className={classes.watchlistButton}
+                            disableRipple
+                        >
+                            Watchlist
+                        </Button>
+                        <Dialog open={open} onClose={handleClose} >
+                            <DialogTitle
+                                style={{
+                                    backgroundColor: "#EEF4F5",
+                                }}
+                            >
+                                {"Get your own watchlist"}
+                            </DialogTitle>
+                            <DialogContent
+                                style={{
+                                    backgroundColor: "#FFFFFF",
+                                    height: '18em',
+                                    width: '30em'
+                                }}
+                            >
+                                <Typography
+                                    style={{
+                                        marginTop: '3.5em',
+                                        marginBottom: '3em',
+                                        marginLeft: '3em'
+                                    }}
+                                >
+                                    Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
+                                </Typography>
+                                <Button
+                                    variant="contained"
+                                    startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                    href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
+                                    onClick={() => {
+                                        setDataError({ ...dataError, errorMessage: "" });
+                                    }}
+                                    sx={{
+                                        backgroundColor: 'transparent',
+                                        color: '#000000',
+                                        width: '23em',
+                                        marginLeft: '4em'
+                                    }}
+                                    className={classes.button}
+                                >
+                                    Sign in with Github
+                                </Button>
+                            </DialogContent>
+
+                        </Dialog>
+                    </>
+                )}
                 <SearchStyle
                     style={{
                         marginLeft: "auto",
@@ -1680,56 +1693,24 @@ export default function TableApp() {
 
             {value === 0 && (<PRTable search={search} />)}
             {value === 1 && (<IssuesTable search={search} />)}
+            {value === 2 && (<ReleasesTable search={search} />)}
+            {value === 3 && <CommitsTable search={search} />}
+            {value === 4 && <ContributorsTable search={search} />}
 
-            {value === 2 && (
-                <ReleasesTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    state={state}
-                    handleMenuFilter={handleMenuFilter}
-                    handleSortChange={handleSort}
-                    clearFilter={clearFilter}
-                    globalFilter={globalFilter}
-                />
-            )}
+            {value === 5 && !stateLogin.isLoggedIn ? setValue(0) : ''}
 
-            {value === 3 &&
-                <CommitsTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    state={state}
-                    handleMenuFilter={handleMenuFilter}
-                    handleSortChange={handleSort}
-                    clearFilter={clearFilter}
-                    globalFilter={globalFilter}
-                />
+            {
+                value === 5 && (
+                    <WatchlistTable
+                        filterName={filterName}
+                        isSearchEmpty={isSearchEmpty}
+                        data={data}
+                        handleSortChange={handleSort}
+                        clearFilter={clearFilter}
+                    />
+                )
             }
 
-            {value === 4 &&
-                <ContributorsTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    state={state}
-                    handleMenuFilter={handleMenuFilter}
-                    handleSortChange={handleSort}
-                    clearFilter={clearFilter}
-                    globalFilter={globalFilter}
-                />
-            }
-
-            {value === 5 && (
-                <WatchlistTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    handleSortChange={handleSort}
-                    clearFilter={clearFilter}
-                />
-            )}
-
-        </Paper>
+        </Paper >
     );
 }

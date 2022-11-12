@@ -22,7 +22,6 @@ import { Client } from '../../../utils/client';
 
 
 // assets
-import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
 import clearFilter from '../../../assets/clearFilter.svg';
 import bara from '../../../assets/bara.svg';
@@ -33,7 +32,6 @@ const client = new Client();
 const useStyles = makeStyles(() => ({
     triunghi: {
         marginLeft: '0.25em',
-        // marginTop: '0.15em'
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
@@ -86,7 +84,6 @@ export default function TriunghiMenuPrContributor({ paramsCallback }) {
         loading: true
     });
     const [isSorted, setIsSorted] = useState(false);
-    const [last, setLast] = useState('');
     const open = Boolean(anchorEl);
 
 
@@ -107,8 +104,7 @@ export default function TriunghiMenuPrContributor({ paramsCallback }) {
     function handleFilterClose(contributor) {
         handleClose();
         setIsSorted(true);
-        setLast(contributor);
-        paramsCallback({contributor: contributor})
+        paramsCallback({ contributor: contributor });
     }
 
     const handleFilterByName = (event) => {
@@ -148,7 +144,10 @@ export default function TriunghiMenuPrContributor({ paramsCallback }) {
             {isSorted ?
                 <IconButton
                     id="basic-button"
-                    onClick={() => { setIsSorted(false); setLast(''); paramsCallback({contributor: undefined}); }}
+                    onClick={() => {
+                        setIsSorted(false);
+                        paramsCallback({ contributor: undefined });
+                    }}
                     style={{ padding: 0, marginLeft: '0.25em' }}
                 >
                     <img src={clearFilter} alt='clear' />

@@ -48,20 +48,35 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function ContributorHead({
-    handleSortChange,
-    handleMenuFilter,
-    clearFilterFunction,
-    globalFilter
-}) {
+export default function ContributorHead({ paramsCallback }) {
 
-    const [orderCommits, setOrderCommits] = useState('desc');
-
-    const [orderPrs, setOrderPrs] = useState('desc');
-
-    const [orderIssues, setOrderIssues] = useState('desc');
-
+    const [isDescCommits, setIsDescCommits] = useState(true);
+    const [isDescPrs, setIsDescPrs] = useState(true);
+    const [isDescIssues, setIsDescIssues] = useState(true);
     const classes = useStyles();
+
+    const handleSort = (type) => {
+        switch (type) {
+            case 'contributions':
+                paramsCallback({ sortBy: type, sortType: isDescCommits ? 'asc' : 'desc' });
+                setIsDescCommits(!isDescCommits);
+                setIsDescPrs(true);
+                setIsDescIssues(true);
+                break;
+            case 'open_prs':
+                paramsCallback({ sortBy: type, sortType: isDescPrs ? 'asc' : 'desc' });
+                setIsDescCommits(true);
+                setIsDescPrs(!isDescPrs);
+                setIsDescIssues(true);
+                break;
+            case 'open_issues':
+                paramsCallback({ sortBy: type, sortType: isDescIssues ? 'asc' : 'desc' });
+                setIsDescCommits(true);
+                setIsDescPrs(true);
+                setIsDescIssues(!isDescIssues);
+                break;
+        }
+    }
 
     return (
         <TableHead>
@@ -90,11 +105,7 @@ export default function ContributorHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuContributorContributor
-                            handleMenuFilter={handleMenuFilter}
-                            clearFilterFunction={clearFilterFunction}
-                            globalFilter={globalFilter}
-                        />
+                        <TriunghiMenuContributorContributor paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
@@ -113,11 +124,7 @@ export default function ContributorHead({
                             Project
                         </Typography>
 
-                        <TriunghiMenuContributorProject
-                            handleMenuFilter={handleMenuFilter}
-                            clearFilterFunction={clearFilterFunction}
-                            globalFilter={globalFilter}
-                        />
+                        <TriunghiMenuContributorProject paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
@@ -138,16 +145,7 @@ export default function ContributorHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => {
-                                if (orderCommits === 'asc') {
-                                    setOrderCommits('desc');
-                                    clearFilterFunction('sortBy', 'contributions', "sortType", 'asc');
-                                }
-                                else {
-                                    setOrderCommits('asc');
-                                    globalFilter('sortBy=contributions', 'sortBy=', '', "sortType=asc", 'sortType=', '');
-                                }
-                            }}
+                            onClick={(e) => handleSort('contributions')}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -191,16 +189,7 @@ export default function ContributorHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => {
-                                if (orderPrs === 'asc') {
-                                    setOrderPrs('desc');
-                                    clearFilterFunction('sortBy', 'open_prs', "sortType", 'asc');
-                                }
-                                else {
-                                    setOrderPrs('asc');
-                                    globalFilter('sortBy=open_prs', 'sortBy=', '', "sortType=asc", 'sortType=', '');
-                                }
-                            }}
+                            onClick={(e) => handleSort('open_prs')}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -256,16 +245,7 @@ export default function ContributorHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => {
-                                if (orderIssues === 'asc') {
-                                    setOrderIssues('desc');
-                                    clearFilterFunction('sortBy', 'open_issues', "sortType", 'asc');
-                                }
-                                else {
-                                    setOrderIssues('asc');
-                                    globalFilter('sortBy=open_issues', 'sortBy=', '', "sortType=asc", 'sortType=', '');
-                                }
-                            }}
+                            onClick={(e) => handleSort('open_issues')}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

@@ -5,12 +5,10 @@ import { makeStyles } from '@mui/styles';
 
 import { Client } from '../../utils/client';
 
-
 import {
     Box,
     Stack,
     Checkbox,
-    CardHeader,
     Table,
     TableRow,
     TableBody,
@@ -54,11 +52,11 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export default function IssuesTable({search}) {
+export default function IssuesTable({ search }) {
     const classes = useStyles();
 
     const [data, setData] = useState([]);
-    const [state, setState] = useState({loading: true});
+    const [state, setState] = useState({ loading: true });
     const [params, setParams] = useState({});
     const [followEvent, setFollowEvent] = useState(false);
     const [isUserNotFound, setIsUserNotFound] = useState(false);
@@ -69,7 +67,7 @@ export default function IssuesTable({search}) {
             let response;
             const user = JSON.parse(localStorage.getItem("user"));
             const client = new Client();
-            
+
             params.search = search;
 
             console.log(params);
@@ -81,9 +79,9 @@ export default function IssuesTable({search}) {
             }
             ;
             setData(response.list);
-            setState({loading: false});
-            setIsUserNotFound(response.list.length == 0 && search);
-            setTableEmpty(response.list.length == 0 && !search);
+            setState({ loading: false });
+            setIsUserNotFound(response.list.length === 0 && search);
+            setTableEmpty(response.list.length === 0 && !search);
 
         } catch (error) {
             console.log(error);
@@ -130,7 +128,7 @@ export default function IssuesTable({search}) {
             >
                 <Table stickyHeader>
 
-                    <IssuesHead paramsCallback={paramsCallback}/>
+                    <IssuesHead paramsCallback={paramsCallback} />
 
                     {state.loading && (
                         <TableBody>
@@ -279,11 +277,6 @@ export default function IssuesTable({search}) {
                                         >
 
                                             {assignees ? JSON.parse(assignees).map((item, index) => {
-                                                // if (index >= 3) {
-                                                //     return (
-                                                //         <span key={index}>...</span>
-                                                //     );
-                                                // }
                                                 if (index < 3) {
                                                     return (
                                                         <Tooltip
@@ -308,6 +301,9 @@ export default function IssuesTable({search}) {
                                                             </Link>
                                                         </Tooltip>
                                                     );
+                                                }
+                                                else {
+                                                    return (<></>)
                                                 }
                                             }) : ''
                                             }

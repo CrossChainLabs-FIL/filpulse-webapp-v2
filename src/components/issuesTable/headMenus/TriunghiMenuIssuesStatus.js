@@ -16,7 +16,6 @@ import { makeStyles } from '@mui/styles';
 
 
 // assets
-import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
 import closedBox from '../../../assets/ClosedBox.svg';
 import openBox from '../../../assets/OpenBox.svg';
@@ -27,7 +26,6 @@ import bara from '../../../assets/bara.svg';
 const useStyles = makeStyles(() => ({
     triunghi: {
         marginLeft: '0.25em',
-        // marginTop: '0.15em'
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
@@ -65,7 +63,6 @@ const useStyles = makeStyles(() => ({
 export default function TriunghiMenuIssuesStatus({ paramsCallback }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const [isSorted, setIsSorted] = useState(false);
-    const [last, setLast] = useState('');
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -77,8 +74,7 @@ export default function TriunghiMenuIssuesStatus({ paramsCallback }) {
     function handleFilterClose(status) {
         handleClose();
         setIsSorted(true);
-        setLast(status);
-        paramsCallback({status: status});
+        paramsCallback({ status: status });
     }
 
 
@@ -99,7 +95,10 @@ export default function TriunghiMenuIssuesStatus({ paramsCallback }) {
             {isSorted ?
                 <IconButton
                     id="basic-button"
-                    onClick={() => { setIsSorted(false); setLast(''); paramsCallback({status: undefined}); }}
+                    onClick={() => {
+                        setIsSorted(false);
+                        paramsCallback({ status: undefined });
+                    }}
                     style={{ padding: 0, marginLeft: '0.25em' }}
                 >
                     <img src={clearFilter} alt='clear' />

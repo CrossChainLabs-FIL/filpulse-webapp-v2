@@ -1,6 +1,9 @@
+import React, { useState, useEffect } from 'react';
 import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
+
+import { Client } from '../../utils/client';
 
 import {
     Box,
@@ -43,25 +46,54 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function ContributorsTable({
-    filterName,
-    isSearchEmpty,
-    data,
-    state,
-    handleMenuFilter,
-    // searchData,
-    handleSortChange,
-    clearFilter,
-    globalFilter
-}) {
+export default function ContributorsTable({ search }) {
 
     const classes = useStyles();
 
-    const isUserNotFound = data.length === 0 && !isSearchEmpty;
+    const [data, setData] = useState([]);
+    const [state, setState] = useState({ loading: true });
+    const [params, setParams] = useState({});
+    const [followEvent, setFollowEvent] = useState(false);
+    const [isUserNotFound, setIsUserNotFound] = useState(false);
+    const [tableEmpty, setTableEmpty] = useState(false);
 
-    const tableEmpty = data.length === 0 && isSearchEmpty;
+    const fetchData = async () => {
+        try {
+            let response;
+            const user = JSON.parse(localStorage.getItem("user"));
+            const client = new Client();
 
-    // const showData = isSearchEmpty ? data : searchData;
+            params.search = search;
+
+            console.log(params);
+
+            if (user?.token) {
+                response = await client.post_with_token('tab_contributors', params, user.token);
+            } else {
+                response = await client.get('tab_contributors', params);
+            }
+            ;
+            setData(response.list);
+            setState({ loading: false });
+            setIsUserNotFound(response.list.length === 0 && search);
+            setTableEmpty(response.list.length === 0 && !search);
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+        setFollowEvent(false);
+    }, [params, followEvent, search]);
+
+    const paramsCallback = (new_params) => {
+        setParams({
+            ...params,
+            ...new_params,
+        });
+    }
 
     return (
         <>
@@ -74,12 +106,7 @@ export default function ContributorsTable({
             >
                 <Table stickyHeader>
 
-                    <ContributorHead
-                        handleSortChange={handleSortChange}
-                        handleMenuFilter={handleMenuFilter}
-                        clearFilterFunction={clearFilter}
-                        globalFilter={globalFilter}
-                    />
+                    <ContributorHead paramsCallback={paramsCallback} />
                     {state.loading && (
                         <TableBody>
                             <TableRow>
@@ -279,11 +306,11 @@ export default function ContributorsTable({
                     )}
 
 
-                    {isUserNotFound && !tableEmpty && !isSearchEmpty && !state.loading && (
+                    {isUserNotFound && !tableEmpty && !search && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>
-                                    <SearchNotFound searchQuery={filterName} />
+                                    <SearchNotFound searchQuery={search} />
                                 </TableCell>
                             </TableRow>
                         </TableBody>

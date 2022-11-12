@@ -14,7 +14,6 @@ import { makeStyles } from '@mui/styles';
 // components
 import TriunghiMenuCommitsProject from './headMenus/TriunghiMenuCommitsProject';
 import TriunghiMenuCommitsContributor from './headMenus/TriunghiMenuCommitsContributor';
-import TriunghiMenuCommitsHash from './headMenus/TriunghiMenuCommitsHash';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -44,17 +43,15 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function CommitsHead({
-    data,
-    handleSortChange,
-    handleMenuFilter,
-    clearFilterFunction,
-    globalFilter
-}) {
+export default function CommitsHead({ paramsCallback }) {
 
-    const [order, setOrder] = useState('desc');
-
+    const [isDesc, setIsDesc] = useState(true);
     const classes = useStyles();
+
+    const handleLastUpdatedSort = () => {
+        paramsCallback({ sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc' });
+        setIsDesc(!isDesc);
+    }
 
     return (
         <TableHead>
@@ -85,7 +82,6 @@ export default function CommitsHead({
                             Hash
                         </Typography>
 
-                        {/* <TriunghiMenuCommitsHash data={data} /> */}
                         <IconButton
                             id="basic-button"
                             // onClick={(e) => handleSortChange()}
@@ -111,7 +107,6 @@ export default function CommitsHead({
                             Commit
                         </Typography>
 
-                        {/* <TriunghiMenuCommitsCommit handleMenuFilter={handleMenuFilter} /> */}
                         <IconButton
                             id="basic-button"
                             // onClick={(e) => handleSortChange()}
@@ -137,11 +132,7 @@ export default function CommitsHead({
                             Project
                         </Typography>
 
-                        <TriunghiMenuCommitsProject
-                            handleMenuFilter={handleMenuFilter}
-                            globalFilter={globalFilter}
-                            clearFilterFunction={clearFilterFunction}
-                        />
+                        <TriunghiMenuCommitsProject paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
@@ -160,11 +151,7 @@ export default function CommitsHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuCommitsContributor
-                            handleMenuFilter={handleMenuFilter}
-                            clearFilterFunction={clearFilterFunction}
-                            globalFilter={globalFilter}
-                        />
+                        <TriunghiMenuCommitsContributor paramsCallback={paramsCallback} />
 
                     </Stack>
                 </TableCell>
@@ -185,16 +172,7 @@ export default function CommitsHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => {
-                                if (order === 'asc') {
-                                    setOrder('desc');
-                                    clearFilterFunction('sortBy', 'updated_at', "sortType", 'asc');
-                                }
-                                else {
-                                    setOrder('asc');
-                                    globalFilter('sortBy=updated_at', 'sortBy=', '', "sortType=asc", 'sortType=', '');
-                                }
-                            }}
+                            onClick={handleLastUpdatedSort}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -203,6 +181,6 @@ export default function CommitsHead({
                 </TableCell>
 
             </TableRow>
-        </TableHead>
+        </TableHead >
     );
 }

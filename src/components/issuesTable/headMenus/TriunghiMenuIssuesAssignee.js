@@ -21,7 +21,6 @@ import { styled } from '@mui/material/styles';
 import { Client } from '../../../utils/client';
 
 // assets
-import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
 import clearFilter from '../../../assets/clearFilter.svg';
 import bara from '../../../assets/bara.svg';
@@ -84,7 +83,6 @@ export default function TriunghiMenuIssuesAssignee({ paramsCallback }) {
         loading: true, commits_data: []
     });
     const [isSorted, setIsSorted] = useState(false);
-    const [last, setLast] = useState('');
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
@@ -105,8 +103,7 @@ export default function TriunghiMenuIssuesAssignee({ paramsCallback }) {
     function handleFilterClose(assignee) {
         handleClose();
         setIsSorted(true);
-        setLast(assignee);
-        paramsCallback({assignee: assignee});
+        paramsCallback({ assignee: assignee });
     }
 
     const handleFilterByName = (event) => {
@@ -147,7 +144,10 @@ export default function TriunghiMenuIssuesAssignee({ paramsCallback }) {
             {isSorted ?
                 <IconButton
                     id="basic-button"
-                    onClick={() => { setIsSorted(false); setLast(''); paramsCallback({assignee: undefined}); }}
+                    onClick={() => {
+                        setIsSorted(false);
+                        paramsCallback({ assignee: undefined });
+                    }}
                     style={{ padding: 0, marginLeft: '0.25em' }}
                 >
                     <img src={clearFilter} alt='clear' />

@@ -80,7 +80,6 @@ export default function PRHead({ paramsCallback }) {
                             #
                         </Typography>
 
-                        {/* <TriunghiMenuPrId data={data} /> */}
                         <IconButton
                             id="basic-button"
                             // onClick={(e) => handleSortChange()}
@@ -106,7 +105,6 @@ export default function PRHead({ paramsCallback }) {
                             PR
                         </Typography>
 
-                        {/* <TriunghiMenuPrPr handleMenuFilter={handleMenuFilter} /> */}
                         <IconButton
                             id="basic-button"
                             //onClick={(e) => handleSortChange()}
@@ -132,9 +130,7 @@ export default function PRHead({ paramsCallback }) {
                             Project
                         </Typography>
 
-                        <TriunghiMenuPrProject
-                            paramsCallback={paramsCallback}
-                        />
+                        <TriunghiMenuPrProject paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 

@@ -22,7 +22,6 @@ import { Client } from '../../../utils/client';
 
 
 // assets
-import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
 import clearFilter from '../../../assets/clearFilter.svg';
 import bara from '../../../assets/bara.svg';
@@ -33,7 +32,6 @@ const client = new Client();
 const useStyles = makeStyles(() => ({
     triunghi: {
         marginLeft: '0.25em',
-        // marginTop: '0.15em'
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
@@ -92,8 +90,6 @@ export default function TriunghiMenuPrProject({ paramsCallback }) {
         loading: true
     });
     const [isSorted, setIsSorted] = useState(false);
-    const [lastOrganisation, setLastOrganisation] = useState('');
-    const [lastRepo, setLastRepo] = useState('');
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
@@ -113,9 +109,7 @@ export default function TriunghiMenuPrProject({ paramsCallback }) {
     function handleFilterClose(organisation, repo) {
         handleClose();
         setIsSorted(true);
-        setLastOrganisation(organisation);
-        setLastRepo(repo);
-        paramsCallback({repo: repo, organisation: organisation});
+        paramsCallback({ repo: repo, organisation: organisation });
     }
 
     const handleFilterByName = (event) => {
@@ -158,9 +152,7 @@ export default function TriunghiMenuPrProject({ paramsCallback }) {
                     id="basic-button"
                     onClick={() => {
                         setIsSorted(false);
-                        setLastOrganisation('');
-                        setLastRepo('');
-                        paramsCallback({repo: undefined, organisation: undefined});
+                        paramsCallback({ repo: undefined, organisation: undefined });
                     }}
                     style={{ padding: 0, marginLeft: '0.25em' }}
                 >
