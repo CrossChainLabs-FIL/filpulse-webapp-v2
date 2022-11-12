@@ -72,7 +72,7 @@ export default function PRTable({ search }) {
             } else {
                 response = await client.get('tab_prs', params);
             }
-
+            ;
             setData(response.list);
             setState({ loading: false });
             setIsUserNotFound(response.list.length === 0 && search);

@@ -132,7 +132,7 @@ export default function WatchlistTable({ search }) {
                     <WatchlistHead paramsCallback={paramsCallback} />
 
                     <TableBody>
-                        {data.map((row, idx) => {
+                        {data.map((row, index) => {
                             const {
                                 number,
                                 title,
@@ -157,14 +157,16 @@ export default function WatchlistTable({ search }) {
                             return (
                                 <TableRow
                                     hover
-                                    key={idx}
+                                    key={index}
                                     tabIndex={-1}
                                 >
                                     <TableCell padding="checkbox">
                                         <Checkbox
+                                            id={index}
                                             icon={<img src={steaGol} alt='steaGol' />}
                                             checkedIcon={<img src={steaPlin} alt='steaPlin' />}
                                             checked={true}
+                                            onClick={(e) => starOnChange(e)}
                                             className={classes.stea}
                                         />
                                     </TableCell>

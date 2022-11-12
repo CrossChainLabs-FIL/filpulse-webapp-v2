@@ -65,7 +65,8 @@ export default function WatchlistHead({ paramsCallback }) {
     }
 
     const handleCommentsSort = () => {
-        paramsCallback({ sortBy: 'commentsTotal', sortType: isDescComments ? 'asc' : 'desc' });
+        console.log(handleCommentsSort);
+        paramsCallback({ sortBy: 'comments', sortType: isDescComments ? 'asc' : 'desc' });
         setIsDescComments(!isDescComments);
     }
 
