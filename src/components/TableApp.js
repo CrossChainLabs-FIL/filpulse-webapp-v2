@@ -175,16 +175,13 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 );
 
 export default function TableApp() {
+    const classes = useStyles();
+    const [open, setOpen] = useState(false);
+    const [search, setSearch] = useState('');
+    const [value, setValue] = useState(0);
     const { stateLogin, dispatch } = useContext(AuthContext);
-
-    const [dataError, setDataError] = useState({ errorMessage: "", isLoading: false });
-
+    const [dataError, setDataError] = useState({ errorMessage: "" });
     const { client_id, redirect_uri } = stateLogin;
-
-
-    const [open, setOpen] = React.useState(false);
-
-    const [search, setSearch] = React.useState('');
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -194,85 +191,10 @@ export default function TableApp() {
         setOpen(false);
     };
 
-
-    const [data, setData] = useState([]);
-
-    const [value, setValue] = useState(0);
-
-    const [filterName, setFilterName] = useState('');
-
-    const [isSearchEmpty, setIsSearchEmpty] = useState(true);
-
-    const [filterLink, setFilterLink] = useState('');
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    const [state, setState] = useState({
-        loading: true, commits_data: [], contributors_data: [], pr_data: [], issues_data: [], releases_data: [], watchlist_data: []
-    });
-
-
-    const classes = useStyles();
-
-
-
     const handleChange = (event, newValue) => {
-        setState({
-            loading: true
-        });
         setValue(newValue);
-        setFilterName('');
-        setFilterLink('');
-        setIsSearchEmpty(true);
-        setData([]);
         setSearch('');
-
-        const user = JSON.parse(localStorage.getItem("user"));
-
-        if (newValue === 5 && user?.token) {
-            client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
-                setState({
-                    loading: false,
-                    watchlist_data: watchlist_data,
-                });
-                setData(watchlist_data.list);
-            });
-        }
     };
-
-    function handleMenuFilter() {
-        setData([]);
-        setState({
-            loading: true
-        });
-        if (value === 5) {
-            const user = JSON.parse(localStorage.getItem("user"));
-            client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
-                setState({
-                    loading: false,
-                    watchlist_data: watchlist_data,
-                });
-                setData(watchlist_data.list);
-            });
-        }
-    }
-
-    const clearFilter = () => {
-        setData([]);
-        setState({
-            loading: true
-        });
-        if (value === 5) {
-            const user = JSON.parse(localStorage.getItem("user"));
-            client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
-                setState({
-                    loading: false,
-                    watchlist_data: watchlist_data,
-                });
-                setData(watchlist_data.list);
-            });
-        }
-    }
 
 
     const handleSearch = (event) => {
@@ -383,26 +305,13 @@ export default function TableApp() {
                 />
             </Stack>
 
-
-
             {value === 0 && (<PRTable search={search} />)}
             {value === 1 && (<IssuesTable search={search} />)}
             {value === 2 && (<ReleasesTable search={search} />)}
             {value === 3 && <CommitsTable search={search} />}
             {value === 4 && <ContributorsTable search={search} />}
-
             {value === 5 && !stateLogin.isLoggedIn ? setValue(0) : ''}
-            {
-                value === 5 && (
-                    <WatchlistTable
-                        filterName={filterName}
-                        isSearchEmpty={isSearchEmpty}
-                        data={data}
-                        // handleSortChange={handleSort}
-                        clearFilter={clearFilter}
-                    />
-                )
-            }
+            {value === 5 && (<WatchlistTable search={search} />)}
 
         </Paper >
     );

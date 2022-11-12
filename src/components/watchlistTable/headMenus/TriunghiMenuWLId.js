@@ -81,7 +81,6 @@ export default function TriunghiMenuWLId({ data }) {
         setAnchorEl(null);
     };
 
-
     const classes = useStyles();
 
     return (
@@ -134,7 +133,7 @@ export default function TriunghiMenuWLId({ data }) {
                     </Box >
                     <Paper className={classes.paper}>
                         <List className={classes.list} disablePadding={true}>
-                            {data.map((row) => {
+                            {data?.map((row) => {
                                 const { id,
                                     showId,
                                 } = row;

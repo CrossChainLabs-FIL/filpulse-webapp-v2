@@ -141,7 +141,7 @@ export default function TriunghiMenuWLName({ data }) {
                     </Box >
                     <Paper className={classes.paper}>
                         <List className={classes.list} disablePadding={true}>
-                            {data.map((row) => {
+                            {data?.map((row) => {
                                 const { id,
                                     projectTitle,
                                     projectSubtitle,

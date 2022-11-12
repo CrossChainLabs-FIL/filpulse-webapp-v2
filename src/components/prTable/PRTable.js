@@ -52,7 +52,6 @@ const useStyles = makeStyles(() => ({
 
 export default function PRTable({ search }) {
     const classes = useStyles();
-
     const [data, setData] = useState([]);
     const [state, setState] = useState({ loading: true });
     const [params, setParams] = useState({});
@@ -73,7 +72,7 @@ export default function PRTable({ search }) {
             } else {
                 response = await client.get('tab_prs', params);
             }
-            ;
+
             setData(response.list);
             setState({ loading: false });
             setIsUserNotFound(response.list.length === 0 && search);

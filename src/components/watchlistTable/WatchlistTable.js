@@ -1,5 +1,8 @@
+import React, { useState, useEffect } from 'react';
 // @mui
 import { makeStyles } from '@mui/styles';
+
+import { Client } from '../../utils/client';
 
 import {
     Checkbox,
@@ -16,7 +19,6 @@ import {
     Tooltip,
     Box
 } from '@mui/material';
-
 
 // components
 import SearchNotFound from '../SearchNotFound';
@@ -56,20 +58,65 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function WatchlistTable({
-    filterName,
-    isSearchEmpty,
-    data,
-    handleSortChange,
-    clearFilter
-}) {
-
+export default function WatchlistTable({ search }) {
     const classes = useStyles();
+    const [data, setData] = useState([]);
+    const [state, setState] = useState({ loading: true });
+    const [params, setParams] = useState({});
+    const [followEvent, setFollowEvent] = useState(false);
+    const [isUserNotFound, setIsUserNotFound] = useState(false);
+    const [tableEmpty, setTableEmpty] = useState(false);
 
-    const isUserNotFound = data.length === 0 && !isSearchEmpty;
+    const fetchData = async () => {
+        try {
+            let response;
+            const user = JSON.parse(localStorage.getItem("user"));
+            const client = new Client();
 
-    const tableEmpty = data.length === 0 && isSearchEmpty;
+            params.search = search;
 
+            if (user?.token) {
+                response = await client.post_with_token('tab_watchlist', params, user.token);
+                setData(response.list);
+                setState({ loading: false });
+                setIsUserNotFound(response.list.length === 0 && search);
+                setTableEmpty(response.list.length === 0 && !search);
+            } 
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+        setFollowEvent(false);
+    }, [params, followEvent, search]);
+
+
+    const starOnChange = (e) => {
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        let index = e.target.id;
+        let params = {
+            number: data[index].number,
+            repo: data[index].repo,
+            organisation: data[index].organisation,
+            follow: e.target.checked,
+        }
+
+        const client = new Client();
+        client.post_with_token('follow', params, user.token).then(() => {
+            setFollowEvent(true);
+        });
+    }
+
+    const paramsCallback = (new_params) => {
+        setParams({
+            ...params,
+            ...new_params,
+        });
+    }
 
     return (
         <>
@@ -82,13 +129,7 @@ export default function WatchlistTable({
             >
                 <Table stickyHeader>
 
-                    <WatchlistHead
-                        data={data}
-                        handleSortChange={handleSortChange}
-                        clearFilterFunction={clearFilter}
-                    />
-
-
+                    <WatchlistHead paramsCallback={paramsCallback} />
 
                     <TableBody>
                         {data.map((row, idx) => {
@@ -307,11 +348,11 @@ export default function WatchlistTable({
                         })}
                     </TableBody>
 
-                    {isUserNotFound && !tableEmpty && !isSearchEmpty && (
+                    {isUserNotFound && !tableEmpty && !search && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>
-                                    <SearchNotFound searchQuery={filterName} />
+                                    <SearchNotFound searchQuery={search} />
                                 </TableCell>
                             </TableRow>
                         </TableBody>

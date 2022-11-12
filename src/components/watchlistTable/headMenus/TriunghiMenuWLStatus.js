@@ -22,6 +22,7 @@ import PRClosed from '../../../assets/PRClosed.svg';
 import PROpen from '../../../assets/PROpen.svg';
 import IssuesOpen from '../../../assets/IssuesOpen.svg';
 import IssuesClosed from '../../../assets/IssuesClosed.svg';
+import clearFilter from '../../../assets/clearFilter.svg';
 
 
 const useStyles = makeStyles(() => ({
@@ -62,8 +63,9 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function TriunghiMenuWLStatus({ data }) {
+export default function TriunghiMenuWLStatus({ paramsCallback }) {
     const [anchorEl, setAnchorEl] = useState(null);
+    const [isSorted, setIsSorted] = useState(false);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -71,6 +73,12 @@ export default function TriunghiMenuWLStatus({ data }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    function handleFilterClose(is_pr, state) {
+        handleClose();
+        setIsSorted(true);
+        paramsCallback({ is_pr: is_pr, state: state });
+    }
 
 
     const classes = useStyles();
@@ -87,6 +95,18 @@ export default function TriunghiMenuWLStatus({ data }) {
             >
                 <img src={triunghi} alt='triunghi' className={classes.triunghi} />
             </IconButton>
+            {isSorted ?
+                <IconButton
+                    id="basic-button"
+                    onClick={() => {
+                        setIsSorted(false);
+                        paramsCallback({ is_pr: undefined, state: undefined });
+                    }}
+                    style={{ padding: 0, marginLeft: '0.25em' }}
+                >
+                    <img src={clearFilter} alt='clear' />
+                </IconButton> : ''
+            }
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -121,28 +141,28 @@ export default function TriunghiMenuWLStatus({ data }) {
                         <List className={classes.list} disablePadding={true}>
                             <MenuItem
                                 style={{ backgroundColor: '#FFFFFF', }}
-                                onClick={handleClose}
+                                onClick={() => handleFilterClose(true, 'closed')}
                             >
                                 <img src={PRClosed} alt="prclosed" />
                             </MenuItem>
                             <Divider />
                             <MenuItem
                                 style={{ backgroundColor: '#FFFFFF', }}
-                                onClick={handleClose}
+                                onClick={() => handleFilterClose(true, 'open')}
                             >
                                 <img src={PROpen} alt="propen" />
                             </MenuItem>
                             <Divider />
                             <MenuItem
                                 style={{ backgroundColor: '#FFFFFF', }}
-                                onClick={handleClose}
+                                onClick={() => handleFilterClose(false, 'open')}
                             >
                                 <img src={IssuesOpen} alt="issuesopen" />
                             </MenuItem>
                             <Divider />
                             <MenuItem
                                 style={{ backgroundColor: '#FFFFFF', }}
-                                onClick={handleClose}
+                                onClick={() => handleFilterClose(false, 'closed')}
                             >
                                 <img src={IssuesClosed} alt="issuesclosed" />
                             </MenuItem>

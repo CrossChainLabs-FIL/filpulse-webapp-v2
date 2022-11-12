@@ -1,3 +1,4 @@
+import { useState } from 'react';
 // material
 import {
     Typography,
@@ -53,13 +54,20 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function WatchlistHead({
-    data,
-    handleSortChange,
-    clearFilterFunction
-}) {
-
+export default function WatchlistHead({ paramsCallback }) {
+    const [isDesc, setIsDesc] = useState(true);
+    const [isDescComments, setIsDescComments] = useState(true);
     const classes = useStyles();
+
+    const handleLastUpdatedSort = () => {
+        paramsCallback({ sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc' });
+        setIsDesc(!isDesc);
+    }
+
+    const handleCommentsSort = () => {
+        paramsCallback({ sortBy: 'commentsTotal', sortType: isDescComments ? 'asc' : 'desc' });
+        setIsDescComments(!isDescComments);
+    }
 
     return (
         <TableHead>
@@ -90,7 +98,13 @@ export default function WatchlistHead({
                             #
                         </Typography>
 
-                        <TriunghiMenuWLId data={data} />
+                        <IconButton
+                            id="basic-button"
+                            onClick={(e) => handleLastUpdatedSort}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -109,7 +123,13 @@ export default function WatchlistHead({
                             Name
                         </Typography>
 
-                        <TriunghiMenuWLName data={data} />
+                        <IconButton
+                            id="basic-button"
+                            onClick={(e) => handleLastUpdatedSort}
+                            style={{ padding: 0 }}
+                        >
+                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -128,15 +148,6 @@ export default function WatchlistHead({
                             Participants
                         </Typography>
 
-                       
-
-                        <IconButton
-                            id="basic-button"
-                            onClick={clearFilterFunction}
-                            style={{ padding: 0, marginLeft: '0.25em' }}
-                        >
-                            <img src={clearFilter} alt='clear' />
-                        </IconButton>
                     </Stack>
                 </TableCell>
 
@@ -155,7 +166,7 @@ export default function WatchlistHead({
                             Status
                         </Typography>
 
-                        <TriunghiMenuWLStatus data={data} />
+                        <TriunghiMenuWLStatus paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
@@ -186,7 +197,7 @@ export default function WatchlistHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleSortChange("commentsTotal", 'asc')}
+                            onClick={(e) => handleCommentsSort}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -210,7 +221,7 @@ export default function WatchlistHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleSortChange("timeNumber", 'asc')}
+                            onClick={(e) => handleLastUpdatedSort}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
