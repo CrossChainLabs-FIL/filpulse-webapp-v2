@@ -65,15 +65,10 @@ export default function PRTable({
 
     const [followEvent, setFollowEvent] = useState(false);
 
-<<<<<<< Updated upstream
-    //const isUserNotFound = data.length === 0 && !isSearchEmpty;
-    //const tableEmpty = data.length === 0 && isSearchEmpty;
-=======
     const isUserNotFound = data.length === 0 && !isSearchEmpty;
     const tableEmpty = data.length === 0 && isSearchEmpty;
 
 
->>>>>>> Stashed changes
 
     const fetchData = async () => {
         try {
