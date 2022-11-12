@@ -54,8 +54,8 @@ const useStyles = makeStyles(() => ({
 export default function PRTable({
     filterName,
     isSearchEmpty,
-    data,
-    state,
+    //data,
+    //state,
     handleMenuFilter,
     handleSortChange,
     clearFilter,
@@ -64,36 +64,61 @@ export default function PRTable({
 
     const classes = useStyles();
 
+    const [data, setData] = useState([]);
+    const [state, setState] = useState({
+        loading: true
+    });
+
+    const [followEvent, setFollowEvent] = useState(false);
+
     const isUserNotFound = data.length === 0 && !isSearchEmpty;
     const tableEmpty = data.length === 0 && isSearchEmpty;
 
-    const [posts, setPosts] = useState([]);
+    
 
-    const fetchPost = async () => {
+    const fetchData = async () => {
         try {
             const user = JSON.parse(localStorage.getItem("user"));
+            const client = new Client();
+
             let response;
-            if (user.token) {
+
+            if (user?.token) {
                 response = await client.post_with_token('tab_prs', { params: 0 }, user.token);
             } else {
                 response = await client.get('tab_prs');
             }
 ;
-            setPosts(response.list);
+            setData(response.list);
+            setState({
+                loading: false,
+            });
         } catch (error) {
             console.log(error);
         }
     };
 
     useEffect(() => {
-        fetchPost();
-    }, []);
+        console.log('useEffect');
+        console.log(followEvent);
+        fetchData();
+        setFollowEvent(false);
+    }, [followEvent]);
 
-    const client = new Client();
 
-    const user = JSON.parse(localStorage.getItem("user"));
+
+    // Similar to componentDidMount and componentDidUpdate:
+    /*useEffect(() => {
+      // Update the document title using the browser API
+      //fetchData();
+      console.log(follow);
+      //setFollow(null);
+    });*/
+    
 
     const starOnChange = (e) => {
+        const user = JSON.parse(localStorage.getItem("user"));
+
         let index = e.target.id;
         let params = {
             number: data[index].number,
@@ -102,9 +127,11 @@ export default function PRTable({
             follow: e.target.checked,
         }
 
-        client.post_with_token('follow', params, user.token);
 
-        fetchPost();
+        const client = new Client();
+        client.post_with_token('follow', params, user.token).then((pr_data) => {
+            setFollowEvent(true);
+        });
     }
 
     return (
@@ -139,7 +166,7 @@ export default function PRTable({
                     )}
                     {!state.loading && (
                         <TableBody>
-                            {posts.map((row, index) => {
+                            {data.map((row, index) => {
                                 const id = faker.datatype.uuid();
                                 const { number,
                                     title,
@@ -151,8 +178,6 @@ export default function PRTable({
                                     dev_name,
                                     follow,
                                     updated_at } = row;
-
-                                console.log(follow);
 
                                 return (
                                     <TableRow

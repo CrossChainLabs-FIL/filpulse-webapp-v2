@@ -1758,8 +1758,8 @@ export default function TableApp() {
                 <PRTable
                     filterName={filterName}
                     isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    state={state}
+                    //data={data}
+                    //state={state}
                     handleMenuFilter={handleMenuFilter}
                     handleSortChange={handleSort}
                     clearFilter={clearFilter}

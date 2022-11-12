@@ -105,3 +105,4 @@ dist
 
 .env.prod
 .env.dev
+.DS_Store
