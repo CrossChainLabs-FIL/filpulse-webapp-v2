@@ -75,6 +75,7 @@ export default function ContributorHead({ paramsCallback }) {
                 setIsDescPrs(true);
                 setIsDescIssues(!isDescIssues);
                 break;
+            default: console.log('error'); break;
         }
     }
 
