@@ -101,15 +101,13 @@ export default function PRTable({search}) {
             follow: e.target.checked,
         }
 
-
         const client = new Client();
-        client.post_with_token('follow', params, user.token).then((pr_data) => {
+        client.post_with_token('follow', params, user.token).then(() => {
             setFollowEvent(true);
         });
     }
 
     const paramsCallback = (new_params) => {
-        console.log(new_params);
         setParams({
             ...params,
             ...new_params,
@@ -127,9 +125,7 @@ export default function PRTable({search}) {
             >
                 <Table stickyHeader>
 
-                    <PRHead
-                        paramsCallback={paramsCallback}
-                    />
+                    <PRHead paramsCallback={paramsCallback}/>
 
                     {state.loading && (
                         <TableBody>

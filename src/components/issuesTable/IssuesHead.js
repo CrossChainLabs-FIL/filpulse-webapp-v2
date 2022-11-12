@@ -52,17 +52,15 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function IssuesHead({
-    data,
-    handleSortChange,
-    handleMenuFilter,
-    clearFilterFunction,
-    globalFilter
-}) {
-
-    const [order, setOrder] = useState('desc');
-
+export default function IssuesHead({ paramsCallback }) {
+    const [isDesc, setIsDesc] = useState(true);
     const classes = useStyles();
+
+    const handleLastUpdatedSort = () => {
+        paramsCallback({ sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc' });
+        setIsDesc(!isDesc);
+    }
+
 
     return (
         <TableHead>
@@ -137,11 +135,7 @@ export default function IssuesHead({
                             Project
                         </Typography>
 
-                        <TriunghiMenuIssuesProject
-                            handleMenuFilter={handleMenuFilter}
-                            globalFilter={globalFilter}
-                            clearFilterFunction={clearFilterFunction}
-                        />
+                        <TriunghiMenuIssuesProject paramsCallback={paramsCallback}/>
                     </Stack>
                 </TableCell>
 
@@ -160,11 +154,7 @@ export default function IssuesHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuIssuesAuthor
-                            handleMenuFilter={handleMenuFilter}
-                            clearFilterFunction={clearFilterFunction}
-                            globalFilter={globalFilter}
-                        />
+                        <TriunghiMenuIssuesAuthor paramsCallback={paramsCallback}/>
                     </Stack>
                 </TableCell>
 
@@ -183,10 +173,7 @@ export default function IssuesHead({
                             Assignee
                         </Typography>
 
-                        <TriunghiMenuIssuesAssignee
-                            clearFilterFunction={clearFilterFunction}
-                            globalFilter={globalFilter}
-                        />
+                        <TriunghiMenuIssuesAssignee paramsCallback={paramsCallback}/>
                     </Stack>
                 </TableCell>
 
@@ -205,10 +192,7 @@ export default function IssuesHead({
                             Status
                         </Typography>
 
-                        <TriunghiMenuIssuesStatus
-                            clearFilterFunction={clearFilterFunction}
-                            globalFilter={globalFilter}
-                        />
+                        <TriunghiMenuIssuesStatus paramsCallback={paramsCallback}/>
                     </Stack>
                 </TableCell>
 
@@ -228,16 +212,7 @@ export default function IssuesHead({
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => {
-                                if (order === 'asc') {
-                                    setOrder('desc');
-                                    clearFilterFunction('sortBy', 'updated_at', "sortType", 'asc');
-                                }
-                                else {
-                                    setOrder('asc');
-                                    globalFilter('sortBy=updated_at', 'sortBy=', '', "sortType=asc", 'sortType=', '');
-                                }
-                            }}
+                            onClick={ handleLastUpdatedSort }
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

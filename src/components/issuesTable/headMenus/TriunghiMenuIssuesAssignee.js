@@ -77,7 +77,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuIssuesAssignee({ clearFilterFunction, globalFilter }) {
+export default function TriunghiMenuIssuesAssignee({ paramsCallback }) {
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
     const [state, setState] = useState({
@@ -106,7 +106,7 @@ export default function TriunghiMenuIssuesAssignee({ clearFilterFunction, global
         handleClose();
         setIsSorted(true);
         setLast(assignee);
-        globalFilter(`assignee=${assignee}`, 'assignee=', last);
+        paramsCallback({assignee: assignee});
     }
 
     const handleFilterByName = (event) => {
@@ -147,7 +147,7 @@ export default function TriunghiMenuIssuesAssignee({ clearFilterFunction, global
             {isSorted ?
                 <IconButton
                     id="basic-button"
-                    onClick={() => { setIsSorted(false); setLast(''); clearFilterFunction('assignee=', last); }}
+                    onClick={() => { setIsSorted(false); setLast(''); paramsCallback({assignee: undefined}); }}
                     style={{ padding: 0, marginLeft: '0.25em' }}
                 >
                     <img src={clearFilter} alt='clear' />

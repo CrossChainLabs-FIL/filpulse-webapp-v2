@@ -50,10 +50,7 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function PRHead({
-    paramsCallback,
-}) {
-
+export default function PRHead({ paramsCallback }) {
     const [isDesc, setIsDesc] = useState(true);
     const classes = useStyles();
 

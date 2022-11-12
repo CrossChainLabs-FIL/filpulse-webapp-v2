@@ -77,7 +77,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuIssuesAuthor({ handleMenuFilter, globalFilter, clearFilterFunction }) {
+export default function TriunghiMenuIssuesAuthor({ paramsCallback }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
@@ -107,7 +107,7 @@ export default function TriunghiMenuIssuesAuthor({ handleMenuFilter, globalFilte
         handleClose();
         setIsSorted(true);
         setLast(contributor);
-        globalFilter(`contributor=${contributor}`, 'contributor=', last);
+        paramsCallback({contributor: contributor});
     }
 
     const handleFilterByName = (event) => {
@@ -148,7 +148,7 @@ export default function TriunghiMenuIssuesAuthor({ handleMenuFilter, globalFilte
             {isSorted ?
                 <IconButton
                     id="basic-button"
-                    onClick={() => { setIsSorted(false); setLast(''); clearFilterFunction('contributor=', last); }}
+                    onClick={() => { setIsSorted(false); setLast(''); paramsCallback({contributor: undefined}); }}
                     style={{ padding: 0, marginLeft: '0.25em' }}
                 >
                     <img src={clearFilter} alt='clear' />

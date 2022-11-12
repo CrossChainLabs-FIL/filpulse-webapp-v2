@@ -246,7 +246,7 @@ export default function TableApp() {
                 }*/
                 break;
             case 1:
-                if (user?.token) {
+                /*if (user?.token) {
                     client.post_with_token('tab_issues', { params: 0 }, user.token).then((issues_data) => {
                         setState({
                             loading: false,
@@ -264,7 +264,7 @@ export default function TableApp() {
                         setOrder('desc');
                         setData(issues_data.list);
                     });
-                }
+                }*/
                 break;
             case 2:
                 client.get('tab_releases').then((releases_data) => {
@@ -393,7 +393,7 @@ export default function TableApp() {
                 }*/
                 break;
             case 1:
-                if (filterLink === '') {
+                /*if (filterLink === '') {
                     if (order === 'asc') {
                         setFilterLink('');
                         client.get('tab_issues').then((issues_data) => {
@@ -464,7 +464,7 @@ export default function TableApp() {
                             setData(issues_data.list);
                         });
                     }
-                }
+                }*/
                 break;
             case 2:
                 if (filterLink === '') {
@@ -1678,32 +1678,8 @@ export default function TableApp() {
 
 
 
-            {value === 0 && (
-                <PRTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    //data={data}
-                    //state={state}
-                    search={search}
-                    handleMenuFilter={handleMenuFilter}
-                    handleSortChange={handleSort}
-                    clearFilter={clearFilter}
-                    globalFilter={globalFilter}
-                />
-            )}
-
-            {value === 1 && (
-                <IssuesTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    state={state}
-                    handleMenuFilter={handleMenuFilter}
-                    handleSortChange={handleSort}
-                    clearFilter={clearFilter}
-                    globalFilter={globalFilter}
-                />
-            )}
+            {value === 0 && (<PRTable search={search} />)}
+            {value === 1 && (<IssuesTable search={search} />)}
 
             {value === 2 && (
                 <ReleasesTable
