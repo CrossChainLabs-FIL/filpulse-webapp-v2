@@ -65,8 +65,8 @@ export default function PRTable({
 
     const [followEvent, setFollowEvent] = useState(false);
 
-    const isUserNotFound = data.length === 0 && !isSearchEmpty;
-    const tableEmpty = data.length === 0 && isSearchEmpty;
+    // const isUserNotFound = data.length === 0 && !isSearchEmpty;
+    // const tableEmpty = data.length === 0 && isSearchEmpty;
 
 
 
