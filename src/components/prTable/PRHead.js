@@ -13,7 +13,6 @@ import { makeStyles } from '@mui/styles';
 
 // components
 import TriunghiMenuPrContributor from './headMenus/TriunghiMenuPrContributor';
-import TriunghiMenuPrId from './headMenus/TriunghiMenuPrId';
 import TriunghiMenuPrProject from './headMenus/TriunghiMenuPrProject';
 import TriunghiMenuPrStatus from './headMenus/TriunghiMenuPrStatus';
 
@@ -59,7 +58,7 @@ export default function PRHead({
     const classes = useStyles();
 
     const handleLastUpdatedSort = () => {
-        paramsCallback({sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc'});
+        paramsCallback({ sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc' });
         setIsDesc(!isDesc);
     }
 
@@ -157,7 +156,7 @@ export default function PRHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuPrContributor paramsCallback={paramsCallback}/>
+                        <TriunghiMenuPrContributor paramsCallback={paramsCallback} />
 
                     </Stack>
                 </TableCell>
@@ -177,7 +176,7 @@ export default function PRHead({
                             Status
                         </Typography>
 
-                        <TriunghiMenuPrStatus paramsCallback={paramsCallback}/>
+                        <TriunghiMenuPrStatus paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 

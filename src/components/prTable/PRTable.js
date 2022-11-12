@@ -8,7 +8,6 @@ import { Client } from '../../utils/client';
 import {
     Box,
     Checkbox,
-    CardHeader,
     Table,
     TableRow,
     TableBody,
@@ -74,7 +73,7 @@ export default function PRTable({search}) {
             } else {
                 response = await client.get('tab_prs', params);
             }
-;
+            ;
             setData(response.list);
             setState({loading: false});
             setIsUserNotFound(response.list.length == 0 && search);
@@ -89,7 +88,7 @@ export default function PRTable({search}) {
         fetchData();
         setFollowEvent(false);
     }, [params, followEvent, search]);
-    
+
 
     const starOnChange = (e) => {
         const user = JSON.parse(localStorage.getItem("user"));

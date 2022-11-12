@@ -34,35 +34,11 @@ import { AuthContext } from "../App";
 import { Client } from '../utils/client';
 
 
-// mock
-import WATCHLISTDATA from '../_mock/watchlistData';
-import PRDATA from '../_mock/PRData';
-import ISSUESDATA from '../_mock/issuesData';
-import COMMITSDATA from '../_mock/commitsData';
-import CONTRIBUTORSDATA from '../_mock/contributorsData';
-
 // assets
 import steaPlin from '../assets/steaPlin.svg';
 import GithubLogo from '../assets/GithubLogo.svg';
 
 const client = new Client();
-
-
-function descendingComparator(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
-        return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-        return 1;
-    }
-    return 0;
-}
-
-function getComparator(order, orderBy) {
-    return order === 'desc'
-        ? (a, b) => descendingComparator(a, b, orderBy)
-        : (a, b) => -descendingComparator(a, b, orderBy);
-}
 
 
 const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
@@ -596,56 +572,6 @@ export default function TableApp() {
             loading: true
         });
         switch (value) {
-            case 0:
-                /*client.get(`tab_prs?${link_value}`).then((pr_data) => {
-                    setState({
-                        loading: false,
-                        pr_data: pr_data,
-                    });
-                    setData(pr_data.list);
-                    setFilterName("");
-                });*/
-                break;
-            case 1:
-                client.get(`tab_issues?${link_value}`).then((issues_data) => {
-                    setState({
-                        loading: false,
-                        issues_data: issues_data,
-                    });
-                    setData(issues_data.list);
-                    setFilterName("");
-                });
-                break;
-            case 2:
-                client.get(`tab_releases?${link_value}`).then((releases_data) => {
-                    setState({
-                        loading: false,
-                        releases_data: releases_data,
-                    });
-                    setData(releases_data.list);
-                    setFilterName("");
-                });
-                break;
-            case 3:
-                client.get(`tab_commits?${link_value}`).then((commits_data) => {
-                    setState({
-                        loading: false,
-                        commits_data: commits_data,
-                    });
-                    setData(commits_data.list);
-                    setFilterName("");
-                });
-                break;
-            case 4:
-                client.get(`tab_contributors?${link_value}`).then((contributors_data) => {
-                    setState({
-                        loading: false,
-                        contributors_data: contributors_data,
-                    });
-                    setData(contributors_data.list);
-                    setFilterName("");
-                });
-                break;
             case 5:
                 const user = JSON.parse(localStorage.getItem("user"));
                 client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
