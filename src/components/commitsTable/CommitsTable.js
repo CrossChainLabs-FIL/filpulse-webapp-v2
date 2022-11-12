@@ -54,19 +54,12 @@ export default function CommitsTable({ search }) {
     const fetchData = async () => {
         try {
             let response;
-            const user = JSON.parse(localStorage.getItem("user"));
             const client = new Client();
 
             params.search = search;
 
-            console.log(params);
+            response = await client.get('tab_commits', params);
 
-            if (user?.token) {
-                response = await client.post_with_token('tab_commits', params, user.token);
-            } else {
-                response = await client.get('tab_commits', params);
-            }
-            ;
             setData(response.list);
             setState({ loading: false });
             setIsUserNotFound(response.list.length === 0 && search);
