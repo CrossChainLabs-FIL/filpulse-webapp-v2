@@ -81,12 +81,20 @@ export default function PRTable({
             const user = JSON.parse(localStorage.getItem("user"));
             const client = new Client();
 
+            let params = {
+                repo: 'venus',
+                organisation: 'filecoin-project',
+                status: 'closed',
+                sortBy: 'updated_at',
+                sortType: 'asc',
+            }
+
             let response;
 
             if (user?.token) {
-                response = await client.post_with_token('tab_prs', { params: 0 }, user.token);
+                response = await client.post_with_token('tab_issues', params, user.token);
             } else {
-                response = await client.get('tab_prs');
+                response = await client.get('tab_prs', params);
             }
 ;
             setData(response.list);
