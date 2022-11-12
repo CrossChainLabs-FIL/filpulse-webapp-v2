@@ -8,7 +8,6 @@ import { Client } from '../../utils/client';
 import {
     Box,
     Checkbox,
-    CardHeader,
     Table,
     TableRow,
     TableBody,
@@ -66,8 +65,15 @@ export default function PRTable({
 
     const [followEvent, setFollowEvent] = useState(false);
 
+<<<<<<< Updated upstream
     //const isUserNotFound = data.length === 0 && !isSearchEmpty;
     //const tableEmpty = data.length === 0 && isSearchEmpty;
+=======
+    const isUserNotFound = data.length === 0 && !isSearchEmpty;
+    const tableEmpty = data.length === 0 && isSearchEmpty;
+
+
+>>>>>>> Stashed changes
 
     const fetchData = async () => {
         try {
@@ -84,7 +90,7 @@ export default function PRTable({
             } else {
                 response = await client.get('tab_prs', params);
             }
-;
+            ;
             setData(response.list);
             setState({
                 loading: false,
@@ -98,7 +104,7 @@ export default function PRTable({
         fetchData();
         setFollowEvent(false);
     }, [params, followEvent, search]);
-    
+
 
     const starOnChange = (e) => {
         const user = JSON.parse(localStorage.getItem("user"));
