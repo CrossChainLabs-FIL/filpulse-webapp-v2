@@ -51,33 +51,23 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function PRTable({
-    search,
-}) {
-
+export default function PRTable({search}) {
     const classes = useStyles();
 
     const [data, setData] = useState([]);
-    const [state, setState] = useState({
-        loading: true
-    });
-    const [params, setParams] = useState({
-    });
-
+    const [state, setState] = useState({loading: true});
+    const [params, setParams] = useState({});
     const [followEvent, setFollowEvent] = useState(false);
-
-    //const isUserNotFound = data.length === 0 && !isSearchEmpty;
-    //const tableEmpty = data.length === 0 && isSearchEmpty;
+    const [isUserNotFound, setIsUserNotFound] = useState(false);
+    const [tableEmpty, setTableEmpty] = useState(false);
 
     const fetchData = async () => {
         try {
+            let response;
             const user = JSON.parse(localStorage.getItem("user"));
             const client = new Client();
-            let response;
-
-            if (search) {
-                params.search = search;
-            }
+            
+            params.search = search;
 
             if (user?.token) {
                 response = await client.post_with_token('tab_prs', params, user.token);
@@ -86,9 +76,10 @@ export default function PRTable({
             }
 ;
             setData(response.list);
-            setState({
-                loading: false,
-            });
+            setState({loading: false});
+            setIsUserNotFound(response.list.length == 0 && search);
+            setTableEmpty(response.list.length == 0 && !search);
+
         } catch (error) {
             console.log(error);
         }
@@ -319,7 +310,7 @@ export default function PRTable({
                         </TableBody>
                     )}
 
-                    {/*isUserNotFound && !tableEmpty && !isSearchEmpty && !state.loading && (
+                    {isUserNotFound && !tableEmpty && !search && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>
@@ -327,9 +318,9 @@ export default function PRTable({
                                 </TableCell>
                             </TableRow>
                         </TableBody>
-                    )*/}
+                    )}
 
-                    {/*tableEmpty && !state.loading && (
+                    {tableEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
@@ -337,7 +328,7 @@ export default function PRTable({
                                 </TableCell>
                             </TableRow>
                         </TableBody>
-                    )*/}
+                    )}
                 </Table>
             </TableContainer>
         </>
