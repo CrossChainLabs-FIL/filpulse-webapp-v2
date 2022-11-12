@@ -118,16 +118,6 @@ export default function PRTable({
         fetchData();
         setFollowEvent(false);
     }, [params, followEvent, search]);
-
-
-
-    // Similar to componentDidMount and componentDidUpdate:
-    /*useEffect(() => {
-      // Update the document title using the browser API
-      //fetchData();
-      console.log(follow);
-      //setFollow(null);
-    });*/
     
 
     const starOnChange = (e) => {
@@ -148,7 +138,7 @@ export default function PRTable({
         });
     }
 
-    const prParamsCallback = (new_params) => {
+    const paramsCallback = (new_params) => {
         console.log(new_params);
         setParams({
             ...params,
@@ -173,7 +163,7 @@ export default function PRTable({
                         handleMenuFilter={handleMenuFilter}
                         clearFilterFunction={clearFilter}
                         globalFilter={globalFilter}
-                        prParamsCallback={prParamsCallback}
+                        paramsCallback={paramsCallback}
                     />
 
                     {state.loading && (

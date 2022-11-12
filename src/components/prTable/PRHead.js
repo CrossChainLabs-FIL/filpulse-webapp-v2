@@ -52,14 +52,14 @@ const useStyles = makeStyles(() => ({
 
 
 export default function PRHead({
-    prParamsCallback,
+    paramsCallback,
 }) {
 
     const [isDesc, setIsDesc] = useState(true);
     const classes = useStyles();
 
     const handleLastUpdatedSort = () => {
-        prParamsCallback({sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc'});
+        paramsCallback({sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc'});
         setIsDesc(!isDesc);
     }
 
@@ -137,7 +137,7 @@ export default function PRHead({
                         </Typography>
 
                         <TriunghiMenuPrProject
-                            prParamsCallback={prParamsCallback}
+                            paramsCallback={paramsCallback}
                         />
                     </Stack>
                 </TableCell>
@@ -157,7 +157,7 @@ export default function PRHead({
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuPrContributor prParamsCallback={prParamsCallback}/>
+                        <TriunghiMenuPrContributor paramsCallback={paramsCallback}/>
 
                     </Stack>
                 </TableCell>
@@ -177,7 +177,7 @@ export default function PRHead({
                             Status
                         </Typography>
 
-                        <TriunghiMenuPrStatus prParamsCallback={prParamsCallback}/>
+                        <TriunghiMenuPrStatus paramsCallback={paramsCallback}/>
                     </Stack>
                 </TableCell>
 

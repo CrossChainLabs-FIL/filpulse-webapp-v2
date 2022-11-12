@@ -247,8 +247,8 @@ export default function TableApp() {
         const user = JSON.parse(localStorage.getItem("user"));
 
         switch (newValue) {
-            case 0:
-                /*if (user.token) {
+            /*case 0:
+                if (user.token) {
                     client.post_with_token('tab_prs', { params: 0 }, user.token).then((pr_data) => {
                         setState({
                             loading: false,
@@ -266,10 +266,10 @@ export default function TableApp() {
                         setOrder('desc');
                         setData(pr_data.list);
                     });
-                }*/
-                break;
+                }
+                break;*/
             case 1:
-                if (user.token) {
+                if (user?.token) {
                     client.post_with_token('tab_issues', { params: 0 }, user.token).then((issues_data) => {
                         setState({
                             loading: false,
@@ -321,7 +321,7 @@ export default function TableApp() {
                 });
                 break;
             case 5:
-                if (user.token) {
+                if (user?.token) {
                     client.post_with_token('tab_watchlist', { params: 0 }, user.token).then((watchlist_data) => {
                         setState({
                             loading: false,
