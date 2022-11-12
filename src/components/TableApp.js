@@ -229,10 +229,10 @@ export default function TableApp() {
     const classes = useStyles();
 
     useEffect(() => {
-        setIsSearchEmpty(true);
+        //setIsSearchEmpty(true);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setState]);
+    }, [search, setState]);
 
     const handleChange = (event, newValue) => {
         setState({
@@ -243,12 +243,13 @@ export default function TableApp() {
         setFilterLink('');
         setIsSearchEmpty(true);
         setData([]);
+        setSearch('');
 
         const user = JSON.parse(localStorage.getItem("user"));
 
         switch (newValue) {
-            /*case 0:
-                if (user.token) {
+            case 0:
+                /*if (user.token) {
                     client.post_with_token('tab_prs', { params: 0 }, user.token).then((pr_data) => {
                         setState({
                             loading: false,
@@ -266,8 +267,8 @@ export default function TableApp() {
                         setOrder('desc');
                         setData(pr_data.list);
                     });
-                }
-                break;*/
+                }*/
+                break;
             case 1:
                 if (user?.token) {
                     client.post_with_token('tab_issues', { params: 0 }, user.token).then((issues_data) => {
@@ -1643,7 +1644,6 @@ export default function TableApp() {
     };
 
     const handleSearch = (event) => {
-        console.log(event.target.value);
         setSearch(event.target.value)
     }
 
@@ -1739,7 +1739,7 @@ export default function TableApp() {
                         marginBottom: '0.25em',
                         marginRight: '1em'
                     }}
-                    value={filterName}
+                    value={search}
                     onChange={(e) => handleSearch(e)}
                     placeholder="Search"
                     startAdornment={

@@ -52,15 +52,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function PRTable({
-    filterName,
-    isSearchEmpty,
     search,
-    //data,
-    //state,
-    handleMenuFilter,
-    handleSortChange,
-    clearFilter,
-    globalFilter
 }) {
 
     const classes = useStyles();
@@ -74,28 +66,18 @@ export default function PRTable({
 
     const [followEvent, setFollowEvent] = useState(false);
 
-    const isUserNotFound = data.length === 0 && !isSearchEmpty;
-    const tableEmpty = data.length === 0 && isSearchEmpty;
-
-    
+    //const isUserNotFound = data.length === 0 && !isSearchEmpty;
+    //const tableEmpty = data.length === 0 && isSearchEmpty;
 
     const fetchData = async () => {
         try {
             const user = JSON.parse(localStorage.getItem("user"));
             const client = new Client();
-
-            /*let params = {
-                //repo: 'venus',
-                //organisation: 'filecoin-project',
-                //status: 'closed',
-                //sortBy: 'updated_at',
-                //sortType: 'asc',
-                search: search,
-            }*/
-
-            console.log('state.params', params);
-
             let response;
+
+            if (search) {
+                params.search = search;
+            }
 
             if (user?.token) {
                 response = await client.post_with_token('tab_prs', params, user.token);
@@ -113,8 +95,6 @@ export default function PRTable({
     };
 
     useEffect(() => {
-        console.log('useEffect');
-        console.log(followEvent);
         fetchData();
         setFollowEvent(false);
     }, [params, followEvent, search]);
@@ -158,11 +138,6 @@ export default function PRTable({
                 <Table stickyHeader>
 
                     <PRHead
-                        data={data}
-                        handleSortChange={handleSortChange}
-                        handleMenuFilter={handleMenuFilter}
-                        clearFilterFunction={clearFilter}
-                        globalFilter={globalFilter}
                         paramsCallback={paramsCallback}
                     />
 
@@ -344,17 +319,17 @@ export default function PRTable({
                         </TableBody>
                     )}
 
-                    {isUserNotFound && !tableEmpty && !isSearchEmpty && !state.loading && (
+                    {/*isUserNotFound && !tableEmpty && !isSearchEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>
-                                    <SearchNotFound searchQuery={filterName} />
+                                    <SearchNotFound searchQuery={search} />
                                 </TableCell>
                             </TableRow>
                         </TableBody>
-                    )}
+                    )*/}
 
-                    {tableEmpty && !state.loading && (
+                    {/*tableEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
@@ -362,7 +337,7 @@ export default function PRTable({
                                 </TableCell>
                             </TableRow>
                         </TableBody>
-                    )}
+                    )*/}
                 </Table>
             </TableContainer>
         </>
