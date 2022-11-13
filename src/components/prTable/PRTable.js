@@ -89,6 +89,7 @@ export default function PRTable({ search }) {
     }, [params, search]);
 
     useEffect(() => {
+        setState({ loading: true });
         fetchData();
         setFollowEvent(false);
     }, [params, followEvent, search, fetchData]);
@@ -112,7 +113,6 @@ export default function PRTable({ search }) {
     }
 
     const paramsCallback = (new_params) => {
-        setState({ loading: true });
         setParams({
             ...params,
             ...new_params,

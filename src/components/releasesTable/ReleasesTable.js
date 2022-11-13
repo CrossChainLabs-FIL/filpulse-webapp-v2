@@ -84,11 +84,11 @@ export default function ReleasesTable({ search }) {
     }, [params, search])
 
     useEffect(() => {
+        setState({ loading: true });
         fetchData();
     }, [params, search, fetchData]);
 
     const paramsCallback = (new_params) => {
-        setState({ loading: true });
         setParams({
             ...params,
             ...new_params,
