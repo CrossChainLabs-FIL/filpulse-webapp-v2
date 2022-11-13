@@ -65,7 +65,12 @@ export default function ReleasesTable({ search }) {
             let response;
             const client = new Client();
 
-            params.search = search;
+            if (!search) {
+                params.search = undefined;
+            }
+            else {
+                params.search = search;
+            }
 
             response = await client.get('tab_releases', params);
 
@@ -142,7 +147,8 @@ export default function ReleasesTable({ search }) {
                                             padding="none"
                                             style={{
                                                 height: '5em',
-                                                paddingLeft: 0,
+                                                padding: 0,
+                                                paddingLeft: '4.5em',
                                             }}
                                         >
                                             <Typography variant="subtitle2" noWrap>
@@ -270,7 +276,7 @@ export default function ReleasesTable({ search }) {
                         </TableBody>
                     )}
 
-                    {isUserNotFound && !tableEmpty && !search && !state.loading && (
+                    {isUserNotFound && !tableEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>

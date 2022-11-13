@@ -56,7 +56,12 @@ export default function CommitsTable({ search }) {
             let response;
             const client = new Client();
 
-            params.search = search;
+            if (!search) {
+                params.search = undefined;
+            }
+            else {
+                params.search = search;
+            }
 
             response = await client.get('tab_commits', params);
 
@@ -239,7 +244,7 @@ export default function CommitsTable({ search }) {
                         </TableBody>
                     )}
 
-                    {isUserNotFound && !tableEmpty && !search && !state.loading && (
+                    {isUserNotFound && !tableEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>

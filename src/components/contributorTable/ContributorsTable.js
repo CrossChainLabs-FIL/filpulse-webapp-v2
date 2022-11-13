@@ -62,10 +62,15 @@ export default function ContributorsTable({ search }) {
             let response;
             const client = new Client();
 
-            params.search = search;
+            if (!search) {
+                params.search = undefined;
+            }
+            else {
+                params.search = search;
+            }
 
             response = await client.get('tab_contributors', params);
-  
+
             setData(response.list);
             setState({ loading: false });
             setIsUserNotFound(response.list.length === 0 && search);
@@ -299,7 +304,7 @@ export default function ContributorsTable({ search }) {
                     )}
 
 
-                    {isUserNotFound && !tableEmpty && !search && !state.loading && (
+                    {isUserNotFound && !tableEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>

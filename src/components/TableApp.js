@@ -198,7 +198,7 @@ export default function TableApp() {
 
 
     const handleSearch = (event) => {
-        setSearch(event.target.value)
+        setSearch(event.target.value);
     }
 
     return (

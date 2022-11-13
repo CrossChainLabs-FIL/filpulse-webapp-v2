@@ -17,7 +17,8 @@ import {
     Badge,
     Stack,
     Tooltip,
-    Box
+    Box,
+    CircularProgress
 } from '@mui/material';
 
 // components
@@ -73,7 +74,12 @@ export default function WatchlistTable({ search }) {
             const user = JSON.parse(localStorage.getItem("user"));
             const client = new Client();
 
-            params.search = search;
+            if (!search) {
+                params.search = undefined;
+            }
+            else {
+                params.search = search;
+            }
 
             if (user?.token) {
                 response = await client.post_with_token('tab_watchlist', params, user.token);
@@ -81,7 +87,7 @@ export default function WatchlistTable({ search }) {
                 setState({ loading: false });
                 setIsUserNotFound(response.list.length === 0 && search);
                 setTableEmpty(response.list.length === 0 && !search);
-            } 
+            }
 
         } catch (error) {
             console.log(error);
@@ -131,226 +137,240 @@ export default function WatchlistTable({ search }) {
 
                     <WatchlistHead paramsCallback={paramsCallback} />
 
-                    <TableBody>
-                        {data.map((row, index) => {
-                            const {
-                                number,
-                                title,
-                                html_url,
-                                dev_name,
-                                is_pr,
-                                state,
-                                participants,
-                                comments,
-                                new_comments,
-                                created_at,
-                                updated_at,
-                            } = row;
-                            let merged = 0;
+                    {state.loading && (
+                        <TableBody>
+                            <TableRow>
+                                <TableCell>
+                                    <Box sx={{ display: 'flex' }}>
+                                        <CircularProgress />
+                                    </Box>
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    )}
 
-                            if (!is_pr) {
-                                merged = 2;
-                            }
-                            if (state == 'open') {
-                                merged++;
-                            }
-                            return (
-                                <TableRow
-                                    hover
-                                    key={index}
-                                    tabIndex={-1}
-                                >
-                                    <TableCell padding="checkbox">
-                                        <Checkbox
-                                            id={index}
-                                            icon={<img src={steaGol} alt='steaGol' />}
-                                            checkedIcon={<img src={steaPlin} alt='steaPlin' />}
-                                            checked={true}
-                                            onClick={(e) => starOnChange(e)}
-                                            className={classes.stea}
-                                        />
-                                    </TableCell>
+                    {!state.loading && (
+                        <TableBody>
+                            {data.map((row, index) => {
+                                const {
+                                    number,
+                                    title,
+                                    html_url,
+                                    dev_name,
+                                    is_pr,
+                                    state,
+                                    participants,
+                                    comments,
+                                    new_comments,
+                                    created_at,
+                                    updated_at,
+                                } = row;
+                                let merged = 0;
 
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                        style={{ height: '6em' }}
+                                if (!is_pr) {
+                                    merged = 2;
+                                }
+                                if (state == 'open') {
+                                    merged++;
+                                }
+                                return (
+                                    <TableRow
+                                        hover
+                                        key={index}
+                                        tabIndex={-1}
                                     >
-                                        <Typography
-                                            variant="subtitle2"
-                                            noWrap
+                                        <TableCell padding="checkbox">
+                                            <Checkbox
+                                                id={index}
+                                                icon={<img src={steaGol} alt='steaGol' />}
+                                                checkedIcon={<img src={steaPlin} alt='steaPlin' />}
+                                                checked={true}
+                                                onClick={(e) => starOnChange(e)}
+                                                className={classes.stea}
+                                            />
+                                        </TableCell>
+
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                            style={{ height: '6em' }}
                                         >
-                                            <Link
-                                                target="_blank"
-                                                rel="noopener"
-                                                href={html_url}
-                                                color="inherit"
+                                            <Typography
+                                                variant="subtitle2"
+                                                noWrap
                                             >
-                                                {number}
-                                            </Link>
-                                        </Typography>
-                                    </TableCell>
-
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                    >
-                                        <CardHeader
-                                            style={{ background: "transparent" }}
-                                            sx={{
-                                                boxShadow: 0,
-                                                padding: 0,
-                                            }}
-                                            title={
-                                                <Typography
-                                                    variant="subtitle2"
-                                                    noWrap
-                                                    style={{
-                                                        lineHeight: '1em',
-                                                        marginTop: '0.45em'
-                                                    }}
-                                                    className={classes.projectElipsis}
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={html_url}
+                                                    color="inherit"
                                                 >
-                                                    {title}
-                                                </Typography>
-                                            }
-                                            subheader={
-                                                <>   {"opened " + fToNow(created_at) + " by "}
-                                                    < Link
-                                                        target="_blank"
-                                                        rel="noopener"
-                                                        href={"https://github.com/" + dev_name}
-                                                        color="inherit"
-                                                    >
-                                                        {dev_name}
-                                                    </Link>
-                                                </>
-                                            }
-                                        />
+                                                    {number}
+                                                </Link>
+                                            </Typography>
+                                        </TableCell>
 
-                                    </TableCell>
-
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                    >
-                                        {participants ? JSON.parse(participants).map((item, index) => {
-                                            let dev_name = item[0];
-                                            let avatar_url = item[1];
-                                            let overflow = false;
-                                            if (index >= 3 && overflow === false) {
-                                                overflow = true;
-                                                return (
-                                                    <span key={index}>...</span>
-                                                );
-                                            }
-                                            if (index < 3) {
-                                                return (
-                                                    <Tooltip
-                                                        title={dev_name}
-                                                        placement="bottom-end"
-                                                        arrow
-                                                        key={index}
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                        >
+                                            <CardHeader
+                                                style={{ background: "transparent" }}
+                                                sx={{
+                                                    boxShadow: 0,
+                                                    padding: 0,
+                                                }}
+                                                title={
+                                                    <Typography
+                                                        variant="subtitle2"
+                                                        noWrap
+                                                        style={{
+                                                            lineHeight: '1em',
+                                                            marginTop: '0.45em'
+                                                        }}
+                                                        className={classes.projectElipsis}
                                                     >
-                                                        <Link
+                                                        {title}
+                                                    </Typography>
+                                                }
+                                                subheader={
+                                                    <>   {"opened " + fToNow(created_at) + " by "}
+                                                        < Link
                                                             target="_blank"
                                                             rel="noopener"
                                                             href={"https://github.com/" + dev_name}
+                                                            color="inherit"
                                                         >
-                                                            <Box
-                                                                component="img"
-                                                                src={avatar_url}
-                                                                sx={{ width: 30, height: 30, borderRadius: 1.5 }}
-                                                                style={{
-                                                                    marginRight: '1em'
-                                                                }}
-                                                            />
+                                                            {dev_name}
                                                         </Link>
-                                                    </Tooltip>
-                                                );
-                                            }
-                                        }) : ''}
-                                    </TableCell>
+                                                    </>
+                                                }
+                                            />
 
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                    >
+                                        </TableCell>
 
-                                        {merged === 0 && (<img src={PRClosed} alt="prclosed" />)}
-                                        {merged === 1 && (<img src={PROpen} alt="propen" />)}
-                                        {merged === 2 && (<img src={IssuesClosed} alt="issuesclosed" />)}
-                                        {merged === 3 && (<img src={IssuesOpen} alt="issuesopen" />)}
-                                    </TableCell>
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                        >
+                                            {participants ? JSON.parse(participants).map((item, index) => {
+                                                let dev_name = item[0];
+                                                let avatar_url = item[1];
+                                                let overflow = false;
+                                                if (index >= 3 && overflow === false) {
+                                                    overflow = true;
+                                                    return (
+                                                        <span key={index}>...</span>
+                                                    );
+                                                }
+                                                if (index < 3) {
+                                                    return (
+                                                        <Tooltip
+                                                            title={dev_name}
+                                                            placement="bottom-end"
+                                                            arrow
+                                                            key={index}
+                                                        >
+                                                            <Link
+                                                                target="_blank"
+                                                                rel="noopener"
+                                                                href={"https://github.com/" + dev_name}
+                                                            >
+                                                                <Box
+                                                                    component="img"
+                                                                    src={avatar_url}
+                                                                    sx={{ width: 30, height: 30, borderRadius: 1.5 }}
+                                                                    style={{
+                                                                        marginRight: '1em'
+                                                                    }}
+                                                                />
+                                                            </Link>
+                                                        </Tooltip>
+                                                    );
+                                                }
+                                            }) : ''}
+                                        </TableCell>
 
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                    >
-                                        < Link
-                                            target="_blank"
-                                            rel="noopener"
-                                            color="inherit"
-                                            underline='none'
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
                                         >
 
-                                            {comments ? (
-                                                <Stack
-                                                    direction="row"
-                                                    alignItems="center"
-                                                    style={{
-                                                        marginLeft: '2.1em'
-                                                    }}
-                                                >
-                                                    <Badge badgeContent={Number(new_comments)}
-                                                        // color='primary'
-                                                        anchorOrigin={{
-                                                            vertical: 'top',
-                                                            horizontal: 'left',
-                                                        }}
-                                                        classes={{ badge: classes.customBadge }}
+                                            {merged === 0 && (<img src={PRClosed} alt="prclosed" />)}
+                                            {merged === 1 && (<img src={PROpen} alt="propen" />)}
+                                            {merged === 2 && (<img src={IssuesClosed} alt="issuesclosed" />)}
+                                            {merged === 3 && (<img src={IssuesOpen} alt="issuesopen" />)}
+                                        </TableCell>
+
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                        >
+                                            < Link
+                                                target="_blank"
+                                                rel="noopener"
+                                                color="inherit"
+                                                underline='none'
+                                            >
+
+                                                {comments ? (
+                                                    <Stack
+                                                        direction="row"
+                                                        alignItems="center"
                                                         style={{
-                                                            marginLeft: '0.25em',
-                                                            marginRight: '0.25em',
+                                                            marginLeft: '2.1em'
                                                         }}
                                                     >
-                                                        <img src={comment} alt='comment' />
-                                                    </Badge>
-                                                    <Typography variant="subtitle2" noWrap >
-                                                        {comments ? comments : ''}
-                                                    </Typography>
-                                                </Stack>) : ''}
+                                                        <Badge badgeContent={Number(new_comments)}
+                                                            // color='primary'
+                                                            anchorOrigin={{
+                                                                vertical: 'top',
+                                                                horizontal: 'left',
+                                                            }}
+                                                            classes={{ badge: classes.customBadge }}
+                                                            style={{
+                                                                marginLeft: '0.25em',
+                                                                marginRight: '0.25em',
+                                                            }}
+                                                        >
+                                                            <img src={comment} alt='comment' />
+                                                        </Badge>
+                                                        <Typography variant="subtitle2" noWrap >
+                                                            {comments ? comments : ''}
+                                                        </Typography>
+                                                    </Stack>) : ''}
 
-                                        </Link>
-                                    </TableCell>
+                                            </Link>
+                                        </TableCell>
 
-                                    <TableCell
-                                        align="left"
-                                        component="th"
-                                        scope="row"
-                                        padding="none"
-                                    >
-                                        <Typography variant="subtitle2" noWrap>
-                                            {fToNow(updated_at)}
-                                        </Typography>
-                                    </TableCell>
+                                        <TableCell
+                                            align="left"
+                                            component="th"
+                                            scope="row"
+                                            padding="none"
+                                        >
+                                            <Typography variant="subtitle2" noWrap>
+                                                {fToNow(updated_at)}
+                                            </Typography>
+                                        </TableCell>
 
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    )}
 
-                    {isUserNotFound && !tableEmpty && !search && (
+                    {isUserNotFound && !tableEmpty && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>

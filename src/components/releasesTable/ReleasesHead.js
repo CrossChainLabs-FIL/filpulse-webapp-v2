@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
         height: '4em',
     },
     id: {
-        width: '9em',
+        width: '15em',
     },
     release: {
         width: '18em'
@@ -43,7 +43,7 @@ const useStyles = makeStyles(() => ({
         width: '20em'
     },
     status: {
-        width: '15em'
+        width: '16em'
     }
 }));
 
@@ -69,6 +69,10 @@ export default function ReleasesHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
+                    style={{
+                        padding: 0,
+                        paddingLeft: '4.5em'
+                    }}
                     className={classes.id}
                 >
                     <Stack

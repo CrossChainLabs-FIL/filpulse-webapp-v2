@@ -68,7 +68,12 @@ export default function IssuesTable({ search }) {
             const user = JSON.parse(localStorage.getItem("user"));
             const client = new Client();
 
-            params.search = search;
+            if (!search) {
+                params.search = undefined;
+            }
+            else {
+                params.search = search;
+            }
 
             console.log(params);
 
@@ -350,7 +355,7 @@ export default function IssuesTable({ search }) {
                         </TableBody>
                     )}
 
-                    {isUserNotFound && !tableEmpty && !search && !state.loading && (
+                    {isUserNotFound && !tableEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>
