@@ -53,7 +53,6 @@ export default function ContributorsTable({ search }) {
     const [data, setData] = useState([]);
     const [state, setState] = useState({ loading: true });
     const [params, setParams] = useState({});
-    const [followEvent, setFollowEvent] = useState(false);
     const [isUserNotFound, setIsUserNotFound] = useState(false);
     const [tableEmpty, setTableEmpty] = useState(false);
 
@@ -83,10 +82,10 @@ export default function ContributorsTable({ search }) {
 
     useEffect(() => {
         fetchData();
-        setFollowEvent(false);
-    }, [params, followEvent, search]);
+    }, [params, search]);
 
     const paramsCallback = (new_params) => {
+        setState({ loading: true });
         setParams({
             ...params,
             ...new_params,

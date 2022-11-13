@@ -118,6 +118,7 @@ export default function WatchlistTable({ search }) {
     }
 
     const paramsCallback = (new_params) => {
+        setState({ loading: true });
         setParams({
             ...params,
             ...new_params,

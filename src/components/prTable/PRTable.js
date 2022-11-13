@@ -112,6 +112,7 @@ export default function PRTable({ search }) {
     }
 
     const paramsCallback = (new_params) => {
+        setState({ loading: true });
         setParams({
             ...params,
             ...new_params,
