@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
@@ -59,7 +59,7 @@ export default function ReleasesTable({ search }) {
     const [isUserNotFound, setIsUserNotFound] = useState(false);
     const [tableEmpty, setTableEmpty] = useState(false);
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             let response;
             const client = new Client();
@@ -81,11 +81,11 @@ export default function ReleasesTable({ search }) {
         } catch (error) {
             console.log(error);
         }
-    };
+    }, [params, search])
 
     useEffect(() => {
         fetchData();
-    }, [params, search]);
+    }, [params, search, fetchData]);
 
     const paramsCallback = (new_params) => {
         setState({ loading: true });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 // @mui
 import { makeStyles } from '@mui/styles';
 
@@ -68,7 +68,7 @@ export default function WatchlistTable({ search }) {
     const [isUserNotFound, setIsUserNotFound] = useState(false);
     const [tableEmpty, setTableEmpty] = useState(false);
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             let response;
             const user = JSON.parse(localStorage.getItem("user"));
@@ -92,12 +92,12 @@ export default function WatchlistTable({ search }) {
         } catch (error) {
             console.log(error);
         }
-    };
+    }, [params, search]);
 
     useEffect(() => {
         fetchData();
         setFollowEvent(false);
-    }, [params, followEvent, search]);
+    }, [params, followEvent, search, fetchData]);
 
 
     const starOnChange = (e) => {
@@ -171,7 +171,7 @@ export default function WatchlistTable({ search }) {
                                 if (!is_pr) {
                                     merged = 2;
                                 }
-                                if (state == 'open') {
+                                if (state === 'open') {
                                     merged++;
                                 }
                                 return (
@@ -295,6 +295,9 @@ export default function WatchlistTable({ search }) {
                                                         </Tooltip>
                                                     );
                                                 }
+                                                else {
+                                                    return (<></>);
+                                                }
                                             }) : ''}
                                         </TableCell>
 
@@ -371,7 +374,7 @@ export default function WatchlistTable({ search }) {
                         </TableBody>
                     )}
 
-                    {isUserNotFound && !tableEmpty && (
+                    {isUserNotFound && !tableEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={11} sx={{ py: 3 }}>
@@ -381,7 +384,7 @@ export default function WatchlistTable({ search }) {
                         </TableBody>
                     )}
 
-                    {tableEmpty && (
+                    {tableEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
                                 <TableCell align="center" colSpan={6} sx={{ py: 3 }}>

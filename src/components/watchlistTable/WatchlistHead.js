@@ -13,14 +13,12 @@ import {
 import { makeStyles } from '@mui/styles';
 
 // components
-import TriunghiMenuWLId from './headMenus/TriunghiMenuWLId';
 import TriunghiMenuWLStatus from './headMenus/TriunghiMenuWLStatus';
 import TriunghiMenuWLName from './headMenus/TriunghiMenuWLName';
 import TriunghiMenuWLParticipants from './headMenus/TriunghiMenuWLParticipants';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
-import clearFilter from '../../assets/clearFilter.svg';
 import info from '../../assets/info.svg';
 
 
@@ -198,7 +196,7 @@ export default function WatchlistHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleCommentsSort}
+                            onClick={handleCommentsSort}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -222,7 +220,7 @@ export default function WatchlistHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleLastUpdatedSort}
+                            onClick={handleLastUpdatedSort}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

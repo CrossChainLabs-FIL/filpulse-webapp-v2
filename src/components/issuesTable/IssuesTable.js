@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
@@ -62,7 +62,7 @@ export default function IssuesTable({ search }) {
     const [isUserNotFound, setIsUserNotFound] = useState(false);
     const [tableEmpty, setTableEmpty] = useState(false);
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             let response;
             const user = JSON.parse(localStorage.getItem("user"));
@@ -91,12 +91,12 @@ export default function IssuesTable({ search }) {
         } catch (error) {
             console.log(error);
         }
-    };
+    }, [params, search]);
 
     useEffect(() => {
         fetchData();
         setFollowEvent(false);
-    }, [params, followEvent, search]);
+    }, [params, followEvent, search, fetchData]);
 
     const starOnChange = (e) => {
         const user = JSON.parse(localStorage.getItem("user"));

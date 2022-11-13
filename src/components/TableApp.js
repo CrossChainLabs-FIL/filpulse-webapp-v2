@@ -29,15 +29,10 @@ import ReleasesTable from './releasesTable/ReleasesTable';
 import ContributorsTable from './contributorTable/ContributorsTable';
 import { AuthContext } from "../App";
 
-
-import { Client } from '../utils/client';
-
-
 // assets
 import steaPlin from '../assets/steaPlin.svg';
 import GithubLogo from '../assets/GithubLogo.svg';
 
-const client = new Client();
 
 
 const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
