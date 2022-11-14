@@ -176,13 +176,13 @@ export default function TriunghiMenuReleasesProject({ paramsCallback }) {
                 }}
                 className={classes.menu}
             >
-                <Box className={classes.mainBox}>
-                    <Box className={classes.titleBox}>
+                <Box className={classes.mainBox} aria-disabled>
+                    <Box className={classes.titleBox} aria-disabled>
                         <Stack
                             direction="row"
                             alignItems="center"
                         >
-                            <Box className={classes.filterText}>
+                            <Box className={classes.filterText} aria-disabled>
                                 Project's name
                             </Box>
                             <IconButton onClick={handleClose} style={{ marginLeft: 'auto' }}>
