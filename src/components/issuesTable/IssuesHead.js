@@ -52,14 +52,31 @@ const useStyles = makeStyles(() => ({
 
 
 export default function IssuesHead({ paramsCallback }) {
-    const [isDesc, setIsDesc] = useState(true);
+    const [isDescNumber, setIsDescNumber] = useState(true);
+    const [isDescName, setIsDescName] = useState(true);
+    const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
     const classes = useStyles();
 
-    const handleLastUpdatedSort = () => {
-        paramsCallback({ sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc' });
-        setIsDesc(!isDesc);
+    const handleSortNumber = () => {
+        paramsCallback({ sortBy: 'number', sortType: isDescNumber ? 'asc' : 'desc' });
+        setIsDescNumber(!isDescNumber);
+        setIsDescName(true);
+        setIsDescUpdatedAt(true);
     }
 
+    const handleSortName = () => {
+        paramsCallback({ sortBy: 'title', sortType: isDescName ? 'asc' : 'desc' });
+        setIsDescNumber(true);
+        setIsDescName(!isDescName);
+        setIsDescUpdatedAt(true);
+    }
+
+    const handleSortUpdatedAt = () => {
+        paramsCallback({ sortBy: 'updated_at', sortType: isDescUpdatedAt ? 'asc' : 'desc' });
+        setIsDescNumber(true);
+        setIsDescName(true);
+        setIsDescUpdatedAt(!isDescUpdatedAt);
+    }
 
     return (
         <TableHead>
@@ -84,7 +101,7 @@ export default function IssuesHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            // onClick={(e) => handleSortChange()}
+                            onClick={handleSortNumber}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -109,7 +126,7 @@ export default function IssuesHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            // onClick={(e) => handleSortChange()}
+                            onClick={handleSortName}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -209,7 +226,7 @@ export default function IssuesHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            onClick={handleLastUpdatedSort}
+                            onClick={handleSortUpdatedAt}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

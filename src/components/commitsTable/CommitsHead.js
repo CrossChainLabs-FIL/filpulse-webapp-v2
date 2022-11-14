@@ -44,13 +44,30 @@ const useStyles = makeStyles(() => ({
 
 
 export default function CommitsHead({ paramsCallback }) {
-
-    const [isDesc, setIsDesc] = useState(true);
+    const [isDescHash, setIsDescHash] = useState(true);
+    const [isDescCommit, setIsDescCommit] = useState(true);
+    const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
     const classes = useStyles();
 
-    const handleLastUpdatedSort = () => {
-        paramsCallback({ sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc' });
-        setIsDesc(!isDesc);
+    const handleSortHash = () => {
+        paramsCallback({ sortBy: 'commit_hash', sortType: isDescHash ? 'asc' : 'desc' });
+        setIsDescHash(!isDescHash);
+        setIsDescCommit(true);
+        setIsDescUpdatedAt(true);
+    }
+
+    const handleSortCommit = () => {
+        paramsCallback({ sortBy: 'message', sortType: isDescCommit ? 'asc' : 'desc' });
+        setIsDescHash(true);
+        setIsDescCommit(!isDescCommit);
+        setIsDescUpdatedAt(true);
+    }
+
+    const handleSortUpdatedAt = () => {
+        paramsCallback({ sortBy: 'updated_at', sortType: isDescUpdatedAt ? 'asc' : 'desc' });
+        setIsDescHash(true);
+        setIsDescCommit(true);
+        setIsDescUpdatedAt(!isDescUpdatedAt);
     }
 
     return (
@@ -84,7 +101,7 @@ export default function CommitsHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            // onClick={(e) => handleSortChange()}
+                            onClick={handleSortHash}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -109,7 +126,7 @@ export default function CommitsHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            // onClick={(e) => handleSortChange()}
+                            onClick={handleSortCommit}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -172,7 +189,7 @@ export default function CommitsHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            onClick={handleLastUpdatedSort}
+                            onClick={handleSortUpdatedAt}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />

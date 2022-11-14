@@ -53,19 +53,42 @@ const useStyles = makeStyles(() => ({
 
 
 export default function WatchlistHead({ paramsCallback }) {
-    const [isDesc, setIsDesc] = useState(true);
+    const [isDescNumber, setIsDescNumber] = useState(true);
+    const [isDescName, setIsDescName] = useState(true);
     const [isDescComments, setIsDescComments] = useState(true);
+    const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
     const classes = useStyles();
 
-    const handleLastUpdatedSort = () => {
-        paramsCallback({ sortBy: 'updated_at', sortType: isDesc ? 'asc' : 'desc' });
-        setIsDesc(!isDesc);
+    const handleSortNumber = () => {
+        paramsCallback({ sortBy: 'number', sortType: isDescNumber ? 'asc' : 'desc' });
+        setIsDescNumber(!isDescNumber);
+        setIsDescName(true);
+        setIsDescComments(true);
+        setIsDescUpdatedAt(true);
+    }
+    
+    const handleSortName = () => {
+        paramsCallback({ sortBy: 'title', sortType: isDescName ? 'asc' : 'desc' });
+        setIsDescNumber(true);
+        setIsDescName(!isDescName);
+        setIsDescComments(true);
+        setIsDescUpdatedAt(true);
     }
 
-    const handleCommentsSort = () => {
-        console.log(handleCommentsSort);
+    const handleSortComments = () => {
         paramsCallback({ sortBy: 'comments', sortType: isDescComments ? 'asc' : 'desc' });
+        setIsDescNumber(true);
+        setIsDescName(true);
         setIsDescComments(!isDescComments);
+        setIsDescUpdatedAt(true);
+    }
+
+    const handleSortUpdatedAt = () => {
+        paramsCallback({ sortBy: 'updated_at', sortType: isDescUpdatedAt ? 'asc' : 'desc' });
+        setIsDescNumber(true);
+        setIsDescName(true);
+        setIsDescComments(true);
+        setIsDescUpdatedAt(!isDescUpdatedAt);
     }
 
     return (
@@ -99,7 +122,7 @@ export default function WatchlistHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleLastUpdatedSort}
+                            onClick={handleSortNumber}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -124,7 +147,7 @@ export default function WatchlistHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            onClick={(e) => handleLastUpdatedSort}
+                            onClick={handleSortName}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -196,7 +219,7 @@ export default function WatchlistHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            onClick={handleCommentsSort}
+                            onClick={handleSortComments}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
@@ -220,7 +243,7 @@ export default function WatchlistHead({ paramsCallback }) {
 
                         <IconButton
                             id="basic-button"
-                            onClick={handleLastUpdatedSort}
+                            onClick={handleSortUpdatedAt}
                             style={{ padding: 0 }}
                         >
                             <img src={triunghi} alt='triunghi' className={classes.triunghi} />
