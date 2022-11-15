@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 // material
 import {
@@ -17,11 +17,16 @@ import {
 
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
-
+import { Client } from '../../../utils/client';
 
 // assets
 import triunghi from '../../../assets/triunghi.svg';
 import x from '../../../assets/x.svg';
+import clearFilter from '../../../assets/clearFilter.svg';
+
+import bara from '../../../assets/bara.svg';
+
+const client = new Client();
 
 
 const useStyles = makeStyles(() => ({
@@ -72,16 +77,65 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuWLParticipants({ data }) {
+export default function TriunghiMenuWLParticipants({ paramsCallback }) {
+    const [filterName, setFilterName] = useState('');
+    const [search, setSearch] = useState('');
+    const [data, setData] = useState([]);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [state, setState] = useState({
+        loading: true
+    });
+    const [isSorted, setIsSorted] = useState(false);
     const open = Boolean(anchorEl);
+
+    const fetchData = useCallback(async () => {
+        console.log('fetchData');
+        try {
+            let response;
+            const user = JSON.parse(localStorage.getItem("user"));
+            const client = new Client();
+
+            let params;
+
+            if (filterName) {
+                params.search = filterName;
+            }
+
+            if (user?.token) {
+                response = await client.post_with_token('tab_watchlist/filter/participants', params, user.token);
+                setData(response.list);
+                setState({ loading: false });
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }, [filterName]);
+
+    useEffect(() => {
+        setState({ loading: true });
+        fetchData();
+    }, [filterName]);
+
+
     const handleClick = (event) => {
+        fetchData();
+        setFilterName('');
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
 
+    function handleFilterClose(participant) {
+        handleClose();
+        setIsSorted(true);
+        paramsCallback({ participant: participant });
+    }
+
+    const handleFilterByName = (event) => {
+        setFilterName(event.target.value);
+    }
 
     const classes = useStyles();
 
@@ -95,8 +149,20 @@ export default function TriunghiMenuWLParticipants({ data }) {
                 onClick={handleClick}
                 style={{ padding: 0 }}
             >
-                <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                <img src={bara} alt='bara' className={classes.triunghi} />
             </IconButton>
+            {isSorted ?
+                <IconButton
+                    id="basic-button"
+                    onClick={() => {
+                        setIsSorted(false);
+                        paramsCallback({ participant: undefined });
+                    }}
+                    style={{ padding: 0, marginLeft: '0.25em' }}
+                >
+                    <img src={clearFilter} alt='clear' />
+                </IconButton> : ''
+            }
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -112,14 +178,14 @@ export default function TriunghiMenuWLParticipants({ data }) {
                 }}
                 className={classes.menu}
             >
-                <Box className={classes.mainBox}>
-                    <Box className={classes.titleBox}>
+                <Box className={classes.mainBox} aria-disabled>
+                    <Box className={classes.titleBox} aria-disabled>
                         <Stack
                             direction="row"
                             alignItems="center"
                         >
-                            <Box className={classes.filterText}>
-                                Filter by user
+                            <Box className={classes.filterText} aria-disabled>
+                                Filter by participants
                             </Box>
                             <IconButton onClick={handleClose} style={{ marginLeft: 'auto' }}>
                                 <img src={x} alt='x' className={classes.x} />
@@ -127,44 +193,37 @@ export default function TriunghiMenuWLParticipants({ data }) {
                         </Stack>
                         <Divider />
                         <SearchStyle
-                            // value={filterName}
-                            // onChange={(e) => handleFilterByName(e)}
-                            placeholder="Filter user"
+                            value={filterName}
+                            onChange={(e) => handleFilterByName(e)}
+                            placeholder="Filter participants"
                         />
                         <Divider />
                     </Box >
                     <Paper className={classes.paper}>
                         <List className={classes.list} disablePadding={true}>
-                            {data.map((row) => {
-                                const { id,
-                                    participantIcons,
-                                    participantName
+                            {data?.map((row) => {
+                                const { dev_name,
+                                    avatar_url
                                 } = row;
                                 return (
-                                    <React.Fragment key={id}>
-                                        {participantName.map((participant, index) => {
-                                            return (
-                                                <React.Fragment key={id}>
-                                                    <MenuItem
-                                                        style={{ backgroundColor: '#FFFFFF', }}
-                                                        onClick={handleClose}
-                                                    >
-                                                        <Avatar
-                                                            src={participantIcons[index]}
-                                                            alt='avatar'
-                                                            sx={{
-                                                                width: 30,
-                                                                height: 30,
-                                                                marginLeft: "1.75em",
-                                                                marginRight: "0.5em"
-                                                            }}
-                                                        />
-                                                        <ListItemText primary={participant} />
-                                                    </MenuItem>
-                                                    <Divider />
-                                                </React.Fragment>
-                                            );
-                                        })}
+                                    <React.Fragment key={dev_name}>
+                                        <MenuItem
+                                            style={{ backgroundColor: '#FFFFFF', }}
+                                            onClick={() => handleFilterClose(dev_name)}
+                                        >
+                                            <Avatar
+                                                src={avatar_url}
+                                                alt='avatar'
+                                                sx={{
+                                                    width: 30,
+                                                    height: 30,
+                                                    marginLeft: "1.75em",
+                                                    marginRight: "0.5em"
+                                                }}
+                                            />
+                                            <ListItemText primary={dev_name} />
+                                        </MenuItem>
+                                        <Divider />
                                     </React.Fragment>
                                 );
                             })}

@@ -170,6 +170,8 @@ export default function WatchlistHead({ paramsCallback }) {
                             Participants
                         </Typography>
 
+                        <TriunghiMenuWLParticipants paramsCallback={paramsCallback} />
+
                     </Stack>
                 </TableCell>
 
