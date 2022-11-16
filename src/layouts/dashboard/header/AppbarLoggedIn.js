@@ -8,7 +8,7 @@ import {
     Toolbar,
     Typography,
     IconButton,
-    MenuItem,
+    Avatar,
     Menu,
     Button
 } from '@mui/material';
@@ -107,15 +107,15 @@ export default function AppbarLoggedIn() {
     const accountInfo = () => {
         const { avatar_url } = stateLogin.user;
         return (
-            <div
+            <Avatar
                 style={{
                     marginLeft: 'auto',
                     display: "flex",
                     flexDirection: 'row'
                 }}
-            >
-                <img src={avatar_url} alt="Avatar" style={{ height: '2em', marginRight: '0.5em' }} />
-            </div >
+                src={avatar_url}
+                alt="Avatar"
+            />
         )
     }
 
@@ -132,7 +132,6 @@ export default function AppbarLoggedIn() {
                     <img src={logo} alt="" className={classes.logo} />
                     <TextTypography>FilPulse</TextTypography>
                     {accountInfo()}
-                    <img src={account} alt="account" />
                     <IconButton
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
