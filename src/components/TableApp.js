@@ -57,17 +57,17 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: '0.3em'
     },
     watchlistButton: {
-        height: '3em',
-        minHeight: '3em',
-        minWidth: '8em',
-        width: '8em',
-        marginRight: '3em',
-        marginTop: '2.45em',
+        marginLeft: '0.2em',
+        marginTop: '2.35em',
         paddingBottom: 0,
         color: '#000000',
         textTransform: 'none',
         fontWeight: theme.typography.fontWeightRegular,
-        fontSize: theme.typography.pxToRem(15),
+        fontSize: theme.typography.pxToRem(16),
+        '&:hover': {
+            backgroundColor: 'transparent',
+            color: '#000000',
+        },
     },
     watchlistTab: {
         height: '3em',
