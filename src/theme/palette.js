@@ -2,11 +2,11 @@ import { alpha } from '@mui/material/styles';
 
 const PRIMARY = { lighter: '#C8FACD', light: '#5BE584', main: '#00AB55', dark: '#007B55', darker: '#005249' };
 const SUCCESS = { lighter: '#E9FCD4', light: '#AAF27F', main: '#54D62C', dark: '#229A16', darker: '#08660D' };
-const ERROR =   { lighter: '#FFE7D9', light: '#FFA48D', main: '#FF4842', dark: '#B72136', darker: '#7A0C2E' };
+const ERROR = { lighter: '#FFE7D9', light: '#FFA48D', main: '#FF4842', dark: '#B72136', darker: '#7A0C2E' };
 
 const CARD_WIDGET_BG = '#EEF4F5';
 
-const GREY_200 = '#F4F6F8';
+const GREY_200 = '#EEF4F5';
 const GREY_400 = '#C4CDD5';
 const GREY_500 = '#919EAB';
 const GREY_600 = '#637381';
@@ -18,7 +18,7 @@ const GREY = {
   500: GREY_500,
   600: GREY_600,
   800: GREY_800,
-  500_8:  alpha(GREY_500, 0.08),
+  500_8: alpha(GREY_500, 0.08),
   500_16: alpha(GREY_500, 0.16),
   500_24: alpha(GREY_500, 0.24),
   500_80: alpha(GREY_500, 0.8),

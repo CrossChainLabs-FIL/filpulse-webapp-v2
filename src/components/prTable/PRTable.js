@@ -38,15 +38,13 @@ const useStyles = makeStyles(() => ({
         maxHeight: "40em",
     },
     stea: {
-        marginLeft: "0.15em"
+        marginBottom: "0.2em"
     },
     projectElipsis: {
         maxWidth: "32em",
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        lineHeight: '1em',
-        marginTop: '0.45em'
     },
 }));
 
@@ -128,7 +126,7 @@ export default function PRTable({ search }) {
                 // component={Paper}
                 className={classes.table}
             >
-                <Table stickyHeader>
+                <Table stickyHeader >
 
                     <PRHead paramsCallback={paramsCallback} />
 
@@ -164,7 +162,10 @@ export default function PRTable({ search }) {
                                         key={id}
                                         tabIndex={-1}
                                     >
-                                        <TableCell padding="checkbox">
+                                        <TableCell
+                                            component="th"
+                                            padding="checkbox"
+                                        >
                                             <Checkbox
                                                 id={index}
                                                 checked={follow}

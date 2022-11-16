@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../../App";
 
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import {
     AppBar,
     Toolbar,
@@ -10,29 +10,17 @@ import {
     IconButton,
     Avatar,
     Menu,
-    Button
+    Button,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import logo from "../../../logo.svg";
 import exit from "../../../assets/exit.svg";
-import account from "../../../assets/account.svg";
 import triunghi from "../../../assets/triunghi.svg";
-
-// import Login from "../../../components/Login"
 
 const BG_COLOR = '#ffffff';
 
 const HEIGHT = 92;
-
-const RootStyle = styled(AppBar)(({ theme }) => ({
-    boxShadow: 'none',
-    backdropFilter: 'blur(6px)',
-    WebkitBackdropFilter: 'blur(6px)',
-    backgroundColor: alpha(theme.palette.background, 0.72),
-    width: `calc(100%}px)`
-}));
 
 const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
     minHeight: HEIGHT,

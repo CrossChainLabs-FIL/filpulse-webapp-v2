@@ -96,7 +96,7 @@ export default function ReleasesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 18 }}>
                             #
                         </Typography>
 
@@ -121,7 +121,7 @@ export default function ReleasesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Release
                         </Typography>
 
@@ -146,7 +146,7 @@ export default function ReleasesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Project
                         </Typography>
 
@@ -165,7 +165,7 @@ export default function ReleasesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Author
                         </Typography>
 
@@ -184,7 +184,7 @@ export default function ReleasesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Status
                         </Typography>
 
@@ -202,7 +202,7 @@ export default function ReleasesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Last Updated
                         </Typography>
 

@@ -44,12 +44,10 @@ const useStyles = makeStyles(() => ({
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        lineHeight: '1em',
-        marginTop: '0.45em'
     },
     stea: {
-        marginLeft: "0.15em"
-    }
+        marginBottom: "0.2em"
+    },
 }));
 
 export default function IssuesTable({ search }) {
@@ -169,7 +167,10 @@ export default function IssuesTable({ search }) {
                                         key={id}
                                         tabIndex={-1}
                                     >
-                                        <TableCell padding="checkbox">
+                                        <TableCell
+                                            component="th"
+                                            padding="checkbox"
+                                        >
                                             <Checkbox
                                                 id={index}
                                                 repo={repo}
@@ -283,11 +284,18 @@ export default function IssuesTable({ search }) {
                                         >
 
                                             {assignees ? JSON.parse(assignees).map((item, index) => {
+                                                const dev_name = item[0];
+                                                const avatar_url = item[1];
+                                                if (index === 3) {
+                                                    return (
+                                                        <span key={index}>...</span>
+                                                    );
+                                                }
                                                 if (index < 3) {
                                                     return (
                                                         <Tooltip
                                                             key={index}
-                                                            title={item[0]}
+                                                            title={dev_name}
                                                             placement="bottom-end"
                                                             arrow
                                                         >
@@ -298,7 +306,7 @@ export default function IssuesTable({ search }) {
                                                             >
                                                                 <Box
                                                                     component="img"
-                                                                    src={item[1]}
+                                                                    src={avatar_url}
                                                                     sx={{ width: 30, height: 30, borderRadius: 1.5 }}
                                                                     style={{
                                                                         marginRight: '1em'

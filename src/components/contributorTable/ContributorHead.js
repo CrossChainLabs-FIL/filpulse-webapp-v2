@@ -98,9 +98,9 @@ export default function ContributorHead({ paramsCallback }) {
                             variant="h6"
                             noWrap
                             style={{
-                                fontWeight: 450,
-                                opacity: 0.75,
-                                marginLeft: '3em'
+                                fontWeight: 500,
+                                marginLeft: '3em',
+                                fontSize: 16
                             }}
                         >
                             Contributor
@@ -121,7 +121,7 @@ export default function ContributorHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Project
                         </Typography>
 
@@ -140,7 +140,7 @@ export default function ContributorHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Commits
                         </Typography>
 
@@ -180,9 +180,8 @@ export default function ContributorHead({ paramsCallback }) {
                             variant="h6"
                             noWrap
                             style={{
-                                fontWeight: 450,
-                                opacity: 0.75,
-                                fontSize: 15
+                                fontWeight: 500,
+                                fontSize: 16
                             }}
                         >
                             PRs
@@ -236,9 +235,8 @@ export default function ContributorHead({ paramsCallback }) {
                             variant="h6"
                             noWrap
                             style={{
-                                fontWeight: 450,
-                                opacity: 0.75,
-                                fontSize: 15
+                                fontWeight: 500,
+                                fontSize: 16
                             }}
                         >
                             Issues

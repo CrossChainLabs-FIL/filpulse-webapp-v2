@@ -40,9 +40,12 @@ export default function Table(theme) {
         body: {
           '&:first-of-type': {
             paddingLeft: theme.spacing(3),
+            boxShadow: `inset 8px 0 0 ${theme.palette.background}`,
+
           },
           '&:last-of-type': {
             paddingRight: theme.spacing(3),
+            boxShadow: `inset -8px 0 0 ${theme.palette.background}`,
           },
         },
       },

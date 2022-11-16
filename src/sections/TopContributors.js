@@ -48,7 +48,7 @@ export default function TopContributors() {
     client.get('top_contributors').then((top_contributors) => {
       setState({
         loading: false,
-        top_contributors: top_contributors.list.slice(0, 5),
+        top_contributors: top_contributors.list.slice(0, 10),
       });
     });
   }, [setState]);
@@ -56,11 +56,18 @@ export default function TopContributors() {
   return (
     <Card className='boxShadowContainer'>
       <CardHeader title="Contributors of the month" />
-      <Stack spacing={5.37} sx={{ p: 5.4, pr: 0 }}>
-        {state.top_contributors.map((item) => (
-          <ContributorItem key={item.dev_name} item={item} />
-        ))}
-      </Stack>
+      <Box
+        sx={{
+          maxHeight: '25.65em',
+          overflowY: 'scroll',
+        }}
+      >
+        <Stack spacing={5.37} sx={{ p: 5.4, pr: 0 }}>
+          {state.top_contributors.map((item) => (
+            <ContributorItem key={item.dev_name} item={item} />
+          ))}
+        </Stack>
+      </Box>
     </Card>
   );
 }

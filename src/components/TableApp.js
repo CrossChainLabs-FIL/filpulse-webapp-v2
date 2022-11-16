@@ -15,9 +15,9 @@ import {
     DialogTitle,
     DialogContent,
     Button,
-    Typography
+    Typography,
+    Grid
 } from '@mui/material';
-
 
 // components
 import Iconify from './Iconify';
@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
         minWidth: '8em',
         width: '8em',
         marginRight: '3em',
-        marginTop: '1.2em',
+        marginTop: '1em',
         marginBottom: '0.2em',
         paddingBottom: 0,
     },
@@ -126,11 +126,12 @@ const useStyles = makeStyles((theme) => ({
     button: {
         backgroundColor: 'transparent',
         color: '#000000',
+        width: '23em',
         '&:hover': {
             backgroundColor: 'transparent',
             color: '#000000',
         },
-    }
+    },
 }));
 
 const StyledTabs = styled((props) => (
@@ -157,7 +158,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({
         textTransform: 'none',
         fontWeight: theme.typography.fontWeightRegular,
-        fontSize: theme.typography.pxToRem(15),
+        fontSize: theme.typography.pxToRem(16),
         marginRight: theme.spacing(3),
         color: "#000000",
         '&.Mui-selected': {
@@ -170,6 +171,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 );
 
 export default function TableApp() {
+
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [search, setSearch] = useState('');
@@ -251,32 +253,37 @@ export default function TableApp() {
                                     width: '30em'
                                 }}
                             >
-                                <Typography
-                                    style={{
-                                        marginTop: '3.5em',
-                                        marginBottom: '3em',
-                                        marginLeft: '3em'
-                                    }}
+                                <Grid
+                                    container
+                                    direction="column"
+                                    justifyContent="center"
+                                    alignItems="center"
                                 >
-                                    Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
-                                </Typography>
-                                <Button
-                                    variant="contained"
-                                    startIcon={<img src={GithubLogo} alt='GithubLogo' />}
-                                    href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
-                                    onClick={() => {
-                                        setDataError({ ...dataError, errorMessage: "" });
-                                    }}
-                                    sx={{
-                                        backgroundColor: 'transparent',
-                                        color: '#000000',
-                                        width: '23em',
-                                        marginLeft: '4em'
-                                    }}
-                                    className={classes.button}
-                                >
-                                    Sign in with Github
-                                </Button>
+                                    <Grid item>
+                                        <Typography
+                                            style={{
+                                                marginTop: '3.5em',
+                                                marginBottom: '3em',
+                                                marginLeft: '3em'
+                                            }}
+                                        >
+                                            Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        <Button
+                                            variant="contained"
+                                            startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                            href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
+                                            onClick={() => {
+                                                setDataError({ ...dataError, errorMessage: "" });
+                                            }}
+                                            className={classes.button}
+                                        >
+                                            Sign in with Github
+                                        </Button>
+                                    </Grid>
+                                </Grid>
                             </DialogContent>
 
                         </Dialog>

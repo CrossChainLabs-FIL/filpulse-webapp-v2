@@ -31,17 +31,23 @@ const useStyles = makeStyles(() => ({
     rowHead: {
         height: '4em',
     },
+    checkbox: {
+        width: '6.5em'
+    },
     id: {
-        width: '8em'
+        width: '6em'
     },
     issue: {
-        width: '35em'
+        width: '28em'
+    },
+    project: {
+        width: '24em'
     },
     contributor: {
-        width: '16em'
+        width: '14em'
     },
     assignee: {
-        width: '13em'
+        width: '16em'
     },
     status: {
         width: '9.3em'
@@ -82,7 +88,7 @@ export default function IssuesHead({ paramsCallback }) {
         <TableHead>
             <TableRow className={classes.rowHead}>
 
-                <TableCell />
+                <TableCell className={classes.checkbox} />
 
                 <TableCell
                     align="left"
@@ -95,7 +101,7 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 18 }}>
                             #
                         </Typography>
 
@@ -120,7 +126,7 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Issue
                         </Typography>
 
@@ -139,13 +145,13 @@ export default function IssuesHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.issue}
+                    className={classes.project}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Project
                         </Typography>
 
@@ -164,7 +170,7 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Contributor
                         </Typography>
 
@@ -183,7 +189,7 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Assignee
                         </Typography>
 
@@ -202,7 +208,7 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Status
                         </Typography>
 
@@ -220,7 +226,7 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Last Updated
                         </Typography>
 

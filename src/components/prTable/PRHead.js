@@ -31,6 +31,9 @@ const useStyles = makeStyles(() => ({
     rowHead: {
         height: '4em',
     },
+    checkbox: {
+        width: '6.5em'
+    },
     id: {
         width: '5.5em'
     },
@@ -44,7 +47,8 @@ const useStyles = makeStyles(() => ({
         width: '15em'
     },
     status: {
-        width: '10em'
+        width: '10em',
+        padding: 0
     }
 }));
 
@@ -81,7 +85,7 @@ export default function PRHead({ paramsCallback }) {
         <TableHead>
             <TableRow className={classes.rowHead}>
 
-                <TableCell />
+                <TableCell className={classes.checkbox} />
 
                 <TableCell
                     align="left"
@@ -94,7 +98,7 @@ export default function PRHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             #
                         </Typography>
 
@@ -119,7 +123,7 @@ export default function PRHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             PR
                         </Typography>
 
@@ -144,7 +148,7 @@ export default function PRHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Project
                         </Typography>
 
@@ -163,7 +167,7 @@ export default function PRHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Contributor
                         </Typography>
 
@@ -183,7 +187,7 @@ export default function PRHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Status
                         </Typography>
 
@@ -197,12 +201,14 @@ export default function PRHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
+                    style={{ padding: 0 }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
+                        style={{ padding: 0 }}
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Last Updated
                         </Typography>
 

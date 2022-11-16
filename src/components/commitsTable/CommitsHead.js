@@ -88,12 +88,11 @@ export default function CommitsHead({ paramsCallback }) {
                         alignItems="center"
                     >
                         <Typography
-                            variant="h6"
                             noWrap
                             style={{
-                                fontWeight: 450,
-                                opacity: 0.75,
-                                marginLeft: '2em'
+                                fontWeight: 500,
+                                marginLeft: '2em',
+                                fontSize: 16
                             }}
                         >
                             Hash
@@ -120,7 +119,7 @@ export default function CommitsHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Commit
                         </Typography>
 
@@ -145,7 +144,7 @@ export default function CommitsHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Project
                         </Typography>
 
@@ -164,7 +163,7 @@ export default function CommitsHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Contributor
                         </Typography>
 
@@ -183,7 +182,7 @@ export default function CommitsHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Last Updated
                         </Typography>
 

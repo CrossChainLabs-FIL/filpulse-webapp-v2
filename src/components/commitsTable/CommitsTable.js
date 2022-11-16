@@ -35,8 +35,6 @@ const useStyles = makeStyles(() => ({
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        lineHeight: '1em',
-        marginTop: '0.45em'
     },
 }));
 

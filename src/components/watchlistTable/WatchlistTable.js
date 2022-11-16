@@ -54,8 +54,6 @@ const useStyles = makeStyles(() => ({
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        lineHeight: '1em',
-        marginTop: '0.45em'
     },
 }));
 
@@ -261,11 +259,9 @@ export default function WatchlistTable({ search }) {
                                             padding="none"
                                         >
                                             {participants ? JSON.parse(participants).map((item, index) => {
-                                                let dev_name = item[0];
-                                                let avatar_url = item[1];
-                                                let overflow = false;
-                                                if (index >= 3 && overflow === false) {
-                                                    overflow = true;
+                                                const dev_name = item[0];
+                                                const avatar_url = item[1];
+                                                if (index === 3) {
                                                     return (
                                                         <span key={index}>...</span>
                                                     );

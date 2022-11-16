@@ -66,7 +66,7 @@ export default function WatchlistHead({ paramsCallback }) {
         setIsDescComments(true);
         setIsDescUpdatedAt(true);
     }
-    
+
     const handleSortName = () => {
         paramsCallback({ sortBy: 'title', sortType: isDescName ? 'asc' : 'desc' });
         setIsDescNumber(true);
@@ -109,12 +109,11 @@ export default function WatchlistHead({ paramsCallback }) {
                         alignItems="center"
                     >
                         <Typography
-                            variant="h6"
                             noWrap
                             style={{
                                 marginLeft: '1.3em',
-                                fontWeight: 450,
-                                opacity: 0.75
+                                fontWeight: 500,
+                                fontSize: 16
                             }}
                         >
                             #
@@ -141,7 +140,7 @@ export default function WatchlistHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Name
                         </Typography>
 
@@ -166,7 +165,7 @@ export default function WatchlistHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Participants
                         </Typography>
 
@@ -186,7 +185,7 @@ export default function WatchlistHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Status
                         </Typography>
 
@@ -215,7 +214,7 @@ export default function WatchlistHead({ paramsCallback }) {
                             <img src={info} alt='info' />
                         </Tooltip>
 
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Comments
                         </Typography>
 
@@ -239,7 +238,7 @@ export default function WatchlistHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography variant="h6" noWrap style={{ fontWeight: 450, opacity: 0.75 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
                             Last Updated
                         </Typography>
 

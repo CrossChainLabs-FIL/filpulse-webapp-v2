@@ -1,5 +1,11 @@
 // import { useTheme } from '@mui/material/styles';
-import { Container, Grid } from '@mui/material';
+import {
+  Container,
+  Grid
+} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 import { useState, useEffect } from 'react';
 import Page from '../components/Page';
 import { Footer } from '../components/Footer';
@@ -19,9 +25,10 @@ const client = new Client();
 
 export default function Dashboard() {
   // const theme = useTheme();
-  const themeStretch = false;
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('xl'));
 
-  const [state, setState] = useState({ commits: '', repositories: '', contributors: '', prs: ''});
+  const [state, setState] = useState({ commits: '', repositories: '', contributors: '', prs: '' });
   const [issuesData, setIssuesData] = useState([0, 0]);
 
   useEffect(() => {
@@ -43,7 +50,7 @@ export default function Dashboard() {
 
   return (
     <Page title="FilPulse">
-      <Container maxWidth={themeStretch ? false : 'xl'}>
+      <Container maxWidth={matches ? 'lg' : 'xl'}   >
         <Grid container spacing={3}>
           <Grid item xs={12} md={3}>
             <CardWidget

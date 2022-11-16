@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../../App";
 
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import {
     AppBar,
     Toolbar,
@@ -11,16 +11,14 @@ import {
     Dialog,
     DialogContent,
     DialogTitle,
-    Button
+    Button,
+    Grid
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import logo from "../../../logo.svg";
 import GithubLogo from "../../../assets/GithubLogo.svg";
 import account from "../../../assets/account.svg";
-
-// import Login from "../../../components/Login"
 
 
 import { Client } from '../../../utils/client';
@@ -31,14 +29,6 @@ const client = new Client();
 const BG_COLOR = '#ffffff';
 
 const HEIGHT = 92;
-
-const RootStyle = styled(AppBar)(({ theme }) => ({
-    boxShadow: 'none',
-    backdropFilter: 'blur(6px)',
-    WebkitBackdropFilter: 'blur(6px)',
-    backgroundColor: alpha(theme.palette.background, 0.72),
-    width: `calc(100%}px)`
-}));
 
 const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
     minHeight: HEIGHT,
@@ -82,6 +72,7 @@ const useStyles = makeStyles((theme) =>
         button: {
             backgroundColor: 'transparent',
             color: '#000000',
+            width: '23em',
             '&:hover': {
                 backgroundColor: 'transparent',
                 color: '#000000',
@@ -177,32 +168,37 @@ export default function AppbarLoggedOut() {
                                         width: '30em'
                                     }}
                                 >
-                                    <Typography
-                                        style={{
-                                            marginTop: '3.5em',
-                                            marginBottom: '3em',
-                                            marginLeft: '3em'
-                                        }}
+                                    <Grid
+                                        container
+                                        direction="column"
+                                        justifyContent="center"
+                                        alignItems="center"
                                     >
-                                        Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
-                                    </Typography>
-                                    <Button
-                                        variant="contained"
-                                        startIcon={<img src={GithubLogo} alt='GithubLogo' />}
-                                        className={classes.button}
-                                        href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
-                                        onClick={() => {
-                                            setData({ ...data, errorMessage: "" });
-                                        }}
-                                        sx={{
-                                            backgroundColor: 'transparent',
-                                            color: '#000000',
-                                            width: '23em',
-                                            marginLeft: '4em'
-                                        }}
-                                    >
-                                        Sign in with Github
-                                    </Button>
+                                        <Grid item>
+                                            <Typography
+                                                style={{
+                                                    marginTop: '3.5em',
+                                                    marginBottom: '3em',
+                                                    marginLeft: '3em'
+                                                }}
+                                            >
+                                                Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Button
+                                                variant="contained"
+                                                startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                                className={classes.button}
+                                                href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
+                                                onClick={() => {
+                                                    setData({ ...data, errorMessage: "" });
+                                                }}
+                                            >
+                                                Sign in with Github
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
                                 </DialogContent>
 
                             </Dialog>
