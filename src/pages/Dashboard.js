@@ -21,14 +21,17 @@ export default function Dashboard() {
   // const theme = useTheme();
   const themeStretch = false;
 
-  const [state, setState] = useState({ loading: true, commits: '', repositories: '', contributors: '', prs: '' });
+  const [state, setState] = useState({ commits: '', repositories: '', contributors: '', prs: ''});
+  const [issuesData, setIssuesData] = useState([0, 0]);
 
   useEffect(() => {
-    setState({ loading: true });
-
     client.get('overview').then((overview) => {
+      let open = parseInt((overview?.issues_open) ? overview?.issues_open : 0);
+      let closed = parseInt((overview?.issues_closed) ? overview?.issues_closed : 0);
+
+      setIssuesData([open, closed]);
+
       setState({
-        loading: false,
         commits: overview.commits,
         repositories: overview.repos,
         contributors: overview.contributors,
@@ -78,7 +81,7 @@ export default function Dashboard() {
           </Grid>
 
           <Grid item xs={12} md={3} lg={4}>
-            <Issues />
+            <Issues issuesData={issuesData} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
