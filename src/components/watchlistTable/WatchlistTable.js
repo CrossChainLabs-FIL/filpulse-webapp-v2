@@ -96,7 +96,6 @@ export default function WatchlistTable({ search }) {
     }, [params, search]);
 
     useEffect(() => {
-        setState({ loading: true });
         fetchData();
     }, [params, fetch, search, fetchData]);
 
@@ -111,6 +110,8 @@ export default function WatchlistTable({ search }) {
                 organisation: data[index].organisation,
                 follow: e.target.checked,
             }
+
+            setState({ loading: true });
 
             const client = new Client();
             client.post_with_token('follow', params, user.token).then(() => {
