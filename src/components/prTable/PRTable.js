@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
+import { alpha } from '@mui/material/styles';
 
 import { Client } from '../../utils/client';
 
@@ -33,7 +34,7 @@ import openBox from '../../assets/OpenBox.svg';
 import { fToNow } from '../../utils/format';
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     table: {
         maxHeight: "40em",
     },
@@ -142,7 +143,14 @@ export default function PRTable({ search }) {
                 // component={Paper}
                 className={classes.table}
             >
-                <Table stickyHeader >
+                <Table
+                    stickyHeader
+                    sx={{
+                        "& .MuiTableRow-root:hover": {
+                            backgroundColor: alpha('#919EAB', 0.2)
+                        }
+                    }}
+                >
 
                     <PRHead paramsCallback={paramsCallback} />
 
