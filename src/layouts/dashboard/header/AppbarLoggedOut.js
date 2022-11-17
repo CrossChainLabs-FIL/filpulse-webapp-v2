@@ -58,9 +58,9 @@ const useStyles = makeStyles((theme) =>
             maxWidth: 40,
             marginRight: '10px',
             marginLeft: '9.5rem',
-             [theme.breakpoints.up('xl')]: {
-                  marginLeft: '30.5rem'
-             },
+            [theme.breakpoints.up('xl')]: {
+                marginLeft: '30.5rem'
+            },
         },
         toolbarMargin: {
             ...theme.mixins.toolbar,
@@ -82,6 +82,14 @@ const useStyles = makeStyles((theme) =>
             '&:hover': {
                 backgroundColor: 'transparent',
                 color: '#000000',
+            },
+        },
+        omMargin: {
+            marginLeft: 'auto',
+            marginTop: '0.4em',
+            marginRight: '9.5rem',
+            [theme.breakpoints.up('xl')]: {
+                marginRight: '30.5rem',
             },
         }
     })
@@ -155,7 +163,7 @@ export default function AppbarLoggedOut() {
                             loading
                         </div>
                     ) : (
-                        <div style={{ marginLeft: 'auto', marginTop: '0.4em', marginRight: '30.5em' }}>
+                        <div className={classes.omMargin}>
                             <IconButton variant="outlined" onClick={handleClickOpen}>
                                 <img src={account} alt="account" />
                             </IconButton>

@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { useTheme } from '@mui/material/styles';
 import logo from "../../../logo.svg";
 import exit from "../../../assets/exit.svg";
 import triunghi from "../../../assets/triunghi.svg";
@@ -51,9 +50,9 @@ const useStyles = makeStyles((theme) =>
             maxWidth: 40,
             marginRight: '10px',
             marginLeft: '9.5rem',
-             [theme.breakpoints.up('xl')]: {
-                  marginLeft: '30.5rem'
-             },
+            [theme.breakpoints.up('xl')]: {
+                marginLeft: '30.5rem'
+            },
         },
         toolbarMargin: {
             ...theme.mixins.toolbar,
@@ -72,6 +71,12 @@ const useStyles = makeStyles((theme) =>
                 backgroundColor: 'transparent',
                 color: '#000000',
             },
+        },
+        triunghiMargin: {
+            marginRight: '9.5rem',
+            [theme.breakpoints.up('xl')]: {
+                marginRight: '30.5rem',
+            },
         }
     })
 );
@@ -81,7 +86,6 @@ export default function AppbarLoggedIn() {
     const { stateLogin, dispatch } = useContext(AuthContext);
 
     const classes = useStyles();
-    const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -131,12 +135,7 @@ export default function AppbarLoggedIn() {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                         onClick={handleClick}
-                        sx={{
-                            marginRight: '6.75rem',
-                            [theme.breakpoints.up('xl')]: {
-                                marginRight: '30.5rem',
-                            },
-                        }}
+                        className={classes.triunghiMargin}
                     >
                         <img src={triunghi} alt="triunghi" />
                     </IconButton >
