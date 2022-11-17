@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 
 import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { useTheme } from '@mui/material/styles';
 import logo from "../../../logo.svg";
 import exit from "../../../assets/exit.svg";
 import triunghi from "../../../assets/triunghi.svg";
@@ -80,6 +81,7 @@ export default function AppbarLoggedIn() {
     const { stateLogin, dispatch } = useContext(AuthContext);
 
     const classes = useStyles();
+    const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -129,7 +131,12 @@ export default function AppbarLoggedIn() {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                         onClick={handleClick}
-                        style={{ marginRight: '6.75em' }}
+                        style={{
+                            marginRight: '6.75rem',
+                            [theme.breakpoints.up('xl')]: {
+                                marginRight: '31rem',
+                            },
+                        }}
                     >
                         <img src={triunghi} alt="triunghi" />
                     </IconButton >
