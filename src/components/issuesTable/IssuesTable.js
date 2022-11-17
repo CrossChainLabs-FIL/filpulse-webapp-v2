@@ -56,7 +56,7 @@ export default function IssuesTable({ search }) {
     const [data, setData] = useState([]);
     const [state, setState] = useState({ loading: true });
     const [params, setParams] = useState({});
-    const [followEvent, setFollowEvent] = useState(false);
+    const [fetch, setFetch] = useState(false);
     const [isUserNotFound, setIsUserNotFound] = useState(false);
     const [tableEmpty, setTableEmpty] = useState(false);
 
@@ -92,10 +92,9 @@ export default function IssuesTable({ search }) {
     }, [params, search]);
 
     useEffect(() => {
-        setState({ loading: true });
         fetchData();
-        setFollowEvent(false);
-    }, [params, followEvent, search, fetchData]);
+        setFetch(false);
+    }, [params, fetch, search, fetchData]);
 
     const starOnChange = (e) => {
         const user = JSON.parse(localStorage.getItem("user"));
@@ -108,9 +107,15 @@ export default function IssuesTable({ search }) {
             follow: e.target.checked,
         }
 
+        data[index] = { ...data[index], follow: e.target.checked };
+
+        setFetch(true);
+
         const client = new Client();
-        client.post_with_token('follow', params, user.token).then(() => {
-            setFollowEvent(true);
+        client.post_with_token('follow', params, user.token).then((result) => {
+            if (result?.success != true) {
+                setFetch(true);
+            }
         });
     }
 

@@ -79,7 +79,6 @@ export default function ContributorsTable({ search }) {
     }, [params, search]);
 
     useEffect(() => {
-        setState({ loading: true });
         fetchData();
     }, [params, search, fetchData]);
 

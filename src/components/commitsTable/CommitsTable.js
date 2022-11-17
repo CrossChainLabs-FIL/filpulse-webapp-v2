@@ -73,7 +73,6 @@ export default function CommitsTable({ search }) {
     }, [params, search]);
 
     useEffect(() => {
-        setState({ loading: true });
         fetchData();
     }, [params, search, fetchData]);
 
