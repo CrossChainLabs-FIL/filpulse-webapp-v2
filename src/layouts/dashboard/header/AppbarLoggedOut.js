@@ -57,7 +57,10 @@ const useStyles = makeStyles((theme) =>
         logo: {
             maxWidth: 40,
             marginRight: '10px',
-            marginLeft: '9.5em'
+            marginLeft: '9.5rem',
+            // [theme.breakpoints.up('xl')]: {
+            //      marginLeft: '15rem'
+            // },
         },
         toolbarMargin: {
             ...theme.mixins.toolbar,
@@ -72,7 +75,10 @@ const useStyles = makeStyles((theme) =>
         button: {
             backgroundColor: 'transparent',
             color: '#000000',
-            width: '23em',
+            width: '23rem',
+            // [theme.breakpoints.up('xl')]: {
+            //     width: '50rem',
+            // },
             '&:hover': {
                 backgroundColor: 'transparent',
                 color: '#000000',

@@ -126,7 +126,10 @@ const useStyles = makeStyles((theme) => ({
     button: {
         backgroundColor: 'transparent',
         color: '#000000',
-        width: '23em',
+        width: '23rem',
+        // [theme.breakpoints.up('xl')]: {
+        //     width: '50rem',
+        // },
         '&:hover': {
             backgroundColor: 'transparent',
             color: '#000000',

@@ -23,7 +23,7 @@ import triunghi from '../../assets/triunghi.svg';
 // ----------------------------------------------------------------------
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     triunghi: {
         marginLeft: '0.35em',
         marginTop: '0.15em'
@@ -32,10 +32,13 @@ const useStyles = makeStyles(() => ({
         height: '4em',
     },
     checkbox: {
-        width: '6.5em'
+        width: '6.5rem',
+        // [theme.breakpoints.up('xl')]: {
+        //     width: '2rem',
+        // },
     },
     id: {
-        width: '5.5em'
+        width: '5.5rem',
     },
     pr: {
         width: '34em'

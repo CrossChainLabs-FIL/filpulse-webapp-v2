@@ -49,7 +49,10 @@ const useStyles = makeStyles((theme) =>
         logo: {
             maxWidth: 40,
             marginRight: '10px',
-            marginLeft: '9.5em'
+            marginLeft: '9.5rem',
+            // [theme.breakpoints.up('xl')]: {
+            //      marginLeft: '15rem'
+            // },
         },
         toolbarMargin: {
             ...theme.mixins.toolbar,

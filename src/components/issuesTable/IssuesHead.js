@@ -32,10 +32,13 @@ const useStyles = makeStyles(() => ({
         height: '4em',
     },
     checkbox: {
-        width: '6.5em'
+        width: '6.5rem',
+        // [theme.breakpoints.up('xl')]: {
+        //     width: '2rem',
+        // },
     },
     id: {
-        width: '6em'
+        width: '6rem',
     },
     issue: {
         width: '28em'
