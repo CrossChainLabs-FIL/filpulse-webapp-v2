@@ -102,19 +102,20 @@ export default function WatchlistTable({ search }) {
 
     const starOnChange = (e) => {
         const user = JSON.parse(localStorage.getItem("user"));
+        if (user?.token) {
+            let index = e.target.id;
+            let params = {
+                number: data[index].number,
+                repo: data[index].repo,
+                organisation: data[index].organisation,
+                follow: e.target.checked,
+            }
 
-        let index = e.target.id;
-        let params = {
-            number: data[index].number,
-            repo: data[index].repo,
-            organisation: data[index].organisation,
-            follow: e.target.checked,
+            const client = new Client();
+            client.post_with_token('follow', params, user.token).then(() => {
+                setFetch(true);
+            });
         }
-
-        const client = new Client();
-        client.post_with_token('follow', params, user.token).then(() => {
-            setFetch(true);
-        });
     }
 
     const viewComments = (index) => {

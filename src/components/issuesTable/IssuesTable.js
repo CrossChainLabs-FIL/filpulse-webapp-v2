@@ -73,14 +73,12 @@ export default function IssuesTable({ search }) {
                 params.search = search;
             }
 
-            console.log(params);
-
             if (user?.token) {
                 response = await client.post_with_token('tab_issues', params, user.token);
             } else {
                 response = await client.get('tab_issues', params);
             }
-            
+
             setData(response.list);
             setState({ loading: false });
             setFetch(false);
@@ -99,24 +97,26 @@ export default function IssuesTable({ search }) {
     const starOnChange = (e) => {
         const user = JSON.parse(localStorage.getItem("user"));
 
-        let index = e.target.id;
-        let params = {
-            number: data[index].number,
-            repo: data[index].repo,
-            organisation: data[index].organisation,
-            follow: e.target.checked,
-        }
-
-        data[index] = { ...data[index], follow: e.target.checked };
-
-        setFetch(true);
-
-        const client = new Client();
-        client.post_with_token('follow', params, user.token).then((result) => {
-            if (result?.success != true) {
-                setFetch(true);
+        if (user?.token) {
+            let index = e.target.id;
+            let params = {
+                number: data[index].number,
+                repo: data[index].repo,
+                organisation: data[index].organisation,
+                follow: e.target.checked,
             }
-        });
+
+            data[index] = { ...data[index], follow: e.target.checked };
+
+            setFetch(true);
+
+            const client = new Client();
+            client.post_with_token('follow', params, user.token).then((result) => {
+                if (result?.success != true) {
+                    setFetch(true);
+                }
+            });
+        }
     }
 
     const paramsCallback = (new_params) => {
