@@ -53,7 +53,8 @@ export default function PRTable({ search }) {
     const [data, setData] = useState([]);
     const [state, setState] = useState({ loading: true });
     const [params, setParams] = useState({});
-    const [fetch, setFetch] = useState(false);
+    const [update, setUpdate] = useState(false);
+    const [fetch, setFetch] = useState(true);
     const [isUserNotFound, setIsUserNotFound] = useState(false);
     const [tableEmpty, setTableEmpty] = useState(false);
 
@@ -76,8 +77,8 @@ export default function PRTable({ search }) {
                 response = await client.get('tab_prs', params);
             }
 
-            setFetch(false);
             setData(response.list);
+            setFetch(false);
             setState({ loading: false });
             setIsUserNotFound(response.list.length === 0 && search);
             setTableEmpty(response.list.length === 0 && !search);
@@ -89,33 +90,40 @@ export default function PRTable({ search }) {
 
     useEffect(() => {
         console.log('useEffect');
-        fetchData();
-    }, [params, fetch, search, fetchData]);
+        if (fetch) {
+            fetchData();
+        }
+        setUpdate(false);
+    }, [update, fetch, params, search]);
 
 
     const starOnChange = (e) => {
         const user = JSON.parse(localStorage.getItem("user"));
-        console.log('starOnChange');
 
-        let index = e.target.id;
-        let params = {
-            number: data[index].number,
-            repo: data[index].repo,
-            organisation: data[index].organisation,
-            follow: e.target.checked,
+        if (user?.token) {
+            console.log('starOnChange');
+
+            let index = e.target.id;
+            let params = {
+                number: data[index].number,
+                repo: data[index].repo,
+                organisation: data[index].organisation,
+                follow: e.target.checked,
+            }
+
+            data[index] = { ...data[index], follow: e.target.checked };
+
+            setUpdate(true);
+
+            const client = new Client();
+            client.post_with_token('follow', params, user.token).then((result) => {
+                console.log('follow return');
+                if (result?.success != true) {
+                    console.log('follow failed trigger fetch');
+                    setFetch(true);
+                }
+            });
         }
-
-        data[index] = { ...data[index], follow: e.target.checked };
-
-        setFetch(true);
-        const client = new Client();
-        client.post_with_token('follow', params, user.token).then((result) => {  
-            console.log('follow return');
-            if (result?.success != true) {
-                console.log('follow failed trigger fetch');
-                setFetch(true);
-            } 
-        });
     }
 
     const paramsCallback = (new_params) => {

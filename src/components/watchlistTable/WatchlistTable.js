@@ -96,6 +96,7 @@ export default function WatchlistTable({ search }) {
     }, [params, search]);
 
     useEffect(() => {
+        setState({ loading: true });
         fetchData();
     }, [params, fetch, search, fetchData]);
 
