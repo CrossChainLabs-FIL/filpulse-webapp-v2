@@ -58,9 +58,9 @@ const useStyles = makeStyles((theme) =>
             maxWidth: 40,
             marginRight: '10px',
             marginLeft: '9.5rem',
-            // [theme.breakpoints.up('xl')]: {
-            //      marginLeft: '15rem'
-            // },
+             [theme.breakpoints.up('xl')]: {
+                  marginLeft: '30.5rem'
+             },
         },
         toolbarMargin: {
             ...theme.mixins.toolbar,
@@ -155,7 +155,7 @@ export default function AppbarLoggedOut() {
                             loading
                         </div>
                     ) : (
-                        <div style={{ marginLeft: 'auto', marginTop: '0.4em', marginRight: '10em' }}>
+                        <div style={{ marginLeft: 'auto', marginTop: '0.4em', marginRight: '30.5em' }}>
                             <IconButton variant="outlined" onClick={handleClickOpen}>
                                 <img src={account} alt="account" />
                             </IconButton>
