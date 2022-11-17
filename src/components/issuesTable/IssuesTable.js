@@ -80,9 +80,10 @@ export default function IssuesTable({ search }) {
             } else {
                 response = await client.get('tab_issues', params);
             }
-            ;
+            
             setData(response.list);
             setState({ loading: false });
+            setFetch(false);
             setIsUserNotFound(response.list.length === 0 && search);
             setTableEmpty(response.list.length === 0 && !search);
 
@@ -93,7 +94,6 @@ export default function IssuesTable({ search }) {
 
     useEffect(() => {
         fetchData();
-        setFetch(false);
     }, [params, fetch, search, fetchData]);
 
     const starOnChange = (e) => {

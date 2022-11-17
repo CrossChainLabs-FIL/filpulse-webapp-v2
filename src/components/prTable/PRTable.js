@@ -75,7 +75,8 @@ export default function PRTable({ search }) {
             } else {
                 response = await client.get('tab_prs', params);
             }
-            ;
+
+            setFetch(false);
             setData(response.list);
             setState({ loading: false });
             setIsUserNotFound(response.list.length === 0 && search);
@@ -87,13 +88,14 @@ export default function PRTable({ search }) {
     }, [params, search]);
 
     useEffect(() => {
+        console.log('useEffect');
         fetchData();
-        setFetch(false);
     }, [params, fetch, search, fetchData]);
 
 
     const starOnChange = (e) => {
         const user = JSON.parse(localStorage.getItem("user"));
+        console.log('starOnChange');
 
         let index = e.target.id;
         let params = {
@@ -108,7 +110,9 @@ export default function PRTable({ search }) {
         setFetch(true);
         const client = new Client();
         client.post_with_token('follow', params, user.token).then((result) => {  
+            console.log('follow return');
             if (result?.success != true) {
+                console.log('follow failed trigger fetch');
                 setFetch(true);
             } 
         });

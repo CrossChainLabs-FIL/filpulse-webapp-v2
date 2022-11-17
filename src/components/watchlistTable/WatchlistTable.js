@@ -88,6 +88,8 @@ export default function WatchlistTable({ search }) {
                 setTableEmpty(response.list.length === 0 && !search);
             }
 
+            setFetch(false);
+
         } catch (error) {
             console.log(error);
         }
@@ -95,7 +97,6 @@ export default function WatchlistTable({ search }) {
 
     useEffect(() => {
         fetchData();
-        setFetch(false);
     }, [params, fetch, search, fetchData]);
 
 
