@@ -18,7 +18,8 @@ import {
     Stack,
     Tooltip,
     Box,
-    CircularProgress
+    CircularProgress,
+    IconButton
 } from '@mui/material';
 
 // components
@@ -113,6 +114,24 @@ export default function WatchlistTable({ search }) {
         client.post_with_token('follow', params, user.token).then(() => {
             setFetch(true);
         });
+    }
+
+    const viewComments = (index) => {
+        console.log('viewComments', index);
+        if (parseInt(data[index].new_comments) > 0) {
+            const user = JSON.parse(localStorage.getItem("user"));
+
+            let params = {
+                number: data[index].number,
+                repo: data[index].repo,
+                organisation: data[index].organisation,
+            }
+
+            const client = new Client();
+            client.post_with_token('view_comments', params, user.token).then(() => {
+                setFetch(true);
+            });
+        }
     }
 
     const paramsCallback = (new_params) => {
@@ -323,31 +342,43 @@ export default function WatchlistTable({ search }) {
                                             >
 
                                                 {comments ? (
-                                                    <Stack
-                                                        direction="row"
-                                                        alignItems="center"
-                                                        style={{
-                                                            marginLeft: '2.1em'
-                                                        }}
+                                                    <IconButton
+                                                        id={index}
+                                                        onClick={() => viewComments(index)}
+                                                        style={{ padding: 0 }}
                                                     >
-                                                        <Badge badgeContent={Number(new_comments)}
-                                                            // color='primary'
-                                                            anchorOrigin={{
-                                                                vertical: 'top',
-                                                                horizontal: 'left',
-                                                            }}
-                                                            classes={{ badge: classes.customBadge }}
-                                                            style={{
-                                                                marginLeft: '0.25em',
-                                                                marginRight: '0.25em',
-                                                            }}
+                                                        <Link
+                                                            target="_blank"
+                                                            rel="noopener"
+                                                            href={html_url}
                                                         >
-                                                            <img src={comment} alt='comment' />
-                                                        </Badge>
-                                                        <Typography variant="subtitle2" noWrap >
-                                                            {comments ? comments : ''}
-                                                        </Typography>
-                                                    </Stack>) : ''}
+                                                            <Stack
+                                                                direction="row"
+                                                                alignItems="center"
+                                                                style={{
+                                                                    marginLeft: '2.1em'
+                                                                }}
+                                                            >
+                                                                <Badge badgeContent={Number(new_comments)}
+                                                                    // color='primary'
+                                                                    anchorOrigin={{
+                                                                        vertical: 'top',
+                                                                        horizontal: 'left',
+                                                                    }}
+                                                                    classes={{ badge: classes.customBadge }}
+                                                                    style={{
+                                                                        marginLeft: '0.25em',
+                                                                        marginRight: '0.25em',
+                                                                    }}
+                                                                >
+                                                                    <img src={comment} alt='comment' />
+                                                                </Badge>
+                                                                <Typography variant="subtitle2" noWrap >
+                                                                    {comments ? comments : ''}
+                                                                </Typography>
+                                                            </Stack>
+                                                        </Link>
+                                                    </IconButton>) : ''}
 
                                             </Link>
                                         </TableCell>
