@@ -51,9 +51,9 @@ const useStyles = makeStyles((theme) =>
             maxWidth: 40,
             marginRight: '10px',
             marginLeft: '9.5rem',
-            // [theme.breakpoints.up('xl')]: {
-            //      marginLeft: '15rem'
-            // },
+             [theme.breakpoints.up('xl')]: {
+                  marginLeft: '30.5rem'
+             },
         },
         toolbarMargin: {
             ...theme.mixins.toolbar,
@@ -131,10 +131,10 @@ export default function AppbarLoggedIn() {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                         onClick={handleClick}
-                        style={{
+                        sx={{
                             marginRight: '6.75rem',
                             [theme.breakpoints.up('xl')]: {
-                                marginRight: '31rem',
+                                marginRight: '30.5rem',
                             },
                         }}
                     >
