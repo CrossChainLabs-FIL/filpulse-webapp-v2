@@ -33,20 +33,26 @@ const useStyles = makeStyles(() => ({
     rowHead: {
         height: '4em',
     },
+    checkbox: {
+        width: '5.35rem',
+        // [theme.breakpoints.up('xl')]: {
+        //     width: '2rem',
+        // },
+    },
     id: {
-        width: '8em'
+        width: '6rem'
     },
     name: {
-        width: '35em'
+        width: '30rem'
     },
     participant: {
-        width: '13em'
+        width: '13rem'
     },
     status: {
-        width: '13em'
+        width: '13rem'
     },
     comments: {
-        width: '14em'
+        width: '12.6rem'
     }
 }));
 
@@ -58,6 +64,23 @@ export default function WatchlistHead({ paramsCallback }) {
     const [isDescComments, setIsDescComments] = useState(true);
     const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
     const classes = useStyles();
+
+    const styleNumber = {
+        transform: !isDescNumber ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
+    const styleName = {
+        transform: !isDescName ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
+    const styleComments = {
+        transform: !isDescComments ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
+    const styleTime = {
+        transform: !isDescUpdatedAt ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
 
     const handleSortNumber = () => {
         paramsCallback({ sortBy: 'number', sortType: isDescNumber ? 'asc' : 'desc' });
@@ -95,7 +118,7 @@ export default function WatchlistHead({ paramsCallback }) {
         <TableHead>
             <TableRow className={classes.rowHead}>
 
-                <TableCell />
+                <TableCell className={classes.checkbox} />
 
                 <TableCell
                     align="left"
@@ -111,9 +134,9 @@ export default function WatchlistHead({ paramsCallback }) {
                         <Typography
                             noWrap
                             style={{
-                                marginLeft: '1.3em',
                                 fontWeight: 500,
-                                fontSize: 16
+                                fontSize: 16,
+                                marginRight: '0.35em'
                             }}
                         >
                             #
@@ -122,9 +145,16 @@ export default function WatchlistHead({ paramsCallback }) {
                         <IconButton
                             id="basic-button"
                             onClick={handleSortNumber}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleNumber}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>
@@ -140,16 +170,23 @@ export default function WatchlistHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em' }}>
                             Name
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortName}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleName}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>
@@ -214,16 +251,23 @@ export default function WatchlistHead({ paramsCallback }) {
                             <img src={info} alt='info' />
                         </Tooltip>
 
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
                             Comments
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortComments}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleComments}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>
@@ -238,16 +282,23 @@ export default function WatchlistHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
                             Last Updated
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortUpdatedAt}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleTime}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>

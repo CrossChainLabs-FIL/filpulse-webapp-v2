@@ -32,28 +32,25 @@ const useStyles = makeStyles(() => ({
         height: '4em',
     },
     checkbox: {
-        width: '6.5rem',
-        // [theme.breakpoints.up('xl')]: {
-        //     width: '2rem',
-        // },
-    },
-    id: {
         width: '6rem',
     },
+    id: {
+        width: '5rem',
+    },
     issue: {
-        width: '28em'
+        width: '24rem'
     },
     project: {
-        width: '24em'
+        width: '20rem'
     },
     contributor: {
-        width: '14em'
+        width: '15rem'
     },
     assignee: {
-        width: '16em'
+        width: '16rem'
     },
     status: {
-        width: '9.3em'
+        width: '8rem'
     }
 }));
 
@@ -65,6 +62,19 @@ export default function IssuesHead({ paramsCallback }) {
     const [isDescName, setIsDescName] = useState(true);
     const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
     const classes = useStyles();
+
+    const styleNumber = {
+        transform: !isDescNumber ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
+    const styleName = {
+        transform: !isDescName ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
+    const styleTime = {
+        transform: !isDescUpdatedAt ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
 
     const handleSortNumber = () => {
         paramsCallback({ sortBy: 'number', sortType: isDescNumber ? 'asc' : 'desc' });
@@ -104,16 +114,23 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 18 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
                             #
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortNumber}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleNumber}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>
@@ -129,16 +146,23 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
                             Issue
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortName}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleName}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>
@@ -229,16 +253,23 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
                             Last Updated
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortUpdatedAt}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleTime}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>

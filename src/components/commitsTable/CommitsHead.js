@@ -30,14 +30,17 @@ const useStyles = makeStyles(() => ({
     rowHead: {
         height: '4em',
     },
+    hash: {
+        width: '14rem'
+    },
     commit: {
-        width: '38em'
+        width: '31rem'
     },
     project: {
-        width: '20em'
+        width: '20rem'
     },
     contributor: {
-        width: '18em'
+        width: '15rem'
     },
 }));
 
@@ -48,6 +51,19 @@ export default function CommitsHead({ paramsCallback }) {
     const [isDescCommit, setIsDescCommit] = useState(true);
     const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
     const classes = useStyles();
+
+    const styleHash = {
+        transform: !isDescHash ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
+    const styleCommit = {
+        transform: !isDescCommit ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
+    const styleTime = {
+        transform: !isDescUpdatedAt ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
 
     const handleSortHash = () => {
         paramsCallback({ sortBy: 'commit_hash', sortType: isDescHash ? 'asc' : 'desc' });
@@ -79,8 +95,10 @@ export default function CommitsHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
+                    className={classes.hash}
                     style={{
-                        width: '12em'
+                        padding: 0,
+                        paddingLeft: '5.35rem'
                     }}
                 >
                     <Stack
@@ -91,8 +109,8 @@ export default function CommitsHead({ paramsCallback }) {
                             noWrap
                             style={{
                                 fontWeight: 500,
-                                marginLeft: '2em',
-                                fontSize: 16
+                                fontSize: 16,
+                                marginRight: '0.35em',
                             }}
                         >
                             Hash
@@ -101,9 +119,16 @@ export default function CommitsHead({ paramsCallback }) {
                         <IconButton
                             id="basic-button"
                             onClick={handleSortHash}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleHash}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>
@@ -119,16 +144,23 @@ export default function CommitsHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
                             Commit
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortCommit}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleCommit}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>
@@ -182,16 +214,23 @@ export default function CommitsHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
                             Last Updated
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortUpdatedAt}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleTime}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>

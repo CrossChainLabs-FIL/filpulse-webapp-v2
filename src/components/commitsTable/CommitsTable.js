@@ -129,14 +129,15 @@ export default function CommitsTable({ search }) {
                                             component="th"
                                             scope="row"
                                             padding="none"
-                                            style={{ height: '5em' }}
+                                            style={{
+                                                height: '5em',
+                                                padding: 0,
+                                                paddingLeft: '5.25rem'
+                                            }}
                                         >
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                style={{
-                                                    marginLeft: '2.5em',
-                                                }}
                                             >
                                                 <Link
                                                     target="_blank"

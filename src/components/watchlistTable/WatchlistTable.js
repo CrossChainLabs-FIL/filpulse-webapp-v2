@@ -200,7 +200,10 @@ export default function WatchlistTable({ search }) {
                                         key={index}
                                         tabIndex={-1}
                                     >
-                                        <TableCell padding="checkbox">
+                                        <TableCell
+                                            component="th"
+                                            padding="checkbox"
+                                        >
                                             <Checkbox
                                                 id={index}
                                                 icon={<img src={steaGol} alt='steaGol' />}
@@ -227,6 +230,7 @@ export default function WatchlistTable({ search }) {
                                                     rel="noopener"
                                                     href={html_url}
                                                     color="inherit"
+                                                    underline='none'
                                                 >
                                                     {number}
                                                 </Link>
@@ -349,19 +353,22 @@ export default function WatchlistTable({ search }) {
                                                     <IconButton
                                                         id={index}
                                                         onClick={() => viewComments(index)}
-                                                        style={{ padding: 0 }}
+                                                        style={{
+                                                            padding: 0,
+                                                            marginLeft: '1.1rem'
+                                                        }}
+                                                        disableRipple
                                                     >
                                                         <Link
                                                             target="_blank"
                                                             rel="noopener"
                                                             href={html_url}
+                                                            color="inherit"
+                                                            underline='none'
                                                         >
                                                             <Stack
                                                                 direction="row"
                                                                 alignItems="center"
-                                                                style={{
-                                                                    marginLeft: '2.1em'
-                                                                }}
                                                             >
                                                                 <Badge badgeContent={Number(new_comments)}
                                                                     // color='primary'

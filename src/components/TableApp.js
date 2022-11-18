@@ -127,9 +127,6 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'transparent',
         color: '#000000',
         width: '23rem',
-        // [theme.breakpoints.up('xl')]: {
-        //     width: '50rem',
-        // },
         '&:hover': {
             backgroundColor: 'transparent',
             color: '#000000',
@@ -288,7 +285,6 @@ export default function TableApp() {
                                     </Grid>
                                 </Grid>
                             </DialogContent>
-
                         </Dialog>
                     </>
                 )}

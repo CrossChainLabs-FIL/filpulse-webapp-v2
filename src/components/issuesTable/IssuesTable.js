@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
@@ -25,6 +25,8 @@ import {
 import SearchNotFound from '../SearchNotFound';
 import TableEmpty from '../TableEmpty';
 import IssuesHead from './IssuesHead';
+import SteaLoggedOut from '../SteaLoggedOut';
+import { AuthContext } from "../../App";
 
 // assets
 import steaPlin from '../../assets/steaPlin.svg';
@@ -47,7 +49,7 @@ const useStyles = makeStyles(() => ({
     },
     stea: {
         marginBottom: "0.2em"
-    },
+    }
 }));
 
 export default function IssuesTable({ search }) {
@@ -60,6 +62,7 @@ export default function IssuesTable({ search }) {
     const [fetch, setFetch] = useState(true);
     const [isUserNotFound, setIsUserNotFound] = useState(false);
     const [tableEmpty, setTableEmpty] = useState(false);
+    const { stateLogin, dispatch } = useContext(AuthContext);
 
     const fetchData = useCallback(async () => {
         try {
@@ -180,15 +183,20 @@ export default function IssuesTable({ search }) {
                                             component="th"
                                             padding="checkbox"
                                         >
-                                            <Checkbox
-                                                id={index}
-                                                repo={repo}
-                                                checked={follow}
-                                                icon={<img src={steaGol} alt='steaGol' />}
-                                                checkedIcon={<img src={steaPlin} alt='steaPlin' />}
-                                                onChange={(e) => starOnChange(e)}
-                                                className={classes.stea}
-                                            />
+                                            {stateLogin.isLoggedIn && (
+                                                <Checkbox
+                                                    id={index}
+                                                    repo={repo}
+                                                    checked={follow}
+                                                    icon={<img src={steaGol} alt='steaGol' />}
+                                                    checkedIcon={<img src={steaPlin} alt='steaPlin' />}
+                                                    onChange={(e) => starOnChange(e)}
+                                                    className={classes.stea}
+                                                />
+                                            )}
+                                            {!stateLogin.isLoggedIn && (
+                                                <SteaLoggedOut stateLogin={stateLogin} />
+                                            )}
                                         </TableCell>
 
                                         <TableCell

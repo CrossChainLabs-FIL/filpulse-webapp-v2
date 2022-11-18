@@ -154,7 +154,11 @@ export default function ContributorsTable({ search }) {
                                             component="th"
                                             scope="row"
                                             padding="none"
-                                            style={{ height: '5em' }}
+                                            style={{
+                                                height: '5em',
+                                                padding: 0,
+                                                paddingLeft: '2rem'
+                                            }}
                                         >
                                             <Stack
                                                 direction="row"

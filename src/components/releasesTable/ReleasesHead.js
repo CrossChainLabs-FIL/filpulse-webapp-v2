@@ -31,19 +31,19 @@ const useStyles = makeStyles(() => ({
         height: '4em',
     },
     id: {
-        width: '15em',
+        width: '15rem',
     },
     release: {
-        width: '18em'
+        width: '15rem'
     },
     project: {
-        width: '20em'
+        width: '18rem'
     },
     author: {
-        width: '20em'
+        width: '18rem'
     },
     status: {
-        width: '16em'
+        width: '14rem'
     }
 }));
 
@@ -55,6 +55,19 @@ export default function ReleasesHead({ paramsCallback }) {
     const [isDescName, setIsDescName] = useState(true);
     const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
     const classes = useStyles();
+
+    const styleNumber = {
+        transform: !isDescNumber ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
+    const styleName = {
+        transform: !isDescName ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
+    const styleTime = {
+        transform: !isDescUpdatedAt ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
 
     const handleSortNumber = () => {
         paramsCallback({ sortBy: 'id', sortType: isDescNumber ? 'asc' : 'desc' });
@@ -88,7 +101,7 @@ export default function ReleasesHead({ paramsCallback }) {
                     padding="none"
                     style={{
                         padding: 0,
-                        paddingLeft: '4.5em'
+                        paddingLeft: '5.35rem'
                     }}
                     className={classes.id}
                 >
@@ -96,16 +109,23 @@ export default function ReleasesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 18 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
                             #
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortNumber}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleNumber}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>
@@ -121,16 +141,23 @@ export default function ReleasesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
                             Release
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortName}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleName}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>
@@ -202,16 +229,23 @@ export default function ReleasesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
                             Last Updated
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortUpdatedAt}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleTime}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>

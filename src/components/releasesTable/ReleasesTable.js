@@ -144,7 +144,7 @@ export default function ReleasesTable({ search }) {
                                             style={{
                                                 height: '5em',
                                                 padding: 0,
-                                                paddingLeft: '4.5em',
+                                                paddingLeft: '5.35rem',
                                             }}
                                         >
                                             <Typography variant="subtitle2" noWrap>

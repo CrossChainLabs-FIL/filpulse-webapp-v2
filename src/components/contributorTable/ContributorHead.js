@@ -33,16 +33,16 @@ const useStyles = makeStyles(() => ({
         height: '4em',
     },
     contributor: {
-        width: '22em'
+        width: '20rem'
     },
     project: {
-        width: '18em'
+        width: '16rem'
     },
     commits: {
-        width: '15em'
+        width: '15rem'
     },
     pr: {
-        width: '24em'
+        width: '20rem'
     }
 }));
 
@@ -54,6 +54,19 @@ export default function ContributorHead({ paramsCallback }) {
     const [isDescPrs, setIsDescPrs] = useState(true);
     const [isDescIssues, setIsDescIssues] = useState(true);
     const classes = useStyles();
+
+    const styleCommits = {
+        transform: !isDescCommits ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
+    const stylePrs = {
+        transform: !isDescPrs ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
+    const styleIssues = {
+        transform: !isDescIssues ? 'rotate(180deg)' : '',
+        transition: 'transform 150ms ease', // smooth transition
+    }
 
     const handleSort = (type) => {
         switch (type) {
@@ -89,6 +102,10 @@ export default function ContributorHead({ paramsCallback }) {
                     scope="row"
                     padding="none"
                     className={classes.contributor}
+                    style={{
+                        padding: 0,
+                        paddingLeft: '2.2rem'
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -140,16 +157,23 @@ export default function ContributorHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
                             Commits
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={(e) => handleSort('contributions')}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleCommits}
+                            />
                         </IconButton>
                     </Stack>
                 </TableCell>
@@ -181,7 +205,8 @@ export default function ContributorHead({ paramsCallback }) {
                             noWrap
                             style={{
                                 fontWeight: 500,
-                                fontSize: 16
+                                fontSize: 16,
+                                marginRight: '0.35em',
                             }}
                         >
                             PRs
@@ -190,9 +215,16 @@ export default function ContributorHead({ paramsCallback }) {
                         <IconButton
                             id="basic-button"
                             onClick={(e) => handleSort('open_prs')}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={stylePrs}
+                            />
                         </IconButton>
                     </Stack>
                     <Typography
@@ -236,7 +268,8 @@ export default function ContributorHead({ paramsCallback }) {
                             noWrap
                             style={{
                                 fontWeight: 500,
-                                fontSize: 16
+                                fontSize: 16,
+                                marginRight: '0.35em',
                             }}
                         >
                             Issues
@@ -245,9 +278,16 @@ export default function ContributorHead({ paramsCallback }) {
                         <IconButton
                             id="basic-button"
                             onClick={(e) => handleSort('open_issues')}
-                            style={{ padding: 0 }}
+                            style={{
+                                padding: 0,
+                                marginTop: '0.15em'
+                            }}
                         >
-                            <img src={triunghi} alt='triunghi' className={classes.triunghi} />
+                            <img
+                                src={triunghi}
+                                alt='triunghi'
+                                style={styleIssues}
+                            />
                         </IconButton>
                     </Stack>
                     <Typography
