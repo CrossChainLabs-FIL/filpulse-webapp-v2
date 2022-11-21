@@ -139,6 +139,7 @@ export default function WatchlistTable({ search }) {
     }
 
     const paramsCallback = (new_params) => {
+        setFetch(true);
         setParams({
             ...params,
             ...new_params,

@@ -93,7 +93,6 @@ export default function PRTable({ search }) {
     }, [params, search]);
 
     useEffect(() => {
-        console.log('useEffect');
         if (fetch) {
             fetchData();
         }
@@ -131,6 +130,7 @@ export default function PRTable({ search }) {
     }
 
     const paramsCallback = (new_params) => {
+        setFetch(true);
         setParams({
             ...params,
             ...new_params,
