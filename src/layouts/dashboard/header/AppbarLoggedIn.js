@@ -34,13 +34,13 @@ const TextTypography = styled(Typography)(({ theme }) => ({
     lineHeight: theme.typography.h3.lineHeight,
 }));
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
         root: {
             flexGrow: 1
         },
         menuButton: {
-            marginRight: theme.spacing(2)
+            //marginRight: '1rem'
         },
         title: {
             flexGrow: 1,
@@ -49,20 +49,20 @@ const useStyles = makeStyles((theme) =>
         logo: {
             maxWidth: 40,
             marginRight: '10px',
-            marginLeft: '9.5rem',
-            [theme.breakpoints.up('xl')]: {
+            //marginLeft: '9.5rem',
+            /*[theme.breakpoints.up('xl')]: {
                 marginLeft: '30.5rem'
-            },
+            },*/
         },
         toolbarMargin: {
-            ...theme.mixins.toolbar,
+            //...theme.mixins.toolbar,
             marginBottom: '2rem',
-            [theme.breakpoints.down('md')]: {
+            /*[theme.breakpoints.down('md')]: {
                 marginBottom: '2rem'
             },
             [theme.breakpoints.down('sm')]: {
                 marginBottom: '1.5rem'
-            }
+            }*/
         },
         button: {
             backgroundColor: 'transparent',
@@ -74,9 +74,9 @@ const useStyles = makeStyles((theme) =>
         },
         triunghiMargin: {
             marginRight: '9.5rem',
-            [theme.breakpoints.up('xl')]: {
+            /*[theme.breakpoints.up('xl')]: {
                 marginRight: '30.5rem',
-            },
+            },*/
         }
     })
 );

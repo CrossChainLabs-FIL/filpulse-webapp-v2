@@ -46,13 +46,13 @@ const TextTypography = styled(Typography)(({ theme }) => ({
   lineHeight: theme.typography.h3.lineHeight,
 }));
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       flexGrow: 1
     },
     menuButton: {
-      marginRight: theme.spacing(2)
+      //marginRight:  '1rem'
     },
     title: {
       flexGrow: 1,
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) =>
     logo: {
       maxWidth: 40,
       marginRight: '10px',
-      marginLeft: '9.5rem'
+      //marginLeft: '9.5rem'
     }
   })
 );

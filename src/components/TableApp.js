@@ -32,38 +32,45 @@ import { AuthContext } from "../App";
 // assets
 import steaPlin from '../assets/steaPlin.svg';
 import GithubLogo from '../assets/GithubLogo.svg';
-
+import { pixelToRem, fontSizes } from '../utils/font';
 
 
 const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
-    height: 40,
-    width: 250,
-    marginBottom: 5,
-    fontSize: 15,
-    [theme.breakpoints.down('xl')]: {
+    height: '2.5rem',
+    width: '15.625rem',
+    marginBottom: '0.313rem',
+    fontSize: pixelToRem(15),
+    /*[theme.breakpoints.down('xl')]: {
         height: 35,
         width: 200,
-    }
+    }*/
 }));
 
 
-
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     table: {
         maxHeight: '40rem',
     },
     stea: {
-        paddingBottom: '0.3rem'
+        //paddingBottom: '0.3rem'
+        height: '1rem',
+        //minHeight: '3rem',
+        //minWidth: '3rem',
+        //width: '3rem',
+        //marginRight: '2rem',
+        marginTop: '3.5rem',
+        paddingBottom: 0
     },
     watchlistButton: {
-        marginLeft: '0.2rem',
-        marginTop: '2.35rem',
+        height: '3rem',
+        //marginLeft: '0.2rem',
+        //marginTop: '2.35rem',
+        //marginTop: '1rem',
         paddingBottom: 0,
         color: '#000000',
         textTransform: 'none',
-        fontWeight: theme.typography.fontWeightRegular,
-        fontSize: theme.typography.pxToRem(16),
+        //fontWeight: theme.typography.fontWeightRegular,
+        fontSize: pixelToRem(16),
         '&:hover': {
             backgroundColor: 'transparent',
             color: '#000000',
@@ -71,62 +78,62 @@ const useStyles = makeStyles((theme) => ({
     },
     watchlistTab: {
         height: '3rem',
-        minHeight: '3rem',
-        minWidth: '8rem',
-        width: '8rem',
-        marginRight: '3rem',
-        marginTop: '1rem',
-        marginBottom: '0.2rem',
+        //minHeight: '3rem',
+        //minWidth: '8rem',
+        //width: '8rem',
+        marginRight: '2rem',
+        //marginTop: '1rem',
+        //marginBottom: '0.2rem',
         paddingBottom: 0,
     },
     prTab: {
         height: '3rem',
-        minHeight: '3rem',
-        minWidth: '3rem',
-        width: '3rem',
-        marginRight: '3rem',
-        marginTop: '1rem',
+        //minHeight: '3rem',
+        //minWidth: '3rem',
+        //width: '3rem',
+        marginRight: '2rem',
+        //marginTop: '1rem',
         paddingBottom: 0
     },
     issuesTab: {
         height: '3rem',
-        minHeight: '3rem',
-        minWidth: '4rem',
-        width: '4rem',
-        marginRight: '3rem',
-        marginTop: '1rem',
+        //minHeight: '3rem',
+        //minWidth: '4rem',
+        //width: '4rem',
+        marginRight: '2rem',
+        //marginTop: '1rem',
         paddingBottom: 0
     },
     releasesTab: {
         height: '3rem',
-        minHeight: '3rem',
-        minWidth: '3rem',
-        width: '5rem',
-        marginRight: '3rem',
-        marginTop: '1rem',
+        //minHeight: '3rem',
+        //minWidth: '3rem',
+        //width: '5rem',
+        marginRight: '2rem',
+        //marginTop: '1rem',
         paddingBottom: 0
     },
     commitsTab: {
         height: '3rem',
-        minHeight: '3rem',
-        minWidth: '4.5rem',
-        width: '4.5rem',
-        marginRight: '3rem',
-        marginTop: '1rem',
+        //minHeight: '3rem',
+        //minWidth: '4.5rem',
+        //width: '4.5rem',
+        marginRight: '2rem',
+        //marginTop: '1rem',
         paddingBottom: 0
     },
     contributorsTab: {
         height: '3rem',
-        minHeight: '3rem',
-        minWidth: '7rem',
-        width: '7rem',
-        marginTop: '1rem',
+        //minHeight: '3rem',
+        //minWidth: '7rem',
+        //width: '7rem',
+        //marginTop: '1rem',
         paddingBottom: 0
     },
     button: {
         backgroundColor: 'transparent',
         color: '#000000',
-        width: '23rem',
+        //width: '23rem',
         '&:hover': {
             backgroundColor: 'transparent',
             color: '#000000',
@@ -155,11 +162,11 @@ const StyledTabs = styled((props) => (
 
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
-    ({ theme }) => ({
+    ({ }) => ({
         textTransform: 'none',
-        fontWeight: theme.typography.fontWeightRegular,
-        fontSize: theme.typography.pxToRem(16),
-        marginRight: theme.spacing(3),
+        //fontWeight: theme.typography.fontWeightRegular,
+        fontSize: pixelToRem(16),
+        marginRight: '1rem',
         color: "#000000",
         '&.Mui-selected': {
             color: '#000000',
@@ -221,13 +228,14 @@ export default function TableApp() {
                     <StyledTab label='Contributors' classes={{ root: classes.contributorsTab }} />
                     {stateLogin.isLoggedIn && (
                         <StyledTab
-                            icon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
+                            //icon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
                             iconPosition='start'
                             label='Watchlist'
                             classes={{ root: classes.watchlistTab }}
                         />
                     )}
                 </StyledTabs>
+                <img src={steaPlin} alt="steaPlin" className={classes.stea} />
                 {!stateLogin.isLoggedIn && (
                     <>
                         <Button
