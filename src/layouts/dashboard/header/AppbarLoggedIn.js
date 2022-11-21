@@ -11,7 +11,10 @@ import {
     Avatar,
     Menu,
     Button,
+    Box
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import logo from "../../../logo.svg";
@@ -48,11 +51,11 @@ const useStyles = makeStyles((theme) =>
         },
         logo: {
             maxWidth: 40,
-            marginRight: '10px',
-            marginLeft: '9.5rem',
-            [theme.breakpoints.up('xl')]: {
-                marginLeft: '30.5rem'
-            },
+            marginRight: '0.5rem',
+            // marginLeft: '9.5rem',
+            // [theme.breakpoints.up('xl')]: {
+            //     marginLeft: '30.5rem'
+            // },
         },
         toolbarMargin: {
             ...theme.mixins.toolbar,
@@ -84,6 +87,8 @@ const useStyles = makeStyles((theme) =>
 
 export default function AppbarLoggedIn() {
     const { stateLogin, dispatch } = useContext(AuthContext);
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down('xl'));
 
     const classes = useStyles();
 
@@ -124,53 +129,69 @@ export default function AppbarLoggedIn() {
 
     return (
         <React.Fragment>
-            <AppBar sx={{ boxShadow: 0, bgcolor: BG_COLOR }}>
-                <ToolbarStyle disableGutters>
-                    <img src={logo} alt="" className={classes.logo} />
-                    <TextTypography>FilPulse</TextTypography>
-                    {accountInfo()}
-                    <IconButton
-                        id="basic-button"
-                        aria-controls={open ? 'basic-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                        onClick={handleClick}
-                        className={classes.triunghiMargin}
-                    >
-                        <img src={triunghi} alt="triunghi" />
-                    </IconButton >
-                    <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                        transformOrigin={{ vertical: "top", horizontal: "right" }}
-                        MenuListProps={{
-                            style: {
-                                backgroundColor: "#fff",
-                                padding: '0px',
-                            }
+            <Box
+                sx={{ display: 'flex' }}
+            >
+
+                <AppBar sx={{ boxShadow: 0, bgcolor: BG_COLOR }}>
+                    <ToolbarStyle
+                        disableGutters
+                        sx={{
+                            marginRight: 'auto',
+                            marginLeft: 'auto',
+                            width: '97rem'
                         }}
                     >
-                        <Button
-                            variant="contained"
-                            startIcon={<img src={exit} alt='exit' />}
-                            sx={{
-                                backgroundColor: 'transparent',
-                                color: '#000000',
-                                width: '12rem',
-
-                            }}
-                            onClick={() => handleLogout()}
-                            className={classes.button}
+                        <img
+                            src={logo}
+                            alt="logo"
+                            className={classes.logo}
+                        />
+                        <TextTypography>FilPulse</TextTypography>
+                        {accountInfo()}
+                        <IconButton
+                            id="basic-button"
+                            aria-controls={open ? 'basic-menu' : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={open ? 'true' : undefined}
+                            onClick={handleClick}
+                        // className={classes.triunghiMargin}
                         >
-                            Sign out
-                        </Button>
-                    </Menu>
-                </ToolbarStyle>
-            </AppBar>
-            <div className={classes.toolbarMargin} />
-        </React.Fragment>
+                            <img src={triunghi} alt="triunghi" />
+                        </IconButton >
+                        <Menu
+                            id="basic-menu"
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleClose}
+                            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                            transformOrigin={{ vertical: "top", horizontal: "right" }}
+                            MenuListProps={{
+                                style: {
+                                    backgroundColor: "#fff",
+                                    padding: '0px',
+                                }
+                            }}
+                        >
+                            <Button
+                                variant="contained"
+                                startIcon={<img src={exit} alt='exit' />}
+                                sx={{
+                                    backgroundColor: 'transparent',
+                                    color: '#000000',
+                                    width: '12rem',
+
+                                }}
+                                onClick={() => handleLogout()}
+                            // className={classes.button}
+                            >
+                                Sign out
+                            </Button>
+                        </Menu>
+                    </ToolbarStyle>
+                </AppBar>
+                <div className={classes.toolbarMargin} />
+            </Box>
+        </React.Fragment >
     );
 }
