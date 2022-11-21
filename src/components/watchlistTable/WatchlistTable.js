@@ -41,17 +41,17 @@ import { fToNow } from '../../utils/format';
 
 const useStyles = makeStyles(() => ({
     table: {
-        maxHeight: "40em",
+        maxHeight: '40rem',
     },
     customBadge: {
         backgroundColor: "#F05B47",
         color: "white"
     },
     stea: {
-        marginLeft: "0.15em"
+        marginLeft: '0.15rem'
     },
     projectElipsis: {
-        maxWidth: "25em",
+        maxWidth: '25rem',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
@@ -220,7 +220,7 @@ export default function WatchlistTable({ search }) {
                                             component="th"
                                             scope="row"
                                             padding="none"
-                                            style={{ height: '6em' }}
+                                            style={{ height: '6rem' }}
                                         >
                                             <Typography
                                                 variant="subtitle2"
@@ -255,8 +255,8 @@ export default function WatchlistTable({ search }) {
                                                         variant="subtitle2"
                                                         noWrap
                                                         style={{
-                                                            lineHeight: '1em',
-                                                            marginTop: '0.45em'
+                                                            lineHeight: '1rem',
+                                                            marginTop: '0.45rem'
                                                         }}
                                                         className={classes.projectElipsis}
                                                     >
@@ -311,7 +311,7 @@ export default function WatchlistTable({ search }) {
                                                                     src={avatar_url}
                                                                     sx={{ width: 30, height: 30, borderRadius: 1.5 }}
                                                                     style={{
-                                                                        marginRight: '1em'
+                                                                        marginRight: '1rem'
                                                                     }}
                                                                 />
                                                             </Link>
@@ -379,8 +379,8 @@ export default function WatchlistTable({ search }) {
                                                                     }}
                                                                     classes={{ badge: classes.customBadge }}
                                                                     style={{
-                                                                        marginLeft: '0.25em',
-                                                                        marginRight: '0.25em',
+                                                                        marginLeft: '0.25rem',
+                                                                        marginRight: '0.25rem',
                                                                     }}
                                                                 >
                                                                     <img src={comment} alt='comment' />

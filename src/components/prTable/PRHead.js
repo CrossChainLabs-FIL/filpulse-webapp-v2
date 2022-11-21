@@ -25,11 +25,11 @@ import triunghi from '../../assets/triunghi.svg';
 
 const useStyles = makeStyles((theme) => ({
     triunghi: {
-        marginLeft: '0.35em',
-        marginTop: '0.15em'
+        marginLeft: '0.35rem',
+        marginTop: '0.15rem'
     },
     rowHead: {
-        height: '4em',
+        height: '4rem',
     },
     checkbox: {
         width: '5.35rem',
@@ -111,7 +111,7 @@ export default function PRHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             #
                         </Typography>
 
@@ -120,7 +120,7 @@ export default function PRHead({ paramsCallback }) {
                             onClick={handleSortNumber}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -143,7 +143,7 @@ export default function PRHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             PR
                         </Typography>
 
@@ -152,7 +152,7 @@ export default function PRHead({ paramsCallback }) {
                             onClick={handleSortName}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -237,7 +237,7 @@ export default function PRHead({ paramsCallback }) {
                         alignItems="center"
                         style={{ padding: 0 }}
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em' }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem' }}>
                             Last Updated
                         </Typography>
 
@@ -246,7 +246,7 @@ export default function PRHead({ paramsCallback }) {
                             onClick={handleSortUpdatedAt}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img

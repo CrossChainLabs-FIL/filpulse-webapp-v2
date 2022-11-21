@@ -24,11 +24,11 @@ import triunghi from '../../assets/triunghi.svg';
 
 const useStyles = makeStyles(() => ({
     triunghi: {
-        marginLeft: '0.35em',
-        marginTop: '0.15em'
+        marginLeft: '0.35rem',
+        marginTop: '0.15rem'
     },
     rowHead: {
-        height: '4em',
+        height: '4rem',
     },
     hash: {
         width: '14rem'
@@ -110,7 +110,7 @@ export default function CommitsHead({ paramsCallback }) {
                             style={{
                                 fontWeight: 500,
                                 fontSize: 16,
-                                marginRight: '0.35em',
+                                marginRight: '0.35rem',
                             }}
                         >
                             Hash
@@ -121,7 +121,7 @@ export default function CommitsHead({ paramsCallback }) {
                             onClick={handleSortHash}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -144,7 +144,7 @@ export default function CommitsHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Commit
                         </Typography>
 
@@ -153,7 +153,7 @@ export default function CommitsHead({ paramsCallback }) {
                             onClick={handleSortCommit}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -214,7 +214,7 @@ export default function CommitsHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Last Updated
                         </Typography>
 
@@ -223,7 +223,7 @@ export default function CommitsHead({ paramsCallback }) {
                             onClick={handleSortUpdatedAt}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img

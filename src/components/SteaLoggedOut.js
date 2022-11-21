@@ -62,8 +62,8 @@ export default function SteaLoggedOut({ stateLogin }) {
                 <DialogContent
                     style={{
                         backgroundColor: "#FFFFFF",
-                        height: '18em',
-                        width: '30em'
+                        height: '18rem',
+                        width: '30rem'
                     }}
                 >
                     <Grid
@@ -75,9 +75,9 @@ export default function SteaLoggedOut({ stateLogin }) {
                         <Grid item>
                             <Typography
                                 style={{
-                                    marginTop: '3.5em',
-                                    marginBottom: '3em',
-                                    marginLeft: '3em'
+                                    marginTop: '3.5rem',
+                                    marginBottom: '3rem',
+                                    marginLeft: '3rem'
                                 }}
                             >
                                 Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.

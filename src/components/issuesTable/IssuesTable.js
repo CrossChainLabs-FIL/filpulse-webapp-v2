@@ -39,16 +39,16 @@ import { fToNow } from '../../utils/format';
 
 const useStyles = makeStyles(() => ({
     table: {
-        maxHeight: "40em",
+        maxHeight: '40rem',
     },
     projectElipsis: {
-        maxWidth: "25em",
+        maxWidth: '25rem',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
     },
     stea: {
-        marginBottom: "0.2em"
+        marginBottom: '0.2rem'
     }
 }));
 
@@ -99,7 +99,7 @@ export default function IssuesTable({ search }) {
             fetchData();
         }
         setUpdate(false);
-    }, [update, fetch, params, search]);
+    }, [update, fetch, params, search, fetchData]);
 
     const starOnChange = (e) => {
         const user = JSON.parse(localStorage.getItem("user"));
@@ -119,7 +119,7 @@ export default function IssuesTable({ search }) {
 
             const client = new Client();
             client.post_with_token('follow', params, user.token).then((result) => {
-                if (result?.success != true) {
+                if (result?.success !== true) {
                     setFetch(true);
                 }
             });
@@ -206,7 +206,7 @@ export default function IssuesTable({ search }) {
                                             scope="row"
                                             padding="none"
                                             style={{
-                                                height: '5em',
+                                                height: '5rem',
                                                 paddingLeft: 0,
                                             }}
                                         >
@@ -277,7 +277,7 @@ export default function IssuesTable({ search }) {
                                                     src={avatar_url}
                                                     sx={{ width: 30, height: 30, borderRadius: 1.5 }}
                                                     style={{
-                                                        marginRight: '1em'
+                                                        marginRight: '1rem'
                                                     }}
                                                 />
                                                 <Typography variant="subtitle2" noWrap>
@@ -327,7 +327,7 @@ export default function IssuesTable({ search }) {
                                                                     src={avatar_url}
                                                                     sx={{ width: 30, height: 30, borderRadius: 1.5 }}
                                                                     style={{
-                                                                        marginRight: '1em'
+                                                                        marginRight: '1rem'
                                                                     }}
                                                                 />
                                                             </Link>

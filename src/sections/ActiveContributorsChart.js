@@ -52,7 +52,7 @@ export default function ActiveContributors() {
         title="Active Contributors"
         subheader=""
       />
-      <Box sx={{ mt: 3, mx: 3, width: "55em", marginLeft: '3.9em', }} dir="ltr">
+      <Box sx={{ mt: 3, mx: 3, width: '55rem', marginLeft: '3.9rem', }} dir="ltr">
         <ReactApexChart type="line" series={state.data} options={chartOptions} height={364} />
       </Box>
     </Card>

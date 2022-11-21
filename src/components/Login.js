@@ -121,8 +121,8 @@ export default function Login() {
                 <DialogContent
                     style={{
                         backgroundColor: "#FFFFFF",
-                        height: '43em',
-                        width: '30em'
+                        height: '43rem',
+                        width: '30rem'
                     }}
                 >
                     <Stack>
@@ -131,18 +131,18 @@ export default function Login() {
                             alt="x"
                             onClick={handleClose}
                             style={{
-                                height: '1em',
-                                width: '1em',
+                                height: '1rem',
+                                width: '1rem',
                                 marginLeft: 'auto',
-                                marginBottom: '2.5em'
+                                marginBottom: '2.5rem'
                             }}
                         />
                         <StyledTabs
                             value={value}
                             onChange={handleChange}
                             style={{
-                                marginLeft: '6.5em',
-                                marginBottom: '1em'
+                                marginLeft: '6.5rem',
+                                marginBottom: '1rem'
                             }}
                         >
                             <StyledTab label='Login' />
@@ -156,15 +156,15 @@ export default function Login() {
                                     label="Username"
                                     fullWidth
                                     style={{
-                                        marginTop: '5em',
-                                        width: '15em',
-                                        marginLeft: '5.5em'
+                                        marginTop: '5rem',
+                                        width: '15rem',
+                                        marginLeft: '5.5rem'
                                     }}
                                 />
                                 <Typography
                                     style={{
-                                        marginLeft: "15em",
-                                        marginTop: '1em',
+                                        marginLeft: '15rem',
+                                        marginTop: '1rem',
                                         opacity: 0.72
                                     }}
                                     onClick={handleForgot}
@@ -177,9 +177,9 @@ export default function Login() {
                                     label="password"
                                     fullWidth
                                     style={{
-                                        marginBottom: '5em',
-                                        width: '15em',
-                                        marginLeft: '5.5em'
+                                        marginBottom: '5rem',
+                                        width: '15rem',
+                                        marginLeft: '5.5rem'
                                     }}
                                 />
                             </>
@@ -189,8 +189,8 @@ export default function Login() {
                             <>
                                 <Typography
                                     style={{
-                                        marginLeft: "4em",
-                                        marginTop: '0.25em',
+                                        marginLeft: '4rem',
+                                        marginTop: '0.25rem',
                                         fontWeight: 650
                                     }}
                                     onClick={handleForgot}
@@ -203,8 +203,8 @@ export default function Login() {
                                     label="Username"
                                     fullWidth
                                     style={{
-                                        width: '15em',
-                                        marginLeft: '5.5em'
+                                        width: '15rem',
+                                        marginLeft: '5.5rem'
                                     }}
                                 />
                                 <TextField
@@ -215,9 +215,9 @@ export default function Login() {
                                     value={questionL}
                                     onChange={handleChangeQuestionL}
                                     style={{
-                                        marginTop: '2em',
-                                        width: '15em',
-                                        marginLeft: '5.5em'
+                                        marginTop: '2rem',
+                                        width: '15rem',
+                                        marginLeft: '5.5rem'
                                     }}
                                 >
                                     {questions.map((question) => (
@@ -235,9 +235,9 @@ export default function Login() {
                                     label="Answer"
                                     fullWidth
                                     style={{
-                                        marginTop: '2em',
-                                        width: '15em',
-                                        marginLeft: '5.5em'
+                                        marginTop: '2rem',
+                                        width: '15rem',
+                                        marginLeft: '5.5rem'
                                     }}
                                 />
                                 <TextField
@@ -245,9 +245,9 @@ export default function Login() {
                                     label="New password"
                                     fullWidth
                                     style={{
-                                        marginTop: '2em',
-                                        width: '15em',
-                                        marginLeft: '5.5em'
+                                        marginTop: '2rem',
+                                        width: '15rem',
+                                        marginLeft: '5.5rem'
                                     }}
                                 />
                                 <TextField
@@ -255,9 +255,9 @@ export default function Login() {
                                     label="Re-type new password"
                                     fullWidth
                                     style={{
-                                        marginTop: '2em',
-                                        width: '15em',
-                                        marginLeft: '5.5em'
+                                        marginTop: '2rem',
+                                        width: '15rem',
+                                        marginLeft: '5.5rem'
                                     }}
                                 />
                             </>
@@ -270,8 +270,8 @@ export default function Login() {
                                     label="Username"
                                     fullWidth
                                     style={{
-                                        width: '15em',
-                                        marginLeft: '5.5em',
+                                        width: '15rem',
+                                        marginLeft: '5.5rem',
                                     }}
                                 />
                                 <TextField
@@ -279,9 +279,9 @@ export default function Login() {
                                     label="New password"
                                     fullWidth
                                     style={{
-                                        marginTop: '2em',
-                                        width: '15em',
-                                        marginLeft: '5.5em'
+                                        marginTop: '2rem',
+                                        width: '15rem',
+                                        marginLeft: '5.5rem'
                                     }}
                                 />
                                 <TextField
@@ -289,9 +289,9 @@ export default function Login() {
                                     label="Re-type new password"
                                     fullWidth
                                     style={{
-                                        marginTop: '2em',
-                                        width: '15em',
-                                        marginLeft: '5.5em'
+                                        marginTop: '2rem',
+                                        width: '15rem',
+                                        marginLeft: '5.5rem'
                                     }}
                                 />
                                 <TextField
@@ -302,9 +302,9 @@ export default function Login() {
                                     value={questionS}
                                     onChange={handleChangeQuestionS}
                                     style={{
-                                        marginTop: '2em',
-                                        width: '15em',
-                                        marginLeft: '5.5em'
+                                        marginTop: '2rem',
+                                        width: '15rem',
+                                        marginLeft: '5.5rem'
                                     }}
                                 >
                                     {questions.map((question) => (
@@ -322,9 +322,9 @@ export default function Login() {
                                     label="Answer"
                                     fullWidth
                                     style={{
-                                        marginTop: '2em',
-                                        width: '15em',
-                                        marginLeft: '5.5em'
+                                        marginTop: '2rem',
+                                        width: '15rem',
+                                        marginLeft: '5.5rem'
                                     }}
                                 />
                             </>
@@ -337,10 +337,10 @@ export default function Login() {
                             onClick={handleClose}
                             variant="contained"
                             style={{
-                                marginLeft: '7em',
-                                height: '3em',
-                                width: '15em',
-                                marginTop: '7em'
+                                marginLeft: '7rem',
+                                height: '3rem',
+                                width: '15rem',
+                                marginTop: '7rem'
                             }}
                         >
                             Log in
@@ -352,10 +352,10 @@ export default function Login() {
                             onClick={handleClose}
                             variant="contained"
                             style={{
-                                marginLeft: '7em',
-                                height: '3em',
-                                width: '15em',
-                                marginTop: '2em'
+                                marginLeft: '7rem',
+                                height: '3rem',
+                                width: '15rem',
+                                marginTop: '2rem'
                             }}
                         >
                             Change password
@@ -367,10 +367,10 @@ export default function Login() {
                             onClick={handleClose}
                             variant="contained"
                             style={{
-                                marginLeft: '7em',
-                                height: '3em',
-                                width: '15em',
-                                marginTop: '2em'
+                                marginLeft: '7rem',
+                                height: '3rem',
+                                width: '15rem',
+                                marginTop: '2rem'
                             }}
                         >
                             Create account

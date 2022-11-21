@@ -51,14 +51,14 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 const useStyles = makeStyles((theme) => ({
     table: {
-        maxHeight: "40em",
+        maxHeight: '40rem',
     },
     stea: {
-        paddingBottom: '0.3em'
+        paddingBottom: '0.3rem'
     },
     watchlistButton: {
-        marginLeft: '0.2em',
-        marginTop: '2.35em',
+        marginLeft: '0.2rem',
+        marginTop: '2.35rem',
         paddingBottom: 0,
         color: '#000000',
         textTransform: 'none',
@@ -70,57 +70,57 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     watchlistTab: {
-        height: '3em',
-        minHeight: '3em',
-        minWidth: '8em',
-        width: '8em',
-        marginRight: '3em',
-        marginTop: '1em',
-        marginBottom: '0.2em',
+        height: '3rem',
+        minHeight: '3rem',
+        minWidth: '8rem',
+        width: '8rem',
+        marginRight: '3rem',
+        marginTop: '1rem',
+        marginBottom: '0.2rem',
         paddingBottom: 0,
     },
     prTab: {
-        height: '3em',
-        minHeight: '3em',
-        minWidth: '3em',
-        width: '3em',
-        marginRight: '3em',
-        marginTop: '1em',
+        height: '3rem',
+        minHeight: '3rem',
+        minWidth: '3rem',
+        width: '3rem',
+        marginRight: '3rem',
+        marginTop: '1rem',
         paddingBottom: 0
     },
     issuesTab: {
-        height: '3em',
-        minHeight: '3em',
-        minWidth: '4em',
-        width: '4em',
-        marginRight: '3em',
-        marginTop: '1em',
+        height: '3rem',
+        minHeight: '3rem',
+        minWidth: '4rem',
+        width: '4rem',
+        marginRight: '3rem',
+        marginTop: '1rem',
         paddingBottom: 0
     },
     releasesTab: {
-        height: '3em',
-        minHeight: '3em',
-        minWidth: '3em',
-        width: '5em',
-        marginRight: '3em',
-        marginTop: '1em',
+        height: '3rem',
+        minHeight: '3rem',
+        minWidth: '3rem',
+        width: '5rem',
+        marginRight: '3rem',
+        marginTop: '1rem',
         paddingBottom: 0
     },
     commitsTab: {
-        height: '3em',
-        minHeight: '3em',
-        minWidth: '4.5em',
-        width: '4.5em',
-        marginRight: '3em',
-        marginTop: '1em',
+        height: '3rem',
+        minHeight: '3rem',
+        minWidth: '4.5rem',
+        width: '4.5rem',
+        marginRight: '3rem',
+        marginTop: '1rem',
         paddingBottom: 0
     },
     contributorsTab: {
-        height: '3em',
-        minHeight: '3em',
-        minWidth: '7em',
-        width: '7em',
-        marginTop: '1em',
+        height: '3rem',
+        minHeight: '3rem',
+        minWidth: '7rem',
+        width: '7rem',
+        marginTop: '1rem',
         paddingBottom: 0
     },
     button: {
@@ -201,7 +201,7 @@ export default function TableApp() {
     return (
         <Paper className="container">
             <Stack
-                style={{ backgroundColor: '#FFFFFF', height: "5em", marginBottom: "2em" }}
+                style={{ backgroundColor: '#FFFFFF', height: '5rem', marginBottom: '2rem' }}
                 direction="row"
                 alignItems="bottom"
                 justifyContent="space-between"
@@ -210,7 +210,7 @@ export default function TableApp() {
                     value={value}
                     onChange={handleChange}
                     style={{
-                        marginLeft: "4.5em",
+                        marginLeft: '4.5rem',
                         marginTop: 'auto'
                     }}
                 >
@@ -249,8 +249,8 @@ export default function TableApp() {
                             <DialogContent
                                 style={{
                                     backgroundColor: "#FFFFFF",
-                                    height: '18em',
-                                    width: '30em'
+                                    height: '18rem',
+                                    width: '30rem'
                                 }}
                             >
                                 <Grid
@@ -262,9 +262,9 @@ export default function TableApp() {
                                     <Grid item>
                                         <Typography
                                             style={{
-                                                marginTop: '3.5em',
-                                                marginBottom: '3em',
-                                                marginLeft: '3em'
+                                                marginTop: '3.5rem',
+                                                marginBottom: '3rem',
+                                                marginLeft: '3rem'
                                             }}
                                         >
                                             Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
@@ -292,8 +292,8 @@ export default function TableApp() {
                     style={{
                         marginLeft: "auto",
                         marginTop: 'auto',
-                        marginBottom: '0.25em',
-                        marginRight: '1em'
+                        marginBottom: '0.25rem',
+                        marginRight: '1rem'
                     }}
                     value={search}
                     onChange={(e) => handleSearch(e)}
@@ -311,7 +311,6 @@ export default function TableApp() {
             {value === 2 && (<ReleasesTable search={search} />)}
             {value === 3 && <CommitsTable search={search} />}
             {value === 4 && <ContributorsTable search={search} />}
-            {value === 5 && !stateLogin.isLoggedIn ? setValue(0) : ''}
             {value === 5 && (<WatchlistTable search={search} />)}
 
         </Paper >

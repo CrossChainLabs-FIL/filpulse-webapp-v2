@@ -58,7 +58,7 @@ export default function TopContributors() {
       <CardHeader title="Contributors of the month" />
       <Box
         sx={{
-          maxHeight: '25.65em',
+          maxHeight: '25.65rem',
           overflowY: 'scroll',
         }}
       >

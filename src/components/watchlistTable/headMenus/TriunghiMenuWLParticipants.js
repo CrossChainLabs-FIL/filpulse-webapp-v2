@@ -31,26 +31,26 @@ const client = new Client();
 
 const useStyles = makeStyles(() => ({
     triunghi: {
-        marginLeft: '0.25em',
-        marginTop: '0.15em'
+        marginLeft: '0.25rem',
+        marginTop: '0.15rem'
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
-        marginBottom: "0.45em"
+        marginBottom: '0.45rem'
     },
     filterText: {
-        marginTop: "0.5em",
-        marginLeft: '0.5em',
-        height: '1.75em',
+        marginTop: '0.5rem',
+        marginLeft: '0.5rem',
+        height: '1.75rem',
     },
     list: {
         height: 'max-content',
     },
     menu: {
-        marginTop: '1.5em',
+        marginTop: '1.5rem',
     },
     x: {
-        height: "0.6em"
+        height: '0.6rem'
     },
     mainBox: {
         maxHeight: '100%',
@@ -58,7 +58,7 @@ const useStyles = makeStyles(() => ({
         padding: 0,
     },
     paper: {
-        maxHeight: '25em',
+        maxHeight: '25rem',
         overflow: 'auto',
         padding: 0,
     }
@@ -158,7 +158,7 @@ export default function TriunghiMenuWLParticipants({ paramsCallback }) {
                         setIsSorted(false);
                         paramsCallback({ participant: undefined });
                     }}
-                    style={{ padding: 0, marginLeft: '0.25em' }}
+                    style={{ padding: 0, marginLeft: '0.25rem' }}
                 >
                     <img src={clearFilter} alt='clear' />
                 </IconButton> : ''
@@ -217,8 +217,8 @@ export default function TriunghiMenuWLParticipants({ paramsCallback }) {
                                                 sx={{
                                                     width: 30,
                                                     height: 30,
-                                                    marginLeft: "1.75em",
-                                                    marginRight: "0.5em"
+                                                    marginLeft: '1.75rem',
+                                                    marginRight: '0.5rem'
                                                 }}
                                             />
                                             <ListItemText primary={dev_name} />

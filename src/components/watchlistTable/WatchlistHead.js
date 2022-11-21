@@ -27,11 +27,11 @@ import info from '../../assets/info.svg';
 
 const useStyles = makeStyles(() => ({
     triunghi: {
-        marginLeft: '0.35em',
-        marginTop: '0.15em'
+        marginLeft: '0.35rem',
+        marginTop: '0.15rem'
     },
     rowHead: {
-        height: '4em',
+        height: '4rem',
     },
     checkbox: {
         width: '5.35rem',
@@ -136,7 +136,7 @@ export default function WatchlistHead({ paramsCallback }) {
                             style={{
                                 fontWeight: 500,
                                 fontSize: 16,
-                                marginRight: '0.35em'
+                                marginRight: '0.35rem'
                             }}
                         >
                             #
@@ -147,7 +147,7 @@ export default function WatchlistHead({ paramsCallback }) {
                             onClick={handleSortNumber}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -170,7 +170,7 @@ export default function WatchlistHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em' }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem' }}>
                             Name
                         </Typography>
 
@@ -179,7 +179,7 @@ export default function WatchlistHead({ paramsCallback }) {
                             onClick={handleSortName}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -245,13 +245,13 @@ export default function WatchlistHead({ paramsCallback }) {
                             title='info'
                             arrow
                             style={{
-                                marginRight: '0.35em'
+                                marginRight: '0.35rem'
                             }}
                         >
                             <img src={info} alt='info' />
                         </Tooltip>
 
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Comments
                         </Typography>
 
@@ -260,7 +260,7 @@ export default function WatchlistHead({ paramsCallback }) {
                             onClick={handleSortComments}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -282,7 +282,7 @@ export default function WatchlistHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Last Updated
                         </Typography>
 
@@ -291,7 +291,7 @@ export default function WatchlistHead({ paramsCallback }) {
                             onClick={handleSortUpdatedAt}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img

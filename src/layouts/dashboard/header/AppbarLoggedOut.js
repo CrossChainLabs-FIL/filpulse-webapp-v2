@@ -64,12 +64,12 @@ const useStyles = makeStyles((theme) =>
         },
         toolbarMargin: {
             ...theme.mixins.toolbar,
-            marginBottom: "2em",
+            marginBottom: '2rem',
             [theme.breakpoints.down('md')]: {
-                marginBottom: "2em"
+                marginBottom: '2rem'
             },
             [theme.breakpoints.down('sm')]: {
-                marginBottom: "1.5em"
+                marginBottom: '1.5rem'
             }
         },
         button: {
@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) =>
         },
         omMargin: {
             marginLeft: 'auto',
-            marginTop: '0.4em',
+            marginTop: '0.4rem',
             marginRight: '9.5rem',
             [theme.breakpoints.up('xl')]: {
                 marginRight: '30.5rem',
@@ -178,8 +178,8 @@ export default function AppbarLoggedOut() {
                                 <DialogContent
                                     style={{
                                         backgroundColor: "#FFFFFF",
-                                        height: '18em',
-                                        width: '30em'
+                                        height: '18rem',
+                                        width: '30rem'
                                     }}
                                 >
                                     <Grid
@@ -191,9 +191,9 @@ export default function AppbarLoggedOut() {
                                         <Grid item>
                                             <Typography
                                                 style={{
-                                                    marginTop: '3.5em',
-                                                    marginBottom: '3em',
-                                                    marginLeft: '3em'
+                                                    marginTop: '3.5rem',
+                                                    marginBottom: '3rem',
+                                                    marginLeft: '3rem'
                                                 }}
                                             >
                                                 Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.

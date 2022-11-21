@@ -26,11 +26,11 @@ import info from '../../assets/info.svg';
 
 const useStyles = makeStyles(() => ({
     triunghi: {
-        marginLeft: '0.35em',
-        marginTop: '0.15em'
+        marginLeft: '0.35rem',
+        marginTop: '0.15rem'
     },
     rowHead: {
-        height: '4em',
+        height: '4rem',
     },
     contributor: {
         width: '20rem'
@@ -116,7 +116,7 @@ export default function ContributorHead({ paramsCallback }) {
                             noWrap
                             style={{
                                 fontWeight: 500,
-                                marginLeft: '3em',
+                                marginLeft: '3rem',
                                 fontSize: 16
                             }}
                         >
@@ -157,7 +157,7 @@ export default function ContributorHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Commits
                         </Typography>
 
@@ -166,7 +166,7 @@ export default function ContributorHead({ paramsCallback }) {
                             onClick={(e) => handleSort('contributions')}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -188,13 +188,13 @@ export default function ContributorHead({ paramsCallback }) {
                     <Stack
                         direction="row"
                         alignItems="center"
-                        style={{ marginTop: '1.2em' }}
+                        style={{ marginTop: '1.2rem' }}
                     >
                         <Tooltip
                             title='info'
                             arrow
                             style={{
-                                marginRight: '0.35em'
+                                marginRight: '0.35rem'
                             }}
                         >
                             <img src={info} alt='info' />
@@ -206,7 +206,7 @@ export default function ContributorHead({ paramsCallback }) {
                             style={{
                                 fontWeight: 500,
                                 fontSize: 16,
-                                marginRight: '0.35em',
+                                marginRight: '0.35rem',
                             }}
                         >
                             PRs
@@ -217,7 +217,7 @@ export default function ContributorHead({ paramsCallback }) {
                             onClick={(e) => handleSort('open_prs')}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -235,7 +235,7 @@ export default function ContributorHead({ paramsCallback }) {
                             opacity: 0.75,
                             marginTop: 0,
                             fontSize: 12,
-                            marginLeft: '1.8em'
+                            marginLeft: '1.8rem'
                         }}
                     >
                         open - closed
@@ -251,13 +251,13 @@ export default function ContributorHead({ paramsCallback }) {
                     <Stack
                         direction="row"
                         alignItems="center"
-                        style={{ marginTop: '1.2em' }}
+                        style={{ marginTop: '1.2rem' }}
                     >
                         <Tooltip
                             title='info'
                             arrow
                             style={{
-                                marginRight: '0.35em'
+                                marginRight: '0.35rem'
                             }}
                         >
                             <img src={info} alt='info' />
@@ -269,7 +269,7 @@ export default function ContributorHead({ paramsCallback }) {
                             style={{
                                 fontWeight: 500,
                                 fontSize: 16,
-                                marginRight: '0.35em',
+                                marginRight: '0.35rem',
                             }}
                         >
                             Issues
@@ -280,7 +280,7 @@ export default function ContributorHead({ paramsCallback }) {
                             onClick={(e) => handleSort('open_issues')}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -298,7 +298,7 @@ export default function ContributorHead({ paramsCallback }) {
                             opacity: 0.75,
                             marginTop: 0,
                             fontSize: 12,
-                            marginLeft: '1.8em'
+                            marginLeft: '1.8rem'
                         }}
                     >
                         open - closed

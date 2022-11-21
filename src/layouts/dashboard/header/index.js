@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) =>
     logo: {
       maxWidth: 40,
       marginRight: '10px',
-      marginLeft: '9.5em'
+      marginLeft: '9.5rem'
     }
   })
 );
@@ -76,7 +76,7 @@ export default function DashboardNavbar() {
     const { avatar_url, name, public_repos, followers, following } = state.user;
     return (
       <div style={{ marginLeft: 'auto' }}>
-        <img src={avatar_url} alt="Avatar" style={{ height: '2em' }} />
+        <img src={avatar_url} alt="Avatar" style={{ height: '2rem' }} />
         <div>{name}</div>
       </div>
     )
@@ -157,7 +157,7 @@ export default function DashboardNavbar() {
             </a>
           </div>
         )}
-        <IconButton style={{ marginRight: '6.75em' }} onClick={() => handleLogout()}>
+        <IconButton style={{ marginRight: '6.75rem' }} onClick={() => handleLogout()}>
           <img src={exit} alt="exit" />
         </IconButton >
       </ToolbarStyle>

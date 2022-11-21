@@ -28,7 +28,7 @@ import ContributorHead from './ContributorHead';
 
 const useStyles = makeStyles(() => ({
     table: {
-        maxHeight: "40em",
+        maxHeight: '40rem',
     },
     colorPrimary: {
         backgroundColor: '#F6ECD0',
@@ -37,7 +37,7 @@ const useStyles = makeStyles(() => ({
         backgroundColor: '#FFB803',
     },
     projectElipsis: {
-        maxWidth: "10em",
+        maxWidth: '10rem',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
@@ -155,7 +155,7 @@ export default function ContributorsTable({ search }) {
                                             scope="row"
                                             padding="none"
                                             style={{
-                                                height: '5em',
+                                                height: '5rem',
                                                 padding: 0,
                                                 paddingLeft: '2rem'
                                             }}
@@ -163,14 +163,14 @@ export default function ContributorsTable({ search }) {
                                             <Stack
                                                 direction="row"
                                                 alignItems="center"
-                                                style={{ marginLeft: '4em' }}
+                                                style={{ marginLeft: '4rem' }}
                                             >
                                                 <Box
                                                     component="img"
                                                     src={avatar_url}
                                                     sx={{ width: 30, height: 30, borderRadius: 1.5 }}
                                                     style={{
-                                                        marginRight: '1em'
+                                                        marginRight: '1rem'
                                                     }}
                                                 />
                                                 <Typography variant="subtitle2" noWrap>
@@ -231,7 +231,7 @@ export default function ContributorsTable({ search }) {
                                             <Stack
                                                 direction="row"
                                                 alignItems="center"
-                                                sx={{ width: '12em', marginLeft: '1.5em' }}
+                                                sx={{ width: '12rem', marginLeft: '1.5rem' }}
                                             >
                                                 <Typography variant="subtitle2" noWrap>
                                                     {open_prs}
@@ -244,11 +244,11 @@ export default function ContributorsTable({ search }) {
                                                     {closed_prs}
                                                 </Typography>
                                             </Stack>
-                                            <Box sx={{ width: '100%', marginLeft: '1.5em' }}>
+                                            <Box sx={{ width: '100%', marginLeft: '1.5rem' }}>
                                                 <LinearProgress
                                                     sx={{
-                                                        width: "12em",
-                                                        height: '0.4em',
+                                                        width: '12rem',
+                                                        height: '0.4rem',
                                                         borderRadius: 5,
                                                     }}
                                                     variant='determinate'
@@ -266,7 +266,7 @@ export default function ContributorsTable({ search }) {
                                             <Stack
                                                 direction="row"
                                                 alignItems="center"
-                                                sx={{ width: '12em', marginLeft: '1.5em' }}
+                                                sx={{ width: '12rem', marginLeft: '1.5rem' }}
                                             >
                                                 <Typography variant="subtitle2" noWrap>
                                                     {open_issues}
@@ -279,13 +279,13 @@ export default function ContributorsTable({ search }) {
                                                     {closed_issues}
                                                 </Typography>
                                             </Stack>
-                                            <Box sx={{ width: '100%', marginLeft: '1.5em' }} >
+                                            <Box sx={{ width: '100%', marginLeft: '1.5rem' }} >
                                                 <LinearProgress
                                                     sx={{
-                                                        width: "12em",
-                                                        height: '0.4em',
+                                                        width: '12rem',
+                                                        height: '0.4rem',
                                                         borderRadius: 5,
-                                                        marginRight: '0em'
+                                                        marginRight: '0rem'
                                                     }}
                                                     variant='determinate'
                                                     value={issueValue}

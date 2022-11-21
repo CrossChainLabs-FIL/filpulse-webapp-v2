@@ -25,26 +25,26 @@ import bara from '../../../assets/bara.svg';
 
 const useStyles = makeStyles(() => ({
     triunghi: {
-        marginLeft: '0.25em',
+        marginLeft: '0.25rem',
     },
     titleBox: {
         backgroundColor: '#FFFFFF',
-        marginBottom: "0.45em",
-        width: "13em"
+        marginBottom: '0.45rem',
+        width: '13rem'
     },
     filterText: {
-        marginTop: "0.5em",
+        marginTop: '0.5rem',
         marginLeft: '0.5em',
-        height: '1.75em',
+        height: '1.75rem',
     },
     list: {
         height: 'max-content',
     },
     menu: {
-        marginTop: '1.5em',
+        marginTop: '1.5rem',
     },
     x: {
-        height: "0.6em"
+        height: '0.6rem'
     },
     mainBox: {
         maxHeight: '100%',
@@ -52,7 +52,7 @@ const useStyles = makeStyles(() => ({
         padding: 0,
     },
     paper: {
-        maxHeight: '25em',
+        maxHeight: '25rem',
         overflow: 'auto',
         padding: 0,
     },
@@ -99,7 +99,7 @@ export default function TriunghiMenuIssuesStatus({ paramsCallback }) {
                         setIsSorted(false);
                         paramsCallback({ status: undefined });
                     }}
-                    style={{ padding: 0, marginLeft: '0.25em' }}
+                    style={{ padding: 0, marginLeft: '0.25rem' }}
                 >
                     <img src={clearFilter} alt='clear' />
                 </IconButton> : ''

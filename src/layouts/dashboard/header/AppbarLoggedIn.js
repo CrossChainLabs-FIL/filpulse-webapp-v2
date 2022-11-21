@@ -56,12 +56,12 @@ const useStyles = makeStyles((theme) =>
         },
         toolbarMargin: {
             ...theme.mixins.toolbar,
-            marginBottom: "2em",
+            marginBottom: '2rem',
             [theme.breakpoints.down('md')]: {
-                marginBottom: "2em"
+                marginBottom: '2rem'
             },
             [theme.breakpoints.down('sm')]: {
-                marginBottom: "1.5em"
+                marginBottom: '1.5rem'
             }
         },
         button: {
@@ -159,7 +159,7 @@ export default function AppbarLoggedIn() {
                             sx={{
                                 backgroundColor: 'transparent',
                                 color: '#000000',
-                                width: '12em',
+                                width: '12rem',
 
                             }}
                             onClick={() => handleLogout()}

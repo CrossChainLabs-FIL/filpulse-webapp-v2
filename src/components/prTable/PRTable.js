@@ -38,13 +38,13 @@ import { fToNow } from '../../utils/format';
 
 const useStyles = makeStyles((theme) => ({
     table: {
-        maxHeight: "40em",
+        maxHeight: '40rem',
     },
     stea: {
-        marginBottom: "0.2em"
+        marginBottom: '0.2rem'
     },
     projectElipsis: {
-        maxWidth: "32em",
+        maxWidth: '32rem',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
@@ -97,7 +97,7 @@ export default function PRTable({ search }) {
             fetchData();
         }
         setUpdate(false);
-    }, [update, fetch, params, search]);
+    }, [update, fetch, params, search, fetchData]);
 
 
     const starOnChange = (e) => {
@@ -121,7 +121,7 @@ export default function PRTable({ search }) {
             const client = new Client();
             client.post_with_token('follow', params, user.token).then((result) => {
                 console.log('follow return');
-                if (result?.success != true) {
+                if (result?.success !== true) {
                     console.log('follow failed trigger fetch');
                     setFetch(true);
                 }
@@ -216,7 +216,7 @@ export default function PRTable({ search }) {
                                             scope="row"
                                             padding="none"
                                             style={{
-                                                height: '5em',
+                                                height: '5rem',
                                                 paddingLeft: 0,
                                             }}
                                         >
@@ -287,7 +287,7 @@ export default function PRTable({ search }) {
                                                     src={avatar_url}
                                                     sx={{ width: 30, height: 30, borderRadius: 1.5 }}
                                                     style={{
-                                                        marginRight: '1em'
+                                                        marginRight: '1rem'
                                                     }}
                                                 />
                                                 <Typography variant="subtitle2" noWrap>

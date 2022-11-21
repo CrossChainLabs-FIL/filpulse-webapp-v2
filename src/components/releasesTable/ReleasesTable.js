@@ -34,16 +34,16 @@ import { fToNow } from '../../utils/format';
 
 const useStyles = makeStyles(() => ({
     table: {
-        maxHeight: "40em",
+        maxHeight: '40rem',
     },
     projectElipsis: {
-        maxWidth: "14em",
+        maxWidth: '14rem',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
     },
     stea: {
-        marginLeft: "0.15em"
+        marginLeft: '0.15rem'
     }
 }));
 
@@ -142,7 +142,7 @@ export default function ReleasesTable({ search }) {
                                             scope="row"
                                             padding="none"
                                             style={{
-                                                height: '5em',
+                                                height: '5rem',
                                                 padding: 0,
                                                 paddingLeft: '5.35rem',
                                             }}
@@ -207,7 +207,7 @@ export default function ReleasesTable({ search }) {
                                                     src={avatar_url}
                                                     sx={{ width: 30, height: 30, borderRadius: 1.5 }}
                                                     style={{
-                                                        marginRight: '1em'
+                                                        marginRight: '1rem'
                                                     }}
                                                 />
                                                 <Typography variant="subtitle2" noWrap>

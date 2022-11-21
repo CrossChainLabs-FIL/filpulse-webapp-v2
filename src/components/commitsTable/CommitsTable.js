@@ -28,10 +28,10 @@ import { fToNow } from '../../utils/format';
 
 const useStyles = makeStyles(() => ({
     table: {
-        maxHeight: "40em",
+        maxHeight: '40rem',
     },
     projectElipsis: {
-        maxWidth: "32em",
+        maxWidth: '32rem',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
@@ -130,7 +130,7 @@ export default function CommitsTable({ search }) {
                                             scope="row"
                                             padding="none"
                                             style={{
-                                                height: '5em',
+                                                height: '5rem',
                                                 padding: 0,
                                                 paddingLeft: '5.25rem'
                                             }}
@@ -207,7 +207,7 @@ export default function CommitsTable({ search }) {
                                                     src={avatar_url}
                                                     sx={{ width: 30, height: 30, borderRadius: 1.5 }}
                                                     style={{
-                                                        marginRight: '1em'
+                                                        marginRight: '1rem'
                                                     }}
                                                 />
                                                 <Typography variant="subtitle2" noWrap>

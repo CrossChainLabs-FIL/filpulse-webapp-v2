@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) =>
     styleLeft: {
       display: 'flex',
       alignItems: 'center',
-      marginLeft: '10em',
+      marginLeft: '10rem',
       [theme.breakpoints.up('xl')]: {
         marginLeft: '30.5rem'
       },
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) =>
       fontWeight: 600,
       textDecoration: 'none',
       marginRight: '32px',
-      marginRight: '10em',
+      marginRight: '10rem',
       [theme.breakpoints.up('xl')]: {
         marginRight: '30.5rem'
       },

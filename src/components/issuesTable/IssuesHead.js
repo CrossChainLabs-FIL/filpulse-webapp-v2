@@ -25,11 +25,11 @@ import triunghi from '../../assets/triunghi.svg';
 
 const useStyles = makeStyles(() => ({
     triunghi: {
-        marginLeft: '0.35em',
-        marginTop: '0.15em'
+        marginLeft: '0.35rem',
+        marginTop: '0.15rem'
     },
     rowHead: {
-        height: '4em',
+        height: '4rem',
     },
     checkbox: {
         width: '6rem',
@@ -114,7 +114,7 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             #
                         </Typography>
 
@@ -123,7 +123,7 @@ export default function IssuesHead({ paramsCallback }) {
                             onClick={handleSortNumber}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -146,7 +146,7 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Issue
                         </Typography>
 
@@ -155,7 +155,7 @@ export default function IssuesHead({ paramsCallback }) {
                             onClick={handleSortName}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
@@ -253,7 +253,7 @@ export default function IssuesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35em', }}>
+                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Last Updated
                         </Typography>
 
@@ -262,7 +262,7 @@ export default function IssuesHead({ paramsCallback }) {
                             onClick={handleSortUpdatedAt}
                             style={{
                                 padding: 0,
-                                marginTop: '0.15em'
+                                marginTop: '0.15rem'
                             }}
                         >
                             <img
