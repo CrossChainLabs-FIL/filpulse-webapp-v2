@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     button: {
         backgroundColor: 'transparent',
         color: '#000000',
-        width: '23rem',
+        //width: '23rem',
         '&:hover': {
             backgroundColor: 'transparent',
             color: '#000000',
