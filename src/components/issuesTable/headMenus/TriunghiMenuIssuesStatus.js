@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
     },
     filterText: {
         marginTop: '0.5rem',
-        marginLeft: '0.5em',
+        marginLeft: '0.5rem',
         height: '1.75rem',
     },
     list: {

@@ -58,7 +58,7 @@ const useStyles = makeStyles(() => ({
         padding: 0,
     },
     paper: {
-        maxHeight: '25em',
+        maxHeight: '25rem',
         overflow: 'auto',
         padding: 0,
     }
