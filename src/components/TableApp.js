@@ -58,7 +58,7 @@ const useStyles = makeStyles(() => ({
         //minWidth: '3rem',
         //width: '3rem',
         //marginRight: '2rem',
-        marginTop: '3.5rem',
+        marginTop: '3.2rem',
         paddingBottom: 0
     },
     watchlistButton: {
@@ -81,9 +81,10 @@ const useStyles = makeStyles(() => ({
         //minHeight: '3rem',
         //minWidth: '8rem',
         //width: '8rem',
-        marginRight: '2rem',
+        marginRight: 0,
         //marginTop: '1rem',
         //marginBottom: '0.2rem',
+        paddingRight: '0.2rem',
         paddingBottom: 0,
     },
     prTab: {
@@ -229,7 +230,7 @@ export default function TableApp() {
                     {stateLogin.isLoggedIn && (
                         <StyledTab
                             //icon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
-                            iconPosition='start'
+                            // iconPosition='start'
                             label='Watchlist'
                             classes={{ root: classes.watchlistTab }}
                         />

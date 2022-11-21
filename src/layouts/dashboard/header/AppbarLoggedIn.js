@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, } from "react";
+import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../../App";
 
@@ -13,8 +13,6 @@ import {
     Button,
     Box
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import logo from "../../../logo.svg";
@@ -37,7 +35,7 @@ const TextTypography = styled(Typography)(({ theme }) => ({
     lineHeight: theme.typography.h3.lineHeight,
 }));
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         root: {
             flexGrow: 1
@@ -58,7 +56,7 @@ const useStyles = makeStyles(() =>
             // },
         },
         toolbarMargin: {
-            //...theme.mixins.toolbar,
+            ...theme.mixins.toolbar,
             marginBottom: '2rem',
             /*[theme.breakpoints.down('md')]: {
                 marginBottom: '2rem'
@@ -87,8 +85,6 @@ const useStyles = makeStyles(() =>
 
 export default function AppbarLoggedIn() {
     const { stateLogin, dispatch } = useContext(AuthContext);
-    const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.down('xl'));
 
     const classes = useStyles();
 
@@ -132,7 +128,6 @@ export default function AppbarLoggedIn() {
             <Box
                 sx={{ display: 'flex' }}
             >
-
                 <AppBar sx={{ boxShadow: 0, bgcolor: BG_COLOR }}>
                     <ToolbarStyle
                         disableGutters
