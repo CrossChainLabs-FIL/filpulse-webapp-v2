@@ -20,15 +20,7 @@ import GithubLogo from '../assets/GithubLogo.svg';
 import steaGol from '../assets/steaGol.svg';
 
 const useStyles = makeStyles((theme) => ({
-    button: {
-        backgroundColor: 'transparent',
-        color: '#000000',
-        //width: '23rem',
-        '&:hover': {
-            backgroundColor: 'transparent',
-            color: '#000000',
-        },
-    },
+
 }));
 
 export default function SteaLoggedOut({ stateLogin }) {
@@ -53,14 +45,14 @@ export default function SteaLoggedOut({ stateLogin }) {
             </IconButton>
             <Dialog open={open} onClose={handleClose} >
                 <DialogTitle
-                    style={{
+                    sx={{
                         backgroundColor: "#EEF4F5",
                     }}
                 >
                     {"Get your own watchlist"}
                 </DialogTitle>
                 <DialogContent
-                    style={{
+                    sx={{
                         backgroundColor: "#FFFFFF",
                         height: '18rem',
                         width: '30rem'
@@ -74,7 +66,7 @@ export default function SteaLoggedOut({ stateLogin }) {
                     >
                         <Grid item>
                             <Typography
-                                style={{
+                                sx={{
                                     marginTop: '3.5rem',
                                     marginBottom: '3rem',
                                     marginLeft: '3rem'
@@ -87,7 +79,15 @@ export default function SteaLoggedOut({ stateLogin }) {
                             <Button
                                 variant="contained"
                                 startIcon={<img src={GithubLogo} alt='GithubLogo' />}
-                                className={classes.button}
+                                sx={{
+                                    backgroundColor: 'transparent',
+                                    color: '#000000',
+                                    width: '23rem',
+                                    '&:hover': {
+                                        backgroundColor: 'transparent',
+                                        color: '#000000',
+                                    },
+                                }}
                                 href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
                                 onClick={() => {
                                     setDataError({ ...dataError, errorMessage: "" });

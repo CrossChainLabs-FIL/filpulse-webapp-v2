@@ -83,6 +83,7 @@ export default function ContributorsTable({ search }) {
     }, [params, search, fetchData]);
 
     const paramsCallback = (new_params) => {
+        setState({ loading: true });
         setParams({
             ...params,
             ...new_params,
@@ -132,7 +133,7 @@ export default function ContributorsTable({ search }) {
                                     prValue = 0;
                                 }
                                 else {
-                                    prValue = ((Number(open_prs) * 100) / Number(closed_prs));
+                                    prValue = ((Number(open_prs) * 100) / (Number(closed_prs) + Number(open_prs)));
                                 }
 
                                 let issueValue;
@@ -140,7 +141,7 @@ export default function ContributorsTable({ search }) {
                                     issueValue = 0;
                                 }
                                 else {
-                                    issueValue = (Number(open_issues) * 100) / Number(closed_issues);
+                                    issueValue = (Number(open_issues) * 100) / (Number(closed_issues) + Number(open_issues));
                                 }
 
                                 return (

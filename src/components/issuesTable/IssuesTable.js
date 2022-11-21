@@ -127,6 +127,7 @@ export default function IssuesTable({ search }) {
     }
 
     const paramsCallback = (new_params) => {
+        setState({ loading: true });
         setFetch(true);
         setParams({
             ...params,

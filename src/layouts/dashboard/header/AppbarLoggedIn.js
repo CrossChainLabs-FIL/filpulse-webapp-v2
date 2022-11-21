@@ -40,9 +40,6 @@ const useStyles = makeStyles((theme) =>
         root: {
             flexGrow: 1
         },
-        menuButton: {
-            //marginRight: '1rem'
-        },
         title: {
             flexGrow: 1,
             textAlign: "center"
@@ -50,35 +47,12 @@ const useStyles = makeStyles((theme) =>
         logo: {
             maxWidth: 40,
             marginRight: '0.5rem',
-            // marginLeft: '9.5rem',
-            // [theme.breakpoints.up('xl')]: {
-            //     marginLeft: '30.5rem'
-            // },
+
         },
         toolbarMargin: {
             ...theme.mixins.toolbar,
             marginBottom: '2rem',
-            /*[theme.breakpoints.down('md')]: {
-                marginBottom: '2rem'
-            },
-            [theme.breakpoints.down('sm')]: {
-                marginBottom: '1.5rem'
-            }*/
         },
-        button: {
-            backgroundColor: 'transparent',
-            color: '#000000',
-            '&:hover': {
-                backgroundColor: 'transparent',
-                color: '#000000',
-            },
-        },
-        triunghiMargin: {
-            marginRight: '9.5rem',
-            /*[theme.breakpoints.up('xl')]: {
-                marginRight: '30.5rem',
-            },*/
-        }
     })
 );
 
@@ -150,7 +124,6 @@ export default function AppbarLoggedIn() {
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
                             onClick={handleClick}
-                        // className={classes.triunghiMargin}
                         >
                             <img src={triunghi} alt="triunghi" />
                         </IconButton >
@@ -175,10 +148,12 @@ export default function AppbarLoggedIn() {
                                     backgroundColor: 'transparent',
                                     color: '#000000',
                                     width: '12rem',
-
+                                    '&:hover': {
+                                        backgroundColor: 'transparent',
+                                        color: '#000000',
+                                    },
                                 }}
                                 onClick={() => handleLogout()}
-                            // className={classes.button}
                             >
                                 Sign out
                             </Button>

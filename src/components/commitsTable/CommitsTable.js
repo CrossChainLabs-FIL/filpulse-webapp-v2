@@ -77,6 +77,7 @@ export default function CommitsTable({ search }) {
     }, [params, search, fetchData]);
 
     const paramsCallback = (new_params) => {
+        setState({ loading: true });
         setParams({
             ...params,
             ...new_params,

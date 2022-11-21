@@ -42,13 +42,10 @@ const TextTypography = styled(Typography)(({ theme }) => ({
     lineHeight: theme.typography.h3.lineHeight,
 }));
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         root: {
             flexGrow: 1
-        },
-        menuButton: {
-            //marginRight: '1rem'
         },
         title: {
             flexGrow: 1,
@@ -56,42 +53,12 @@ const useStyles = makeStyles(() =>
         },
         logo: {
             maxWidth: 40,
-            marginRight: '10px',
-            //marginLeft: '9.5rem',
-            /*[theme.breakpoints.up('xl')]: {
-                marginLeft: '30.5rem'
-            },*/
+            marginRight: '0.5rem',
         },
         toolbarMargin: {
-            //...theme.mixins.toolbar,
+            ...theme.mixins.toolbar,
             marginBottom: '2rem',
-            /*[theme.breakpoints.down('md')]: {
-                marginBottom: '2rem'
-            },
-            [theme.breakpoints.down('sm')]: {
-                marginBottom: '1.5rem'
-            }*/
         },
-        button: {
-            backgroundColor: 'transparent',
-            color: '#000000',
-            //width: '23rem',
-            /*[theme.breakpoints.up('xl')]: {
-                width: '50rem',
-            },*/
-            '&:hover': {
-                backgroundColor: 'transparent',
-                color: '#000000',
-            },
-        },
-        omMargin: {
-            marginLeft: 'auto',
-            marginTop: '0.4rem',
-            marginRight: '9.5rem',
-            /*[theme.breakpoints.up('xl')]: {
-                marginRight: '30.5rem',
-            },*/
-        }
     })
 );
 
@@ -154,7 +121,14 @@ export default function AppbarLoggedOut() {
     return (
         <React.Fragment>
             <AppBar sx={{ boxShadow: 0, bgcolor: BG_COLOR }}>
-                <ToolbarStyle disableGutters>
+                <ToolbarStyle
+                    disableGutters
+                    sx={{
+                        marginRight: 'auto',
+                        marginLeft: 'auto',
+                        width: '97rem'
+                    }}
+                >
                     <img src={logo} alt="" className={classes.logo} />
                     <TextTypography>FilPulse</TextTypography>
                     <span>{data.errorMessage}</span>
@@ -163,7 +137,12 @@ export default function AppbarLoggedOut() {
                             loading
                         </div>
                     ) : (
-                        <div className={classes.omMargin}>
+                        <div
+                            style={{
+                                marginLeft: 'auto',
+                                marginTop: '0.4rem',
+                            }}
+                        >
                             <IconButton variant="outlined" onClick={handleClickOpen}>
                                 <img src={account} alt="account" />
                             </IconButton>
@@ -203,7 +182,15 @@ export default function AppbarLoggedOut() {
                                             <Button
                                                 variant="contained"
                                                 startIcon={<img src={GithubLogo} alt='GithubLogo' />}
-                                                className={classes.button}
+                                                sx={{
+                                                    backgroundColor: 'transparent',
+                                                    color: '#000000',
+                                                    width: '23rem',
+                                                    '&:hover': {
+                                                        backgroundColor: 'transparent',
+                                                        color: '#000000',
+                                                    },
+                                                }}
                                                 href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
                                                 onClick={() => {
                                                     setData({ ...data, errorMessage: "" });

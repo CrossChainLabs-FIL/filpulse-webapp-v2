@@ -51,95 +51,6 @@ const useStyles = makeStyles(() => ({
     table: {
         maxHeight: '40rem',
     },
-    stea: {
-        //paddingBottom: '0.3rem'
-        height: '1rem',
-        //minHeight: '3rem',
-        //minWidth: '3rem',
-        //width: '3rem',
-        //marginRight: '2rem',
-        marginTop: '3.2rem',
-        paddingBottom: 0
-    },
-    watchlistButton: {
-        height: '3rem',
-        //marginLeft: '0.2rem',
-        //marginTop: '2.35rem',
-        //marginTop: '1rem',
-        paddingBottom: 0,
-        color: '#000000',
-        textTransform: 'none',
-        //fontWeight: theme.typography.fontWeightRegular,
-        fontSize: pixelToRem(16),
-        '&:hover': {
-            backgroundColor: 'transparent',
-            color: '#000000',
-        },
-    },
-    watchlistTab: {
-        height: '3rem',
-        //minHeight: '3rem',
-        //minWidth: '8rem',
-        //width: '8rem',
-        marginRight: 0,
-        //marginTop: '1rem',
-        //marginBottom: '0.2rem',
-        paddingRight: '0.2rem',
-        paddingBottom: 0,
-    },
-    prTab: {
-        height: '3rem',
-        //minHeight: '3rem',
-        //minWidth: '3rem',
-        //width: '3rem',
-        marginRight: '2rem',
-        //marginTop: '1rem',
-        paddingBottom: 0
-    },
-    issuesTab: {
-        height: '3rem',
-        //minHeight: '3rem',
-        //minWidth: '4rem',
-        //width: '4rem',
-        marginRight: '2rem',
-        //marginTop: '1rem',
-        paddingBottom: 0
-    },
-    releasesTab: {
-        height: '3rem',
-        //minHeight: '3rem',
-        //minWidth: '3rem',
-        //width: '5rem',
-        marginRight: '2rem',
-        //marginTop: '1rem',
-        paddingBottom: 0
-    },
-    commitsTab: {
-        height: '3rem',
-        //minHeight: '3rem',
-        //minWidth: '4.5rem',
-        //width: '4.5rem',
-        marginRight: '2rem',
-        //marginTop: '1rem',
-        paddingBottom: 0
-    },
-    contributorsTab: {
-        height: '3rem',
-        //minHeight: '3rem',
-        //minWidth: '7rem',
-        //width: '7rem',
-        //marginTop: '1rem',
-        paddingBottom: 0
-    },
-    button: {
-        backgroundColor: 'transparent',
-        color: '#000000',
-        //width: '23rem',
-        '&:hover': {
-            backgroundColor: 'transparent',
-            color: '#000000',
-        },
-    },
 }));
 
 const StyledTabs = styled((props) => (
@@ -163,15 +74,16 @@ const StyledTabs = styled((props) => (
 
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
-    ({ }) => ({
+    ({ theme }) => ({
         textTransform: 'none',
-        //fontWeight: theme.typography.fontWeightRegular,
+        fontWeight: 500,
         fontSize: pixelToRem(16),
         marginRight: '1rem',
         color: "#000000",
         '&.Mui-selected': {
             color: '#000000',
         },
+        // height: '3rem'
         // '&.Mui-focusVisible': {
         //     backgroundColor: 'rgba(100, 95, 228, 0.32)',
         // },
@@ -194,6 +106,7 @@ export default function TableApp() {
 
     const handleClose = () => {
         setOpen(false);
+        setValue(0);
     };
 
     const handleChange = (event, newValue) => {
@@ -217,9 +130,10 @@ export default function TableApp() {
                 <StyledTabs
                     value={value}
                     onChange={handleChange}
-                    style={{
+                    sx={{
                         marginLeft: '4.5rem',
-                        marginTop: 'auto'
+                        height: '3.5rem',
+                        marginTop: '1.2rem'
                     }}
                 >
                     <StyledTab label='PRs' classes={{ root: classes.prTab }} />
@@ -227,78 +141,86 @@ export default function TableApp() {
                     <StyledTab label='Releases' classes={{ root: classes.releasesTab }} />
                     <StyledTab label='Commits' classes={{ root: classes.commitsTab }} />
                     <StyledTab label='Contributors' classes={{ root: classes.contributorsTab }} />
-                    {stateLogin.isLoggedIn && (
-                        <StyledTab
-                            //icon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
-                            // iconPosition='start'
-                            label='Watchlist'
-                            classes={{ root: classes.watchlistTab }}
-                        />
-                    )}
+                    <StyledTab
+                        icon={
+                            <img
+                                src={steaPlin}
+                                alt="steaPlin"
+                                sx={{
+                                    height: '1rem',
+                                    marginBottom: '0.3rem'
+                                }}
+                            />
+                        }
+                        iconPosition='start'
+                        onClick={stateLogin.isLoggedIn ? '' : handleClickOpen}
+                        label='Watchlist'
+                        classes={{ root: classes.watchlistTab }}
+                    />
+
                 </StyledTabs>
-                <img src={steaPlin} alt="steaPlin" className={classes.stea} />
-                {!stateLogin.isLoggedIn && (
-                    <>
-                        <Button
-                            startIcon={<img src={steaPlin} alt="steaPlin" className={classes.stea} />}
-                            onClick={handleClickOpen}
-                            className={classes.watchlistButton}
-                            disableRipple
+                {/* <img src={steaPlin} alt="steaPlin" className={classes.stea} /> */}
+                <>
+
+                    <Dialog open={open} onClose={handleClose} >
+                        <DialogTitle
+                            sx={{
+                                backgroundColor: "#EEF4F5",
+                            }}
                         >
-                            Watchlist
-                        </Button>
-                        <Dialog open={open} onClose={handleClose} >
-                            <DialogTitle
-                                style={{
-                                    backgroundColor: "#EEF4F5",
-                                }}
+                            {"Get your own watchlist"}
+                        </DialogTitle>
+                        <DialogContent
+                            sx={{
+                                backgroundColor: "#FFFFFF",
+                                height: '18rem',
+                                width: '30rem'
+                            }}
+                        >
+                            <Grid
+                                container
+                                direction="column"
+                                justifyContent="center"
+                                alignItems="center"
                             >
-                                {"Get your own watchlist"}
-                            </DialogTitle>
-                            <DialogContent
-                                style={{
-                                    backgroundColor: "#FFFFFF",
-                                    height: '18rem',
-                                    width: '30rem'
-                                }}
-                            >
-                                <Grid
-                                    container
-                                    direction="column"
-                                    justifyContent="center"
-                                    alignItems="center"
-                                >
-                                    <Grid item>
-                                        <Typography
-                                            style={{
-                                                marginTop: '3.5rem',
-                                                marginBottom: '3rem',
-                                                marginLeft: '3rem'
-                                            }}
-                                        >
-                                            Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item>
-                                        <Button
-                                            variant="contained"
-                                            startIcon={<img src={GithubLogo} alt='GithubLogo' />}
-                                            href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
-                                            onClick={() => {
-                                                setDataError({ ...dataError, errorMessage: "" });
-                                            }}
-                                            className={classes.button}
-                                        >
-                                            Sign in with Github
-                                        </Button>
-                                    </Grid>
+                                <Grid item>
+                                    <Typography
+                                        sx={{
+                                            marginTop: '3.5rem',
+                                            marginBottom: '3rem',
+                                            marginLeft: '3rem'
+                                        }}
+                                    >
+                                        Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
+                                    </Typography>
                                 </Grid>
-                            </DialogContent>
-                        </Dialog>
-                    </>
-                )}
+                                <Grid item>
+                                    <Button
+                                        variant="contained"
+                                        startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                        href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
+                                        onClick={() => {
+                                            setDataError({ ...dataError, errorMessage: "" });
+                                        }}
+                                        sx={{
+                                            backgroundColor: 'transparent',
+                                            color: '#000000',
+                                            width: '23rem',
+                                            '&:hover': {
+                                                backgroundColor: 'transparent',
+                                                color: '#000000',
+                                            },
+                                        }}
+                                    >
+                                        Sign in with Github
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </DialogContent>
+                    </Dialog>
+                </>
                 <SearchStyle
-                    style={{
+                    sx={{
                         marginLeft: "auto",
                         marginTop: 'auto',
                         marginBottom: '0.25rem',
@@ -320,7 +242,7 @@ export default function TableApp() {
             {value === 2 && (<ReleasesTable search={search} />)}
             {value === 3 && <CommitsTable search={search} />}
             {value === 4 && <ContributorsTable search={search} />}
-            {value === 5 && (<WatchlistTable search={search} />)}
+            {value === 5 && stateLogin.isLoggedIn && (<WatchlistTable search={search} />)}
 
         </Paper >
     );
