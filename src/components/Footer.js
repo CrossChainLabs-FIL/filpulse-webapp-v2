@@ -9,27 +9,16 @@ const useStyles = makeStyles((theme) =>
     styleLeft: {
       display: 'flex',
       alignItems: 'center',
-      marginLeft: '10rem',
-      [theme.breakpoints.up('xl')]: {
-        marginLeft: '30.5rem'
-      },
-      [theme.breakpoints.down('md')]: {
-        marginLeft: '1rem'
-      },
+      left: 0,
+      bottom: 0,
     },
     styleRight: {
       fontSize: '15px',
       lineHeight: '16px',
       fontWeight: 600,
       textDecoration: 'none',
-      marginRight: '32px',
-      marginRight: '10rem',
-      [theme.breakpoints.up('xl')]: {
-        marginRight: '30.5rem'
-      },
-      [theme.breakpoints.down('md')]: {
-        marginRight: '1rem'
-      },
+      right: 0,
+      bottom: 0,
     }
   })
 );

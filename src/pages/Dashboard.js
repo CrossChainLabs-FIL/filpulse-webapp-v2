@@ -100,8 +100,8 @@ export default function Dashboard() {
           </Grid>
 
         </Grid>
+        <Footer />
       </Container>
-      <Footer />
     </Page>
   );
 }
