@@ -18,14 +18,13 @@ import {
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
-import { Client } from '../../../utils/client';
+import { Client } from '../utils/client';
 
 
 // assets
-import x from '../../../assets/x.svg';
-import clearFilter from '../../../assets/clearFilter.svg';
-import bara from '../../../assets/bara.svg';
-
+import x from '../assets/x.svg';
+import clearFilter from '../assets/clearFilter.svg';
+import bara from '../assets/bara.svg';
 
 const client = new Client();
 
@@ -77,19 +76,19 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuCommitsContributor({ paramsCallback }) {
+export default function FilterByContributor({ endpoint, paramsCallback }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
     const [state, setState] = useState({
-        loading: true, commits_data: []
+        loading: true
     });
     const [isSorted, setIsSorted] = useState(false);
     const open = Boolean(anchorEl);
 
 
     const handleClick = (event) => {
-        client.get('tab_commits/filter/contributor').then((contributor_data) => {
+        client.get(endpoint).then((contributor_data) => {
             setState({
                 loading: false,
                 contributor_data: contributor_data,
@@ -110,7 +109,7 @@ export default function TriunghiMenuCommitsContributor({ paramsCallback }) {
 
     const handleFilterByName = (event) => {
         if (event.target.value) {
-            client.get(`tab_commits/filter/contributor?search=${event.target.value}`).then((contributor_data) => {
+            client.get(`${endpoint}?search=${event.target.value}`).then((contributor_data) => {
                 setState({
                     loading: false,
                     contributor_data: contributor_data,
@@ -118,7 +117,7 @@ export default function TriunghiMenuCommitsContributor({ paramsCallback }) {
             });
         }
         else {
-            client.get('tab_commits/filter/contributor').then((contributor_data) => {
+            client.get(endpoint).then((contributor_data) => {
                 setState({
                     loading: false,
                     contributor_data: contributor_data,
@@ -127,8 +126,6 @@ export default function TriunghiMenuCommitsContributor({ paramsCallback }) {
         }
         setFilterName(event.target.value);
     }
-
-
 
     const classes = useStyles();
 
@@ -178,7 +175,7 @@ export default function TriunghiMenuCommitsContributor({ paramsCallback }) {
                             alignItems="center"
                         >
                             <Box className={classes.filterText} aria-disabled>
-                                Filter by author
+                                Filter by assignee
                             </Box>
                             <IconButton onClick={handleClose} style={{ marginLeft: 'auto' }}>
                                 <img src={x} alt='x' className={classes.x} />
@@ -188,7 +185,7 @@ export default function TriunghiMenuCommitsContributor({ paramsCallback }) {
                         <SearchStyle
                             value={filterName}
                             onChange={(e) => handleFilterByName(e)}
-                            placeholder="Filter user"
+                            placeholder="Filter by contributor"
                         />
                         <Divider />
                     </Box >

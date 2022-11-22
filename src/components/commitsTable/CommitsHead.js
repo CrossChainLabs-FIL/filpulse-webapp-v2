@@ -12,8 +12,8 @@ import {
 import { makeStyles } from '@mui/styles';
 
 // components
-import TriunghiMenuCommitsContributor from './headMenus/TriunghiMenuCommitsContributor';
 import FilterByProject from '../FilterByProject';
+import FilterByContributor from '../FilterByContributor';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -199,7 +199,7 @@ export default function CommitsHead({ paramsCallback }) {
                             Contributor
                         </Typography>
 
-                        <TriunghiMenuCommitsContributor paramsCallback={paramsCallback} />
+                        <FilterByContributor endpoint={'tab_commits/filter/contributor'} paramsCallback={paramsCallback} />
 
                     </Stack>
                 </TableCell>
