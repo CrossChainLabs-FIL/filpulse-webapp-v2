@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useLayoutEffect } from 'react';
 import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
@@ -53,6 +53,10 @@ export default function ContributorsTable({ search }) {
     const [params, setParams] = useState({});
     const [isUserNotFound, setIsUserNotFound] = useState(false);
     const [tableEmpty, setTableEmpty] = useState(false);
+    const tableEl = useRef();
+    const [distanceBottom, setDistanceBottom] = useState(0);
+    const [lastOffset, setLastOffset] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
 
     const fetchData = useCallback(async () => {
         try {
@@ -68,7 +72,17 @@ export default function ContributorsTable({ search }) {
 
             response = await client.get('tab_contributors', params);
 
-            setData(response.list);
+            if (response.list?.length < 20) {
+                setHasMore(false);
+            }
+
+            if (params?.offset > lastOffset) {
+                setData([...data, ...response.list]);
+                setLastOffset(params?.offset);
+            } else if (lastOffset == 0) {
+                setData(response.list);
+            }
+
             setState({ loading: false });
             setIsUserNotFound(response.list.length === 0 && search);
             setTableEmpty(response.list.length === 0 && !search);
@@ -84,11 +98,42 @@ export default function ContributorsTable({ search }) {
 
     const paramsCallback = (new_params) => {
         setState({ loading: true });
+        setData([]);
+        new_params.offset = 0;
         setParams({
             ...params,
             ...new_params,
         });
+        setDistanceBottom(0);
+        setLastOffset(0);
+        setHasMore(true);
     }
+
+    const scrollListener = useCallback(() => {
+        let bottom = tableEl.current.scrollHeight - tableEl.current.clientHeight
+
+        setDistanceBottom(Math.round((bottom / 100) * 20))
+
+        if (tableEl.current.scrollTop > bottom - distanceBottom && hasMore && !state.loading) {
+            let new_params = {
+                offset: lastOffset + 20,
+            }
+
+            setParams({
+                ...params,
+                ...new_params,
+            });
+
+        }
+    }, [hasMore, state.loading, distanceBottom]);
+
+    useLayoutEffect(() => {
+        const tableRef = tableEl.current
+        tableRef.addEventListener('scroll', scrollListener)
+        return () => {
+            tableRef.removeEventListener('scroll', scrollListener)
+        }
+    }, [scrollListener]);
 
     return (
         <>
@@ -96,8 +141,8 @@ export default function ContributorsTable({ search }) {
                 sx={{
                     minWidth: 800,
                 }}
-                // component={Paper}
                 className={classes.table}
+                ref={tableEl}
             >
                 <Table stickyHeader>
 

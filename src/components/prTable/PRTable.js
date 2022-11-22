@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useCallback, useContext, useRef, useLayoutEffect } from 'react';
 import { faker } from '@faker-js/faker';
 // @mui
 import { makeStyles } from '@mui/styles';
@@ -61,6 +61,10 @@ export default function PRTable({ search }) {
     const [isUserNotFound, setIsUserNotFound] = useState(false);
     const [tableEmpty, setTableEmpty] = useState(false);
     const { stateLogin, dispatch } = useContext(AuthContext);
+    const tableEl = useRef();
+    const [distanceBottom, setDistanceBottom] = useState(0);
+    const [lastOffset, setLastOffset] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
 
     const fetchData = useCallback(async () => {
         try {
@@ -81,7 +85,17 @@ export default function PRTable({ search }) {
                 response = await client.get('tab_prs', params);
             }
 
-            setData(response.list);
+            if (response.list?.length < 20) {
+                setHasMore(false);
+            }
+
+            if (params?.offset > lastOffset) {
+                setData([...data, ...response.list]);
+                setLastOffset(params?.offset);
+            } else if (lastOffset == 0) {
+                setData(response.list);
+            }
+
             setFetch(false);
             setState({ loading: false });
             setIsUserNotFound(response.list.length === 0 && search);
@@ -104,8 +118,6 @@ export default function PRTable({ search }) {
         const user = JSON.parse(localStorage.getItem("user"));
 
         if (user?.token) {
-            console.log('starOnChange');
-
             let index = e.target.id;
             let params = {
                 number: data[index].number,
@@ -120,9 +132,7 @@ export default function PRTable({ search }) {
 
             const client = new Client();
             client.post_with_token('follow', params, user.token).then((result) => {
-                console.log('follow return');
                 if (result?.success !== true) {
-                    console.log('follow failed trigger fetch');
                     setFetch(true);
                 }
             });
@@ -131,12 +141,44 @@ export default function PRTable({ search }) {
 
     const paramsCallback = (new_params) => {
         setState({ loading: true });
+        setData([]);
         setFetch(true);
+        new_params.offset = 0;
         setParams({
             ...params,
             ...new_params,
         });
+        setDistanceBottom(0);
+        setLastOffset(0);
+        setHasMore(true);
     }
+
+    const scrollListener = useCallback(() => {
+        let bottom = tableEl.current.scrollHeight - tableEl.current.clientHeight
+
+        setDistanceBottom(Math.round((bottom / 100) * 20))
+
+        if (tableEl.current.scrollTop > bottom - distanceBottom && hasMore && !state.loading) {
+            let new_params = {
+                offset: lastOffset + 20,
+            }
+
+            setParams({
+                ...params,
+                ...new_params,
+            });
+
+            setFetch(true);
+        }
+    }, [hasMore, state.loading, distanceBottom]);
+
+    useLayoutEffect(() => {
+        const tableRef = tableEl.current
+        tableRef.addEventListener('scroll', scrollListener)
+        return () => {
+            tableRef.removeEventListener('scroll', scrollListener)
+        }
+    }, [scrollListener]);
 
     return (
         <>
@@ -144,8 +186,8 @@ export default function PRTable({ search }) {
                 sx={{
                     minWidth: 800,
                 }}
-                // component={Paper}
                 className={classes.table}
+                ref={tableEl}
             >
                 <Table
                     stickyHeader
