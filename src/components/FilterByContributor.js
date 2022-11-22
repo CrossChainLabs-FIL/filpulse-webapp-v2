@@ -76,7 +76,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function FilterByContributor({ endpoint, paramsCallback }) {
+export default function FilterByContributor({ endpoint, paramsCallback, name }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
@@ -175,7 +175,7 @@ export default function FilterByContributor({ endpoint, paramsCallback }) {
                             alignItems="center"
                         >
                             <Box className={classes.filterText} aria-disabled>
-                                Filter by assignee
+                               { name ? name : 'Filter by contributor' }
                             </Box>
                             <IconButton onClick={handleClose} style={{ marginLeft: 'auto' }}>
                                 <img src={x} alt='x' className={classes.x} />
