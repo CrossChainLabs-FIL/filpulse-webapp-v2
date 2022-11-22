@@ -14,7 +14,7 @@ import { makeStyles } from '@mui/styles';
 
 // components
 import TriunghiMenuContributorContributor from './headMenus/TriunghiMenuContributorContributor';
-import TriunghiMenuContributorProject from './headMenus/TriunghiMenuContributorProject'
+import FilterByProject from '../FilterByProject';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -142,7 +142,7 @@ export default function ContributorHead({ paramsCallback }) {
                             Project
                         </Typography>
 
-                        <TriunghiMenuContributorProject paramsCallback={paramsCallback} />
+                        <FilterByProject endpoint={'tab_contributors/filter/project'} paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 

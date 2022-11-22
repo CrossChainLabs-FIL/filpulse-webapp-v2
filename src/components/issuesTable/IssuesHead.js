@@ -13,9 +13,9 @@ import { makeStyles } from '@mui/styles';
 
 // components
 import TriunghiMenuIssuesAuthor from './headMenus/TriunghiMenuIssuesAuthor';
-import TriunghiMenuIssuesProject from './headMenus/TriunghiMenuIssuesProject';
 import TriunghiMenuIssuesAssignee from './headMenus/TriunghiMenuIssuesAssignee';
 import TriunghiMenuIssuesStatus from './headMenus/TriunghiMenuIssuesStatus'
+import FilterByProject from '../FilterByProject';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -182,7 +182,7 @@ export default function IssuesHead({ paramsCallback }) {
                             Project
                         </Typography>
 
-                        <TriunghiMenuIssuesProject paramsCallback={paramsCallback} />
+                        <FilterByProject endpoint={'tab_issues/filter/project'}  paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 

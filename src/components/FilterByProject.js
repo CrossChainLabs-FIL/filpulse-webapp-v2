@@ -18,13 +18,13 @@ import {
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
-import { Client } from '../../../utils/client';
+import { Client } from '../utils/client';
 
 
 // assets
-import x from '../../../assets/x.svg';
-import clearFilter from '../../../assets/clearFilter.svg';
-import bara from '../../../assets/bara.svg';
+import x from '../assets/x.svg';
+import clearFilter from '../assets/clearFilter.svg';
+import bara from '../assets/bara.svg';
 
 const client = new Client();
 
@@ -82,7 +82,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 
 
-export default function TriunghiMenuPrProject({ paramsCallback }) {
+export default function FilterByProject({ endpoint, paramsCallback }) {
 
     const [filterName, setFilterName] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
@@ -93,7 +93,7 @@ export default function TriunghiMenuPrProject({ paramsCallback }) {
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
-        client.get('tab_prs/filter/project').then((project_data) => {
+        client.get(endpoint).then((project_data) => {
             setState({
                 loading: false,
                 project_data: project_data,
@@ -114,7 +114,7 @@ export default function TriunghiMenuPrProject({ paramsCallback }) {
 
     const handleFilterByName = (event) => {
         if (event.target.value) {
-            client.get(`tab_prs/filter/project?search=${event.target.value}`).then((project_data) => {
+            client.get(`${endpoint}?search=${event.target.value}`).then((project_data) => {
                 setState({
                     loading: false,
                     project_data: project_data,
@@ -122,7 +122,7 @@ export default function TriunghiMenuPrProject({ paramsCallback }) {
             });
         }
         else {
-            client.get('tab_prs/filter/project').then((project_data) => {
+            client.get(endpoint).then((project_data) => {
                 setState({
                     loading: false,
                     project_data: project_data,

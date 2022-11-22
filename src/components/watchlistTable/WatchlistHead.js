@@ -14,7 +14,6 @@ import { makeStyles } from '@mui/styles';
 
 // components
 import TriunghiMenuWLStatus from './headMenus/TriunghiMenuWLStatus';
-import TriunghiMenuWLName from './headMenus/TriunghiMenuWLName';
 import TriunghiMenuWLParticipants from './headMenus/TriunghiMenuWLParticipants';
 
 // assets

@@ -13,8 +13,8 @@ import { makeStyles } from '@mui/styles';
 
 // components
 import TriunghiMenuPrContributor from './headMenus/TriunghiMenuPrContributor';
-import TriunghiMenuPrProject from './headMenus/TriunghiMenuPrProject';
 import TriunghiMenuPrStatus from './headMenus/TriunghiMenuPrStatus';
+import FilterByProject from '../FilterByProject';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -179,7 +179,7 @@ export default function PRHead({ paramsCallback }) {
                             Project
                         </Typography>
 
-                        <TriunghiMenuPrProject paramsCallback={paramsCallback} />
+                        <FilterByProject endpoint={'tab_prs/filter/project'} paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 

@@ -13,8 +13,8 @@ import { makeStyles } from '@mui/styles';
 
 // components
 import TriunghiMenuReleasesAuthor from './headMenus/TriunghiMenuReleasesAuthor';
-import TriunghiMenuReleasesProject from './headMenus/TriunghiMenuReleasesProject';
-import TriunghiMenuReleasesStatus from './headMenus/TriunghiMenuReleasesStatus'
+import TriunghiMenuReleasesStatus from './headMenus/TriunghiMenuReleasesStatus';
+import FilterByProject from '../FilterByProject';
 
 // assets
 import triunghi from '../../assets/triunghi.svg';
@@ -177,7 +177,7 @@ export default function ReleasesHead({ paramsCallback }) {
                             Project
                         </Typography>
 
-                        <TriunghiMenuReleasesProject paramsCallback={paramsCallback} />
+                        <FilterByProject endpoint={'tab_releases/filter/project'} paramsCallback={paramsCallback} />
                     </Stack>
                 </TableCell>
 
