@@ -107,7 +107,7 @@ export default function PRTable({ search }) {
     }, [params, search]);
 
     useEffect(() => {
-        if (fetch) {
+        if (fetch || search) {
             fetchData();
         }
         setUpdate(false);
