@@ -17,9 +17,25 @@ function ContributorItem({ item }) {
   const { dev_name, avatar_url, contributions } = item
 
   return (
-    <Stack direction="row" alignItems="center" spacing={2}>
-      <Box component="img" src={avatar_url} sx={{ width: 30, height: 30, borderRadius: 1.5 }} />
-      <Box sx={{ minWidth: 240 }}>
+    <Stack
+      direction="row"
+      alignItems="center"
+      spacing={2}
+    >
+      <Box
+        component="img"
+        src={avatar_url}
+        sx={{
+          width: 30,
+          height: 30,
+          borderRadius: 1.5
+        }}
+      />
+      <Box
+        sx={{
+          minWidth: { xl: 240, lg: 140 }
+        }}
+      >
         <Typography variant="subtitle2" noWrap>
           <Link
             target="_blank"
@@ -32,7 +48,14 @@ function ContributorItem({ item }) {
         </Typography>
       </Box>
       <Box flexGrow={2}></Box>
-      <Typography variant="caption" sx={{ pr: 3, flexShrink: 0, color: 'text.secondary' }}>
+      <Typography
+        variant="caption"
+        sx={{
+          pr: 3,
+          flexShrink: 0,
+          color: 'text.secondary',
+        }}
+      >
         {contributions} commits
       </Typography>
     </Stack>
@@ -54,7 +77,12 @@ export default function TopContributors() {
   }, [setState]);
 
   return (
-    <Card className='boxShadowContainer'>
+    <Card
+      className='boxShadowContainer'
+      sx={{
+        marginBottom: '3rem'
+      }}
+    >
       <CardHeader title="Contributors of the month" />
       <Box
         sx={{

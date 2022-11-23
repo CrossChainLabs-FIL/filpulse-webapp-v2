@@ -122,7 +122,13 @@ export default function AppbarLoggedOut() {
 
     return (
         <React.Fragment>
-            <AppBar sx={{ boxShadow: 1, bgcolor: BG_COLOR }}>
+            <AppBar
+                className="appbarShadow"
+                sx={{
+                    // boxShadow: 1,
+                    bgcolor: BG_COLOR
+                }}
+            >
                 <ToolbarStyle
                     disableGutters
                     sx={{
@@ -171,13 +177,14 @@ export default function AppbarLoggedOut() {
                                     >
                                         <Grid item>
                                             <Typography
-                                                style={{
+                                                sx={{
                                                     marginTop: '3.5rem',
-                                                    marginBottom: '3rem',
-                                                    marginLeft: '3rem'
+                                                    marginBottom: '4rem',
+                                                    marginLeft: '3rem',
+                                                    marginRight: '3rem'
                                                 }}
                                             >
-                                                Track the ecosystem development. View your preferred activities. Do it all with our easy to use platform.
+                                                Sign in to track the ecosystem development and view your preferred activities.
                                             </Typography>
                                         </Grid>
                                         <Grid item>

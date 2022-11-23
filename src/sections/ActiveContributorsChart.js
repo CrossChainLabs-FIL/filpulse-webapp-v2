@@ -47,12 +47,24 @@ export default function ActiveContributors() {
   });
 
   return (
-    <Card className='boxShadowContainer'>
+    <Card
+      className='boxShadowContainer'
+      sx={{
+        marginBottom: '3rem'
+      }}
+    >
       <CardHeader
         title="Active Contributors"
         subheader=""
       />
-      <Box sx={{ mt: 3, mx: 3, width: '55rem', marginLeft: '3.9rem', }} dir="ltr">
+      <Box
+        sx={{
+          mt: 3,
+          mx: 3,
+          width: '55rem'
+        }}
+        dir="ltr"
+      >
         <ReactApexChart type="line" series={state.data} options={chartOptions} height={364} />
       </Box>
     </Card>

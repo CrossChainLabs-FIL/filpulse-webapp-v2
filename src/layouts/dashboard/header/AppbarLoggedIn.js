@@ -101,7 +101,12 @@ export default function AppbarLoggedIn() {
 
     return (
         <React.Fragment>
-            <AppBar sx={{ boxShadow: 1, bgcolor: BG_COLOR }}>
+            <AppBar
+                className="appbarShadow"
+                sx={{
+                    // boxShadow: 0.5,
+                    bgcolor: BG_COLOR
+                }}>
                 <ToolbarStyle
                     disableGutters
                     sx={{

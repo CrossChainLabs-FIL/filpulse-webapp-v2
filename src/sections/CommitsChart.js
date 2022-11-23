@@ -48,12 +48,23 @@ export default function Commits() {
   });
 
   return (
-    <Card className='boxShadowContainer'>
+    <Card
+      className='boxShadowContainer'
+      sx={{
+        marginBottom: '3rem'
+      }}
+    >
       <CardHeader
         title="Commits"
         subheader=""
       />
-      <Box sx={{ mt: 3, mx: 3 }} dir="ltr">
+      <Box
+        sx={{
+          mt: 3,
+          mx: 3,
+        }}
+        dir="ltr"
+      >
         <ReactApexChart type="bar" series={state.data} options={chartOptions} height={364} />
       </Box>
     </Card>

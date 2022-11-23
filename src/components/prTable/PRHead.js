@@ -28,28 +28,6 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: '0.35rem',
         marginTop: '0.15rem'
     },
-    rowHead: {
-        height: '4rem',
-    },
-    checkbox: {
-        width: '5.35rem',
-    },
-    id: {
-        width: '5.5rem',
-    },
-    pr: {
-        width: '26rem'
-    },
-    project: {
-        width: '18rem'
-    },
-    contributor: {
-        width: '15rem'
-    },
-    status: {
-        width: '10rem',
-        padding: 0
-    },
 }));
 
 
@@ -96,16 +74,26 @@ export default function PRHead({ paramsCallback }) {
 
     return (
         <TableHead>
-            <TableRow className={classes.rowHead}>
+            <TableRow
+                sx={{
+                    height: '4rem',
+                }}
+            >
 
-                <TableCell className={classes.checkbox} />
+                <TableCell
+                    sx={{
+                        width: '5.35rem',
+                    }}
+                />
 
                 <TableCell
                     align="left"
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.id}
+                    sx={{
+                        width: '5.5rem',
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -137,7 +125,9 @@ export default function PRHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.pr}
+                    sx={{
+                        width: '26rem'
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -169,7 +159,9 @@ export default function PRHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.project}
+                    sx={{
+                        width: '18rem'
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -188,7 +180,9 @@ export default function PRHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.contributor}
+                    sx={{
+                        width: '15rem'
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -208,7 +202,10 @@ export default function PRHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.status}
+                    sx={{
+                        width: '10rem',
+                        padding: 0
+                    }}
                 >
                     <Stack
                         direction="row"

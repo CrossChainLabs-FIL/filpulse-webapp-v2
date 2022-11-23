@@ -65,7 +65,12 @@ export default function Issues({ issuesData }) {
   });
 
   return (
-    <Card className='boxShadowContainer'>
+    <Card
+      className='boxShadowContainer'
+      sx={{
+        marginBottom: '3rem'
+      }}
+    >
       <CardHeader title="Issues" />
       <ChartWrapperStyle dir="ltr">
         <ReactApexChart type="donut" series={issuesData} options={chartOptions} height={310} />

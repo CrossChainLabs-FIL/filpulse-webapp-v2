@@ -102,7 +102,7 @@ export default function ContributorHead({ paramsCallback }) {
                     scope="row"
                     padding="none"
                     className={classes.contributor}
-                    style={{
+                    sx={{
                         padding: 0,
                         paddingLeft: '2.2rem'
                     }}
@@ -112,9 +112,8 @@ export default function ContributorHead({ paramsCallback }) {
                         alignItems="center"
                     >
                         <Typography
-                            variant="h6"
                             noWrap
-                            style={{
+                            sx={{
                                 fontWeight: 500,
                                 marginLeft: '3rem',
                                 fontSize: 16
@@ -138,7 +137,13 @@ export default function ContributorHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography
+                            noWrap
+                            sx={{
+                                fontWeight: 500,
+                                fontSize: 16
+                            }}
+                        >
                             Project
                         </Typography>
 
@@ -157,14 +162,21 @@ export default function ContributorHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
+                        <Typography
+                            noWrap
+                            sx={{
+                                fontWeight: 500,
+                                fontSize: 16,
+                                marginRight: '0.35rem',
+                            }}
+                        >
                             Commits
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={(e) => handleSort('contributions')}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}
@@ -188,12 +200,12 @@ export default function ContributorHead({ paramsCallback }) {
                     <Stack
                         direction="row"
                         alignItems="center"
-                        style={{ marginTop: '1.2rem' }}
+                        sx={{ marginTop: '1.2rem' }}
                     >
                         <Tooltip
                             title='info'
                             arrow
-                            style={{
+                            sx={{
                                 marginRight: '0.35rem'
                             }}
                         >
@@ -201,9 +213,8 @@ export default function ContributorHead({ paramsCallback }) {
                         </Tooltip>
 
                         <Typography
-                            variant="h6"
                             noWrap
-                            style={{
+                            sx={{
                                 fontWeight: 500,
                                 fontSize: 16,
                                 marginRight: '0.35rem',
@@ -215,7 +226,7 @@ export default function ContributorHead({ paramsCallback }) {
                         <IconButton
                             id="basic-button"
                             onClick={(e) => handleSort('open_prs')}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}
@@ -228,14 +239,13 @@ export default function ContributorHead({ paramsCallback }) {
                         </IconButton>
                     </Stack>
                     <Typography
-                        variant="subtitle2"
                         noWrap
-                        style={{
+                        sx={{
                             fontWeight: 450,
                             opacity: 0.75,
                             marginTop: 0,
                             fontSize: 12,
-                            marginLeft: '1.8rem'
+                            marginLeft: '1rem'
                         }}
                     >
                         open - closed
@@ -251,12 +261,12 @@ export default function ContributorHead({ paramsCallback }) {
                     <Stack
                         direction="row"
                         alignItems="center"
-                        style={{ marginTop: '1.2rem' }}
+                        sx={{ marginTop: '1.2rem' }}
                     >
                         <Tooltip
                             title='info'
                             arrow
-                            style={{
+                            sx={{
                                 marginRight: '0.35rem'
                             }}
                         >
@@ -264,9 +274,8 @@ export default function ContributorHead({ paramsCallback }) {
                         </Tooltip>
 
                         <Typography
-                            variant="h6"
                             noWrap
-                            style={{
+                            sx={{
                                 fontWeight: 500,
                                 fontSize: 16,
                                 marginRight: '0.35rem',
@@ -278,7 +287,7 @@ export default function ContributorHead({ paramsCallback }) {
                         <IconButton
                             id="basic-button"
                             onClick={(e) => handleSort('open_issues')}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}
@@ -291,14 +300,13 @@ export default function ContributorHead({ paramsCallback }) {
                         </IconButton>
                     </Stack>
                     <Typography
-                        variant="subtitle2"
                         noWrap
-                        style={{
+                        sx={{
                             fontWeight: 450,
                             opacity: 0.75,
                             marginTop: 0,
                             fontSize: 12,
-                            marginLeft: '1.8rem'
+                            marginLeft: '1rem'
                         }}
                     >
                         open - closed
