@@ -9,7 +9,6 @@ import {
     IconButton
 } from '@mui/material';
 
-import { makeStyles } from '@mui/styles';
 
 // components
 import FilterByProject from '../FilterByProject';
@@ -22,35 +21,11 @@ import triunghi from '../../assets/triunghi.svg';
 // ----------------------------------------------------------------------
 
 
-const useStyles = makeStyles(() => ({
-    triunghi: {
-        marginLeft: '0.35rem',
-        marginTop: '0.15rem'
-    },
-    rowHead: {
-        height: '4rem',
-    },
-    hash: {
-        width: '14rem'
-    },
-    commit: {
-        width: '31rem'
-    },
-    project: {
-        width: '20rem'
-    },
-    contributor: {
-        width: '15rem'
-    },
-}));
-
-
 
 export default function CommitsHead({ paramsCallback }) {
     const [isDescHash, setIsDescHash] = useState(true);
     const [isDescCommit, setIsDescCommit] = useState(true);
     const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
-    const classes = useStyles();
 
     const styleHash = {
         transform: !isDescHash ? 'rotate(180deg)' : '',
@@ -88,17 +63,20 @@ export default function CommitsHead({ paramsCallback }) {
 
     return (
         <TableHead>
-            <TableRow className={classes.rowHead}>
+            <TableRow
+                sx={{
+                    height: '4rem',
+                }}
+            >
 
                 <TableCell
                     align="left"
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.hash}
-                    style={{
+                    sx={{
+                        width: '14rem',
                         padding: 0,
-                        paddingLeft: '5.35rem'
                     }}
                 >
                     <Stack
@@ -107,10 +85,11 @@ export default function CommitsHead({ paramsCallback }) {
                     >
                         <Typography
                             noWrap
-                            style={{
+                            sx={{
                                 fontWeight: 500,
                                 fontSize: 16,
                                 marginRight: '0.35rem',
+                                marginLeft: '3.75rem',
                             }}
                         >
                             Hash
@@ -119,7 +98,7 @@ export default function CommitsHead({ paramsCallback }) {
                         <IconButton
                             id="basic-button"
                             onClick={handleSortHash}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}
@@ -138,20 +117,22 @@ export default function CommitsHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.commit}
+                    sx={{
+                        width: '31rem'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Commit
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortCommit}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}
@@ -170,13 +151,15 @@ export default function CommitsHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.project}
+                    sx={{
+                        width: '20rem'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16 }}>
                             Project
                         </Typography>
 
@@ -189,13 +172,15 @@ export default function CommitsHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.contributor}
+                    sx={{
+                        width: '15rem'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16 }}>
                             Contributor
                         </Typography>
 
@@ -214,14 +199,14 @@ export default function CommitsHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Last Updated
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortUpdatedAt}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}

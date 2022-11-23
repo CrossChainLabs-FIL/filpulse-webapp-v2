@@ -50,12 +50,6 @@ const useStyles = makeStyles(() => ({
     stea: {
         marginLeft: '0.15rem'
     },
-    projectElipsis: {
-        maxWidth: '25rem',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-    },
 }));
 
 export default function WatchlistTable({ search }) {
@@ -90,7 +84,7 @@ export default function WatchlistTable({ search }) {
                 if (response.list?.length < 20) {
                     setHasMore(false);
                 }
-    
+
                 if (params?.offset > lastOffset) {
                     setData([...data, ...response.list]);
                     setLastOffset(params?.offset);
@@ -268,7 +262,7 @@ export default function WatchlistTable({ search }) {
                                             component="th"
                                             scope="row"
                                             padding="none"
-                                            style={{ height: '6rem' }}
+                                            sx={{ height: '6rem' }}
                                         >
                                             <Typography
                                                 variant="subtitle2"
@@ -302,11 +296,14 @@ export default function WatchlistTable({ search }) {
                                                     <Typography
                                                         variant="subtitle2"
                                                         noWrap
-                                                        style={{
+                                                        sx={{
                                                             lineHeight: '1rem',
-                                                            marginTop: '0.45rem'
+                                                            marginTop: '0.45rem',
+                                                            maxWidth: '12rem',
+                                                            whiteSpace: 'nowrap',
+                                                            overflow: 'hidden',
+                                                            textOverflow: 'ellipsis',
                                                         }}
-                                                        className={classes.projectElipsis}
                                                     >
                                                         {title}
                                                     </Typography>
@@ -357,8 +354,10 @@ export default function WatchlistTable({ search }) {
                                                                 <Box
                                                                     component="img"
                                                                     src={avatar_url}
-                                                                    sx={{ width: 30, height: 30, borderRadius: 1.5 }}
-                                                                    style={{
+                                                                    sx={{
+                                                                        width: 30,
+                                                                        height: 30,
+                                                                        borderRadius: 1.5,
                                                                         marginRight: '1rem'
                                                                     }}
                                                                 />
@@ -402,7 +401,7 @@ export default function WatchlistTable({ search }) {
                                                     <IconButton
                                                         id={index}
                                                         onClick={() => viewComments(index)}
-                                                        style={{
+                                                        sx={{
                                                             padding: 0,
                                                             marginLeft: '1.1rem'
                                                         }}
@@ -420,13 +419,12 @@ export default function WatchlistTable({ search }) {
                                                                 alignItems="center"
                                                             >
                                                                 <Badge badgeContent={Number(new_comments)}
-                                                                    // color='primary'
                                                                     anchorOrigin={{
                                                                         vertical: 'top',
                                                                         horizontal: 'left',
                                                                     }}
                                                                     classes={{ badge: classes.customBadge }}
-                                                                    style={{
+                                                                    sx={{
                                                                         marginLeft: '0.25rem',
                                                                         marginRight: '0.25rem',
                                                                     }}

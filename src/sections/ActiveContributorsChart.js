@@ -61,7 +61,7 @@ export default function ActiveContributors() {
         sx={{
           mt: 3,
           mx: 3,
-          width: '55rem'
+          width: { xl: '58rem', lg: '44rem' }
         }}
         dir="ltr"
       >

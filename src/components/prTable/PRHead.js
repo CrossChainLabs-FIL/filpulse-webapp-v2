@@ -9,8 +9,6 @@ import {
     IconButton
 } from '@mui/material';
 
-import { makeStyles } from '@mui/styles';
-
 // components
 import TriunghiMenuPrStatus from './headMenus/TriunghiMenuPrStatus';
 import FilterByProject from '../FilterByProject';
@@ -23,20 +21,10 @@ import triunghi from '../../assets/triunghi.svg';
 // ----------------------------------------------------------------------
 
 
-const useStyles = makeStyles((theme) => ({
-    triunghi: {
-        marginLeft: '0.35rem',
-        marginTop: '0.15rem'
-    },
-}));
-
-
-
 export default function PRHead({ paramsCallback }) {
     const [isDescNumber, setIsDescNumber] = useState(true);
     const [isDescName, setIsDescName] = useState(true);
     const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
-    const classes = useStyles();
 
     const styleNumber = {
         transform: !isDescNumber ? 'rotate(180deg)' : '',
@@ -82,7 +70,7 @@ export default function PRHead({ paramsCallback }) {
 
                 <TableCell
                     sx={{
-                        width: '5.35rem',
+                        width: { xl: '5.35rem', lg: '4rem' }
                     }}
                 />
 
@@ -92,7 +80,7 @@ export default function PRHead({ paramsCallback }) {
                     scope="row"
                     padding="none"
                     sx={{
-                        width: '5.5rem',
+                        width: { xl: '5.5rem', lg: '4rem' },
                     }}
                 >
                     <Stack
@@ -126,7 +114,7 @@ export default function PRHead({ paramsCallback }) {
                     scope="row"
                     padding="none"
                     sx={{
-                        width: '26rem'
+                        width: { xl: '26rem', lg: '20rem' }
                     }}
                 >
                     <Stack
@@ -160,7 +148,7 @@ export default function PRHead({ paramsCallback }) {
                     scope="row"
                     padding="none"
                     sx={{
-                        width: '18rem'
+                        width: { xl: '18rem', lg: '12rem' }
                     }}
                 >
                     <Stack
@@ -181,7 +169,7 @@ export default function PRHead({ paramsCallback }) {
                     scope="row"
                     padding="none"
                     sx={{
-                        width: '15rem'
+                        width: { xl: '15rem', lg: '10rem' }
                     }}
                 >
                     <Stack
@@ -203,7 +191,7 @@ export default function PRHead({ paramsCallback }) {
                     scope="row"
                     padding="none"
                     sx={{
-                        width: '10rem',
+                        width: { xl: '10rem', lg: '8rem' },
                         padding: 0
                     }}
                 >
@@ -225,14 +213,14 @@ export default function PRHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    style={{
+                    sx={{
                         padding: 0,
                     }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
-                        style={{ padding: 0 }}
+                        sx={{ padding: 0 }}
                     >
                         <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem' }}>
                             Last Updated

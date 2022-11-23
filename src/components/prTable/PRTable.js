@@ -258,7 +258,7 @@ export default function PRTable({ search }) {
                                             component="th"
                                             scope="row"
                                             padding="none"
-                                            style={{
+                                            sx={{
                                                 height: '5rem',
                                                 paddingLeft: 0,
                                             }}
@@ -286,7 +286,7 @@ export default function PRTable({ search }) {
                                                 variant="subtitle2"
                                                 noWrap
                                                 sx={{
-                                                    maxWidth: '32rem',
+                                                    maxWidth: { xl: '18rem', lg: '16rem' },
                                                     whiteSpace: 'nowrap',
                                                     overflow: 'hidden',
                                                     textOverflow: 'ellipsis',
@@ -306,7 +306,7 @@ export default function PRTable({ search }) {
                                                 variant="subtitle2"
                                                 noWrap
                                                 sx={{
-                                                    maxWidth: '32rem',
+                                                    maxWidth: '12rem',
                                                     whiteSpace: 'nowrap',
                                                     overflow: 'hidden',
                                                     textOverflow: 'ellipsis',
@@ -411,7 +411,13 @@ export default function PRTable({ search }) {
                     {tableEmpty && !state.loading && (
                         <TableBody>
                             <TableRow>
-                                <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                                <TableCell
+                                    align="center"
+                                    colSpan={7}
+                                    sx={{
+                                        py: 3,
+                                    }}
+                                >
                                     <TableEmpty />
                                 </TableCell>
                             </TableRow>

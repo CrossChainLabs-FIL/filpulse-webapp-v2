@@ -10,8 +10,6 @@ import {
     Tooltip
 } from '@mui/material';
 
-import { makeStyles } from '@mui/styles';
-
 // components
 import FilterByProject from '../FilterByProject';
 import FilterByContributor from '../FilterByContributor';
@@ -24,36 +22,11 @@ import info from '../../assets/info.svg';
 // ----------------------------------------------------------------------
 
 
-const useStyles = makeStyles(() => ({
-    triunghi: {
-        marginLeft: '0.35rem',
-        marginTop: '0.15rem'
-    },
-    rowHead: {
-        height: '4rem',
-    },
-    contributor: {
-        width: '20rem'
-    },
-    project: {
-        width: '16rem'
-    },
-    commits: {
-        width: '15rem'
-    },
-    pr: {
-        width: '20rem'
-    }
-}));
-
-
-
 export default function ContributorHead({ paramsCallback }) {
 
     const [isDescCommits, setIsDescCommits] = useState(true);
     const [isDescPrs, setIsDescPrs] = useState(true);
     const [isDescIssues, setIsDescIssues] = useState(true);
-    const classes = useStyles();
 
     const styleCommits = {
         transform: !isDescCommits ? 'rotate(180deg)' : '',
@@ -94,17 +67,20 @@ export default function ContributorHead({ paramsCallback }) {
 
     return (
         <TableHead>
-            <TableRow className={classes.rowHead}>
+            <TableRow
+                sx={{
+                    height: '4rem',
+                }}
+            >
 
                 <TableCell
                     align="left"
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.contributor}
                     sx={{
+                        width: '20rem',
                         padding: 0,
-                        paddingLeft: '2.2rem'
                     }}
                 >
                     <Stack
@@ -115,7 +91,7 @@ export default function ContributorHead({ paramsCallback }) {
                             noWrap
                             sx={{
                                 fontWeight: 500,
-                                marginLeft: '3rem',
+                                marginLeft: '3.8rem',
                                 fontSize: 16
                             }}
                         >
@@ -131,7 +107,9 @@ export default function ContributorHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.project}
+                    sx={{
+                        width: '16rem'
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -156,7 +134,9 @@ export default function ContributorHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.commits}
+                    sx={{
+                        width: '15rem'
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -195,7 +175,9 @@ export default function ContributorHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.pr}
+                    sx={{
+                        width: '20rem'
+                    }}
                 >
                     <Stack
                         direction="row"

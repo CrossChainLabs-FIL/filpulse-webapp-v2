@@ -9,7 +9,6 @@ import {
     IconButton
 } from '@mui/material';
 
-import { makeStyles } from '@mui/styles';
 
 // components
 import TriunghiMenuIssuesAssignee from './headMenus/TriunghiMenuIssuesAssignee';
@@ -23,45 +22,10 @@ import triunghi from '../../assets/triunghi.svg';
 // ----------------------------------------------------------------------
 
 
-const useStyles = makeStyles(() => ({
-    triunghi: {
-        marginLeft: '0.35rem',
-        marginTop: '0.15rem'
-    },
-    rowHead: {
-        height: '4rem',
-    },
-    checkbox: {
-        width: '6rem',
-    },
-    id: {
-        width: '5rem',
-    },
-    issue: {
-        width: '24rem'
-    },
-    project: {
-        width: '20rem'
-    },
-    contributor: {
-        width: '15rem'
-    },
-    assignee: {
-        width: '16rem'
-    },
-    status: {
-        width: '8rem'
-    }
-}));
-
-
-
-
 export default function IssuesHead({ paramsCallback }) {
     const [isDescNumber, setIsDescNumber] = useState(true);
     const [isDescName, setIsDescName] = useState(true);
     const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
-    const classes = useStyles();
 
     const styleNumber = {
         transform: !isDescNumber ? 'rotate(180deg)' : '',
@@ -99,16 +63,26 @@ export default function IssuesHead({ paramsCallback }) {
 
     return (
         <TableHead>
-            <TableRow className={classes.rowHead}>
+            <TableRow
+                sx={{
+                    height: '4rem',
+                }}
+            >
 
-                <TableCell className={classes.checkbox} />
+                <TableCell
+                    sx={{
+                        width: { xl: '6rem', lg: '4rem' },
+                    }}
+                />
 
                 <TableCell
                     align="left"
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.id}
+                    sx={{
+                        width: { xl: '5rem', lg: '4rem' },
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -121,7 +95,7 @@ export default function IssuesHead({ paramsCallback }) {
                         <IconButton
                             id="basic-button"
                             onClick={handleSortNumber}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}
@@ -140,7 +114,9 @@ export default function IssuesHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.issue}
+                    sx={{
+                        width: { xl: '24rem', lg: '15rem' }
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -172,7 +148,9 @@ export default function IssuesHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.project}
+                    sx={{
+                        width: { xl: '20rem', lg: '15rem' }
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -191,7 +169,9 @@ export default function IssuesHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.contributor}
+                    sx={{
+                        width: { xl: '15rem', lg: '12rem' }
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -210,7 +190,9 @@ export default function IssuesHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.assignee}
+                    sx={{
+                        width: '16rem'
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -229,7 +211,9 @@ export default function IssuesHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.status}
+                    sx={{
+                        width: '8rem'
+                    }}
                 >
                     <Stack
                         direction="row"

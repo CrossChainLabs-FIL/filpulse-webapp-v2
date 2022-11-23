@@ -37,10 +37,7 @@ const useStyles = makeStyles(() => ({
         maxHeight: '40rem',
     },
     projectElipsis: {
-        maxWidth: '14rem',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
+
     },
     stea: {
         marginLeft: '0.15rem'
@@ -206,7 +203,12 @@ export default function ReleasesTable({ search }) {
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                className={classes.projectElipsis}
+                                                sx={{
+                                                    maxWidth: '14rem',
+                                                    whiteSpace: 'nowrap',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                }}
                                             >
                                                 {name}
                                             </Typography>
@@ -222,7 +224,12 @@ export default function ReleasesTable({ search }) {
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                className={classes.projectElipsis}
+                                                sx={{
+                                                    maxWidth: '12rem',
+                                                    whiteSpace: 'nowrap',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                }}
                                             >
                                                 <Link
                                                     target="_blank"

@@ -9,8 +9,6 @@ import {
     IconButton
 } from '@mui/material';
 
-import { makeStyles } from '@mui/styles';
-
 // components
 import TriunghiMenuReleasesStatus from './headMenus/TriunghiMenuReleasesStatus';
 import FilterByProject from '../FilterByProject';
@@ -22,39 +20,12 @@ import triunghi from '../../assets/triunghi.svg';
 // ----------------------------------------------------------------------
 
 
-const useStyles = makeStyles(() => ({
-    triunghi: {
-        marginLeft: '0.35rem',
-        marginTop: '0.15rem'
-    },
-    rowHead: {
-        height: '4rem',
-    },
-    id: {
-        width: '15rem',
-    },
-    release: {
-        width: '15rem'
-    },
-    project: {
-        width: '18rem'
-    },
-    author: {
-        width: '18rem'
-    },
-    status: {
-        width: '14rem'
-    }
-}));
-
-
 
 
 export default function ReleasesHead({ paramsCallback }) {
     const [isDescNumber, setIsDescNumber] = useState(true);
     const [isDescName, setIsDescName] = useState(true);
     const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
-    const classes = useStyles();
 
     const styleNumber = {
         transform: !isDescNumber ? 'rotate(180deg)' : '',
@@ -92,31 +63,43 @@ export default function ReleasesHead({ paramsCallback }) {
 
     return (
         <TableHead>
-            <TableRow className={classes.rowHead}>
+            <TableRow
+                sx={{
+                    height: '4rem',
+                }}
+            >
 
                 <TableCell
                     align="left"
                     component="th"
                     scope="row"
                     padding="none"
-                    style={{
+                    sx={{
+                        width: '15rem',
                         padding: 0,
-                        paddingLeft: '5.35rem'
+                        // paddingLeft: '5.35rem',
                     }}
-                    className={classes.id}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
+                        <Typography
+                            noWrap
+                            sx={{
+                                fontWeight: 500,
+                                fontSize: 16,
+                                marginRight: '0.35rem',
+                                marginLeft: '3.9rem',
+                            }}
+                        >
                             #
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortNumber}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}
@@ -135,20 +118,22 @@ export default function ReleasesHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.release}
+                    sx={{
+                        width: '15rem'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Release
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortName}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}
@@ -167,13 +152,15 @@ export default function ReleasesHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.project}
+                    sx={{
+                        width: '18rem'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16 }}>
                             Project
                         </Typography>
 
@@ -186,13 +173,15 @@ export default function ReleasesHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.author}
+                    sx={{
+                        width: '18rem'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16 }}>
                             Author
                         </Typography>
 
@@ -209,13 +198,15 @@ export default function ReleasesHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.status}
+                    sx={{
+                        width: '14rem'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16 }}>
                             Status
                         </Typography>
 
@@ -233,14 +224,14 @@ export default function ReleasesHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Last Updated
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortUpdatedAt}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}

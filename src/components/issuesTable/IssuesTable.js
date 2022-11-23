@@ -41,12 +41,6 @@ const useStyles = makeStyles(() => ({
     table: {
         maxHeight: '40rem',
     },
-    projectElipsis: {
-        maxWidth: '25rem',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-    },
     stea: {
         marginBottom: '0.2rem'
     }
@@ -252,7 +246,7 @@ export default function IssuesTable({ search }) {
                                             component="th"
                                             scope="row"
                                             padding="none"
-                                            style={{
+                                            sx={{
                                                 height: '5rem',
                                                 paddingLeft: 0,
                                             }}
@@ -279,7 +273,12 @@ export default function IssuesTable({ search }) {
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                className={classes.projectElipsis}
+                                                sx={{
+                                                    maxWidth: { xl: '18rem', lg: '10rem' },
+                                                    whiteSpace: 'nowrap',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                }}
                                             >
                                                 {title}
                                             </Typography>
@@ -294,7 +293,12 @@ export default function IssuesTable({ search }) {
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                className={classes.projectElipsis}
+                                                sx={{
+                                                    maxWidth: { xl: '18rem', lg: '10rem' },
+                                                    whiteSpace: 'nowrap',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                }}
                                                 color='#65898F'
                                             >
                                                 <Link

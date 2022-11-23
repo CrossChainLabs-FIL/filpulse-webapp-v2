@@ -10,7 +10,6 @@ import {
     Tooltip
 } from '@mui/material';
 
-import { makeStyles } from '@mui/styles';
 
 // components
 import TriunghiMenuWLStatus from './headMenus/TriunghiMenuWLStatus';
@@ -24,45 +23,11 @@ import info from '../../assets/info.svg';
 // ----------------------------------------------------------------------
 
 
-const useStyles = makeStyles(() => ({
-    triunghi: {
-        marginLeft: '0.35rem',
-        marginTop: '0.15rem'
-    },
-    rowHead: {
-        height: '4rem',
-    },
-    checkbox: {
-        width: '5.35rem',
-        // [theme.breakpoints.up('xl')]: {
-        //     width: '2rem',
-        // },
-    },
-    id: {
-        width: '6rem'
-    },
-    name: {
-        width: '30rem'
-    },
-    participant: {
-        width: '13rem'
-    },
-    status: {
-        width: '13rem'
-    },
-    comments: {
-        width: '12.6rem'
-    }
-}));
-
-
-
 export default function WatchlistHead({ paramsCallback }) {
     const [isDescNumber, setIsDescNumber] = useState(true);
     const [isDescName, setIsDescName] = useState(true);
     const [isDescComments, setIsDescComments] = useState(true);
     const [isDescUpdatedAt, setIsDescUpdatedAt] = useState(true);
-    const classes = useStyles();
 
     const styleNumber = {
         transform: !isDescNumber ? 'rotate(180deg)' : '',
@@ -115,16 +80,26 @@ export default function WatchlistHead({ paramsCallback }) {
 
     return (
         <TableHead>
-            <TableRow className={classes.rowHead}>
+            <TableRow
+                sx={{
+                    height: '4rem',
+                }}
+            >
 
-                <TableCell className={classes.checkbox} />
+                <TableCell
+                    sx={{
+                        width: '5.35rem',
+                    }}
+                />
 
                 <TableCell
                     align="left"
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.id}
+                    sx={{
+                        width: '6rem'
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -132,7 +107,7 @@ export default function WatchlistHead({ paramsCallback }) {
                     >
                         <Typography
                             noWrap
-                            style={{
+                            sx={{
                                 fontWeight: 500,
                                 fontSize: 16,
                                 marginRight: '0.35rem'
@@ -144,7 +119,7 @@ export default function WatchlistHead({ paramsCallback }) {
                         <IconButton
                             id="basic-button"
                             onClick={handleSortNumber}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}
@@ -163,20 +138,22 @@ export default function WatchlistHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.name}
+                    sx={{
+                        width: '30rem'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem' }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem' }}>
                             Name
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortName}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}
@@ -195,13 +172,15 @@ export default function WatchlistHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.participant}
+                    sx={{
+                        width: '13rem'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16 }}>
                             Participants
                         </Typography>
 
@@ -215,13 +194,15 @@ export default function WatchlistHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.status}
+                    sx={{
+                        width: '13rem'
+                    }}
                 >
                     <Stack
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16 }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16 }}>
                             Status
                         </Typography>
 
@@ -234,7 +215,9 @@ export default function WatchlistHead({ paramsCallback }) {
                     component="th"
                     scope="row"
                     padding="none"
-                    className={classes.comments}
+                    sx={{
+                        width: '12.6rem'
+                    }}
                 >
                     <Stack
                         direction="row"
@@ -243,21 +226,21 @@ export default function WatchlistHead({ paramsCallback }) {
                         <Tooltip
                             title='info'
                             arrow
-                            style={{
+                            sx={{
                                 marginRight: '0.35rem'
                             }}
                         >
                             <img src={info} alt='info' />
                         </Tooltip>
 
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Comments
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortComments}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}
@@ -281,14 +264,14 @@ export default function WatchlistHead({ paramsCallback }) {
                         direction="row"
                         alignItems="center"
                     >
-                        <Typography noWrap style={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
+                        <Typography noWrap sx={{ fontWeight: 500, fontSize: 16, marginRight: '0.35rem', }}>
                             Last Updated
                         </Typography>
 
                         <IconButton
                             id="basic-button"
                             onClick={handleSortUpdatedAt}
-                            style={{
+                            sx={{
                                 padding: 0,
                                 marginTop: '0.15rem'
                             }}

@@ -30,12 +30,6 @@ const useStyles = makeStyles(() => ({
     table: {
         maxHeight: '40rem',
     },
-    projectElipsis: {
-        maxWidth: '32rem',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-    },
 }));
 
 export default function CommitsTable({ search }) {
@@ -206,7 +200,12 @@ export default function CommitsTable({ search }) {
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                className={classes.projectElipsis}
+                                                sx={{
+                                                    maxWidth: '20rem',
+                                                    whiteSpace: 'nowrap',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                }}
                                             >
                                                 {message?.substring(0, 50)}
                                             </Typography>
@@ -221,7 +220,12 @@ export default function CommitsTable({ search }) {
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                className={classes.projectElipsis}
+                                                sx={{
+                                                    maxWidth: '15rem',
+                                                    whiteSpace: 'nowrap',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                }}
                                                 color='#65898F'
                                             >
                                                 <Link

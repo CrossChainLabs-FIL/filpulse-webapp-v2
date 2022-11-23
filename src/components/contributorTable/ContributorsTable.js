@@ -36,12 +36,6 @@ const useStyles = makeStyles(() => ({
     barColorPrimary: {
         backgroundColor: '#FFB803',
     },
-    projectElipsis: {
-        maxWidth: '10rem',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-    },
 }));
 
 export default function ContributorsTable({ search }) {
@@ -200,7 +194,7 @@ export default function ContributorsTable({ search }) {
                                             component="th"
                                             scope="row"
                                             padding="none"
-                                            style={{
+                                            sx={{
                                                 height: '5rem',
                                                 padding: 0,
                                                 paddingLeft: '2rem'
@@ -209,13 +203,15 @@ export default function ContributorsTable({ search }) {
                                             <Stack
                                                 direction="row"
                                                 alignItems="center"
-                                                style={{ marginLeft: '4rem' }}
+                                                sx={{ marginLeft: '4rem' }}
                                             >
                                                 <Box
                                                     component="img"
                                                     src={avatar_url}
-                                                    sx={{ width: 30, height: 30, borderRadius: 1.5 }}
-                                                    style={{
+                                                    sx={{
+                                                        width: 30,
+                                                        height: 30,
+                                                        borderRadius: 1.5,
                                                         marginRight: '1rem'
                                                     }}
                                                 />
@@ -243,7 +239,12 @@ export default function ContributorsTable({ search }) {
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                className={classes.projectElipsis}
+                                                sx={{
+                                                    maxWidth: '10rem',
+                                                    whiteSpace: 'nowrap',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                }}
                                             >
                                                 <Link
                                                     target="_blank"
