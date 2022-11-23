@@ -285,7 +285,12 @@ export default function PRTable({ search }) {
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                className={classes.projectElipsis}
+                                                sx={{
+                                                    maxWidth: '32rem',
+                                                    whiteSpace: 'nowrap',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                }}
                                             >
                                                 {title}
                                             </Typography>
@@ -300,7 +305,12 @@ export default function PRTable({ search }) {
                                             <Typography
                                                 variant="subtitle2"
                                                 noWrap
-                                                className={classes.projectElipsis}
+                                                sx={{
+                                                    maxWidth: '32rem',
+                                                    whiteSpace: 'nowrap',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                }}
                                                 color='#65898F'
                                             >
                                                 <Link
