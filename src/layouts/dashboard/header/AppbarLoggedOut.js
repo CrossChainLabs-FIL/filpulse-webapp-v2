@@ -15,6 +15,8 @@ import {
     Grid
 } from '@mui/material';
 
+import { pixelToRem, fontSizes } from '../../../utils/font';
+
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import logo from "../../../logo.svg";
 import GithubLogo from "../../../assets/GithubLogo.svg";
@@ -37,7 +39,7 @@ const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
 
 const TextTypography = styled(Typography)(({ theme }) => ({
     color: theme.palette.text.primary,
-    fontSize: theme.typography.h3.fontSize,
+    fontSize: pixelToRem(32),
     fontWeight: theme.typography.h3.fontWeight,
     lineHeight: theme.typography.h3.lineHeight,
 }));
@@ -120,13 +122,13 @@ export default function AppbarLoggedOut() {
 
     return (
         <React.Fragment>
-            <AppBar sx={{ boxShadow: 0, bgcolor: BG_COLOR }}>
+            <AppBar sx={{ boxShadow: 1, bgcolor: BG_COLOR }}>
                 <ToolbarStyle
                     disableGutters
                     sx={{
                         marginRight: 'auto',
                         marginLeft: 'auto',
-                        width: '97rem'
+                        width: { xl: '97rem', lg: '76rem' }
                     }}
                 >
                     <img src={logo} alt="" className={classes.logo} />

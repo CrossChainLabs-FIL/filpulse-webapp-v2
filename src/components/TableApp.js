@@ -131,7 +131,7 @@ export default function TableApp() {
                     value={value}
                     onChange={handleChange}
                     sx={{
-                        marginLeft: '4.5rem',
+                        marginLeft: '3.7rem',
                         height: '3.5rem',
                         marginTop: '1.2rem'
                     }}

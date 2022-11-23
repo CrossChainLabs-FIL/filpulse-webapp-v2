@@ -14,6 +14,8 @@ import {
     Box
 } from '@mui/material';
 
+import { pixelToRem, fontSizes } from '../../../utils/font';
+
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import logo from "../../../logo.svg";
 import exit from "../../../assets/exit.svg";
@@ -30,7 +32,7 @@ const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
 
 const TextTypography = styled(Typography)(({ theme }) => ({
     color: theme.palette.text.primary,
-    fontSize: theme.typography.h3.fontSize,
+    fontSize: pixelToRem(32),
     fontWeight: theme.typography.h3.fontWeight,
     lineHeight: theme.typography.h3.lineHeight,
 }));
@@ -99,69 +101,65 @@ export default function AppbarLoggedIn() {
 
     return (
         <React.Fragment>
-            <Box
-                sx={{ display: 'flex' }}
-            >
-                <AppBar sx={{ boxShadow: 0, bgcolor: BG_COLOR }}>
-                    <ToolbarStyle
-                        disableGutters
-                        sx={{
-                            marginRight: 'auto',
-                            marginLeft: 'auto',
-                            width: '97rem'
+            <AppBar sx={{ boxShadow: 1, bgcolor: BG_COLOR }}>
+                <ToolbarStyle
+                    disableGutters
+                    sx={{
+                        marginRight: 'auto',
+                        marginLeft: 'auto',
+                        width: { xl: '97rem', lg: '76rem' }
+                    }}
+                >
+                    <img
+                        src={logo}
+                        alt="logo"
+                        className={classes.logo}
+                    />
+                    <TextTypography>FilPulse</TextTypography>
+                    {accountInfo()}
+                    <IconButton
+                        id="basic-button"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                    >
+                        <img src={triunghi} alt="triunghi" />
+                    </IconButton >
+                    <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                        transformOrigin={{ vertical: "top", horizontal: "right" }}
+                        MenuListProps={{
+                            style: {
+                                backgroundColor: "#fff",
+                                padding: '0px',
+                            }
                         }}
                     >
-                        <img
-                            src={logo}
-                            alt="logo"
-                            className={classes.logo}
-                        />
-                        <TextTypography>FilPulse</TextTypography>
-                        {accountInfo()}
-                        <IconButton
-                            id="basic-button"
-                            aria-controls={open ? 'basic-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={open ? 'true' : undefined}
-                            onClick={handleClick}
-                        >
-                            <img src={triunghi} alt="triunghi" />
-                        </IconButton >
-                        <Menu
-                            id="basic-menu"
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                            transformOrigin={{ vertical: "top", horizontal: "right" }}
-                            MenuListProps={{
-                                style: {
-                                    backgroundColor: "#fff",
-                                    padding: '0px',
-                                }
-                            }}
-                        >
-                            <Button
-                                variant="contained"
-                                startIcon={<img src={exit} alt='exit' />}
-                                sx={{
+                        <Button
+                            variant="contained"
+                            startIcon={<img src={exit} alt='exit' />}
+                            sx={{
+                                backgroundColor: 'transparent',
+                                color: '#000000',
+                                width: '12rem',
+                                '&:hover': {
                                     backgroundColor: 'transparent',
                                     color: '#000000',
-                                    width: '12rem',
-                                    '&:hover': {
-                                        backgroundColor: 'transparent',
-                                        color: '#000000',
-                                    },
-                                }}
-                                onClick={() => handleLogout()}
-                            >
-                                Sign out
-                            </Button>
-                        </Menu>
-                    </ToolbarStyle>
-                </AppBar>
-                <div className={classes.toolbarMargin} />
-            </Box>
+                                },
+                            }}
+                            onClick={() => handleLogout()}
+                        >
+                            Sign out
+                        </Button>
+                    </Menu>
+                </ToolbarStyle>
+            </AppBar>
+            <div className={classes.toolbarMargin} />
         </React.Fragment >
     );
 }
