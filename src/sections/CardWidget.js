@@ -12,7 +12,8 @@ CardWidget.propTypes = {
 const RootStyle = styled(Card)(({ theme }) => ({
   textAlign: 'center',
   backgroundColor: palette.card,
-  marginBottom: '2rem'
+  marginBottom: '2rem',
+  marginTop: '2rem'
 }));
 
 export default function CardWidget({ name, value }) {

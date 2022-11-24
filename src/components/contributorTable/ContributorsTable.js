@@ -278,7 +278,9 @@ export default function ContributorsTable({ search }) {
                                             <Stack
                                                 direction="row"
                                                 alignItems="center"
-                                                sx={{ width: '12rem', marginLeft: '1.5rem' }}
+                                                sx={{
+                                                    width: '12rem',
+                                                }}
                                             >
                                                 <Typography variant="subtitle2" noWrap>
                                                     {open_prs}
@@ -291,7 +293,11 @@ export default function ContributorsTable({ search }) {
                                                     {closed_prs}
                                                 </Typography>
                                             </Stack>
-                                            <Box sx={{ width: '100%', marginLeft: '1.5rem' }}>
+                                            <Box
+                                                sx={{
+                                                    width: '100%',
+                                                }}
+                                            >
                                                 <LinearProgress
                                                     sx={{
                                                         width: '12rem',
@@ -313,7 +319,9 @@ export default function ContributorsTable({ search }) {
                                             <Stack
                                                 direction="row"
                                                 alignItems="center"
-                                                sx={{ width: '12rem', marginLeft: '1.5rem' }}
+                                                sx={{
+                                                    width: '12rem',
+                                                }}
                                             >
                                                 <Typography variant="subtitle2" noWrap>
                                                     {open_issues}
@@ -326,7 +334,11 @@ export default function ContributorsTable({ search }) {
                                                     {closed_issues}
                                                 </Typography>
                                             </Stack>
-                                            <Box sx={{ width: '100%', marginLeft: '1.5rem' }} >
+                                            <Box
+                                                sx={{
+                                                    width: '100%',
+                                                }}
+                                            >
                                                 <LinearProgress
                                                     sx={{
                                                         width: '12rem',

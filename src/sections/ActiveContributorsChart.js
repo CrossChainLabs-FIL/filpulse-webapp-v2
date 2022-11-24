@@ -50,7 +50,7 @@ export default function ActiveContributors() {
     <Card
       className='boxShadowContainer'
       sx={{
-        marginBottom: '3rem'
+        marginBottom: '2rem'
       }}
     >
       <CardHeader

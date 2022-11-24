@@ -7,7 +7,6 @@ import {
     TableHead,
     Stack,
     IconButton,
-    Tooltip
 } from '@mui/material';
 
 // components
@@ -184,15 +183,6 @@ export default function ContributorHead({ paramsCallback }) {
                         alignItems="center"
                         sx={{ marginTop: '1.2rem' }}
                     >
-                        <Tooltip
-                            title='info'
-                            arrow
-                            sx={{
-                                marginRight: '0.35rem'
-                            }}
-                        >
-                            <img src={info} alt='info' />
-                        </Tooltip>
 
                         <Typography
                             noWrap
@@ -227,7 +217,6 @@ export default function ContributorHead({ paramsCallback }) {
                             opacity: 0.75,
                             marginTop: 0,
                             fontSize: 12,
-                            marginLeft: '1rem'
                         }}
                     >
                         open - closed
@@ -245,16 +234,6 @@ export default function ContributorHead({ paramsCallback }) {
                         alignItems="center"
                         sx={{ marginTop: '1.2rem' }}
                     >
-                        <Tooltip
-                            title='info'
-                            arrow
-                            sx={{
-                                marginRight: '0.35rem'
-                            }}
-                        >
-                            <img src={info} alt='info' />
-                        </Tooltip>
-
                         <Typography
                             noWrap
                             sx={{
@@ -288,7 +267,6 @@ export default function ContributorHead({ paramsCallback }) {
                             opacity: 0.75,
                             marginTop: 0,
                             fontSize: 12,
-                            marginLeft: '1rem'
                         }}
                     >
                         open - closed
