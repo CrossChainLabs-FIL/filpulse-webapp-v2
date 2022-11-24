@@ -1,44 +1,56 @@
+// import { useTheme } from '@mui/material/styles';
+import {
+  Container,
+  Grid
+} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Container, Grid } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 import { useState, useEffect } from 'react';
 import Page from '../components/Page';
 import { Footer } from '../components/Footer';
 import { Client } from '../utils/client';
 
-import { 
-  RecentCommits, 
-  Commits, 
-  CardWidget, 
+import {
+  Commits,
+  CardWidget,
   TopContributors,
   Issues,
   ActiveContributors,
 } from '../sections';
 
+import TableApp from '../components/TableApp';
+
 const client = new Client();
 
 export default function Dashboard() {
+  // const theme = useTheme();
   const theme = useTheme();
-  const  themeStretch  = false;
+  const matches = useMediaQuery(theme.breakpoints.down('xl'));
 
-  const [state, setState] = useState({ loading: true, commits: '', repositories: '', contributors: '', prs: '' });
+  const [state, setState] = useState({ commits: '', repositories: '', contributors: '', prs: '' });
+  const [issuesData, setIssuesData] = useState([0, 0]);
+
   useEffect(() => {
-    setState({ loading: true });
-
     client.get('overview').then((overview) => {
+      let open = parseInt((overview?.issues_open) ? overview?.issues_open : 0);
+      let closed = parseInt((overview?.issues_closed) ? overview?.issues_closed : 0);
+
+      setIssuesData([open, closed]);
+
       setState({
-        loading: false,
         commits: overview.commits,
         repositories: overview.repos,
         contributors: overview.contributors,
         prs: overview.prs,
       })
-      
+
     });
   }, [setState]);
 
   return (
     <Page title="FilPulse">
-      <Container maxWidth={themeStretch ? false : 'xl'}>
+      <Container maxWidth={matches ? 'lg' : 'xl'}   >
         <Grid container spacing={3}>
           <Grid item xs={12} md={3}>
             <CardWidget
@@ -76,7 +88,7 @@ export default function Dashboard() {
           </Grid>
 
           <Grid item xs={12} md={3} lg={4}>
-            <Issues />
+            <Issues issuesData={issuesData} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
@@ -84,13 +96,12 @@ export default function Dashboard() {
           </Grid>
 
           <Grid item xs={12} lg={12}>
-            <RecentCommits />
+            <TableApp />
           </Grid>
 
         </Grid>
-        
+        <Footer />
       </Container>
-      <Footer />
     </Page>
   );
 }

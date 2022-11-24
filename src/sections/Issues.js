@@ -4,14 +4,9 @@ import { useTheme, styled } from '@mui/material/styles';
 import { Card, CardHeader } from '@mui/material';
 import { number } from '../utils/format';
 import { CustomChart } from '../components/chart';
-import { useState, useEffect } from 'react';
-
-import { Client } from '../utils/client';
 
 const CHART_HEIGHT = 392;
 const LEGEND_HEIGHT = 72;
-
-const client = new Client();
 
 const ChartWrapperStyle = styled('div')(({ theme }) => ({
   height: CHART_HEIGHT,
@@ -29,18 +24,8 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
   }
 }));
 
-export default function Issues() {
+export default function Issues({ issuesData }) {
   const theme = useTheme();
-  const [state, setState] = useState({ loading: true, chartData: [0, 0] });
-  
-  useEffect(() => {
-    client.get('overview').then((overview) => {
-      let open = parseInt((overview?.issues_open) ? overview?.issues_open : 0);
-      let closed = parseInt((overview?.issues_closed) ? overview?.issues_closed : 0);
-
-      setState({ loading: false, chartData: [open, closed] });
-    });
-  }, [setState]);
 
   const chartOptions = merge(CustomChart(), {
     colors: [
@@ -80,10 +65,15 @@ export default function Issues() {
   });
 
   return (
-    <Card>
+    <Card
+      className='boxShadowContainer'
+      sx={{
+        marginBottom: '2rem'
+      }}
+    >
       <CardHeader title="Issues" />
       <ChartWrapperStyle dir="ltr">
-        <ReactApexChart type="donut" series={state.chartData} options={chartOptions} height={310} />
+        <ReactApexChart type="donut" series={issuesData} options={chartOptions} height={310} />
       </ChartWrapperStyle>
     </Card>
   );

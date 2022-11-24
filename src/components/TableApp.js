@@ -1,113 +1,56 @@
-import { filter } from 'lodash';
-import { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 
 // @mui
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
 import {
-    Box,
     Stack,
     Paper,
     Tabs,
     Tab,
     OutlinedInput,
-    InputAdornment
+    InputAdornment,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    Button,
+    Typography,
+    Grid
 } from '@mui/material';
-
 
 // components
 import Iconify from './Iconify';
-import WatchlistTable from './WatchlistTable';
-import PRTable from './PRTable';
-import CommitsTable from './CommitsTable';
-import IssuesTable from './IssuesTable';
-import ContributorsTable from './ContributorsTable';
-
-import { Client } from '../utils/client';
-
-
-
-
-
-// mock
-import WATCHLISTDATA from '../_mock/watchlistData';
-import PRDATA from '../_mock/PRData';
-import ISSUESDATA from '../_mock/issuesData';
-import COMMITSDATA from '../_mock/commitsData';
-import CONTRIBUTORSDATA from '../_mock/contributorsData';
+import WatchlistTable from './watchlistTable/WatchlistTable';
+import PRTable from './prTable/PRTable';
+import CommitsTable from './commitsTable/CommitsTable';
+import IssuesTable from './issuesTable/IssuesTable';
+import ReleasesTable from './releasesTable/ReleasesTable';
+import ContributorsTable from './contributorTable/ContributorsTable';
+import { AuthContext } from "../App";
 
 // assets
 import steaPlin from '../assets/steaPlin.svg';
-
-const client = new Client();
-
-function descendingComparator(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
-        return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-        return 1;
-    }
-    return 0;
-}
-
-function getComparator(order, orderBy) {
-    return order === 'desc'
-        ? (a, b) => descendingComparator(a, b, orderBy)
-        : (a, b) => -descendingComparator(a, b, orderBy);
-}
+import GithubLogo from '../assets/GithubLogo.svg';
+import { pixelToRem, fontSizes } from '../utils/font';
 
 
 const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
-    height: 40,
-    width: 250,
-    marginBottom: 5,
-    fontSize: 15,
-    [theme.breakpoints.down('xl')]: {
-        height: 30,
+    height: '2.5rem',
+    width: '15.625rem',
+    marginBottom: '0.313rem',
+    fontSize: pixelToRem(15),
+    /*[theme.breakpoints.down('xl')]: {
+        height: 35,
         width: 200,
-    }
+    }*/
 }));
-
-
 
 
 const useStyles = makeStyles(() => ({
     table: {
-        maxHeight: "40em",
+        maxHeight: '40rem',
     },
-    watchlistTab: {
-        height: '3em',
-        minHeight: '3em',
-        minWidth: '8em',
-        width: '8em',
-        marginRight: '3em',
-        paddingBottom: 0
-    },
-    prTab: {
-        minWidth: '3em',
-        width: '3em',
-        marginRight: '3em',
-        paddingBottom: 0
-    },
-    issuesTab: {
-        minWidth: '4em',
-        width: '4em',
-        marginRight: '3em',
-        paddingBottom: 0
-    },
-    commitsTab: {
-        minWidth: '4.5em',
-        width: '4.5em',
-        marginRight: '3em',
-        paddingBottom: 0
-    },
-    contributorsTab: {
-        minWidth: '7em',
-        width: '7em',
-        paddingBottom: 0
-    }
 }));
 
 const StyledTabs = styled((props) => (
@@ -133,13 +76,14 @@ const StyledTabs = styled((props) => (
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({
         textTransform: 'none',
-        fontWeight: theme.typography.fontWeightRegular,
-        fontSize: theme.typography.pxToRem(15),
-        marginRight: theme.spacing(3),
+        fontWeight: 500,
+        fontSize: pixelToRem(16),
+        marginRight: '1rem',
         color: "#000000",
         '&.Mui-selected': {
             color: '#000000',
         },
+        // height: '3rem'
         // '&.Mui-focusVisible': {
         //     backgroundColor: 'rgba(100, 95, 228, 0.32)',
         // },
@@ -148,137 +92,37 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 
 export default function TableApp() {
 
-    const [order, setOrder] = useState('asc');
-
-    const [orderBy, setOrderBy] = useState('showId');
-
-    const [searchData, setSearchData] = useState([]);
-
-    const [data, setData] = useState([]);
-
-    const [value, setValue] = useState(0);
-
-    const [filterName, setFilterName] = useState('');
-
-    const [isSearchEmpty, setIsSearchEmpty] = useState(true);
-
-    const [state, setState] = useState({
-        loading: true, commits_data: []
-      });
-
     const classes = useStyles();
+    const [open, setOpen] = useState(false);
+    const [search, setSearch] = useState('');
+    const [value, setValue] = useState(0);
+    const { stateLogin, dispatch } = useContext(AuthContext);
+    const [dataError, setDataError] = useState({ errorMessage: "" });
+    const { client_id, redirect_uri } = stateLogin;
 
-    function applySortFilter(array, comparator, query) {
-        const stabilizedThis = array.map((el, index) => [el, index]);
-        stabilizedThis.sort((a, b) => {
-            const order = comparator(a[0], b[0]);
-            if (order !== 0) return order;
-            return a[1] - b[1];
-        });
-        if (query) {
-            switch (value) {
-                case 0:
-                    setSearchData(filter(array, (_user) =>
-                        _user.project.title.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-                    break;
-                case 1:
-                    setSearchData(filter(array, (_user) =>
-                        _user.project.title.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-                    break;
-                case 2:
-                    setSearchData(filter(array, (_user) =>
-                        _user.project.title.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-                    break;
-                case 3:
-                    setSearchData(filter(array, (_user) =>
-                        _user.project.title.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-                    break;
-                case 4:
-                    setSearchData(filter(array, (_user) =>
-                        _user.person.name.toLowerCase().indexOf(query.toLowerCase()) !== -1));
-                    break;
-                default: break;
-            }
-            return;
-        }
-        setData(stabilizedThis.map((el) => el[0]));
-    }
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
-    useEffect(() => {
-        applySortFilter(WATCHLISTDATA, getComparator(order, orderBy), filterName);
-        setIsSearchEmpty(true);
-
-        let interval = setInterval( () => {
-            client.get('tab_commits').then((commits_data) => {
-              setState({
-                loading: false, 
-                commits_data: commits_data,
-              });
-            });
-          }, 15*60*1000);
-          client.get('tab_commits').then((commits_data) => {
-            setState({
-              loading: false, 
-              commits_data: commits_data,
-            });
-          });
-      
-          return function cleanup() {
-            console.log('interval cleanup');
-            clearInterval(interval);
-          };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setState]);
-
-
+    const handleClose = () => {
+        setOpen(false);
+        setValue(0);
+    };
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        // setSelected([]);
-        setFilterName('');
-        setIsSearchEmpty(true);
-        // handleTop();
-        switch (newValue) {
-            case 0:
-                setOrderBy('showId');
-                applySortFilter(WATCHLISTDATA, getComparator(order, "showId"), filterName);
-                break;
-            case 1:
-                setOrderBy('showId');
-                applySortFilter(PRDATA, getComparator(order, "showId"), filterName);
-                break;
-            case 2:
-                setOrderBy('showId');
-                applySortFilter(ISSUESDATA, getComparator(order, "showId"), filterName);
-                break;
-            case 3:
-                setOrderBy('showId');
-                applySortFilter(state.commits_data.list, getComparator(order, "showId"), filterName);
-                break;
-            case 4:
-                setOrderBy('person.name');
-                applySortFilter(CONTRIBUTORSDATA, getComparator(order, 'person.name'), filterName);
-                break;
-            default: console.log(newValue); break;
-        }
+        setSearch('');
     };
 
 
-    const handleFilterByName = (event) => {
-        applySortFilter(data, getComparator(order, orderBy), event.target.value);
-        if (event.target.value) {
-            setIsSearchEmpty(false);
-        }
-        else {
-            setIsSearchEmpty(true);
-        }
-        setFilterName(event.target.value);
-    };
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
+    }
 
     return (
         <Paper className="container">
             <Stack
-                style={{ backgroundColor: '#FFFFFF', height: "5em", marginBottom: "2em" }}
+                style={{ backgroundColor: '#FFFFFF', height: '5rem', marginBottom: '2rem' }}
                 direction="row"
                 alignItems="bottom"
                 justifyContent="space-between"
@@ -286,31 +130,105 @@ export default function TableApp() {
                 <StyledTabs
                     value={value}
                     onChange={handleChange}
-                    style={{
-                        marginLeft: "1.15em",
-                        marginTop: 'auto'
+                    sx={{
+                        marginLeft: '3.7rem',
+                        height: '3.5rem',
+                        marginTop: '1.2rem'
                     }}
                 >
+                    <StyledTab label='PRs' classes={{ root: classes.prTab }} />
+                    <StyledTab label='Issues' classes={{ root: classes.issuesTab }} />
+                    <StyledTab label='Releases' classes={{ root: classes.releasesTab }} />
+                    <StyledTab label='Commits' classes={{ root: classes.commitsTab }} />
+                    <StyledTab label='Contributors' classes={{ root: classes.contributorsTab }} />
                     <StyledTab
-                        icon={<img src={steaPlin} alt="steaPlin" />}
+                        icon={
+                            <img
+                                src={steaPlin}
+                                alt="steaPlin"
+                                sx={{
+                                    height: '1rem',
+                                    marginBottom: '0.3rem'
+                                }}
+                            />
+                        }
                         iconPosition='start'
+                        onClick={stateLogin.isLoggedIn ? '' : handleClickOpen}
                         label='Watchlist'
                         classes={{ root: classes.watchlistTab }}
                     />
-                    <StyledTab label='PRs' classes={{ root: classes.prTab }} />
-                    <StyledTab label='Issues' classes={{ root: classes.issuesTab }} />
-                    <StyledTab label='Commits' classes={{ root: classes.commitsTab }} />
-                    <StyledTab label='Contributors' classes={{ root: classes.contributorsTab }} />
+
                 </StyledTabs>
+                {/* <img src={steaPlin} alt="steaPlin" className={classes.stea} /> */}
+                <>
+
+                    <Dialog open={open} onClose={handleClose} >
+                        <DialogTitle
+                            sx={{
+                                backgroundColor: "#EEF4F5",
+                            }}
+                        >
+                            {"Get your own watchlist"}
+                        </DialogTitle>
+                        <DialogContent
+                            sx={{
+                                backgroundColor: "#FFFFFF",
+                                height: '18rem',
+                                width: '30rem'
+                            }}
+                        >
+                            <Grid
+                                container
+                                direction="column"
+                                justifyContent="center"
+                                alignItems="center"
+                            >
+                                <Grid item>
+                                    <Typography
+                                        sx={{
+                                            marginTop: '3.5rem',
+                                            marginBottom: '4rem',
+                                            marginLeft: '3rem',
+                                            marginRight: '3rem'
+                                        }}
+                                    >
+                                        Sign in to track the ecosystem development and view your preferred activities.
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Button
+                                        variant="contained"
+                                        startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                        href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
+                                        onClick={() => {
+                                            setDataError({ ...dataError, errorMessage: "" });
+                                        }}
+                                        sx={{
+                                            backgroundColor: 'transparent',
+                                            color: '#000000',
+                                            width: '23rem',
+                                            '&:hover': {
+                                                backgroundColor: 'transparent',
+                                                color: '#000000',
+                                            },
+                                        }}
+                                    >
+                                        Sign in with Github
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </DialogContent>
+                    </Dialog>
+                </>
                 <SearchStyle
-                    style={{
+                    sx={{
                         marginLeft: "auto",
                         marginTop: 'auto',
-                        marginBottom: '0.25em',
-                        marginRight: '1em'
+                        marginBottom: '0.25rem',
+                        marginRight: '1rem'
                     }}
-                    value={filterName}
-                    onChange={(e) => handleFilterByName(e)}
+                    value={search}
+                    onChange={(e) => handleSearch(e)}
                     placeholder="Search"
                     startAdornment={
                         <InputAdornment position="start">
@@ -320,53 +238,13 @@ export default function TableApp() {
                 />
             </Stack>
 
-            {value === 0 && (
-                <WatchlistTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    searchData={searchData}
-                />
-            )}
+            {value === 0 && (<PRTable search={search} />)}
+            {value === 1 && (<IssuesTable search={search} />)}
+            {value === 2 && (<ReleasesTable search={search} />)}
+            {value === 3 && <CommitsTable search={search} />}
+            {value === 4 && <ContributorsTable search={search} />}
+            {value === 5 && stateLogin.isLoggedIn && (<WatchlistTable search={search} />)}
 
-            {value === 1 && (
-                <PRTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    searchData={searchData}
-                />
-            )}
-
-            {value === 2 && (
-                <IssuesTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    searchData={searchData}
-                />
-            )}
-
-            {value === 3 &&
-                <CommitsTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    searchData={searchData}
-                />
-            }
-
-            {value === 4 &&
-                <ContributorsTable
-                    filterName={filterName}
-                    isSearchEmpty={isSearchEmpty}
-                    data={data}
-                    searchData={searchData}
-                />
-            }
-
-
-            <Box className={classes.endBox} />
-        </Paper>
+        </Paper >
     );
 }

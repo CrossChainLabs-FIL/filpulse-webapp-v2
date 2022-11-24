@@ -31,7 +31,7 @@ export default function UserListHead() {
           padding="none"
           className={classes.id}
         >
-          <Typography variant="h6" noWrap style={{ marginLeft: '0.75em', fontWeight: 1200 }}>
+          <Typography variant="h6" noWrap style={{ marginLeft: '0.75rem', fontWeight: 1200 }}>
             #
           </Typography>
         </TableCell>
@@ -43,7 +43,7 @@ export default function UserListHead() {
           padding="none"
           className={classes.name}
         >
-          <Typography variant="h6" noWrap style={{ marginLeft: '0.15em', fontWeight: 1200 }}>
+          <Typography variant="h6" noWrap style={{ marginLeft: '0.15rem', fontWeight: 1200 }}>
             Name
           </Typography>
         </TableCell>
