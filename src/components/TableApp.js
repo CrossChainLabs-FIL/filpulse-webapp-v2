@@ -119,6 +119,31 @@ export default function TableApp() {
         setSearch(event.target.value);
     }
 
+    const tabValueToName = (value) => {
+        let result = ' ';
+        switch (value) {
+            case 0: 
+                result = 'PRs';
+                break;
+            case 1:
+                result = 'Issues';
+                break;
+            case 2:
+                result = 'Releases';
+                break;
+            case 3:
+                result = 'Commits';
+                break;
+            case 4:
+                result = 'Contributors';
+                break;
+            case 5:
+                result = 'Watchlist';
+                break;
+        }
+        return result;
+    }
+
     return (
         <Paper className="container">
             <Stack
@@ -229,7 +254,7 @@ export default function TableApp() {
                     }}
                     value={search}
                     onChange={(e) => handleSearch(e)}
-                    placeholder="Search"
+                    placeholder={"Search by " + tabValueToName(value)}
                     startAdornment={
                         <InputAdornment position="start">
                             <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled', width: 20, height: 20 }} />
