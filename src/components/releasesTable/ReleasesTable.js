@@ -165,6 +165,7 @@ export default function ReleasesTable({ search }) {
                                 const {
                                     id,
                                     name,
+                                    tag_name,
                                     dev_name,
                                     avatar_url,
                                     repo,
@@ -190,7 +191,15 @@ export default function ReleasesTable({ search }) {
                                             }}
                                         >
                                             <Typography variant="subtitle2" noWrap>
-                                                {`${id}`}
+                                            <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={"https://github.com/" + organisation + "/" + repo + "/releases/tag/" + tag_name}
+                                                    color="inherit"
+                                                    underline="none"
+                                                >
+                                                    {`${id}`}
+                                                </Link>
                                             </Typography>
                                         </TableCell>
 
@@ -210,9 +219,16 @@ export default function ReleasesTable({ search }) {
                                                     textOverflow: 'ellipsis',
                                                 }}
                                             >
-                                                {name}
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={"https://github.com/" + organisation + "/" + repo + "/releases/tag/" + tag_name}
+                                                    color="inherit"
+                                                    underline="none"
+                                                >
+                                                    {name}
+                                                </Link>
                                             </Typography>
-
                                         </TableCell>
 
                                         <TableCell

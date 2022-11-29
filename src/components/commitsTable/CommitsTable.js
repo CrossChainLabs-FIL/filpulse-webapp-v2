@@ -207,7 +207,15 @@ export default function CommitsTable({ search }) {
                                                     textOverflow: 'ellipsis',
                                                 }}
                                             >
-                                                {message?.substring(0, 50)}
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={"https://github.com/" + organisation + "/" + repo + "/commit/" + commit_hash}
+                                                    color="inherit"
+                                                    underline="none"
+                                                >
+                                                    {message?.substring(0, 50)}
+                                                </Link>
                                             </Typography>
                                         </TableCell>
 

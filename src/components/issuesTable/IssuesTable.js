@@ -280,7 +280,15 @@ export default function IssuesTable({ search }) {
                                                     textOverflow: 'ellipsis',
                                                 }}
                                             >
-                                                {title}
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={html_url}
+                                                    color="inherit"
+                                                    underline="none"
+                                                >
+                                                    {title}
+                                                </Link>
                                             </Typography>
                                         </TableCell>
 
