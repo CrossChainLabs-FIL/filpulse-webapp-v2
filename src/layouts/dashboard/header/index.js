@@ -73,7 +73,7 @@ export default function DashboardNavbar() {
   const classes = useStyles();
 
   const accountInfo = () => {
-    const { avatar_url, name, public_repos, followers, following } = state.user;
+    const { avatar_url, name } = state.user;
     return (
       <div style={{ marginLeft: 'auto' }}>
         <img src={avatar_url} alt="Avatar" style={{ height: '2rem' }} />
@@ -87,7 +87,6 @@ export default function DashboardNavbar() {
   const { client_id, redirect_uri } = state;
 
   useEffect(() => {
-    console.log(state.isLoggedIn);
     if (!state.isLoggedIn) {
       // After requesting Github access, Github redirects back to your app with a code parameter
       const url = window.location.href;
@@ -105,7 +104,6 @@ export default function DashboardNavbar() {
 
 
         client.post('authenticate', requestData).then(response => {
-          console.log(response);
           dispatch({
             type: "LOGIN",
             payload: { user: response, isLoggedIn: true }

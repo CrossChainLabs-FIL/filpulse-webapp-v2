@@ -89,7 +89,6 @@ export default function TriunghiMenuWLParticipants({ paramsCallback }) {
     const open = Boolean(anchorEl);
 
     const fetchData = useCallback(async () => {
-        console.log('fetchData');
         try {
             let response;
             const user = JSON.parse(localStorage.getItem("user"));

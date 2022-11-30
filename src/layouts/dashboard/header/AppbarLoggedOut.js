@@ -100,7 +100,6 @@ export default function AppbarLoggedOut() {
             };
 
             client.post('authenticate', requestData).then(response => {
-                console.log(response);
                 dispatch({
                     type: "LOGIN",
                     payload: { user: response, isLoggedIn: true }
