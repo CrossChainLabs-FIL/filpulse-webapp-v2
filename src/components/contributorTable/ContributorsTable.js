@@ -60,8 +60,14 @@ export default function ContributorsTable({ search }) {
             if (!search) {
                 params.search = undefined;
             }
-            else {
+            else if (params.search != search) {
                 params.search = search;
+                params.offset = 0;
+
+                setLastOffset(0);
+                setDistanceBottom(0);
+                setHasMore(true);
+                setState({ loading: true });
             }
 
             response = await client.get('tab_contributors', params);

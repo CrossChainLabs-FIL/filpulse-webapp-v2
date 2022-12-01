@@ -54,8 +54,14 @@ export default function CommitsTable({ search }) {
             if (!search) {
                 params.search = undefined;
             }
-            else {
+            else if (params.search != search) {
                 params.search = search;
+                params.offset = 0;
+
+                setLastOffset(0);
+                setDistanceBottom(0);
+                setHasMore(true);
+                setState({ loading: true });
             }
 
             response = await client.get('tab_commits', params);
@@ -214,7 +220,7 @@ export default function CommitsTable({ search }) {
                                                     color="inherit"
                                                     underline="none"
                                                 >
-                                                    {message?.substring(0, 50)}
+                                                    {message.indexOf('\n') > 0 ? message?.substring(0, message.indexOf('\n')) : message}
                                                 </Link>
                                             </Typography>
                                         </TableCell>

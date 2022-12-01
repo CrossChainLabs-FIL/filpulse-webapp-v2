@@ -71,8 +71,14 @@ export default function IssuesTable({ search }) {
             if (!search) {
                 params.search = undefined;
             }
-            else {
+            else if (params.search != search) {
                 params.search = search;
+                params.offset = 0;
+
+                setLastOffset(0);
+                setDistanceBottom(0);
+                setHasMore(true);
+                setState({ loading: true });
             }
 
             if (user?.token) {
@@ -98,7 +104,11 @@ export default function IssuesTable({ search }) {
             setTableEmpty(response.list.length === 0 && !search);
 
         } catch (error) {
-            console.log(error);
+            dispatch({
+                type: "LOGOUT"
+            });
+            setUpdate(true);
+            setFetch(true);
         }
     }, [params, search]);
 
@@ -287,7 +297,7 @@ export default function IssuesTable({ search }) {
                                                     color="inherit"
                                                     underline="none"
                                                 >
-                                                    {title}
+                                                    {title.indexOf('\n') > 0 ? title?.substring(0, title.indexOf('\n')) : title}
                                                 </Link>
                                             </Typography>
                                         </TableCell>

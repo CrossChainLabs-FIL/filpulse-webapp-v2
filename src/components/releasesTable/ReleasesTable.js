@@ -66,8 +66,14 @@ export default function ReleasesTable({ search }) {
             if (!search) {
                 params.search = undefined;
             }
-            else {
+            else if (params.search != search) {
                 params.search = search;
+                params.offset = 0;
+
+                setLastOffset(0);
+                setDistanceBottom(0);
+                setHasMore(true);
+                setState({ loading: true });
             }
 
             response = await client.get('tab_releases', params);
@@ -226,7 +232,7 @@ export default function ReleasesTable({ search }) {
                                                     color="inherit"
                                                     underline="none"
                                                 >
-                                                    {name}
+                                                    {name.indexOf('\n') > 0 ? name?.substring(0, name.indexOf('\n')) : name}
                                                 </Link>
                                             </Typography>
                                         </TableCell>

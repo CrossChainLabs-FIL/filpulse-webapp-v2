@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useLayoutEffect, useContext } from 'react';
 // @mui
 import { makeStyles } from '@mui/styles';
 
@@ -26,6 +26,7 @@ import {
 import SearchNotFound from '../SearchNotFound';
 import TableEmpty from '../TableEmpty';
 import WatchlistHead from './WatchlistHead';
+import { AuthContext } from "../../App";
 
 // assets
 import steaPlin from '../../assets/steaPlin.svg';
@@ -64,6 +65,7 @@ export default function WatchlistTable({ search }) {
     const [distanceBottom, setDistanceBottom] = useState(0);
     const [lastOffset, setLastOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
+    const { dispatch } = useContext(AuthContext);
 
     const fetchData = useCallback(async () => {
         try {
@@ -74,8 +76,14 @@ export default function WatchlistTable({ search }) {
             if (!search) {
                 params.search = undefined;
             }
-            else {
+            else if (params.search != search) {
                 params.search = search;
+                params.offset = 0;
+
+                setLastOffset(0);
+                setDistanceBottom(0);
+                setHasMore(true);
+                setState({ loading: true });
             }
 
             if (user?.token) {
@@ -100,7 +108,10 @@ export default function WatchlistTable({ search }) {
             setFetch(false);
 
         } catch (error) {
-            console.log(error);
+            dispatch({
+                type: "LOGOUT"
+            });
+            setFetch(true);
         }
     }, [params, search]);
 
@@ -130,7 +141,6 @@ export default function WatchlistTable({ search }) {
     }
 
     const viewComments = (index) => {
-        console.log('viewComments', index);
         if (parseInt(data[index].new_comments) > 0) {
             const user = JSON.parse(localStorage.getItem("user"));
 
@@ -305,7 +315,7 @@ export default function WatchlistTable({ search }) {
                                                             textOverflow: 'ellipsis',
                                                         }}
                                                     >
-                                                        {title}
+                                                        {title.indexOf('\n') > 0 ? title?.substring(0, title.indexOf('\n')) : title}
                                                     </Typography>
                                                 }
                                                 subheader={
