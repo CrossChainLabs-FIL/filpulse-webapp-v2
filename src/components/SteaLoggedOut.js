@@ -9,7 +9,8 @@ import {
     Grid,
     Button,
     DialogTitle,
-    IconButton
+    IconButton,
+    Avatar
 } from '@mui/material';
 
 
@@ -79,7 +80,7 @@ export default function SteaLoggedOut({ stateLogin }) {
                         <Grid item>
                             <Button
                                 variant="contained"
-                                startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                startIcon={<Avatar src={GithubLogo} alt='GithubLogo' />}
                                 sx={{
                                     backgroundColor: 'transparent',
                                     color: '#000000',

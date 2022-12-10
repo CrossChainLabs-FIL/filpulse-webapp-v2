@@ -12,7 +12,8 @@ import {
     DialogContent,
     DialogTitle,
     Button,
-    Grid
+    Grid,
+    Avatar
 } from '@mui/material';
 
 import { pixelToRem, fontSizes } from '../../../utils/font';
@@ -189,7 +190,7 @@ export default function AppbarLoggedOut() {
                                         <Grid item>
                                             <Button
                                                 variant="contained"
-                                                startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                                startIcon={<Avatar src={GithubLogo} alt='GithubLogo' />}
                                                 sx={{
                                                     backgroundColor: 'transparent',
                                                     color: '#000000',

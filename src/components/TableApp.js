@@ -16,7 +16,8 @@ import {
     DialogContent,
     Button,
     Typography,
-    Grid
+    Grid,
+    Avatar
 } from '@mui/material';
 
 // components
@@ -122,7 +123,7 @@ export default function TableApp() {
     const tabValueToName = (value) => {
         let result = ' ';
         switch (value) {
-            case 0: 
+            case 0:
                 result = 'PRs';
                 break;
             case 1:
@@ -223,7 +224,7 @@ export default function TableApp() {
                                 <Grid item>
                                     <Button
                                         variant="contained"
-                                        startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                        startIcon={<Avatar src={GithubLogo} alt='GithubLogo' />}
                                         href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
                                         onClick={() => {
                                             setDataError({ ...dataError, errorMessage: "" });

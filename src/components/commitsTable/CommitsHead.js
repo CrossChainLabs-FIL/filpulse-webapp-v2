@@ -75,7 +75,7 @@ export default function CommitsHead({ paramsCallback }) {
                     scope="row"
                     padding="none"
                     sx={{
-                        width: '14rem',
+                        width: '15rem',
                         padding: 0,
                     }}
                 >
@@ -118,7 +118,7 @@ export default function CommitsHead({ paramsCallback }) {
                     scope="row"
                     padding="none"
                     sx={{
-                        width: '31rem'
+                        width: '29rem'
                     }}
                 >
                     <Stack
@@ -152,7 +152,7 @@ export default function CommitsHead({ paramsCallback }) {
                     scope="row"
                     padding="none"
                     sx={{
-                        width: '20rem'
+                        width: '18rem'
                     }}
                 >
                     <Stack
@@ -173,7 +173,7 @@ export default function CommitsHead({ paramsCallback }) {
                     scope="row"
                     padding="none"
                     sx={{
-                        width: '15rem'
+                        width: '18rem'
                     }}
                 >
                     <Stack
