@@ -11,10 +11,9 @@ import {
     Avatar,
     Menu,
     Button,
-    Box
 } from '@mui/material';
 
-import { pixelToRem, fontSizes } from '../../../utils/font';
+import { pixelToRem } from '../../../utils/font';
 
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import logo from "../../../logo.svg";
@@ -114,7 +113,7 @@ export default function AppbarLoggedIn() {
                         src={logo}
                         alt="logo"
                         style={{
-                            maxWidth: '10rem',
+                            width: '2.5rem',
                             marginRight: '0.5rem',
                         }}
                     />
