@@ -15,7 +15,6 @@ import {
     Typography
 } from '@mui/material';
 
-import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
 import { Client } from '../utils/client';
@@ -29,48 +28,15 @@ import bara from '../assets/bara.svg';
 const client = new Client();
 
 
-const useStyles = makeStyles(() => ({
-    triunghi: {
-        marginLeft: '0.25rem',
-    },
-    titleBox: {
-        backgroundColor: '#FFFFFF',
-        marginBottom: '0.45rem'
-    },
-    filterText: {
-        marginTop: '0.5rem',
-        marginLeft: '0.5rem',
-        height: '1.75rem',
-    },
-    list: {
-        height: 'max-content',
-    },
-    menu: {
-        marginTop: '1.5rem',
-    },
-    x: {
-        height: '0.6rem'
-    },
-    mainBox: {
-        maxHeight: '100%',
-        backgroundColor: '#FFFFFF',
-        padding: 0
-    },
-    paper: {
-        maxHeight: '25rem',
-        overflow: 'auto',
-        padding: 0,
-    },
-}));
 
 const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
-    height: 30,
-    width: 400,
+    height: '2rem',
+    width: '25rem',
     margin: 5,
     fontSize: 15,
     [theme.breakpoints.down('xl')]: {
-        height: 30,
-        width: 200,
+        height: '2rem',
+        width: '23rem',
     }
 }));
 
@@ -126,9 +92,6 @@ export default function FilterByProject({ endpoint, paramsCallback }) {
         setFilterName(event.target.value);
     }
 
-
-    const classes = useStyles();
-
     return (
         <>
             <IconButton
@@ -139,7 +102,7 @@ export default function FilterByProject({ endpoint, paramsCallback }) {
                 onClick={handleClick}
                 style={{ padding: 0 }}
             >
-                <img src={bara} alt='bara' className={classes.triunghi} />
+                <img src={bara} alt='bara' style={{ marginLeft: '0.25rem', }} />
             </IconButton>
             {isSorted ?
                 <IconButton
@@ -166,19 +129,39 @@ export default function FilterByProject({ endpoint, paramsCallback }) {
                         padding: '0px',
                     }
                 }}
-                className={classes.menu}
+                sx={{
+                    marginTop: '1.5rem',
+                }}
             >
-                <Box className={classes.mainBox} aria-disabled>
-                    <Box className={classes.titleBox} aria-disabled>
+                <Box
+                    sx={{
+                        maxHeight: '100%',
+                        backgroundColor: '#FFFFFF',
+                        padding: 0
+                    }}
+                    aria-disabled>
+                    <Box
+                        sx={{
+                            backgroundColor: '#FFFFFF',
+                            marginBottom: '0.45rem'
+                        }}
+                        aria-disabled>
                         <Stack
                             direction="row"
                             alignItems="center"
                         >
-                            <Box className={classes.filterText} aria-disabled>
+                            <Box
+                                sx={{
+                                    marginTop: '0.5rem',
+                                    marginLeft: '0.5rem',
+                                    height: '1.75rem',
+                                }}
+                                aria-disabled
+                            >
                                 Filter by PR's project
                             </Box>
                             <IconButton onClick={handleClose} style={{ marginLeft: 'auto' }}>
-                                <img src={x} alt='x' className={classes.x} />
+                                <img src={x} alt='x' style={{ height: '0.6rem' }} />
                             </IconButton>
                         </Stack>
                         <Divider />
@@ -189,8 +172,14 @@ export default function FilterByProject({ endpoint, paramsCallback }) {
                         />
                         <Divider />
                     </Box >
-                    <Paper className={classes.paper}>
-                        <List className={classes.list} disablePadding={true}>
+                    <Paper
+                        sx={{
+                            maxHeight: '25rem',
+                            overflow: 'auto',
+                            padding: 0,
+                        }}
+                    >
+                        <List sx={{ height: 'max-content', }} disablePadding={true}>
                             {state.project_data?.list.map((row) => {
                                 const { repo,
                                     organisation
@@ -198,7 +187,7 @@ export default function FilterByProject({ endpoint, paramsCallback }) {
                                 return (
                                     <React.Fragment key={repo}>
                                         <MenuItem
-                                            style={{ backgroundColor: '#FFFFFF' }}
+                                            sx={{ backgroundColor: '#FFFFFF' }}
                                             onClick={() => handleFilterClose(organisation, repo)}
                                         >
                                             <ListItemText
