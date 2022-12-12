@@ -11,7 +11,6 @@ export class Client {
   async get(endpoint, params = null) {
     let response;
     if (params) {
-      console.log(params);
       response = await axios.get(this.api + endpoint, { params: params });
     } else {
       response = await axios.get(this.api + endpoint);

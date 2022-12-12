@@ -29,7 +29,7 @@
     "start": "env-cmd -f .env.dev react-scripts start",
     "start-prod": "serve -s build",
     "build": "env-cmd -f .env.prod react-scripts build",
-    "deploy": "tar -czf build.tgz build/*",
+    "deploy": "zip -r build.zip build/*",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

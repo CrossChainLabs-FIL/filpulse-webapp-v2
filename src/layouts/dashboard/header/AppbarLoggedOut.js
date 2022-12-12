@@ -12,7 +12,8 @@ import {
     DialogContent,
     DialogTitle,
     Button,
-    Grid
+    Grid,
+    Avatar
 } from '@mui/material';
 
 import { pixelToRem, fontSizes } from '../../../utils/font';
@@ -52,10 +53,6 @@ const useStyles = makeStyles((theme) =>
         title: {
             flexGrow: 1,
             textAlign: "center"
-        },
-        logo: {
-            maxWidth: 40,
-            marginRight: '0.5rem',
         },
         toolbarMargin: {
             ...theme.mixins.toolbar,
@@ -100,7 +97,6 @@ export default function AppbarLoggedOut() {
             };
 
             client.post('authenticate', requestData).then(response => {
-                console.log(response);
                 dispatch({
                     type: "LOGIN",
                     payload: { user: response, isLoggedIn: true }
@@ -137,7 +133,14 @@ export default function AppbarLoggedOut() {
                         width: { xl: '97rem', lg: '76rem' }
                     }}
                 >
-                    <img src={logo} alt="" className={classes.logo} />
+                    <img
+                        src={logo}
+                        alt="logo"
+                        style={{
+                            maxWidth: '10rem',
+                            marginRight: '0.5rem',
+                        }}
+                    />
                     <TextTypography>FilPulse</TextTypography>
                     <span>{data.errorMessage}</span>
                     {data.isLoading ? (
@@ -165,8 +168,8 @@ export default function AppbarLoggedOut() {
                                 <DialogContent
                                     style={{
                                         backgroundColor: "#FFFFFF",
-                                        height: '18rem',
-                                        width: '30rem'
+                                        height: '16rem',
+                                        width: '26rem'
                                     }}
                                 >
                                     <Grid
@@ -179,22 +182,22 @@ export default function AppbarLoggedOut() {
                                             <Typography
                                                 sx={{
                                                     marginTop: '3.5rem',
-                                                    marginBottom: '4rem',
-                                                    marginLeft: '3rem',
-                                                    marginRight: '3rem'
+                                                    marginBottom: '2.5rem',
+                                                    marginLeft: '2.7rem',
+                                                    marginRight: '2.7rem'
                                                 }}
                                             >
-                                                Sign in to track the ecosystem development and view your preferred activities.
+                                                Sign in to keep track of your preferred development activities.
                                             </Typography>
                                         </Grid>
                                         <Grid item>
                                             <Button
                                                 variant="contained"
-                                                startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                                startIcon={<Avatar src={GithubLogo} alt='GithubLogo' />}
                                                 sx={{
                                                     backgroundColor: 'transparent',
                                                     color: '#000000',
-                                                    width: '23rem',
+                                                    width: '18rem',
                                                     '&:hover': {
                                                         backgroundColor: 'transparent',
                                                         color: '#000000',
@@ -205,7 +208,7 @@ export default function AppbarLoggedOut() {
                                                     setData({ ...data, errorMessage: "" });
                                                 }}
                                             >
-                                                Sign in with Github
+                                                Sign in with GitHub
                                             </Button>
                                         </Grid>
                                     </Grid>

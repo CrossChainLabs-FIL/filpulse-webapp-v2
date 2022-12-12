@@ -16,7 +16,8 @@ import {
     DialogContent,
     Button,
     Typography,
-    Grid
+    Grid,
+    Avatar
 } from '@mui/material';
 
 // components
@@ -119,6 +120,31 @@ export default function TableApp() {
         setSearch(event.target.value);
     }
 
+    const tabValueToName = (value) => {
+        let result = ' ';
+        switch (value) {
+            case 0:
+                result = 'PRs';
+                break;
+            case 1:
+                result = 'Issues';
+                break;
+            case 2:
+                result = 'Releases';
+                break;
+            case 3:
+                result = 'Commits';
+                break;
+            case 4:
+                result = 'Contributors';
+                break;
+            case 5:
+                result = 'Watchlist';
+                break;
+        }
+        return result;
+    }
+
     return (
         <Paper className="container">
             <Stack
@@ -173,8 +199,8 @@ export default function TableApp() {
                         <DialogContent
                             sx={{
                                 backgroundColor: "#FFFFFF",
-                                height: '18rem',
-                                width: '30rem'
+                                height: '16rem',
+                                width: '26rem'
                             }}
                         >
                             <Grid
@@ -187,18 +213,18 @@ export default function TableApp() {
                                     <Typography
                                         sx={{
                                             marginTop: '3.5rem',
-                                            marginBottom: '4rem',
-                                            marginLeft: '3rem',
-                                            marginRight: '3rem'
+                                            marginBottom: '2.5rem',
+                                            marginLeft: '2.7rem',
+                                            marginRight: '2.7rem'
                                         }}
                                     >
-                                        Sign in to track the ecosystem development and view your preferred activities.
+                                        Sign in to keep track of your preferred development activities.
                                     </Typography>
                                 </Grid>
                                 <Grid item>
                                     <Button
                                         variant="contained"
-                                        startIcon={<img src={GithubLogo} alt='GithubLogo' />}
+                                        startIcon={<Avatar src={GithubLogo} alt='GithubLogo' />}
                                         href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
                                         onClick={() => {
                                             setDataError({ ...dataError, errorMessage: "" });
@@ -206,14 +232,14 @@ export default function TableApp() {
                                         sx={{
                                             backgroundColor: 'transparent',
                                             color: '#000000',
-                                            width: '23rem',
+                                            width: '18rem',
                                             '&:hover': {
                                                 backgroundColor: 'transparent',
                                                 color: '#000000',
                                             },
                                         }}
                                     >
-                                        Sign in with Github
+                                        Sign in with GitHub
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -229,7 +255,7 @@ export default function TableApp() {
                     }}
                     value={search}
                     onChange={(e) => handleSearch(e)}
-                    placeholder="Search"
+                    placeholder={"Search by " + tabValueToName(value)}
                     startAdornment={
                         <InputAdornment position="start">
                             <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled', width: 20, height: 20 }} />

@@ -54,8 +54,14 @@ export default function CommitsTable({ search }) {
             if (!search) {
                 params.search = undefined;
             }
-            else {
+            else if (params.search != search) {
                 params.search = search;
+                params.offset = 0;
+
+                setLastOffset(0);
+                setDistanceBottom(0);
+                setHasMore(true);
+                setState({ loading: true });
             }
 
             response = await client.get('tab_commits', params);
@@ -207,7 +213,15 @@ export default function CommitsTable({ search }) {
                                                     textOverflow: 'ellipsis',
                                                 }}
                                             >
-                                                {message?.substring(0, 50)}
+                                                <Link
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href={"https://github.com/" + organisation + "/" + repo + "/commit/" + commit_hash}
+                                                    color="inherit"
+                                                    underline="none"
+                                                >
+                                                    {message.indexOf('\n') > 0 ? message?.substring(0, message.indexOf('\n')) : message}
+                                                </Link>
                                             </Typography>
                                         </TableCell>
 
