@@ -46,11 +46,6 @@ const useStyles = makeStyles((theme) =>
             flexGrow: 1,
             textAlign: "center"
         },
-        logo: {
-            maxWidth: 40,
-            marginRight: '0.5rem',
-
-        },
         toolbarMargin: {
             ...theme.mixins.toolbar,
             marginBottom: '2rem',
@@ -118,7 +113,10 @@ export default function AppbarLoggedIn() {
                     <img
                         src={logo}
                         alt="logo"
-                        className={classes.logo}
+                        style={{
+                            maxWidth: '10rem',
+                            marginRight: '0.5rem',
+                        }}
                     />
                     <TextTypography>FilPulse</TextTypography>
                     {accountInfo()}

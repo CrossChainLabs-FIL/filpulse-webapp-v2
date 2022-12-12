@@ -61,12 +61,6 @@ const useStyles = makeStyles(() => ({
         overflow: 'auto',
         padding: 0,
     },
-    projectElipsis: {
-        maxWidth: '23rem',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-    },
 }));
 
 const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
@@ -211,7 +205,12 @@ export default function FilterByProject({ endpoint, paramsCallback }) {
                                                 primary={
                                                     <Typography
                                                         noWrap
-                                                        className={classes.projectElipsis}
+                                                        sx={{
+                                                            maxWidth: '23rem',
+                                                            whiteSpace: 'nowrap',
+                                                            overflow: 'hidden',
+                                                            textOverflow: 'ellipsis',
+                                                        }}
                                                     >
                                                         {organisation + "/" + repo}
                                                     </Typography>
