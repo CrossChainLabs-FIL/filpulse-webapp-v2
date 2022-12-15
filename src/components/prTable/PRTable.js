@@ -25,6 +25,7 @@ import SearchNotFound from '../SearchNotFound';
 import TableEmpty from '../TableEmpty';
 import PRHead from './PRHead';
 import SteaLoggedOut from '../SteaLoggedOut';
+import SessionExpired from '../SessionExpired';
 import { AuthContext } from "../../App";
 
 // assets
@@ -51,6 +52,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+
+
 export default function PRTable({ search }) {
     const classes = useStyles();
     const [data, setData] = useState([]);
@@ -66,6 +69,7 @@ export default function PRTable({ search }) {
     const [lastOffset, setLastOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const [pendingFollowMap, setPendingFollowMap] = useState(new Map());
+    const [open, setOpen] = useState(false);
 
     const updatePendingFollowMap = (number, repo, organisation, follow) => {
         const keyObj = {
@@ -114,7 +118,7 @@ export default function PRTable({ search }) {
             if (!search) {
                 params.search = undefined;
             }
-            else if (params.search != search) {
+            else if (params.search !== search) {
                 params.search = search;
                 params.offset = 0;
 
@@ -137,7 +141,7 @@ export default function PRTable({ search }) {
             if (params?.offset > lastOffset) {
                 setData([...data, ...response.list]);
                 setLastOffset(params?.offset);
-            } else if (lastOffset == 0) {
+            } else if (lastOffset === 0) {
                 setData(response.list);
             }
 
@@ -150,10 +154,11 @@ export default function PRTable({ search }) {
             dispatch({
                 type: "LOGOUT"
             });
+            setOpen(true);
             setUpdate(true);
             setFetch(true);
         }
-    }, [params, search]);
+    }, [params, search, data, dispatch, lastOffset]); // warning?
 
     useEffect(() => {
         if (fetch || search) {
@@ -234,6 +239,7 @@ export default function PRTable({ search }) {
 
     return (
         <>
+            <SessionExpired stateLogin={stateLogin} open={open} setOpen={setOpen} />
             <TableContainer
                 sx={{
                     minWidth: 800,
