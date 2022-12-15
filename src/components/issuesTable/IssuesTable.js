@@ -61,6 +61,45 @@ export default function IssuesTable({ search }) {
     const [distanceBottom, setDistanceBottom] = useState(0);
     const [lastOffset, setLastOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
+    const [pendingFollowMap, setPendingFollowMap] = useState(new Map());
+
+    const updatePendingFollowMap = (number, repo, organisation, follow) => {
+        const keyObj = {
+            number: number,
+            repo: repo,
+            organisation: organisation,
+        };
+
+        setPendingFollowMap(pendingFollowMap.set(keyObj, follow));
+    }
+
+    const deleteFromPendingFollowMap = (number, repo, organisation) => {
+        const keyObj = {
+            number: number,
+            repo: repo,
+            organisation: organisation,
+        };
+
+        if (pendingFollowMap.has(keyObj)) {
+            setPendingFollowMap(pendingFollowMap.delete(keyObj));
+        }
+    }
+
+    const getFromPendingFollowMap = (number, repo, organisation) => {
+        let result = undefined;
+
+        const keyObj = {
+            number: number,
+            repo: repo,
+            organisation: organisation,
+        };
+
+        if (pendingFollowMap.has(keyObj)) {
+            result = pendingFollowMap.get(keyObj);
+        }
+
+        return result;
+    }
 
     const fetchData = useCallback(async () => {
         try {
@@ -133,10 +172,13 @@ export default function IssuesTable({ search }) {
 
             data[index] = { ...data[index], follow: e.target.checked };
 
+            updatePendingFollowMap(params.number, params.repo, params.organisation, params.follow);
+
             setUpdate(true);
 
             const client = new Client();
             client.post_with_token('follow', params, user.token).then((result) => {
+                deleteFromPendingFollowMap(params.number, params.repo, params.organisation);
                 if (result?.success !== true) {
                     setFetch(true);
                 }
@@ -239,7 +281,7 @@ export default function IssuesTable({ search }) {
                                                 <Checkbox
                                                     id={index}
                                                     repo={repo}
-                                                    checked={follow}
+                                                    checked={getFromPendingFollowMap(number, repo, organisation) ? getFromPendingFollowMap(number, repo, organisation) : follow}
                                                     icon={<img src={steaGol} alt='steaGol' />}
                                                     checkedIcon={<img src={steaPlin} alt='steaPlin' />}
                                                     onChange={(e) => starOnChange(e)}
