@@ -26,6 +26,7 @@ import SearchNotFound from '../SearchNotFound';
 import TableEmpty from '../TableEmpty';
 import IssuesHead from './IssuesHead';
 import SteaLoggedOut from '../SteaLoggedOut';
+import SessionExpired from '../SessionExpired';
 import { AuthContext } from "../../App";
 
 // assets
@@ -62,6 +63,7 @@ export default function IssuesTable({ search }) {
     const [lastOffset, setLastOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const [pendingFollowMap, setPendingFollowMap] = useState(new Map());
+    const [open, setOpen] = useState(false);
 
     const updatePendingFollowMap = (number, repo, organisation, follow) => {
         const keyObj = {
@@ -110,7 +112,7 @@ export default function IssuesTable({ search }) {
             if (!search) {
                 params.search = undefined;
             }
-            else if (params.search != search) {
+            else if (params.search !== search) {
                 params.search = search;
                 params.offset = 0;
 
@@ -133,7 +135,7 @@ export default function IssuesTable({ search }) {
             if (params?.offset > lastOffset) {
                 setData([...data, ...response.list]);
                 setLastOffset(params?.offset);
-            } else if (lastOffset == 0) {
+            } else if (lastOffset === 0) {
                 setData(response.list);
             }
 
@@ -229,6 +231,7 @@ export default function IssuesTable({ search }) {
 
     return (
         <>
+            <SessionExpired stateLogin={stateLogin} open={open} setOpen={setOpen} />
             <TableContainer
                 sx={{
                     minWidth: 800,

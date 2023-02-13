@@ -173,6 +173,7 @@ export default function FilterByContributor({ endpoint, paramsCallback, name }) 
                             value={filterName}
                             onChange={(e) => handleFilterByName(e)}
                             placeholder="Filter by contributor"
+                            autoFocus
                         />
                         <Divider />
                     </Box >

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 import {
     Typography,
@@ -7,28 +7,18 @@ import {
     Grid,
     Button,
     DialogTitle,
-    IconButton,
     Avatar
 } from '@mui/material';
-
 
 // components
 
 // assets
 import GithubLogo from '../assets/GithubLogo.svg';
-import steaGol from '../assets/steaGol.svg';
 
-
-
-export default function SteaLoggedOut({ stateLogin }) {
+export default function SessionExpired({ stateLogin, open, setOpen }) {
 
     const [dataError, setDataError] = useState({ errorMessage: "" });
-    const [open, setOpen] = useState(false);
     const { client_id, redirect_uri } = stateLogin;
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
     const handleClose = () => {
         setOpen(false);
@@ -36,16 +26,13 @@ export default function SteaLoggedOut({ stateLogin }) {
 
     return (
         <>
-            <IconButton variant="outlined" onClick={handleClickOpen} disableRipple>
-                <img src={steaGol} alt="steaGol" />
-            </IconButton>
             <Dialog open={open} onClose={handleClose} >
                 <DialogTitle
                     sx={{
                         backgroundColor: "#EEF4F5",
                     }}
                 >
-                    {"Get your own watchlist"}
+                    {"Session expired"}
                 </DialogTitle>
                 <DialogContent
                     sx={{
@@ -69,7 +56,7 @@ export default function SteaLoggedOut({ stateLogin }) {
                                     marginRight: '2.7rem'
                                 }}
                             >
-                                Sign in to keep track of your preferred development activities.
+                                Your sign-in session has expired, please sign in again.
                             </Typography>
                         </Grid>
                         <Grid item>

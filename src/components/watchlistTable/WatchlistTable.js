@@ -26,6 +26,7 @@ import {
 import SearchNotFound from '../SearchNotFound';
 import TableEmpty from '../TableEmpty';
 import WatchlistHead from './WatchlistHead';
+import SessionExpired from '../SessionExpired';
 import { AuthContext } from "../../App";
 
 // assets
@@ -65,7 +66,8 @@ export default function WatchlistTable({ search }) {
     const [distanceBottom, setDistanceBottom] = useState(0);
     const [lastOffset, setLastOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
-    const { dispatch } = useContext(AuthContext);
+    const { stateLogin, dispatch } = useContext(AuthContext);
+    const [open, setOpen] = useState(false);
 
     const fetchData = useCallback(async () => {
         try {
@@ -76,7 +78,7 @@ export default function WatchlistTable({ search }) {
             if (!search) {
                 params.search = undefined;
             }
-            else if (params.search != search) {
+            else if (params.search !== search) {
                 params.search = search;
                 params.offset = 0;
 
@@ -96,7 +98,7 @@ export default function WatchlistTable({ search }) {
                 if (params?.offset > lastOffset) {
                     setData([...data, ...response.list]);
                     setLastOffset(params?.offset);
-                } else if (lastOffset == 0) {
+                } else if (lastOffset === 0) {
                     setData(response.list);
                 }
 
@@ -200,6 +202,7 @@ export default function WatchlistTable({ search }) {
 
     return (
         <>
+            <SessionExpired stateLogin={stateLogin} open={open} setOpen={setOpen} />
             <TableContainer
                 sx={{
                     minWidth: 800,

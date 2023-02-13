@@ -169,6 +169,7 @@ export default function FilterByProject({ endpoint, paramsCallback }) {
                             value={filterName}
                             onChange={(e) => handleFilterByName(e)}
                             placeholder="Filter project"
+                            autoFocus
                         />
                         <Divider />
                     </Box >
